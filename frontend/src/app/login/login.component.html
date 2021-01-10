@@ -1,0 +1,15 @@
+<table>
+    <tr>
+        <td>Username:</td>
+        <td><input type="text" name="username" [(ngModel)]='username'></td>
+    </tr>
+    <tr>
+        <td>Password:</td>
+        <td><input type="password" name="password" [(ngModel)]='password'></td>
+    </tr>
+    <tr>
+        <td><button (click)='login()'>Login</button></td>
+    </tr>
+</table>
+
+<a routerLink='register'>Register</a>

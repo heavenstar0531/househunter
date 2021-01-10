@@ -1,0 +1,25 @@
+Hello {{username}}!
+<br>
+
+<b>Vesti u sistemu su:</b>
+<br>
+<table>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Caption</td>
+            <td>Comments</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor='let el of news'>
+            <td>{{el._id}}</td>
+            <td>{{el.caption}}</td>
+            <td>
+                <div *ngFor='let comment of el.comments'>
+                    <span>{{comment.text}}</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>
