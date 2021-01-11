@@ -24,7 +24,7 @@ mongoose.connect(environment.mongoUrl, { useUnifiedTopology: true, useNewUrlPars
 // uzimanje connection objekta iz trenutne konekcije
 const conn = mongoose.connection;
 // logovanje da je konekcija uspesna
-conn.once('open', () => console.log(`Open connection to mongo on port ${environment.mongoPort}`));
+conn.once('open', () => console.log(`Open connection to mongo on '${environment.mongoUrl}'`));
 
 
 // kada dodje ova ruta, gadja se ova funkcionalnost naseg rest api-ja
