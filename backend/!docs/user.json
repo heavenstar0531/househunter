@@ -1,0 +1,19 @@
+/* 1 */
+{
+    "_id" : ObjectId("5ffc54027090fbe8ff31d40d"),
+    "__v" : 0,
+    "username" : "pera",
+    "password" : "123",
+    "email" : "pera@email.com",
+    "type" : 0
+}
+
+/* 2 */
+{
+    "_id" : ObjectId("5ffc54077090fbe8ff31d410"),
+    "__v" : 0,
+    "username" : "admin",
+    "password" : "123",
+    "email" : "admin@email.com",
+    "type" : 1
+}

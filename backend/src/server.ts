@@ -1,9 +1,11 @@
+import { environment } from './environments/environment';
 import express from 'express';
 import mongoose from 'mongoose';        // olaksava pristup mongo bazi
 import cors from 'cors';                // omogucava koriscenje cross origin sharing-a
 import bodyParser from 'body-parser';   // citanje podataka iz zahteva od frontend-a
-import user from './app/models/user';
-import news from './app/models/news';
+// dodati modeli
+import User from './app/models/user';
+import News from './app/models/news';
 
 // shorthand notacija za express biblioteku i express ruter
 const app = express();
@@ -18,11 +20,11 @@ app.use( '/', router );
 
 
 // povezivanje na bazu podataka -- protokol, putanja, naziv baze
-mongoose.connect('mongodb://localhost:27017/mydb', { useUnifiedTopology: true, useNewUrlParser: true, });
+mongoose.connect(environment.mongoUrl, { useUnifiedTopology: true, useNewUrlParser: true, });
 // uzimanje connection objekta iz trenutne konekcije
 const conn = mongoose.connection;
 // logovanje da je konekcija uspesna
-conn.once('open', () => console.log('Open connection to mongodb'));
+conn.once('open', () => console.log(`Open connection to mongo on port ${environment.mongoPort}`));
 
 
 // kada dodje ova ruta, gadja se ova funkcionalnost naseg rest api-ja
@@ -35,7 +37,7 @@ router.route('/login').post( (req, res) => {
 
     // nadji jednog! user-a iz mongo baze sa datim parametrima
     // +   takodje se dodaje funkcija kojoj je dat error objekat ako je doslo do greske, i sam user ako je pronadjen
-    user.findOne({ 'username': username, 'password': password }, (err: any, user: any) => {
+    User.findOne({ 'username': username, 'password': password }, (err: any, user: any) => {
         // ako nema greske, dodati user-a u json response
         if( err ) { console.log( err ); return; }
         res.json( user );
@@ -44,7 +46,7 @@ router.route('/login').post( (req, res) => {
 
 router.route('/register').post( (req, res) => {
     // uzimanje username-a i password-a iz tela post zahteva
-    let usr = new user( req.body );
+    let usr = new User( req.body );
 
     // cuvanje usera u mongu i vracanje statusa operacije
     usr.save().then ( _ => res.status(200).json({'user': 'ok' }) )
@@ -53,7 +55,7 @@ router.route('/register').post( (req, res) => {
 
 router.route('/news').get( (req, res) => {
     // trazi sve elemente po kriterijumu koji je prazan -- sve vesti
-    news.find({}, (err, news) => {
+    News.find({}, (err, news) => {
         if( err ) { console.log( err ); return; }
         res.json( news );
     });
@@ -62,4 +64,4 @@ router.route('/news').get( (req, res) => {
 
 
 // pokretanje express servera na datom portu
-app.listen(4000, () => console.log(`Express server running on port 4000`));
+app.listen(environment.serverPort, () => console.log(`Express server running on port ${environment.serverPort}`));

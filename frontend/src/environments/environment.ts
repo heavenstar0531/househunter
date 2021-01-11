@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  serverUrl: 'http://localhost:27015',   // putanja ka backend-u
 };
 
 /*
