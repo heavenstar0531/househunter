@@ -1,28 +1,7 @@
-# User
-/* 1 */
 {
-    "_id" : ObjectId("5ff1bc2b7cffbffa34853132"),
-    "username" : "pera",
-    "password" : "123",
-    "email" : "pera@email.com",
-    "type" : 0
-}
-
-/* 2 */
-{
-    "_id" : ObjectId("5ff1bc527cffbffa34853138"),
-    "username" : "admin",
-    "password" : "123",
-    "email" : "admin@email.com",
-    "type" : 1
-}
-
-
-# News
-/* 1 */
-{
-    "_id" : 1,
+    "_id" : ObjectId("5ffc4b1e7090fbe8ff31d35f"),
     "caption" : "News 1",
+    "__v" : 0,
     "comments" : [ 
         {
             "text" : "Comment 1"
@@ -32,13 +11,13 @@
         }, 
         {
             "text" : "Comment 3"
-        }
+        },
     ]
 }
 
-/* 2 */
 {
-    "_id" : 2,
+    "_id" : ObjectId("5ffc4b287090fbe8ff31d367"),
+    "__v" : 0,
     "caption" : "News 2",
     "comments" : [ 
         {

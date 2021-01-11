@@ -2,8 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose';        // olaksava pristup mongo bazi
 import cors from 'cors';                // omogucava koriscenje cross origin sharing-a
 import bodyParser from 'body-parser';   // citanje podataka iz zahteva od frontend-a
-import user from './model/user';
-import news from './model/news';
+import user from './app/models/user';
+import news from './app/models/news';
 
 // shorthand notacija za express biblioteku i express ruter
 const app = express();

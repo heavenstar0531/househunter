@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { News } from '../model/news.model';
-import { UserService } from '../user.service';
+import { News } from '../../models/news.model';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-admin',

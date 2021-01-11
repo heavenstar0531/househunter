@@ -1,28 +1,30 @@
-import { BrowserModule } from '@angular/platform-browser';
+// default moduli i komponente
 import { NgModule } from '@angular/core';
-
+import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { AdminComponent } from './admin/admin.component';
-import { UserComponent } from './user/user.component';
-// da bi radio two way data binding za forme!!!
+// two way data binding za forme i http client moduli
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RegisterComponent } from './register/register.component';
+// dodate komponente
+import { AppComponent } from './components/app/app.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
+import { UserComponent } from './components/user/user.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
+    // dodate komponente
     AdminComponent,
+    LoginComponent,
+    RegisterComponent,
     UserComponent,
-    RegisterComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    // ne zaboraviti !!!
+    // two way data binding i http client moduli
     FormsModule,
     HttpClientModule,
   ],
