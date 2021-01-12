@@ -21,6 +21,8 @@
     "@angular/platform-browser-dynamic": "~11.0.7",
     "@angular/router": "~11.0.7",
     "@ng-bootstrap/ng-bootstrap": "^8.0.1",
+    "@ngx-translate/core": "^13.0.0",
+    "@ngx-translate/http-loader": "^6.0.0",
     "@popperjs/core": "^2.6.0",
     "bootstrap": "^4.5.0",
     "ngx-popperjs": "^10.0.0",
