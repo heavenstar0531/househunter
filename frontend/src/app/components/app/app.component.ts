@@ -7,11 +7,11 @@ import { TranslateService } from '@ngx-translate/core';   // za lokalizaciju apl
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  param: { name: 'Mare' };
+  title: 'app';
 
   constructor( translate: TranslateService )
   {
-    // podesavanje default jezika i trenutnog jezika aplikacije
+    // podesavanje default jezika aplikacije
     translate.setDefaultLang( 'sr' );
   }
 }

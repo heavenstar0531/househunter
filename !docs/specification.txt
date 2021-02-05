@@ -1,0 +1,248 @@
+----------------------
++ frontend
+----------------------
+
++ korisnici
+----------------------
++ admin (A)       1
++ employee (E)   0N
++ student (S)    0N
++ user (K)       0N
+
+
++ komponente
+----------------------
+# podkomponente
+  + navbar
+    + login (dropdown)
+    # lang-picker (sr, ср, en)
+    + breadcrumb
+  + footer
+  + course-list
+  + course
+  + employee-list
+  + employee
+  + notif-list
+  + notif
+
+# stranice (K)
+  + pocetna
+  + zaposleni
+  + obavestenja
+  + studiranje
+    + osnovne-def
+    + osnovne-si
+    + osnovne-rti
+    + master
+  + projekti-ponude
+  + nauka
+    + istrazivanja
+    + projekti
+  + kontakt
+  + registracija
+
+# stranice (E)
+  # pocetna
+  + predmeti
+  + vesti-zaposleni
+  + nalog
+
+
+
+
++ servisi
+----------------------
++ auth (has_privilege, set_privilege)
++ login (login, logout)
++ acc (create, change_status, change_password, change_photo)
+
+
++ napomene
+----------------------
++ authorization
++ localization
++ prvi login -> promena lozinke obavezna!
++ header + footer na svakoj strani
++ breadcrumbs
++ required polja u formama
++ slider na pocetnoj strani (kao na sajtu etf-a)
++ obavestenja starosti vise od tri meseca se ne prikazuju
++ obavestenja starija od sedam dana su sepia
++ lista predmeta po grupama uvek (naziv grupe se ispisuje ako nije null)
++ nauka->istrazivanja - staticka veb strana sa linkovima
++ korisnik ne vidi detalje o predmetima
+
+
+
+
+
+
+----------------------
++ backend
+----------------------
+
+
+
+
+
+
+----------------------
++ database
+----------------------
+
+
++ acc
+----------------------
++ id              [id]
++ username        string|unique
++ password        hash|unique
++ firstname       string
++ lastname        string
++ telephone       string|null
++ address         string|null
++ acc_type        -> acc_type
++ created         date
++ valid           date|null
++ active          date|null
++ deleted         date|null
+### employee ###
++ em_title_id     -> em_title|null
++ em_biography    -> file|null
++ em_photo_id     -> file|null
++ em_website_url  string|null
++ em_cabinet      string|null
++ em_status       enum('active', 'inactive')|null
+### student ###
++ sd_index        string|null
++ sd_study_type   enum('undergraduate', 'master', 'postdoc')|null
++ sd_status       enum('active', 'inactive')|null
+
++ em_title
+----------------------
++ id              [id]
++ title           string|unique
+
++ acc_type
+----------------------
++ id              [id]
++ type            string      # admin, nastavnik, nenastavnik, student
+
+
+
++ crs
+----------------------
++ id              [id]
++ name            string
++ espb            number
++ semester        number
++ created         date
+
++ crs_page
+----------------------
++ id              [id]
++ crsid           -> crs
++ enabled         date|null
++ page_type       enum('info', 'pred', 'vezbe', 'lab', 'domaci', 'proj', 'ispit')
++ text            string|null
++ created         date
+
+
+
++ news
+----------------------
++ id              [id]
++ news_cat        -> news_cat
++ title           string
++ text            string|null
++ created         date
++ deleted         date|null
+
++ news_cat
+----------------------
++ id              [id]
++ category        string|unique
++ created         date
++ deleted         date|null
+
+
+
++ file
+----------------------
++ id              [id]
++ acc             -> acc
++ filename        string
++ filetype        string
++ data            buffer
++ created         date
++ deleted         date|null
+
++ file_link
+----------------------
++ id              [id]
++ thing_id        -> <any>
++ file_id         -> file
++ created         date
+
+
+
++ priv
+----------------------
++ id              [id]
++ thing_id        -> (acc|acc_type)
++ privilege       string
++ created         date
+
+
+
++ app_ev           # za prijavu
+----------------------
++ id              [id]
++ thing_id        -> <any>
++ event           string
++ created         date
++ completed       date|null
+
+
+
++ term
+----------------------
++ id              [id]
++ date_beg        date
++ date_end        date
+
+
+
++ event
+----------------------
++ id              [id]
++ name            string
++ cabinet         string
++ termin_id       -> termin
++ date_beg        date
++ date_end        date
++ prsn_limit      number|null
++ created         date
++ readonly        date|null
++ completed       date|null
+
+
+// TODO
+
++ group
+----------------------
++ id              [id]
++ acc_id          -> <any>
++ group_id        -> string
+
+
++ sched
+----------------------
+
+
++ crs
+----------------------
+
+
++ plan
+----------------------
+
