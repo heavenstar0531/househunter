@@ -10,10 +10,6 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 // dodate komponente
 import { AppComponent } from './components/app/app.component';
-import { AdminComponent } from './components/admin/admin.component';
-import { LoginComponent } from './components/login/login.component';
-import { RegisterComponent } from './components/register/register.component';
-import { UserComponent } from './components/user/user.component';
 
 // ova funkcija mora da bude eksportovana da bi mogla biti koriscena od strane translate modula kao generator translate loader-a
 export function HttpLoaderFactory( http: HttpClient )
@@ -25,10 +21,6 @@ export function HttpLoaderFactory( http: HttpClient )
   declarations: [
     AppComponent,
     // dodate komponente
-    AdminComponent,
-    LoginComponent,
-    RegisterComponent,
-    UserComponent,
   ],
   imports: [
     BrowserModule,

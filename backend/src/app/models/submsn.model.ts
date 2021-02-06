@@ -15,11 +15,11 @@ let submsnTermSchema = new mongoose.Schema({
 });
 
 let submsnSchema = new mongoose.Schema({
-    name:           { type: String }, // string
-    term:           { type: [submsnTermSchema]}, // list< >
-    created:        { type: Date },   // date
-    readonly:       { type: Date },   // date|null
-    completed:      { type: Date },   // date|null
+    name:      { type: String }, // string
+    term:      { type: [submsnTermSchema]}, // list< >
+    created:   { type: Date },   // date
+    readonly:  { type: Date },   // date|null
+    completed: { type: Date },   // date|null
 });
 
 let submsnModel = mongoose.model( 'submsn', submsnSchema );
