@@ -132,7 +132,7 @@
 + text            string|null
 + news_cat        -> news_cat
 + acc             -> acc
-+ scope           list< 'main'|->crs >
++ scope           list< ->general|->crs >
 + files           list< ->file >|null
 + created         date
 + posted          date
@@ -154,7 +154,7 @@
 + code            unique<string>
 + name            string
 + plan            list< >
-  + department      enum( 'si', 'rti' )
+  + department      enum( 'si', 'rti', 'os' )
   + semester        number
   + optional        bool
 + class_hh        number
@@ -196,7 +196,7 @@
   + date_beg        date
   + date_end        date
   + prsn_limit      number|null
-  + submsn            list< >
+  + submtd          list< >
     + acc             -> acc
     + file            -> file|null
 + created         date
