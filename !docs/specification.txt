@@ -31,13 +31,13 @@
     + predmet-st       # accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
 
 # stranice (em)
-  + predmeti-em        # lista predmeta na kojima je zaposleni angazovan
+  + predmet-list-em    # lista predmeta na kojima je zaposleni angazovan
     + predmet-em       # accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit
   + obavestenja-em
   + prijave-em         # otvaranje prijava za labove, projekte, itd.
 
 + stranice (adm)
-  + korisnici-adm      # lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
+  + korisnik-list-adm  # lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
     + korisnik-adm     # admin ne moze da obrise svoj nalog!
   # studiranje         # admin moze da doda novi predmet + slicno stranici studiranje korisnika
     # predmet-adm      # slicno stranici predmet od zaposlenog, ali admin moze i da doda 
