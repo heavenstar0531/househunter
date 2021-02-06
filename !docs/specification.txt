@@ -2,77 +2,78 @@
 + frontend
 ----------------------
 
+
 + korisnici
 ----------------------
-+ admin (A)       1
-+ employee (E)   0N
-+ student (S)    0N
-+ user (K)       0N
++ admin (adm)       1
++ employee (em)    0N
++ student (st)     0N
++ user (usr)       0N
+
 
 
 + komponente
 ----------------------
-# stranice (K)
-  + pocetna
-  + zaposleni
-  + vesti
-  + studiranje
-    + osnovne
-    + osnovne-si
-    + osnovne-rti
-    + master
-  + projekti-ponude
-  + nauka
-    + istrazivanja
-    + projekti
-  + kontakt
-  + registracija
+# stranice (usr)
+  + pocetna            # sadrzi i obavestenja
+  + studiranje         # sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
+  + nauka              # ne postoji ova stranica, tako da ne moze da se klikne u navbar-u
+    + istrazivanja     # stranica sa statickim linkovima
+    + projekti         # stranica sa statickim linkovima
+    + ponude           # stranica sa statickim tekstom
+  + kontakt            # stranica sa statickim tekstom
+    + zaposleni
+      + zaposlen
+  + profil             # za sve ulogovane korisnike (sve osim usr)
 
-# stranice (E)
-  # pocetna
-  + predmeti
-  + vesti-zaposleni
-  + nalog
+# stranice (st)
+  # studiranje
+    + predmet-st       # accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
 
-# podkomponente
-  + navbar
-    + login (dropdown)
-    # lang-picker (sr, ср, en)
-    + breadcrumb
-  + footer
+# stranice (em)
+  + predmeti-em        # lista predmeta na kojima je zaposleni angazovan
+    + predmet-em       # accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit
+  + obavestenja-em
+  + prijave-em         # otvaranje prijava za labove, projekte, itd.
 
-  + course-list
-  + course
-  + employee-list
-  + employee
-  + notif-list
-  + notif
++ stranice (adm)
+  + korisnici-adm      # lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
+    + korisnik-adm     # admin ne moze da obrise svoj nalog!
+  # studiranje         # admin moze da doda novi predmet + slicno stranici studiranje korisnika
+    # predmet-adm      # slicno stranici predmet od zaposlenog, ali admin moze i da doda 
+  
 
 
+# komponente
+  + navbar             # na svakoj strani
+    + breadcrumb       # breadcrumb
+    + login            # dropdown
+    + registracija     # modal
+    # lang-picker      # sr, ср, en
+  + footer             # na svakoj strani
+  + crs-page           # stranica kursa
+  + file-list          # lista fajlova sa menjanjem redosleda, dodavanjem i uklanjanjem fajlova
 
+# postojece komponente
+  + nav
+  + breadcrumb
+  + modal
+  + dropdown
+  + date-picker
+  + carousel
+  + time-picker
+  + accordion
+  + ngx-quill
 
-+ servisi
-----------------------
-+ auth (has_privilege, set_privilege)
-+ login (login, logout)
-+ acc (create, change_status, change_password, change_photo)
 
 
 + napomene
 ----------------------
-+ authorization
-+ localization
-+ prvi login -> promena lozinke obavezna!
-+ nista ne brisati iz baze! -- select uvek pita samo stvari koje nisu deleted
-+ header + footer na svakoj strani
-+ komponente: breadcrumb, calendar, header, footer, 
-+ required polja u formama
-+ slider na pocetnoj strani (kao na sajtu etf-a)
-+ obavestenja starosti vise od tri meseca se ne prikazuju
-+ obavestenja starija od sedam dana su sepia
-+ lista predmeta po grupama uvek (naziv grupe se ispisuje ako nije null)
-+ nauka->istrazivanja - staticka veb strana sa linkovima
-+ korisnik ne vidi detalje o predmetima
++ promena lozinke obavezna ako je admin napravio nalog (tome sluzi valid polje)
++ nista ne brisati iz baze -- select uvek pita samo stvari koje nisu deleted/archived/completed itd.
++ router treba da se uveri da korisnik moze da pristupi stranici
++ paziti na forme -- validacija polja
++ obavestenja starija od tri meseca se ne prikazuju, a kada prodje expired datum su posivljena
 
 
 
@@ -80,16 +81,7 @@
 
 
 ----------------------
-+ backend
-----------------------
-
-
-
-
-
-
-----------------------
-+ database
++ baza
 ----------------------
 
 
@@ -144,6 +136,7 @@
 + files           list< ->file >|null
 + created         date
 + posted          date
++ expired         date             # kada obavestenje treba da posivi
 + deleted         date|null
 
 + news_cat
