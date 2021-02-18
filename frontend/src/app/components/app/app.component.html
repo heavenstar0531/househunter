@@ -1,2 +1,13 @@
-<!-- default router putanja -->
+<!-- navigation -->
+<ul ngbNav [activeId]='activeRoute.fragment|async' class='nav-tabs'>
+  <li *ngFor='let route of routes' [ngbNavItem]='route.path'>
+    <a ngbNavLink [routerLink]='route.path'>{{ getRouteLabel( route ) }}</a>
+  </li>
+</ul>
+
+<!-- breadcrumb -->
+<xng-breadcrumb></xng-breadcrumb>
+
+<!-- default router outlet -->
 <router-outlet></router-outlet>
+

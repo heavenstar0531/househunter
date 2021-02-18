@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PredmetListEmComponent } from './predmet-list-em.component';
+import { PredmetiEmComponent } from './predmeti-em.component';
 
-describe('PredmetListEmComponent', () => {
-  let component: PredmetListEmComponent;
-  let fixture: ComponentFixture<PredmetListEmComponent>;
+describe('PredmetiEmComponent', () => {
+  let component: PredmetiEmComponent;
+  let fixture: ComponentFixture<PredmetiEmComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PredmetListEmComponent ]
+      declarations: [ PredmetiEmComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PredmetListEmComponent);
+    fixture = TestBed.createComponent(PredmetiEmComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

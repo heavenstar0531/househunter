@@ -40,7 +40,7 @@
   + korisnik-list-adm  # lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
     + korisnik-adm     # admin ne moze da obrise svoj nalog!
   # studiranje         # admin moze da doda novi predmet + slicno stranici studiranje korisnika
-    # predmet-adm      # slicno stranici predmet od zaposlenog, ali admin moze i da doda 
+    # predmet-adm      # slicno stranici predmet od zaposlenog, ali admin moze i da doda ?
   
 
 
