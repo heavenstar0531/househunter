@@ -1,0 +1,18 @@
+<!-- navbar -->
+<ul ngbNav [activeId]='activeNavItems[0]' (activeIdChange)='activeNavItemChanged( $event, 0 )' class='nav-pills'>
+
+  <!-- pages -->
+  <li *ngFor='let route of routes' [ngbNavItem]='route.path'>
+    <a ngbNavLink [routerLink]='route.path'>{{ getRouteLabel( route ) }}</a>
+  </li>
+
+  <!-- flexible space -->
+  <div class="flex-space"></div>
+
+  <app-register-modal></app-register-modal>
+  <app-login-modal></app-login-modal>
+
+  <!-- logout -->
+  <button class="btn btn-link">Odjava</button>
+  
+</ul>

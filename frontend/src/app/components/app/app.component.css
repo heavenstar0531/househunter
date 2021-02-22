@@ -1,0 +1,5 @@
+#login-form>div>label,
+#register-form>div>label {
+  margin-bottom: 3px;
+}
+

@@ -1,0 +1,74 @@
+<!-- register modal -->
+<button class="btn btn-link" (click)="openModal( register )">Registracija</button>
+<ng-template let-modal #register>
+  <div class="modal-header">
+    <h4 class="modal-title">Registracija</h4>
+  </div>
+
+  <div class="modal-body">
+    <form id='register-form' class="px-3 py-1">
+      <small class='errmsg'>{{registerMsg}}</small>
+
+      <!-- general -->
+      <div class="form-group">
+        <label for="register-username">korisničko ime</label>
+        <input id ="register-username" type="text" class="form-control" placeholder="korisničko ime">
+        <small class='errmsg'>{{registerUsernameMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label>lozinka</label>
+        <input for="register-password" type="password" class="form-control" placeholder="lozinka">
+        <small id ="register-password" class='errmsg'>{{registerPasswordMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="register-firstname">ime</label>
+        <input id ="register-firstname" type="text" class="form-control" placeholder="ime">
+        <small class='errmsg'>{{registerFirstnameMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="register-lastname">prezime</label>
+        <input id ="register-lastname" type="text" class="form-control" placeholder="prezime">
+        <small class='errmsg'>{{registerLastnameMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="register-telephone">telefon</label>
+        <input id ="register-telephone" type="tel" class="form-control" placeholder="+381601234567">
+        <small class='errmsg'>{{registerTelephoneMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="register-address">puna adresa</label>
+        <input id ="register-address" type="text" class="form-control" placeholder="Beogradska 20, Beograd, Srbija">
+        <small class='errmsg'>{{registerAddressMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label  for="register-acc-type">tip korisnika</label>
+        <select id ="register-acc-type" class="form-control">
+          <option value='student' selected>student</option>
+          <option value='zaposleni'>zaposleni</option>
+        </select>
+        <small class='errmsg'>{{registerAccTypeMsg}}</small>
+      </div>
+
+      <!-- employee -->
+      <div class="form-group">
+        <label  for="register-em-title">zvanje</label>
+        <select id ="register-em-title" class="form-control">
+          <!-- ... TODO: procitati iz baze ... -->
+          <option value='602ed0298b05043edc647ccc' selected>redovni profesor</option>
+          <option value='602ed0298b05043edc647cd1'>istraživač</option>
+        </select>
+        <small class='errmsg'>{{registerEmTitleMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="register-em-cabinet">kabinet</label>
+        <input id ="register-em-cabinet" type="text" class="form-control" placeholder="42a">
+        <small class='errmsg'>{{registerEmCabinetMsg}}</small>
+      </div>
+    </form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-light" (click)="modal.dismiss()">Odustani</button>
+    <button class="btn btn-outline-dark" (click)="register()">Registruj se</button>
+  </div>
+</ng-template>

@@ -10,7 +10,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-// (usr) komponente
+
+// servisi
+import { AccService } from './services/acc/acc.service';
+
+// (usr) stranice
 import { PocetnaComponent } from './components/pages/pocetna/pocetna.component';
 import { StudiranjeComponent } from './components/pages/studiranje/studiranje.component';
 import { IstrazivanjaComponent } from './components/pages/istrazivanja/istrazivanja.component';
@@ -20,16 +24,21 @@ import { KontaktComponent } from './components/pages/kontakt/kontakt.component';
 import { ZaposleniComponent } from './components/pages/zaposleni/zaposleni.component';
 import { ZaposlenComponent } from './components/pages/zaposlen/zaposlen.component';
 import { ProfilComponent } from './components/pages/profil/profil.component';
-// (st) komponente
+// (st) stranice
 import { PredmetStComponent } from './components/pages/predmet-st/predmet-st.component';
-// (em) komponente
+// (em) stranice
 import { PredmetiEmComponent } from './components/pages/predmeti-em/predmeti-em.component';
 import { PredmetEmComponent } from './components/pages/predmet-em/predmet-em.component';
 import { ObavestenjaEmComponent } from './components/pages/obavestenja-em/obavestenja-em.component';
 import { PrijaveEmComponent } from './components/pages/prijave-em/prijave-em.component';
-// (adm) komponente
+// (adm) stranice
 import { KorisniciAdmComponent } from './components/pages/korisnici-adm/korisnici-adm.component';
 import { KorisnikAdmComponent } from './components/pages/korisnik-adm/korisnik-adm.component';
+
+// delovi
+import { LoginModalComponent } from './components/parts/login-modal/login-modal.component';
+import { RegisterModalComponent } from './components/parts/register-modal/register-modal.component';
+import { NavbarComponent } from './components/parts/navbar/navbar.component';
 
 // ova funkcija mora da bude eksportovana da bi mogla biti koriscena od strane translate modula kao generator translate loader-a
 export function HttpLoaderFactory( http: HttpClient )
@@ -40,7 +49,7 @@ export function HttpLoaderFactory( http: HttpClient )
 @NgModule({
   declarations: [
     AppComponent,
-    // (usr) komponente
+    // (usr) stranice
     PocetnaComponent,
     StudiranjeComponent,
     IstrazivanjaComponent,
@@ -50,16 +59,20 @@ export function HttpLoaderFactory( http: HttpClient )
     ZaposleniComponent,
     ZaposlenComponent,
     ProfilComponent,
-    // (st) komponente
+    // (st) stranice
     PredmetStComponent,
-    // (em) komponente
+    // (em) stranice
     PredmetiEmComponent,
     PredmetEmComponent,
     ObavestenjaEmComponent,
     PrijaveEmComponent,
-    // (adm) komponente
+    // (adm) stranice
     KorisniciAdmComponent,
     KorisnikAdmComponent,
+    // delovi
+    LoginModalComponent,
+    RegisterModalComponent,
+    NavbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,11 +82,11 @@ export function HttpLoaderFactory( http: HttpClient )
     HttpClientModule,
     NgbModule,
     BreadcrumbModule,
-    TranslateModule.forRoot({
-      loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] },
-    }),
+    TranslateModule.forRoot({ loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] }, }),
   ],
-  providers: [],
+  providers: [
+    AccService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

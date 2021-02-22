@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 let accGroupSchema = new mongoose.Schema({
     name:    { type: String },       // string
+    type:    { type: String },       // string
     acc:     { type: [ObjectId] },   // list< -> acc >
     created: { type: Date },         // date
     deleted: { type: Date },         // date|null

@@ -1,0 +1,352 @@
+[{
+  "_id": {
+    "$oid": "602eda588b05043edc647cdb"
+  },
+  "username ": "admin",
+  "password ": "admin",
+  "firstname": "Pera",
+  "lastname ": "Perić",
+  "telephone": "0621027694",
+  "address  ": "Beogradska 6",
+  "acc_type ": "adm",
+  "created  ": "2021-02-17T23:00:00Z",
+  "valid    ": "2021-02-17T23:00:00Z",
+  "active   ": "2021-02-17T23:00:00Z",
+  "deleted  ": null
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cdc"
+  },
+  "username": "zaposleni0",
+  "password": "zaposleni0",
+  "firstname": "Mara",
+  "lastname": "Marić",
+  "telephone": "063859172",
+  "address": "Starogradska 20",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "em_title": {
+    "$oid": "602ed0298b05043edc647ccc"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": "https://pera.peric/org",
+  "em_cabinet": "42"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cdd"
+  },
+  "username": "zaposleni1",
+  "password": "zaposleni1",
+  "firstname": "Laza",
+  "lastname": "Lazić",
+  "telephone": "063815172",
+  "address": "Zaplanjska 56",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": "2021-02-17T23:00:00Z",
+  "em_title": {
+    "$oid": "602ed0298b05043edc647ccd"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": "https://laza.lazic/org",
+  "em_cabinet": "23"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cde"
+  },
+  "username": "zaposleni2",
+  "password": "zaposleni2",
+  "firstname": "Žika",
+  "lastname": "Žikić",
+  "telephone": "063859172",
+  "address": "Starogradska 20",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": null,
+  "deleted": null,
+  "em_title": {
+    "$oid": "602ed0298b05043edc647cce"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": "https://zika.zikic/org",
+  "em_cabinet": "64"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cdf"
+  },
+  "username": "zaposleni3",
+  "password": "zaposleni3",
+  "firstname": "Sima",
+  "lastname": "Simić",
+  "telephone": "063859172",
+  "address": "Starogradska 20",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": null,
+  "active": null,
+  "deleted": null,
+  "em_title": {
+    "$oid": "602ed0298b05043edc647cd1"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": null,
+  "em_cabinet": null
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce0"
+  },
+  "username": "zaposleni4",
+  "password": "zaposleni4",
+  "firstname": "Mira",
+  "lastname": "Marković",
+  "telephone": "063859172",
+  "address": "Novogradska 20",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "em_title": {
+    "$oid": "602ed0298b05043edc647ccc"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": "https://mira.markovic/org",
+  "em_cabinet": "13"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce1"
+  },
+  "username": "zaposleni5",
+  "password": "zaposleni5",
+  "firstname": "Sonja",
+  "lastname": "Savić",
+  "telephone": "065851169",
+  "address": "Železnik 20",
+  "acc_type": "em",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "em_title": {
+    "$oid": "602ed0298b05043edc647cd2"
+  },
+  "em_biography": null,
+  "em_photo": null,
+  "em_website_url": "https://sonja.savic/org",
+  "em_cabinet": null
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce2"
+  },
+  "username": "student0",
+  "password": "student0",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2016/0156",
+  "st_semester": "5"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce3"
+  },
+  "username": "student1",
+  "password": "student1",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2015/0116",
+  "st_semester": "7"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce4"
+  },
+  "username": "student2",
+  "password": "student2",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": null,
+  "deleted": null,
+  "st_index": "2015/0206",
+  "st_semester": "10"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce5"
+  },
+  "username": "student3",
+  "password": "student3",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": null,
+  "active": null,
+  "deleted": null,
+  "st_index": "2020/0192",
+  "st_semester": "1"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce6"
+  },
+  "username": "student4",
+  "password": "student4",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": null,
+  "active": null,
+  "deleted": null,
+  "st_index": "2020/0559",
+  "st_semester": "1"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce7"
+  },
+  "username": "student5",
+  "password": "student5",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2020/0610",
+  "st_semester": "1"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce8"
+  },
+  "username": "student6",
+  "password": "student6",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2020/0501",
+  "st_semester": "1"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ce9"
+  },
+  "username": "student7",
+  "password": "student7",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2020/0013",
+  "st_semester": "1"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cea"
+  },
+  "username": "student8",
+  "password": "student8",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2018/0027",
+  "st_semester": "5"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ceb"
+  },
+  "username": "student9",
+  "password": "student9",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2018/0042",
+  "st_semester": "5"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647cec"
+  },
+  "username": "student10",
+  "password": "student10",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": null,
+  "st_index": "2018/0314",
+  "st_semester": "5"
+},{
+  "_id": {
+    "$oid": "602eda588b05043edc647ced"
+  },
+  "username": "student11",
+  "password": "student11",
+  "firstname": "Mika",
+  "lastname": "Mikic",
+  "telephone": null,
+  "address": null,
+  "acc_type": "st",
+  "created": "2021-02-17T23:00:00Z",
+  "valid": "2021-02-17T23:00:00Z",
+  "active": "2021-02-17T23:00:00Z",
+  "deleted": "2021-02-17T23:00:00Z",
+  "st_index": "2018/0985",
+  "st_semester": "5"
+}]

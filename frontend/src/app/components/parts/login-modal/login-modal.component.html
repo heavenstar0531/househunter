@@ -1,0 +1,28 @@
+<!-- login modal -->
+<button class="btn btn-outline-dark" (click)="openModal( login )">Prijava</button>
+<ng-template let-modal #login>
+  <div class="modal-header">
+    <h4 class="modal-title">Prijava</h4>
+  </div>
+
+  <div class="modal-body">
+    <form id='form' class="px-3 py-1">
+      <small class='errmsg'>{{loginMsg}}</small>
+      <div class="form-group">
+        <label for="username">korisničko ime</label>
+        <input id ="username" type="text" class="form-control" placeholder="korisničko ime" [(ngModel)]="username" name="username">
+        <small class='errmsg'>{{loginUsernameMsg}}</small>
+      </div>
+      <div class="form-group">
+        <label for="password">lozinka</label>
+        <input id ="password" type="password" class="form-control" placeholder="lozinka" [(ngModel)]="password" name="password">
+        <small class='errmsg'>{{loginPasswordMsg}}</small>
+      </div>
+    </form>
+  </div>
+  
+  <div class="modal-footer">
+    <button class="btn btn-light" (click)="modal.dismiss()">Odustani</button>
+    <button class="btn btn-outline-dark" (click)="login()">Prijavi se</button>
+  </div>
+</ng-template>

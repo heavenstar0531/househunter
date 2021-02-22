@@ -1,13 +1,12 @@
-<!-- navigation -->
-<ul ngbNav [activeId]='activeRoute.fragment|async' class='nav-tabs'>
-  <li *ngFor='let route of routes' [ngbNavItem]='route.path'>
-    <a ngbNavLink [routerLink]='route.path'>{{ getRouteLabel( route ) }}</a>
-  </li>
-</ul>
+<!-- navbar -->
+<div class='offset-sm-1 col-sm-10'>
+  <app-navbar></app-navbar>
+</div>
 
 <!-- breadcrumb -->
-<xng-breadcrumb></xng-breadcrumb>
+<xng-breadcrumb separator='>'></xng-breadcrumb>
 
 <!-- default router outlet -->
 <router-outlet></router-outlet>
+
 

@@ -94,14 +94,13 @@
 + lastname        string
 + telephone       string|null
 + address         string|null
-+ acc_type        enum( 'admin', 'nastavnik', 'nenastavnik', 'student' )
-+ created         date
-+ valid           date|null
++ acc_type        enum( 'adm', 'em', 'st' )
++ created         date|null
 + active          date|null
 + deleted         date|null
 ### employee ###
 + em_title        -> acc_em_title|null
-+ em_biography    -> file|null
++ em_biography    string|null
 + em_photo        -> file|null
 + em_website_url  string|null
 + em_cabinet      string|null
@@ -118,7 +117,8 @@
 + acc_group
 ----------------------
 + id              [id]
-+ name            string
++ name            string|null
++ type            string
 + acc             list< -> acc >
 + created         date
 + deleted         date|null
@@ -157,7 +157,7 @@
   + department      enum( 'si', 'rti', 'os' )
   + semester        number
   + optional        bool
-+ class_hh        number
++ class_hh        string
 + espb            number
 + lecturer        list< ->acc >
 + goal            string
@@ -174,7 +174,7 @@
 ----------------------
 + id              [id]
 + crs             -> crs
-+ department      enum( 'si', 'rti' )
++ department      enum( 'si', 'rti', 'os' )
 + semester        number
 + lecturer        list< ->acc >
 + student         -> acc_group

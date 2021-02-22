@@ -1,1 +1,20 @@
-<p>pocetna works!</p>
+<ngb-carousel id="carousel" [interval]="10000">
+  <ng-template ngbSlide>
+    <img class="carousel-img" src="../../../../assets/images/pocetna-1.jpg">
+    <div class="carousel-caption">
+      <h3>Zgrada fakulteta</h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="carousel-img" src="../../../../assets/images/pocetna-2.jpg">
+    <div class="carousel-caption">
+      <h3>Doček brucoša</h3>
+    </div>
+  </ng-template>
+  <ng-template ngbSlide>
+    <img class="carousel-img" src="../../../../assets/images/pocetna-3.jpg">
+    <div class="carousel-caption">
+      <h3>Hodnik</h3>
+    </div>
+  </ng-template>
+</ngb-carousel>

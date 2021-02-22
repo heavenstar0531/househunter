@@ -20,7 +20,7 @@ class Crs {
     code:     string;          // unique<string>
     name:     string;          // string
     plan:     Array<CrsPlan>;  // list< >
-    class_hh: number;          // number
+    class_hh: string;          // string
     espb:     number;          // number
     lecturer: Array<ObjectId>; // list< ->acc >
     goal:     string;          // string

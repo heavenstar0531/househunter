@@ -18,7 +18,7 @@ let crsSchema = new mongoose.Schema({
     code:     { type: String },          // unique<string>
     name:     { type: String },          // string
     plan:     { type: [crsPlanSchema] }, // list< >
-    class_hh: { type: Number },          // number
+    class_hh: { type: String },          // string
     espb:     { type: Number },          // number
     lecturer: { type: [ObjectId] },      // list< ->acc >
     goal:     { type: String },          // string
