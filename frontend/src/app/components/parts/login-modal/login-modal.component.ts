@@ -20,10 +20,10 @@ export class LoginModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModal( content: any ) {
+  openModal( content: any ): void {
     this.modalService.open( content );
   }
 
-  login() {
+  login(): void {
   }
 }
