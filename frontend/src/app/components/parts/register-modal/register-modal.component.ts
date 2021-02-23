@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AccRegisterData } from 'src/app/objects/acc';
 
 @Component({
   selector: 'app-register-modal',
@@ -7,16 +8,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./register-modal.component.css']
 })
 export class RegisterModalComponent implements OnInit {
-  registerMsg: String = '';
-  registerUsernameMsg: String = '';
-  registerPasswordMsg: String = '';
-  registerFirstnameMsg: String = '';
-  registerLastnameMsg: String = '';
-  registerTelephoneMsg: String = '';
-  registerAddressMsg: String = '';
-  registerAccTypeMsg: String = '';
-  registerEmTitleMsg: String = '';
-  registerEmCabinetMsg: String = '';
+  data: AccRegisterData = new AccRegisterData();
 
   constructor(
     private modalService: NgbModal,
@@ -25,11 +17,11 @@ export class RegisterModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModal( content: any ) {
+  openModal( content: any ): void {
     this.modalService.open( content );
   }
 
-  register() {
+  register(): void {
     
   }
 }

@@ -1,5 +1,18 @@
-#login-form>div>label,
-#register-form>div>label {
-  margin-bottom: 3px;
+/* app-navbar {
+	position: fixed;
+	top: 0px;
+	width: 100%;
+  z-index: 1000;
+  background-color: var(--navbar-color);
+} */
+
+
+.footer {
+	background-color: var(--footer-color);
+	color: var(--sidebar-text-color);
+	text-align:center;
+	font-size:10pt;
+	padding-top:5px;
+  padding-bottom:5px;
 }
 

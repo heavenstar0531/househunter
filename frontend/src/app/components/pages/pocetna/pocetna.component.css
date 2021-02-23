@@ -1,3 +1,12 @@
+.carousel-inner {
+  height: 500px;
+}
+
+.carousel-item.active {
+  display: inline-flex;
+}
+
 .carousel-img {
-    height: 500px;
+  margin-left: auto;
+  margin-right: auto;
 }

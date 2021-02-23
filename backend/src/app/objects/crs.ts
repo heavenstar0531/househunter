@@ -1,13 +1,13 @@
 import ObjectId from 'bson-objectid';
 
-class CrsPlan {
+export class CrsPlan {
     _id:        ObjectId = new ObjectId();  // [id]
     department: string   = '';   // enum( 'si', 'rti', 'os' )
     semester:   number   = 0;
     optional:   boolean  = false;
 };
 
-class CrsPage {
+export class CrsPage {
     _id:     ObjectId    = new ObjectId();   // [id]
     type:    string      = '';   // enum( 'info', 'pred', 'vezbe', 'lab', 'domaci', 'proj', 'ispit' )
     text:    string|null = null;
@@ -15,7 +15,7 @@ class CrsPage {
     enabled: Date|null   = null;
 };
 
-class Crs {
+export class Crs {
     _id:      ObjectId  = new ObjectId();   // [id]
     code:     string    = '';   // unique<string>
     name:     string    = '';
@@ -30,5 +30,5 @@ class Crs {
     deleted:  Date|null = null;
 };
 
-export { Crs, CrsPage, CrsPlan };
+
 

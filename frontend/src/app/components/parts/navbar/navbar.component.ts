@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Routes, Route } from '@angular/router';
 import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { appRoutes } from 'src/app/app-routing.module';
+import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +14,9 @@ export class NavbarComponent implements OnInit {
   activeNavItems: string[] = ['', ''];
   collapsed: boolean = true;
 
-  constructor() {
+  constructor(
+    private breadcrumbService: BreadcrumbService,
+  ) {
     let activeNavItems = JSON.parse( sessionStorage.getItem( 'activeNavItems' ) ?? '[]' );
     this.activeNavItems = ( activeNavItems != [] ) ? activeNavItems : ['', ''];
   }

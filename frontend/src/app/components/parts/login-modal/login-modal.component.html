@@ -7,16 +7,16 @@
 
   <div class="modal-body">
     <form id='form' class="px-3 py-1">
-      <small class='errmsg'>{{loginMsg}}</small>
+      <small class='errmsg'>{{data.loginErr}}&nbsp;</small>
       <div class="form-group">
         <label for="username">korisničko ime</label>
-        <input id ="username" type="text" class="form-control" placeholder="korisničko ime" [(ngModel)]="username" name="username">
-        <small class='errmsg'>{{loginUsernameMsg}}</small>
+        <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="data.username" [class.is-invalid]="data.usernameErr != ''">
+        <small class='errmsg'>{{data.usernameErr}}&nbsp;</small>
       </div>
       <div class="form-group">
         <label for="password">lozinka</label>
-        <input id ="password" type="password" class="form-control" placeholder="lozinka" [(ngModel)]="password" name="password">
-        <small class='errmsg'>{{loginPasswordMsg}}</small>
+        <input id ="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="data.password" [class.is-invalid]="data.passwordErr != ''">
+        <small class='errmsg'>{{data.passwordErr}}&nbsp;</small>
       </div>
     </form>
   </div>

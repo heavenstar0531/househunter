@@ -1,6 +1,6 @@
 import ObjectId from 'bson-objectid';
 
-class CrsGroup {
+export class CrsGroup {
     _id:           ObjectId  = new ObjectId();   // [id]
     crs:           ObjectId  = new ObjectId();   // -> crs
     department:    string    = '';     // enum( 'si', 'rti', 'os' )
@@ -15,5 +15,5 @@ class CrsGroup {
     deleted:       Date|null = null;
 };
 
-export { CrsGroup };
+
 

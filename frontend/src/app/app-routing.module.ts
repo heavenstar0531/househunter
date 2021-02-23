@@ -26,39 +26,39 @@ import { KorisnikAdmComponent } from './components/pages/korisnik-adm/korisnik-a
 let appRoutes: Routes = [
   // ____________________________________________________________________________________________________
   // stranice (usr, st)
-  { path: 'pocetna',        component: PocetnaComponent,       data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Početna',      } } },             // sadrzi i obavestenja
-  { path: 'studiranje',     component: StudiranjeComponent,    data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Studiranje',   } }, children: [   // sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
-    { path: ':crsid',       component: PredmetStComponent,     data: { 'acctype': '|st|',     'breadcrumb': { 'alias': ':crsname',     } } },             // accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
+  { path: 'pocetna',        component: PocetnaComponent,       data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Početna',      } } },             // sadrzi i obavestenja
+  { path: 'studiranje',     component: StudiranjeComponent,    data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Studiranje',   } }, children: [   // sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
+    { path: ':crsid',       component: PredmetStComponent,     data: { 'acctype': ['st'],       'breadcrumb': { 'alias': ':crsname',     } } },             // accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
   ]},
-  { path: 'nauka',        /*component: null,*/                 data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Nauka', 'disable': true } }, children: [   // ne postoji ova stranica, tako da ne moze da se klikne u navbar-u
-    { path: 'istrazivanja', component: IstrazivanjaComponent,  data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Istraživanja', } } },             // stranica sa statickim linkovima
-    { path: 'projekti',     component: ProjektiComponent,      data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Projekti',     } } },             // stranica sa statickim linkovima
-    { path: 'ponude',       component: PonudeComponent,        data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Ponude',       } } },             // stranica sa statickim tekstom
+  { path: 'nauka',        /*component: null,*/                 data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Nauka', 'disable': true } }, children: [   // ne postoji ova stranica, tako da ne moze da se klikne u navbar-u
+    { path: 'istrazivanja', component: IstrazivanjaComponent,  data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Istraživanja', } } },             // stranica sa statickim linkovima
+    { path: 'projekti',     component: ProjektiComponent,      data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Projekti',     } } },             // stranica sa statickim linkovima
+    { path: 'ponude',       component: PonudeComponent,        data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Ponude',       } } },             // stranica sa statickim tekstom
   ]},
-  { path: 'kontakt',        component: KontaktComponent,       data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Kontakt',      } }, children: [   // stranica sa statickim tekstom
-    { path: 'zaposleni',    component: ZaposleniComponent,     data: { 'acctype': '|usr|st|', 'breadcrumb': { 'label': 'Zaposleni',    } }, children: [
-      { path:':accid',      component: ZaposlenComponent,      data: { 'acctype': '|usr|st|', 'breadcrumb': { 'alias': ':prsnname',    } } },
+  { path: 'kontakt',        component: KontaktComponent,       data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Kontakt',      } }, children: [   // stranica sa statickim tekstom
+    { path: 'zaposleni',    component: ZaposleniComponent,     data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Zaposleni',    } }, children: [
+      { path:':accid',      component: ZaposlenComponent,      data: { 'acctype': ['usr','st'], 'breadcrumb': { 'alias': ':prsnname',    } } },
     ]},
   ]},
   
   // stranice (em)
-  { path: 'predmeti',       component: PredmetiEmComponent,    data: { 'acctype': '|em|', 'breadcrumb': { 'label': 'Predmeti',     } }, children: [       // lista predmeta na kojima je zaposleni angazovan
-    { path: ':crsid',       component: PredmetEmComponent,     data: { 'acctype': '|em|', 'breadcrumb': { 'alias': ':crsname',     } } },                 // accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit
+  { path: 'predmeti',       component: PredmetiEmComponent,    data: { 'acctype': ['em'], 'breadcrumb': { 'label': 'Predmeti',     } }, children: [         // lista predmeta na kojima je zaposleni angazovan
+    { path: ':crsid',       component: PredmetEmComponent,     data: { 'acctype': ['em'], 'breadcrumb': { 'alias': ':crsname',     } } },                   // accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit
   ]},
-  { path: 'obavestenja',    component: ObavestenjaEmComponent, data: { 'acctype': '|em|', 'breadcrumb': { 'label': 'Obaveštenja',  } } },
-  { path: 'prijave',        component: PrijaveEmComponent,     data: { 'acctype': '|em|', 'breadcrumb': { 'label': 'Prijave',      } } },                 // otvaranje prijava za labove, projekte, itd.
-  
+  { path: 'obavestenja',    component: ObavestenjaEmComponent, data: { 'acctype': ['em'], 'breadcrumb': { 'label': 'Obaveštenja',  } } },
+  { path: 'prijave',        component: PrijaveEmComponent,     data: { 'acctype': ['em'], 'breadcrumb': { 'label': 'Prijave',      } } },                   // otvaranje prijava za labove, projekte, itd.
+
   // stranice (adm)
-  { path: 'korisnici',      component: KorisniciAdmComponent,  data: { 'acctype': '|adm|', 'breadcrumb': { 'label': 'Korisnici',   } }, children: [       // lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
-    { path: ':accid',       component: KorisnikAdmComponent,   data: { 'acctype': '|adm|', 'breadcrumb': { 'alias': ':prsnname',   } } },                 // admin ne moze da obrise svoj nalog!
+  { path: 'korisnici',      component: KorisniciAdmComponent,  data: { 'acctype': ['adm'], 'breadcrumb': { 'label': 'Korisnici',   } }, children: [         // lista korisnika prema tipu;   ovde moze da se napravi grupa studenata
+    { path: ':accid',       component: KorisnikAdmComponent,   data: { 'acctype': ['adm'], 'breadcrumb': { 'alias': ':prsnname',   } } },                   // admin ne moze da obrise svoj nalog!
   ]},
 
   // stranice (usr, st, adm)
-  { path: 'profil',         component: ProfilComponent,        data: { 'acctype': '|st|em|adm|', 'breadcrumb': { 'label': 'Profil',    } } },             // za sve ulogovane korisnike (sve osim usr)
+  { path: 'profil',         component: ProfilComponent,        data: { 'acctype': ['st','em','adm'], 'breadcrumb': { 'label': 'Profil',    } } },           // za sve ulogovane korisnike (sve osim usr)
 
   // ____________________________________________________________________________________________________
   // putanje koje ne treba da se nadju u navbar-u
-  { path: '**', redirectTo: '/pocetna' },                                                                                                                 // default putanja
+  { path: '**', redirectTo: '/pocetna' },                                                                                                                   // default putanja
 ];
 
 @NgModule({

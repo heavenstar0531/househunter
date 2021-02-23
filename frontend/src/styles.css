@@ -20,3 +20,22 @@
 .errmsg {
   color: red;
 }
+
+/* style placed here since for some bizarre reason it doesn't work anywhere else */
+/* possibly because reboot.scss is included globally? */
+.xng-breadcrumb-item label {
+  margin-bottom: 0;
+}
+
+.xng-breadcrumb-root {
+  padding: 4px 16px;
+  border-radius: 4px;
+
+  border-bottom: 2px solid #666;
+  border-radius: 0;
+}
+
+.form-control.is-valid, .form-control.is-invalid {
+  background-image: none;
+}
+

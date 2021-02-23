@@ -1,6 +1,6 @@
 import ObjectId from 'bson-objectid';
 
-class News {
+export class News {
     _id:      ObjectId = new ObjectId();   // [id]
     title:    string = '';
     text:     string|null = '';
@@ -14,5 +14,5 @@ class News {
     deleted:  Date|null = null;
 };
 
-export { News };
+
 

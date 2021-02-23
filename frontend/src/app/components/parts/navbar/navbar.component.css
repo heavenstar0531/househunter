@@ -2,7 +2,6 @@
   margin-top: 0;
   border: none;
   border-radius: 0;
-  background-color: #ffc107;
 }
 
 .dropdown-toggle::after {
@@ -14,6 +13,18 @@
   padding-right: 0.5rem;
 }
 
-.navbar-toggler-icon {
-  height: 0.5rem;
+.navbar-toggler {
+  padding-top: 0;
+  padding-bottom: 0;
 }
+
+.navbar-toggler-icon {
+  margin-bottom: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.pt-0125 {
+  padding-top: 0.125rem;
+}
+

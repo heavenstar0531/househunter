@@ -1,6 +1,6 @@
 import ObjectId from 'bson-objectid';
 
-class File {
+export class File {
     _id:      ObjectId = new ObjectId();   // [id]
     acc:      ObjectId = new ObjectId();   // -> acc
     filename: string = '';
@@ -12,5 +12,5 @@ class File {
     deleted:  Date|null = null;
 };
 
-export { File };
+
 

@@ -1,12 +1,12 @@
 import ObjectId from 'bson-objectid';
 
-class SubmsnSubmtd {
+export class SubmsnSubmtd {
     _id:  ObjectId      = new ObjectId();   // [id]
     acc:  ObjectId      = new ObjectId();   // -> acc
     file: ObjectId|null = null;   // -> file|null
 };
 
-class SubmsnTerm {
+export class SubmsnTerm {
     _id:        ObjectId    = new ObjectId();   // [id]
     cabinet:    string      = '';
     date_beg:   Date        = new Date();
@@ -15,7 +15,7 @@ class SubmsnTerm {
     submtd:     Array<SubmsnSubmtd> = [];
 };
 
-class Submsn {
+export class Submsn {
     _id:       ObjectId  = new ObjectId();   // [id]
     name:      string    = '';
     term:      Array<SubmsnTerm> = [];
@@ -24,5 +24,5 @@ class Submsn {
     completed: Date|null = null;
 };
 
-export { Submsn, SubmsnTerm, SubmsnSubmtd };
+
 
