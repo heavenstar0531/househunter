@@ -8,7 +8,7 @@ export class Acc {
     lastname:       string      = '';
     telephone:      string|null = null;
     address:        string|null = null;
-    acc_type:       string      = 'st';   // enum( 'adm', 'em', 'st' )
+    acc_type:       string      = '';   // enum( 'adm', 'em', 'st' )
     created:        Date        = new Date();
     valid:          Date|null   = null;
     active:         Date|null   = null;
@@ -51,8 +51,7 @@ export class AccRegisterData {
     lastname:       string      = '';
     telephone:      string|null = null;
     address:        string|null = null;
-    acc_type:       string      = 'st';   // enum( 'adm', 'em', 'st' )
-    // ### employee ###
+    acc_type:       string      = '';   // enum( 'adm', 'em', 'st' )
     em_title:       ObjectId|null = null;   // -> acc_em_title|null
     em_cabinet:     string|null   = null;
     // response
