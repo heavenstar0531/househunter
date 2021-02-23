@@ -70,3 +70,6 @@ export class AppRoutingModule { }
 // uklanjanje putanja koje ne treba da se nadju u navbar-u
 appRoutes.pop();
 export { appRoutes };
+
+
+

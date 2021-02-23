@@ -1,18 +1,40 @@
 <!-- navbar -->
-<ul ngbNav [activeId]='activeNavItems[0]' (activeIdChange)='activeNavItemChanged( $event, 0 )' class='nav-pills'>
+<nav ngbNav class="navbar navbar-expand-sm navbar-light bg-warning no-select">
+  <span class="navbar-brand">
+    <button class="navbar-toggler border-0" type="button" (click)="collapsed = !collapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <span>RTI</span>
+  </span>
 
-  <!-- pages -->
-  <li *ngFor='let route of routes' [ngbNavItem]='route.path'>
-    <a ngbNavLink [routerLink]='route.path'>{{ getRouteLabel( route ) }}</a>
-  </li>
+  <div class="navbar-collapse" [class.collapse]="collapsed">
+    <ul class="navbar-nav mr-auto">
 
-  <!-- flexible space -->
-  <div class="flex-space"></div>
+      <li *ngFor='let route of getRoutes()' [ngbNavItem]='route.path'>
+        <!-- main menu -->
+        <a *ngIf="getSubroutes( route ).length == 0" [routerLink]='route.path' class="nav-link">{{ getRouteLabel( route ) }}</a>
 
-  <app-register-modal></app-register-modal>
-  <app-login-modal></app-login-modal>
+        <div *ngIf="getSubroutes( route ).length > 0" ngbDropdown #dropdown="ngbDropdown" class="nav-item" (mouseover)="dropdown.open()" (mouseout)="dropdown.close()">
+          <!-- main menu -->
+          <a ngbDropdownToggle [routerLink]='route.path' class="nav-link" role="button">{{ getRouteLabel( route ) }}</a>
 
-  <!-- logout -->
-  <button class="btn btn-link">Odjava</button>
-  
-</ul>
+          <!-- submenu -->
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a *ngFor="let subroute of getSubroutes( route )" ngbDropdownItem class="nav-link" [routerLink]='[route.path, subroute.path]'>{{ getRouteLabel( subroute ) }}</a>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <!-- register -->
+      <app-register-modal></app-register-modal>
+      <!-- login -->
+      <app-login-modal></app-login-modal>
+      <!-- logout -->
+      <div><button class="btn nav-link shadow-none">Odjava</button></div>
+    </ul>
+  </div>
+
+</nav>

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
-.flex-space {
-  flex-grow: 1;
+*:focus {
+  outline: none;
 }
 
 .no-select {
@@ -11,6 +11,10 @@
   -moz-user-select: none; /* Old versions of Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently supported by Chrome, Opera and Firefox */
+}
+
+.flex-space {
+  flex-grow: 1;
 }
 
 .errmsg {

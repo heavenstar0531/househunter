@@ -1,33 +1,33 @@
 import ObjectId from 'bson-objectid';
 
 class CrsPlan {
-    _id:        ObjectId;  // [id]
-    department: string;    // enum( 'si', 'rti', 'os' )
-    semester:   number;    // number
-    optional:   boolean;   // bool
+    _id:        ObjectId = new ObjectId();  // [id]
+    department: string   = '';   // enum( 'si', 'rti', 'os' )
+    semester:   number   = 0;
+    optional:   boolean  = false;
 };
 
 class CrsPage {
-    _id:     ObjectId;        // [id]
-    type:    string;          // enum( 'info', 'pred', 'vezbe', 'lab', 'domaci', 'proj', 'ispit' )
-    text:    string;          // string|null
-    files:   Array<ObjectId>; // list< ->file >|null
-    enabled: Date;            // date|null
+    _id:     ObjectId    = new ObjectId();   // [id]
+    type:    string      = '';   // enum( 'info', 'pred', 'vezbe', 'lab', 'domaci', 'proj', 'ispit' )
+    text:    string|null = null;
+    files:   Array<ObjectId> = [];   // list< ->file >|null
+    enabled: Date|null   = null;
 };
 
 class Crs {
-    _id:      ObjectId;        // [id]
-    code:     string;          // unique<string>
-    name:     string;          // string
-    plan:     Array<CrsPlan>;  // list< >
-    class_hh: string;          // string
-    espb:     number;          // number
-    lecturer: Array<ObjectId>; // list< ->acc >
-    goal:     string;          // string
-    outcome:  string;          // string
-    page:     Array<CrsPage>;  // list< >
-    created:  Date;            // date
-    deleted:  Date;            // date|null
+    _id:      ObjectId  = new ObjectId();   // [id]
+    code:     string    = '';   // unique<string>
+    name:     string    = '';
+    plan:     Array<CrsPlan> = [];
+    class_hh: string    = '';
+    espb:     number    = 0;
+    lecturer: Array<ObjectId> = [];   // list< ->acc >
+    goal:     string    = '';
+    outcome:  string    = '';
+    page:     Array<CrsPage> = [];
+    created:  Date      = new Date();
+    deleted:  Date|null = null;
 };
 
 export { Crs, CrsPage, CrsPlan };

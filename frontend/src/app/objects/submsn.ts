@@ -1,27 +1,27 @@
 import ObjectId from 'bson-objectid';
 
 class SubmsnSubmtd {
-    _id:  ObjectId;   // [id]
-    acc:  ObjectId;   // -> acc
-    file: ObjectId;   // -> file|null
+    _id:  ObjectId      = new ObjectId();   // [id]
+    acc:  ObjectId      = new ObjectId();   // -> acc
+    file: ObjectId|null = null;   // -> file|null
 };
 
 class SubmsnTerm {
-    _id:        ObjectId;   // [id]
-    cabinet:    string;     // string
-    date_beg:   Date;       // date
-    date_end:   Date;       // date
-    prsn_limit: number;     // number|null
-    submtd:     Array<SubmsnSubmtd>; // list< >
+    _id:        ObjectId    = new ObjectId();   // [id]
+    cabinet:    string      = '';
+    date_beg:   Date        = new Date();
+    date_end:   Date        = new Date();
+    prsn_limit: number|null = null;
+    submtd:     Array<SubmsnSubmtd> = [];
 };
 
 class Submsn {
-    _id:       ObjectId;   // [id]
-    name:      string;     // string
-    term:      Array<SubmsnTerm>; // list< >
-    created:   Date;       // date
-    readonly:  Date;       // date|null
-    completed: Date;       // date|null
+    _id:       ObjectId  = new ObjectId();   // [id]
+    name:      string    = '';
+    term:      Array<SubmsnTerm> = [];
+    created:   Date      = new Date();
+    readonly:  Date|null = null;
+    completed: Date|null = null;
 };
 
 export { Submsn, SubmsnTerm, SubmsnSubmtd };

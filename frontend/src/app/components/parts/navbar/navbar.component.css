@@ -1,0 +1,19 @@
+.dropdown-menu {
+  margin-top: 0;
+  border: none;
+  border-radius: 0;
+  background-color: #ffc107;
+}
+
+.dropdown-toggle::after {
+  display: none;
+}
+
+.dropdown-item {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
+.navbar-toggler-icon {
+  height: 0.5rem;
+}

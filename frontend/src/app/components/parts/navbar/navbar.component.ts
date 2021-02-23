@@ -10,7 +10,8 @@ import { appRoutes } from 'src/app/app-routing.module';
 })
 export class NavbarComponent implements OnInit {
   routes: Routes = appRoutes;
-  activeNavItems: String[] = ['', ''];
+  activeNavItems: string[] = ['', ''];
+  collapsed: boolean = true;
 
   constructor() {
     let activeNavItems = JSON.parse( sessionStorage.getItem( 'activeNavItems' ) ?? '[]' );
@@ -24,10 +25,6 @@ export class NavbarComponent implements OnInit {
     sessionStorage.setItem( 'activeNavItems', JSON.stringify( this.activeNavItems ) );
   }
 
-  getRouteLabel( route: Route ): String {
-    return route.data?.breadcrumb['label'] ?? 'missing';
-  }
-
   activeNavItemChanged( $event: NgbNavChangeEvent, idx: number ) {
     this.activeNavItems[idx] = $event.nextId;
   }
@@ -36,4 +33,17 @@ export class NavbarComponent implements OnInit {
     
   }
 
+
+  getRouteLabel( route: Route ): string {
+    return route.data?.breadcrumb['label'] ?? '';
+  }
+
+  getRoutes(): Routes {
+    return this.routes;
+  }
+
+  getSubroutes( route: Route ): Routes {
+    let routes = route?.children ?? [];
+    return routes.filter( ( r ) => this.getRouteLabel( r ) != '' );
+  }
 }
