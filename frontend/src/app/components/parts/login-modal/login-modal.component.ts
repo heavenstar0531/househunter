@@ -20,8 +20,17 @@ export class LoginModalComponent implements OnInit {
 
   }
 
-  openModal( content: any ): void {
-    this.modalService.open( content );
+  openModal( modal: any ): void {
+    this.modalService.open( modal ).result.then( _ => this.resetData(), _ => this.resetData() );
+  }
+
+  closeModal( modal: any ): void {
+    modal.dismiss();
+    this.data = new AccLoginData();
+  }
+
+  resetData(): void {
+    this.data = new AccLoginData();
   }
 
   login(): void {

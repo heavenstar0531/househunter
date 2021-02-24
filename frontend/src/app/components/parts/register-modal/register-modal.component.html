@@ -22,12 +22,12 @@
       </div>
       <div class="form-group">
         <label for="firstname">ime</label>
-        <input id ="firstname" type="text" class="form-control" placeholder="ime" name="firstname" [(ngModel)]="data.lastname" [class.is-invalid]="data.lastnameErr != ''">
+        <input id ="firstname" type="text" class="form-control" placeholder="ime" name="firstname" [(ngModel)]="data.firstname" [class.is-invalid]="data.firstnameErr != ''">
         <small class='errmsg'>{{data.firstnameErr}}&nbsp;</small>
       </div>
       <div class="form-group">
         <label for="lastname">prezime</label>
-        <input id ="lastname" type="text" class="form-control" placeholder="prezime" name="lastname" [(ngModel)]="data.firstname" [class.is-invalid]="data.firstnameErr != ''">
+        <input id ="lastname" type="text" class="form-control" placeholder="prezime" name="lastname" [(ngModel)]="data.lastname" [class.is-invalid]="data.lastnameErr != ''">
         <small class='errmsg'>{{data.lastnameErr}}&nbsp;</small>
       </div>
       <div class="form-group">
@@ -43,32 +43,33 @@
       <div class="form-group">
         <label  for="acc_type">tip korisnika</label>
         <select id ="acc_type" class="form-control" name="accType" [(ngModel)]="data.acc_type" [class.is-invalid]="data.acc_typeErr != ''">
-          <option value='student' selected>student</option>
-          <option value='zaposleni'>zaposleni</option>
+          <option value='st'>student</option>
+          <option value='em'>zaposleni</option>
         </select>
         <small class='errmsg'>{{data.acc_typeErr}}&nbsp;</small>
       </div>
 
       <!-- employee -->
-      <div class="form-group">
+      <div *ngIf="data.acc_type == 'em'" class="form-group">
         <label  for="em_title">zvanje</label>
         <select id ="em_title" class="form-control" name="emTitle" [(ngModel)]="data.em_title" [class.is-invalid]="data.em_titleErr != ''">
           <!-- ... TODO: procitati iz baze ... -->
-          <option value='602ed0298b05043edc647ccc' selected>redovni profesor</option>
+          <option value='602ed0298b05043edc647ccc'>redovni profesor</option>
           <option value='602ed0298b05043edc647cd1'>istraživač</option>
         </select>
         <small class='errmsg'>{{data.em_titleErr}}&nbsp;</small>
       </div>
-      <div class="form-group">
+      <div *ngIf="data.acc_type == 'em'" class="form-group">
         <label for="em_cabinet">kabinet</label>
         <input id ="em_cabinet" type="text" class="form-control" placeholder="42a" name="emCabinet" [(ngModel)]="data.em_cabinet" [class.is-invalid]="data.em_cabinetErr != ''">
         <small class='errmsg'>{{data.em_cabinetErr}}&nbsp;</small>
       </div>
+
     </form>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="modal.dismiss()">Odustani</button>
+    <button class="btn btn-light" (click)="closeModal( modal )">Odustani</button>
     <button class="btn btn-outline-dark" (click)="register()">Registruj se</button>
   </div>
 </ng-template>
