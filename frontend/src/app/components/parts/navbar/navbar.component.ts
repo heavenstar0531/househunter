@@ -7,7 +7,7 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.sass']
 })
 export class NavbarComponent implements OnInit {
   routes: Routes = appRoutes;

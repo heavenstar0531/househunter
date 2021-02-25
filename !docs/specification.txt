@@ -17,8 +17,7 @@
 # stranice (usr)
   + pocetna            # sadrzi i obavestenja
   + studiranje         # sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
-  + nauka              # ne postoji ova stranica, tako da ne moze da se klikne u navbar-u
-    + istrazivanja     # stranica sa statickim linkovima
+  + nauka              # istrazivanja
     + projekti         # stranica sa statickim linkovima
     + ponude           # stranica sa statickim tekstom
   + kontakt            # stranica sa statickim tekstom

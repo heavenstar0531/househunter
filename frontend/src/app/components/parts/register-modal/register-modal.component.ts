@@ -6,7 +6,7 @@ import { AccService } from 'src/app/services/acc/acc.service';
 @Component({
   selector: 'app-register-modal',
   templateUrl: './register-modal.component.html',
-  styleUrls: ['./register-modal.component.css']
+  styleUrls: ['./register-modal.component.sass']
 })
 export class RegisterModalComponent implements OnInit {
   data: AccRegisterData = new AccRegisterData();

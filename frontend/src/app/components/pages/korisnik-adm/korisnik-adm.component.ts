@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-korisnik-adm',
   templateUrl: './korisnik-adm.component.html',
-  styleUrls: ['./korisnik-adm.component.css']
+  styleUrls: ['./korisnik-adm.component.sass']
 })
 export class KorisnikAdmComponent implements OnInit {
 

@@ -1,15 +1,15 @@
-<!-- navbar -->
-<app-navbar></app-navbar>
-<!-- breadcrumb -->
-<xng-breadcrumb separator='>'></xng-breadcrumb>
+<div class="header d-block row mx-0">
+    <div class="col-sm-12">&nbsp;</div>
+    <div class="col-sm-12">
+        <app-navbar></app-navbar>
+    </div>
+</div>
 
-<!-- default router outlet -->
-<router-outlet></router-outlet>
-
-
-<app-crs-page></app-crs-page>
-
+<div class="main">
+    <xng-breadcrumb separator='>'></xng-breadcrumb>
+    <router-outlet></router-outlet>
+</div>
 
 <div class="footer">
-    Copyright 2021, Marko Stanojević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu
+    <span>Copyright 2021, Marko Stanojević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu</span>
 </div>

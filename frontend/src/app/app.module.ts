@@ -40,6 +40,7 @@ import { LoginModalComponent } from './components/parts/login-modal/login-modal.
 import { RegisterModalComponent } from './components/parts/register-modal/register-modal.component';
 import { NavbarComponent } from './components/parts/navbar/navbar.component';
 import { CrsPageComponent } from './components/parts/crs-page/crs-page.component';
+import { CrsInfoComponent } from './components/parts/crs-info/crs-info.component';
 
 // ova funkcija mora da bude eksportovana da bi mogla biti koriscena od strane translate modula kao generator translate loader-a
 export function HttpLoaderFactory( http: HttpClient )
@@ -75,6 +76,7 @@ export function HttpLoaderFactory( http: HttpClient )
     RegisterModalComponent,
     NavbarComponent,
     CrsPageComponent,
+    CrsInfoComponent,
   ],
   imports: [
     BrowserModule,

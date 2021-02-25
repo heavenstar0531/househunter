@@ -30,8 +30,7 @@ let appRoutes: Routes = [
   { path: 'studiranje',     component: StudiranjeComponent,    data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Studiranje',   } }, children: [   // sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
     { path: ':crsid',       component: PredmetStComponent,     data: { 'acctype': ['st'],       'breadcrumb': { 'alias': ':crsname',     } } },             // accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
   ]},
-  { path: 'nauka',        /*component: null,*/                 data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Nauka', 'disable': true } }, children: [   // ne postoji ova stranica, tako da ne moze da se klikne u navbar-u
-    { path: 'istrazivanja', component: IstrazivanjaComponent,  data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Istraživanja', } } },             // stranica sa statickim linkovima
+  { path: 'nauka',          component: IstrazivanjaComponent,  data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Nauka'         } }, children: [   // istrazivanja -- stranica sa statickim linkovima
     { path: 'projekti',     component: ProjektiComponent,      data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Projekti',     } } },             // stranica sa statickim linkovima
     { path: 'ponude',       component: PonudeComponent,        data: { 'acctype': ['usr','st'], 'breadcrumb': { 'label': 'Ponude',       } } },             // stranica sa statickim tekstom
   ]},

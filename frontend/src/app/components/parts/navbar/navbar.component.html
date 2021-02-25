@@ -1,5 +1,5 @@
 <!-- navbar -->
-<nav ngbNav class="navbar navbar-expand-sm navbar-light bg-warning no-select">
+<nav ngbNav class="navbar navbar-expand-sm no-select navbar-light">
   <span class="navbar-brand">
     <button class="navbar-toggler border-0" type="button" (click)="collapsed = !collapsed">
       <span class="navbar-toggler-icon"></span>
@@ -19,7 +19,7 @@
           <a ngbDropdownToggle [routerLink]='route.path' class="nav-link" role="button">{{ getRouteLabel( route ) }}</a>
 
           <!-- submenu -->
-          <div ngbDropdownMenu class="dropdown-menu bg-warning">
+          <div ngbDropdownMenu class="dropdown-menu">
             <a *ngFor="let subroute of getSubroutes( route )" ngbDropdownItem class="nav-link" [routerLink]='[route.path, subroute.path]'>{{ getRouteLabel( subroute ) }}</a>
           </div>
         </div>

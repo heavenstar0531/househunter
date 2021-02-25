@@ -6,7 +6,7 @@ import { AccLoginData } from '../../../objects/acc';
 @Component({
   selector: 'app-login-modal',
   templateUrl: './login-modal.component.html',
-  styleUrls: ['./login-modal.component.css']
+  styleUrls: ['./login-modal.component.sass']
 })
 export class LoginModalComponent implements OnInit {
   data: AccLoginData = new AccLoginData();
