@@ -28,7 +28,9 @@ export class RegisterModalComponent implements OnInit {
     this.data = new AccRegisterData();
   }
 
-  resetData(): void {}
+  resetData(): void {
+    this.data = new AccRegisterData();
+  }
 
   register(): void {
     this.accService.register( this.data );

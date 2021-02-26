@@ -17,7 +17,6 @@ export class LoginModalComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
   }
 
   openModal( modal: any ): void {
