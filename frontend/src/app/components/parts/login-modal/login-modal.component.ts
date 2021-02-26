@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccService } from 'src/app/services/acc/acc.service';
 import { AccLoginData } from '../../../objects/acc';
@@ -9,6 +9,8 @@ import { AccLoginData } from '../../../objects/acc';
   styleUrls: ['./login-modal.component.sass']
 })
 export class LoginModalComponent implements OnInit {
+  @ViewChild( TemplateRef )
+  templateRef: TemplateRef<any>|null = null;
   data: AccLoginData = new AccLoginData();
 
   constructor(
@@ -19,20 +21,20 @@ export class LoginModalComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  openModal( modal: any ): void {
-    this.modalService.open( modal ).result.then( _ => this.resetData(), _ => this.resetData() );
+  open(): void {
+    this.modalService.open( this.templateRef ).result.then( _ => this.reset(), _ => this.reset() );
   }
 
-  closeModal( modal: any ): void {
+  close( modal: any ): void {
     modal.dismiss();
-    this.data = new AccLoginData();
-  }
-
-  resetData(): void {
-    this.data = new AccLoginData();
+    this.reset();
   }
 
   login(): void {
     this.accService.login( this.data );
+  }
+
+  reset(): void {
+    this.data = new AccLoginData();
   }
 }

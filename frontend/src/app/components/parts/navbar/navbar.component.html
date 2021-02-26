@@ -29,9 +29,11 @@
 
     <ul class="navbar-nav ml-auto">
       <!-- register -->
-      <app-register-modal></app-register-modal>
+      <button class="btn nav-link shadow-none" (click)="registerModal.open()">Registracija</button>
+      <app-register-modal #registerModal></app-register-modal>
       <!-- login -->
-      <app-login-modal></app-login-modal>
+      <button class="btn btn-outline-dark btn-nav" (click)="loginModal.open()">Prijava</button>
+      <app-login-modal #loginModal></app-login-modal>
       <!-- logout -->
       <div><button class="btn nav-link shadow-none">Odjava</button></div>
     </ul>

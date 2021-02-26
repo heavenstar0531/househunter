@@ -6,7 +6,7 @@ import { AppComponent } from './components/app/app.component';
 // two way data binding za forme, http client, bootstrap i translate moduli
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'xng-breadcrumb';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
@@ -90,6 +90,7 @@ export function HttpLoaderFactory( http: HttpClient )
   ],
   providers: [
     AccService,
+    NgbActiveModal,
   ],
   bootstrap: [AppComponent]
 })

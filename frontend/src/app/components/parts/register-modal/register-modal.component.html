@@ -1,6 +1,5 @@
 <!-- register modal -->
-<button class="btn nav-link shadow-none" (click)="openModal( registerModal )">Registracija</button>
-<ng-template let-modal #registerModal>
+<ng-template let-modal #templateRef>
   <div class="modal-header">
     <h4 class="modal-title">Registracija</h4>
   </div>
@@ -69,7 +68,7 @@
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="closeModal( modal )">Odustani</button>
+    <button class="btn btn-light" (click)="close( modal )">Odustani</button>
     <button class="btn btn-outline-dark" (click)="register()">Registruj se</button>
   </div>
 </ng-template>
