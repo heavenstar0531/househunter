@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';   // za lokalizaciju aplikacije
 
 @Component({
   selector: 'app-root',
@@ -8,12 +7,7 @@ import { TranslateService } from '@ngx-translate/core';   // za lokalizaciju apl
 })
 export class AppComponent implements OnInit {
 
-  constructor(
-    public translate: TranslateService,
-  ) { }
+  constructor() { }
 
-
-  ngOnInit(): void {
-    this.translate.setDefaultLang( 'sr' );
-  }
+  ngOnInit(): void { }
 }

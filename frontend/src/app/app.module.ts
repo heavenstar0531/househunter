@@ -5,11 +5,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './components/app/app.component';
 // two way data binding za forme, http client, bootstrap i translate moduli
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'xng-breadcrumb';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // servisi
 import { AccService } from './services/acc/acc.service';
@@ -41,12 +39,6 @@ import { RegisterModalComponent } from './components/parts/register-modal/regist
 import { NavbarComponent } from './components/parts/navbar/navbar.component';
 import { CrsPageComponent } from './components/parts/crs-page/crs-page.component';
 import { CrsInfoComponent } from './components/parts/crs-info/crs-info.component';
-
-// ova funkcija mora da bude eksportovana da bi mogla biti koriscena od strane translate modula kao generator translate loader-a
-export function HttpLoaderFactory( http: HttpClient )
-{
-  return new TranslateHttpLoader( http );
-}
 
 @NgModule({
   declarations: [
@@ -86,7 +78,6 @@ export function HttpLoaderFactory( http: HttpClient )
     HttpClientModule,
     NgbModule,
     BreadcrumbModule,
-    TranslateModule.forRoot({ loader: { provide: TranslateLoader, useFactory: HttpLoaderFactory, deps: [HttpClient] }, }),
   ],
   providers: [
     AccService,
