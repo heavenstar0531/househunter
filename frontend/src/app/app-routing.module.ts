@@ -67,6 +67,7 @@ let appRoutes: Routes = [
 export class AppRoutingModule { }
 
 // uklanjanje putanja koje ne treba da se nadju u navbar-u
+appRoutes = JSON.parse( JSON.stringify( appRoutes ) );
 appRoutes.pop();
 export { appRoutes };
 
