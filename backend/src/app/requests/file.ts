@@ -1,6 +1,6 @@
 import ObjectId from 'bson-objectid';
 
-export class FilesData {
+export class FileData {
     // ------------------------------------------------------------- <<< file info
     _id:         null|ObjectId = null;   // [id]
     length:      null|number = null;     // number
@@ -11,7 +11,7 @@ export class FilesData {
 
 
     ensureValid( acc_type: string, method: string ): void {
-        throw new Error('Not implemented');
+        throw new Error('TODO');
     }
 }
 

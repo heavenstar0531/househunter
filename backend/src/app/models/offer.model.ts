@@ -1,5 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { OfferData } from '../requests/offer';
+import { Status } from '../common/types'
 
 let offerSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< offer info
@@ -15,5 +17,25 @@ let offerSchema = new mongoose.Schema({
 export class OfferModel
 {
     private model: Model<any> = mongoose.model( 'offer', offerSchema );
+
+    // (usr)
+    add( offer: OfferData ): Status {
+        throw new Error('TODO');
+    }
+
+    // rest-unexposed method
+    delete( prop_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    accept( offer: OfferData ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    list( prop_id: ObjectId ): [ Status, Array< OfferData >|null ] {
+        throw new Error('TODO');
+    }
 }
 

@@ -12,7 +12,7 @@ export class OfferData {
 
 
     ensureValid( acc_type: string, method: string ): void {
-        throw new Error('Not implemented');
+        throw new Error('TODO');
     }
 };
 

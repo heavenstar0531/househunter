@@ -7,6 +7,11 @@ export class MsgData {
     text:      null|string = null;     // string
     sent_dt:   null|Date = null;       // date
     read_dt:   null|Date = null;       // date|null
+
+
+    ensureValid( acc_type: string, method: string ): void {
+        throw new Error('TODO');
+    }
 };
 
 export class ConvData {
@@ -22,7 +27,7 @@ export class ConvData {
 
 
     ensureValid( acc_type: string, method: string ): void {
-        throw new Error('Not implemented');
+        throw new Error('TODO');
     }
 };
 

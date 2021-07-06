@@ -1,0 +1,42 @@
+[
+  {
+    "_id": { "$oid": "602ed0298b05043edc647cce" },
+    "username": "admin",
+    "password": "admin",
+    "firstname": "Pera",
+    "lastname": "Perić",
+    "email": "pera@email.com",
+
+    "usr_photo_id": null,
+    "usr_addr_country": "Srbija",
+    "usr_addr_city": "Beograd",
+
+    "acc_type": "adm",
+    "activated_dt": "2021-02-17T23:00:00Z",
+    "deleted_dt": null,
+    "usr_blocked_ids": []
+  }
+]  
+
+// "_id": { "$oid": "602ed0298b05043edc647ccf" },
+// "_id": { "$oid": "602ed0298b05043edc647cd0" },
+// "_id": { "$oid": "602ed0298b05043edc647cd1" },
+// "_id": { "$oid": "602ed0298b05043edc647cd2" },
+// "_id": { "$oid": "602ed0298b05043edc647cd3" },
+// "_id": { "$oid": "602eda588b05043edc647ce0" },
+// "_id": { "$oid": "602eda588b05043edc647cdf" },
+// "_id": { "$oid": "602eda588b05043edc647ce1" },
+// "_id": { "$oid": "602eda588b05043edc647ce2" },
+// "_id": { "$oid": "602eda588b05043edc647ce3" },
+// "_id": { "$oid": "602eda588b05043edc647ce4" },
+// "_id": { "$oid": "602eda588b05043edc647ce5" },
+// "_id": { "$oid": "602eda588b05043edc647ce6" },
+// "_id": { "$oid": "602eda588b05043edc647ce7" },
+// "_id": { "$oid": "602eda588b05043edc647ce8" },
+// "_id": { "$oid": "602eda588b05043edc647ce9" },
+// "_id": { "$oid": "602eda588b05043edc647cea" },
+// "_id": { "$oid": "602eda588b05043edc647ceb" },
+// "_id": { "$oid": "602eda588b05043edc647cec" },
+// "_id": { "$oid": "602eda588b05043edc647ced" },
+
+// "2021-02-17T23:00:00Z"

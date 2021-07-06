@@ -72,8 +72,8 @@ TODO: dovrsiti i napraviti prototip
 # ------------------------------------- <<< frontend (instance) methods
 . agncy.ensureValid( acc_type, method ) => status
 # ------------------------------------- <<< backend (static) methods
-. get()               => status, agncy                  # (adm)
-. update( new_agncy ) => status                         # (adm)
+. get()                   => status, agncy              # (adm)
+. update( updated_agncy ) => status                     # (adm)
 
 
 
@@ -153,16 +153,17 @@ TODO: dovrsiti i napraviti prototip
 # ------------------------------------- <<< backend (static) methods
 . add( prop )           => status, prop_id|null               # <all>
 . addMany( json_prop_list ) => status, list< prop_id >|null   # (adm)
-. delete( acc_id )      => status                             # (adm)
+. delete( prop_id )     => status                             # (adm)
 . get( prop_id )        => status, prop|null                  # <gst>,<all>
 . list( criteria_json ) => status, list< prop >|null          # <gst>,<all>: <everything>|promoted|city|price_range;   (usr): owned;   (ang),(adm): agency_owned|sold
 .
-. updateInfo( updated_acc )       => status                   # <all>
-. updateStatus( updated_acc )     => status                   # (adm),(agn)
+. updateInfo( updated_prop )       => status                   # <all>
+. updateStatus( updated_prop )     => status                   # (adm),(agn)
 .
 . rent( prop_id, from_dt, to_dt ) => status, cost|null        # (usr)
 . purchase( prop_id, on_credit )  => status, cost|credit|null # (usr)
 .
+// TODO: smisliti sta treba da vrati ova funkcija
 . getStats( criteria_json ) => status, any|null               # (adm),(agn)
 
 
@@ -182,7 +183,7 @@ TODO: dovrsiti i napraviti prototip
 . offer.ensureValid( acc_type, method ) => status
 # ------------------------------------- <<< backend (static) methods
 . add( offer )      => status                               # (usr)
-. delete( prop_id ) => status                               # private method
+. delete( prop_id ) => status                               # invisible to rest api
 . accept( offer )   => status                               # <all>
 . list( prop_id )   => status, list< offer >|null           # <all>
 
@@ -226,9 +227,9 @@ TODO: dovrsiti i napraviti prototip
   + uploader_id     ->acc
   + deleted_dt      date|null
 # ------------------------------------- <<< backend (static) methods
-. add( file )    => status, file_id|null                    # private method
-. delete( file ) => status                                  # private method
-. get( file_id ) => status, file|null                       # private method
+. add( file )       => status, file_id|null             # invisible to rest api
+. delete( file_id ) => status                           # invisible to rest api
+. get( file_id )    => status, file|null                # invisible to rest api
 
 
 

@@ -1,5 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { PropData } from '../requests/prop';
+import { Status, Criteria } from '../common/types'
 
 let propRentSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< rent info
@@ -43,5 +45,58 @@ let propSchema = new mongoose.Schema({
 export class PropModel
 {
     private model: Model<any> = mongoose.model( 'prop', propSchema );
+
+    // <all>
+    add( prop: PropData ): [ Status, ObjectId|null/*prop_id*/ ] {
+        throw new Error('TODO');
+    }
+
+    // (adm)
+    addMany( prop_list: Array<String> ): [ Status, Array<ObjectId>|null/*prop_list*/ ] {
+        throw new Error('TODO');
+    }
+
+    // (adm)
+    delete( prop_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
+
+    // <gst>,<all>
+    get( prop_id: ObjectId ): [ Status, PropData|null ] {
+        throw new Error('TODO');
+    }
+
+    // <gst>,<all>: <everything>|promoted|city|price_range;   (usr): owned;   (ang),(adm): agency_owned|sold
+    list( criteria: Criteria ): [ Status, Array<PropData>|null ] {
+        throw new Error('TODO');
+    }
+
+
+    // <all>
+    updateInfo( updated_prop: PropData ): Status {
+        throw new Error('TODO');
+    }
+
+    // (adm),(agn)
+    updateStatus( updated_prop: PropData ): Status {
+        throw new Error('TODO');
+    }
+    
+    
+    // (usr)
+    rent( prop_id: ObjectId, from_dt: Date, to_dt: Date ): [ Status, number|null/*cost*/ ] {
+        throw new Error('TODO');
+    }
+
+    // (usr)
+    purchase( prop_id: ObjectId, on_credit: boolean ): [ Status, number|null/*cost|credit*/ ] {
+        throw new Error('TODO');
+    }
+    
+    // (adm),(agn)
+    // TODO: smisliti sta treba da vrati ova funkcija
+    getStats( criteria: Criteria ): [ Status, any|null ] {
+        throw new Error('TODO');
+    }
 }
 

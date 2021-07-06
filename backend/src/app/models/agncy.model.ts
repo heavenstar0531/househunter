@@ -1,5 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { AgncyData } from '../requests/agncy';
+import { Status } from '../common/types'
 
 let agncySchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< agency info
@@ -14,5 +16,15 @@ let agncySchema = new mongoose.Schema({
 export class AgncyModel
 {
     private model: Model<any> = mongoose.model( 'agncy', agncySchema );
+
+    // (adm)
+    get(): [ Status, AgncyData|null ] {
+        throw new Error('TODO');
+    }
+
+    // (adm)
+    update( updated_agncy: AgncyData ): Status {
+        throw new Error('TODO');
+    }
 }
 

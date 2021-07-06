@@ -1,5 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { ConvData, MsgData } from '../requests/conv';
+import { Status, Criteria } from '../common/types'
 
 let convMsgSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< message info
@@ -25,5 +27,20 @@ let convSchema = new mongoose.Schema({
 export class ConvModel
 {
     private model: Model<any> = mongoose.model( 'conv', convSchema );
+
+    // (usr)
+    add( conv: ConvData ): Status {
+        throw new Error('TODO');
+    }
+    
+    // <all>
+    send( conv_id: ObjectId, msg: MsgData ): [ Status, ObjectId|null/*msg_id*/ ] {
+        throw new Error('TODO');
+    }
+    
+    // <all>: not_archived|archived
+    list( criteria: Criteria ): [ Status, Array<ConvData> ] {
+        throw new Error('TODO');
+    }
 }
 

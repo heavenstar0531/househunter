@@ -1,12 +1,12 @@
-// router moduli i komponente
+// router modules and components
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-// (gst) stranice
-// (usr) stranice
-// (agn) stranice
-// (adm) stranice
+// (gst) pages
+// (usr) pages
+// (agn) pages
+// (adm) pages
 
-// rute u aplikaciji
+// application routes
 let appRoutes: Routes = [
   // ____________________________________________________________________________________________________
   // stranice (usr, st)
@@ -40,7 +40,7 @@ let appRoutes: Routes = [
   // { path: 'profil',         component: ProfilComponent,        data: { 'acctype': ['st','em','adm'], 'breadcrumb': { 'label': 'Profil',    } } },           // za sve ulogovane korisnike (sve osim usr)
 
   // ____________________________________________________________________________________________________
-  // putanje koje ne treba da se nadju u navbar-u
+  // miscellaneous paths that should't be visible in the navbar
   { path: '**', redirectTo: '/pocetna' },                                                                                                                   // default putanja
 ];
 
@@ -50,7 +50,8 @@ let appRoutes: Routes = [
 })
 export class AppRoutingModule { }
 
-// uklanjanje putanja koje ne treba da se nadju u navbar-u
+// remove paths that should't be visible in the navbar
+// +   deep copy the app routes object first before exporting
 appRoutes = JSON.parse( JSON.stringify( appRoutes ) );
 appRoutes.pop();
 export { appRoutes };

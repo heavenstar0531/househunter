@@ -1,5 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
+import { AccData } from '../requests/acc';
+import { Status } from '../common/types'
 
 let accSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< account info
@@ -23,5 +25,58 @@ let accSchema = new mongoose.Schema({
 export class AccModel
 {
     private model: Model<any> = mongoose.model( 'acc', accSchema );
+
+    // <gst>,(adm)
+    add( acc: AccData ): [ Status, ObjectId|null/*acc_id*/ ] {
+        throw new Error('TODO');
+    }
+    
+    // (adm)
+    delete( acc_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
+
+    // (adm)
+    get( acc_id: ObjectId ): [ Status, AccData|null ] {
+        throw new Error('TODO');
+    }
+
+    // (adm): <everything>
+    list(): [ Status, Array<AccData>|null ] {
+        throw new Error('TODO');
+    }
+    
+
+    // <all> initializes a server session
+    login( username: string, password: string ): [ Status, ObjectId|null /*acc_id*/ ] {
+        throw new Error('TODO');
+    }
+
+    // <all> current user in session
+    logout(): Status {
+        throw new Error('TODO');
+    }
+    
+
+    // <all>
+    updateInfo( updated_acc: AccData ): Status {
+        throw new Error('TODO');
+    }
+
+    // (adm)
+    updateStatus( updated_acc: AccData ): Status {
+        throw new Error('TODO');
+    }
+    
+
+    // <all> current user in session
+    blockAnother( blocked_acc_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all> current user in session
+    unblockAnother( blocked_acc_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
 }
 

@@ -9,7 +9,7 @@ export class RentData {
 };
 
 
-export class propData {
+export class PropData {
     // ------------------------------------------------------------- <<< property info
     _id:             null|ObjectId = null;          // [id]
     name:            null|string = null;            // string
@@ -40,7 +40,7 @@ export class propData {
 
 
     ensureValid( acc_type: string, method: string ): void {
-        throw new Error('Not implemented');
+        throw new Error('TODO');
     }
 };
 
