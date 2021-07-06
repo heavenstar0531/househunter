@@ -2,7 +2,7 @@ import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
 let offerSchema = new mongoose.Schema({
- // ------------------------------------------------------------- <<< offer info
+    // ------------------------------------------------------------- <<< offer info
  // _id:        { type: ObjectId },   // [id]
     prop_id:    { type: ObjectId },   // ->prop
     offeror_id: { type: ObjectId },   // ->acc         # (usr) nalog koji daje ponudu
@@ -12,10 +12,8 @@ let offerSchema = new mongoose.Schema({
     reject_dt:  { type: Date },       // date|null
 });
 
-class offerModel
+export class OfferModel
 {
     private model: Model<any> = mongoose.model( 'offer', offerSchema );
 }
-
-export { offerModel };
 

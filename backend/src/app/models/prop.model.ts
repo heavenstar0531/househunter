@@ -2,7 +2,7 @@ import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
 
 let propRentSchema = new mongoose.Schema({
- // ------------------------------------------------------------- <<< rent info
+    // ------------------------------------------------------------- <<< rent info
  // _id:     { type: ObjectId },   // [id]
     acc_id:  { type: ObjectId },   // ->acc
     from_dt: { type: Date },       // date
@@ -11,7 +11,7 @@ let propRentSchema = new mongoose.Schema({
 
 
 let propSchema = new mongoose.Schema({
- // ------------------------------------------------------------- <<< property info
+    // ------------------------------------------------------------- <<< property info
  // _id:             { type: ObjectId },           // [id]
     name:            { type: String },             // string
     addr_city:       { type: String },             // string|null
@@ -26,13 +26,13 @@ let propSchema = new mongoose.Schema({
     is_furnished:    { type: Boolean },            // bool
     gallery:         { type: String },             // list< ->file|buffer<binary> >|null   # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
     prev_owner_id:   { type: ObjectId },           // ->acc|->agncy                        # (usr), agency
- // ------------------------------------------------------------- <<< rent/sale info
+    // ------------------------------------------------------------- <<< rent/sale info
     prop_sale_type:  { type: String, enum: [ 'rent', 'sale' ] },   // enum( 'rent', 'sale' )
     rent_list:       { type: [propRentSchema] },   // list< rent >|null
     rent_price:      { type: Number },             // number|null
     sale_price:      { type: Number },             // number|null
     sale_owner_id:   { type: ObjectId },           // ->acc|null                           # (usr)
- // ------------------------------------------------------------- <<< property status
+    // ------------------------------------------------------------- <<< property status
     accepted_dt:     { type: Date },               // date|null
     sold_dt:         { type: Date },               // date|null
     deleted_dt:      { type: Date },               // date|null
@@ -40,10 +40,8 @@ let propSchema = new mongoose.Schema({
     viewcnt:         { type: Number },             // number    
 });
 
-class propModel
+export class PropModel
 {
     private model: Model<any> = mongoose.model( 'prop', propSchema );
 }
-
-export { propModel };
 

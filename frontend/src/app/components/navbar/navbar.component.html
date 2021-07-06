@@ -1,0 +1,42 @@
+<!-- navbar -->
+<nav ngbNav class="navbar navbar-expand-sm no-select navbar-light">
+  <span class="navbar-brand">
+    <button class="navbar-toggler border-0" type="button" (click)="collapsed = !collapsed">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <span class="nav-icon">HH</span>
+  </span>
+
+  <div class="navbar-collapse" [class.collapse]="collapsed">
+    <ul class="navbar-nav mr-auto">
+
+      <li *ngFor='let route of getRoutes()' [ngbNavItem]='route.path'>
+        <!-- main menu -->
+        <a *ngIf="getSubroutes( route ).length == 0" [routerLink]='route.path' class="nav-link">{{ getRouteLabel( route ) }}</a>
+
+        <div *ngIf="getSubroutes( route ).length > 0" ngbDropdown #dropdown="ngbDropdown" class="nav-item" (mouseover)="dropdown.open()" (mouseout)="dropdown.close()">
+          <!-- main menu -->
+          <a ngbDropdownToggle [routerLink]='route.path' class="nav-link" role="button">{{ getRouteLabel( route ) }}</a>
+
+          <!-- submenu -->
+          <div ngbDropdownMenu class="dropdown-menu">
+            <a *ngFor="let subroute of getSubroutes( route )" ngbDropdownItem class="nav-link" [routerLink]='[route.path, subroute.path]'>{{ getRouteLabel( subroute ) }}</a>
+          </div>
+        </div>
+
+      </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+      <!-- register -->
+      <button class="btn nav-link shadow-none" (click)="registerModal.open()">Registracija</button>
+      <app-register-modal #registerModal></app-register-modal>
+      <!-- login -->
+      <button class="btn btn-outline-dark btn-nav" (click)="loginModal.open()">Prijava</button>
+      <app-login-modal #loginModal></app-login-modal>
+      <!-- logout -->
+      <div><button class="btn nav-link shadow-none">Odjava</button></div>
+    </ul>
+  </div>
+
+</nav>
