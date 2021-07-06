@@ -79,10 +79,7 @@ import { CrsInfoComponent } from './components/parts/crs-info/crs-info.component
     NgbModule,
     BreadcrumbModule,
   ],
-  providers: [
-    AccService,
-    NgbActiveModal,
-  ],
-  bootstrap: [AppComponent]
+  providers: [AccService, NgbActiveModal],
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

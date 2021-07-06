@@ -52,13 +52,6 @@ TODO: dovrsiti i napraviti prototip
 + guest <gst>      0N
 
 
-+ session
-----------------------------------------
-+ acc_id              ->acc
-+ acc_type            enum( 'adm', 'agn', 'usr' )
-+ viewed_prop_list    list< ->prop >
-
-
 + local storage
 ----------------------------------------
 + acc_id              ->acc
@@ -173,6 +166,7 @@ TODO: dovrsiti i napraviti prototip
 . getStats( criteria_json ) => status, any|null               # (adm),(agn)
 
 
+
 ----------------------------------------------------------------------------------------
 + offer                                                     # sale offer
 ----------------------------------------------------------------------------------------
@@ -219,7 +213,7 @@ TODO: dovrsiti i napraviti prototip
 
 
 ----------------------------------------------------------------------------------------
-+ fs.files
++ fs.files                                              # gridfs-stream
 ----------------------------------------------------------------------------------------
 + _id             [id]
 + length          number
@@ -237,12 +231,22 @@ TODO: dovrsiti i napraviti prototip
 
 
 ----------------------------------------------------------------------------------------
-+ fs.chunks
++ fs.chunks                                             # gridfs-stream
 ----------------------------------------------------------------------------------------
 + _id             [id]
 + files_id        ->file
 + n               number
 + data            buffer< binary >
+
+
+
+----------------------------------------------------------------------------------------
++ session                                               # express-session + connect-mongo
+----------------------------------------------------------------------------------------
++ _id                 [id]
++ acc_id              ->acc
++ acc_type            enum( 'adm', 'agn', 'usr' )
++ viewed_prop_list    list< ->prop >
 
 
 
