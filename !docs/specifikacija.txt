@@ -201,7 +201,8 @@ TODO: dovrsiti i napraviti prototip
   + sent_dt         date
   + read_dt         date|null
 # ------------------------------------- <<< conversation status
-+ archived_dt     date|null
++ owner_arch_dt   date|null
++ offeror_arch_dt date|null
 + deleted_dt      date|null
 # ------------------------------------- <<< frontend (instance) methods
 . msg.ensureValid( acc_type, method ) => status

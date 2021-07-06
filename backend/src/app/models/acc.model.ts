@@ -1,29 +1,29 @@
+import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
-import mongoose from 'mongoose';
 
 let accSchema = new mongoose.Schema({
-    username:       { type: String },   // unique<string>
-    password:       { type: String },   // unique<hash>
-    firstname:      { type: String },   // string
-    lastname:       { type: String },   // string
-    telephone:      { type: String },   // string|null
-    address:        { type: String },   // string|null
-    acc_type:       { type: String, enum: [ 'adm', 'em', 'st' ] },   // enum( 'adm', 'em', 'st' ) + usr
-    created:        { type: Date },     // date|null
-    active:         { type: Date },     // date|null
-    deleted:        { type: Date },     // date|null
-    // ### employee ###
-    em_title:       { type: ObjectId }, // -> acc_em_title|null
-    em_biography:   { type: String },   // string
-    em_photo:       { type: ObjectId }, // -> file|null
-    em_website_url: { type: String },   // string|null
-    em_cabinet:     { type: String },   // string|null
-    // ### student ###
-    st_index:       { type: String },   // string|null
-    st_semester:    { type: Number },   // number|null
+ // ------------------------------------------------------------- <<< account info
+ // _id:              { type: ObjectId },     // [id]
+    username:         { type: String },       // unique<string>
+    password:         { type: String },       // unique<hash>
+    firstname:        { type: String },       // string
+    lastname:         { type: String },       // string
+    email:            { type: String },       // unique<string>
+ // ------------------------------------------------------------- <<< user info
+    usr_photo_id:     { type: ObjectId },     // ->file|buffer< binary >|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
+    usr_addr_country: { type: String },       // string|null
+    usr_addr_city:    { type: String },       // string|null
+ // ------------------------------------------------------------- <<< acc status
+    acc_type:         { type: String, enum: ['adm', 'agn', 'usr'] },   // enum( 'adm', 'agn', 'usr' )
+    activated_dt:     { type: Date },         // date|null
+    deleted_dt:       { type: Date },         // date|null
+    usr_blocked_ids:  { type: [ObjectId] },   // list< ->acc >|null
 });
 
-let accModel = mongoose.model( 'acc', accSchema );
+class accModel
+{
+    private model: Model<any> = mongoose.model( 'acc', accSchema );
+}
 
 export { accModel };
 
