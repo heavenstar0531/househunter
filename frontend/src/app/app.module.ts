@@ -2,31 +2,31 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './pages/app/app.component';
+import { AppComponent } from './app/app.component';
 // two-way data binding for forms, http client, bootstrap and breadcrumb modules
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'xng-breadcrumb';
-// (gst) pages
-// (usr) pages
-// (agn) pages
-// (adm) pages
-// services
-import { AccService } from './services/acc/acc.service';
+
+// pages
 
 // components
 import { LoginModalComponent } from './components/login-modal/login-modal.component';
 import { RegisterModalComponent } from './components/register-modal/register-modal.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 
+// services
+import { AccService } from './services/acc/acc.service';
+import { AgncyService } from './services/agncy/agncy.service';
+import { ConvService } from './services/conv/conv.service';
+import { PropService } from './services/prop/prop.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
-    // (gst) pages
-    // (usr) pages
-    // (agn) pages
-    // (adm) pages
+    // pages
     // components
     LoginModalComponent,
     RegisterModalComponent,
@@ -42,7 +42,15 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     NgbModule,
     BreadcrumbModule,
   ],
-  providers: [AccService, NgbActiveModal],
+  providers: [
+    // bootstrap modal
+    NgbActiveModal,
+    // services
+    AccService,
+    AgncyService,
+    ConvService,
+    PropService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

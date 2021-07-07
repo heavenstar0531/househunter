@@ -7,6 +7,7 @@ import { AccLoginData, AccRegisterData } from 'src/app/requests/acc';
 })
 export class AccService {
 
+  // TODO: fix
   constructor(private router: Router) { }
 
   login( data: AccLoginData ): void {

@@ -1,7 +1,7 @@
 import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
-import { PropData } from '../requests/prop';
-import { Status, Criteria } from '../common/types'
+import { PropData, OfferData } from '../requests/prop';
+import { Status, Criteria, Stats } from '../common/types'
 
 let propRentSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< rent info
@@ -11,6 +11,13 @@ let propRentSchema = new mongoose.Schema({
     to_dt:   { type: Date },       // date
 });
 
+let propOfferSchema = new mongoose.Schema({
+    // ------------------------------------------------------------- <<< offer info
+ // _id:            { type: ObjectId },   // [id]
+    offeror_id:     { type: ObjectId },   // ->acc
+    offered_amount: { type: Number },     // number
+    accepted_dt:    { type: Date },       // date|null
+});
 
 let propSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< property info
@@ -26,14 +33,17 @@ let propSchema = new mongoose.Schema({
     area_m2:         { type: Number },             // number
     roomcnt:         { type: Number },             // number
     is_furnished:    { type: Boolean },            // bool
-    gallery:         { type: String },             // list< ->file|buffer<binary> >|null   # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
-    prev_owner_id:   { type: ObjectId },           // ->acc|->agncy                        # (usr), agency
+    gallery:         { type: [ObjectId] },         // list< ->file >|list< file >|null    # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
+    old_owner_id:    { type: ObjectId },           // ->acc|->agncy                       # (usr), agency
     // ------------------------------------------------------------- <<< rent/sale info
     prop_sale_type:  { type: String, enum: [ 'rent', 'sale' ] },   // enum( 'rent', 'sale' )
     rent_list:       { type: [propRentSchema] },   // list< rent >|null
     rent_price:      { type: Number },             // number|null
-    sale_price:      { type: Number },             // number|null
-    sale_owner_id:   { type: ObjectId },           // ->acc|null                           # (usr)
+    sale_proposed_price: { type: Number },         // number|null
+    sale_offer_list:     { type: [propOfferSchema] },   // list< sale_offer >|null
+    sale_actual_price:   { type: Number },         // number|null
+    sale_arbiter_id:     { type: ObjectId },       // ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
+    sale_new_owner_id:   { type: ObjectId },       // ->acc|null                           # (usr)
     // ------------------------------------------------------------- <<< property status
     accepted_dt:     { type: Date },               // date|null
     sold_dt:         { type: Date },               // date|null
@@ -88,14 +98,31 @@ export class PropModel
         throw new Error('TODO');
     }
 
+    // TODO: fix
     // (usr)
     purchase( prop_id: ObjectId, on_credit: boolean ): [ Status, number|null/*cost|credit*/ ] {
         throw new Error('TODO');
     }
+
+
+    // (usr)
+    addOffer( prop_id: ObjectId, offer: OfferData ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    acceptOffer( prop_id: ObjectId, offeror_id: ObjectId ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    listOffers( prop_id: ObjectId ): [ Status, Array< OfferData >|null ] {
+        throw new Error('TODO');
+    }
+    
     
     // (adm),(agn)
-    // TODO: smisliti sta treba da vrati ova funkcija
-    getStats( criteria: Criteria ): [ Status, any|null ] {
+    getStats( criteria: Criteria ): [ Status, Stats|null ] {
         throw new Error('TODO');
     }
 }

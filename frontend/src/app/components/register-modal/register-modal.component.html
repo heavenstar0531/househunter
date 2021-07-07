@@ -16,8 +16,8 @@
       </div>
       <div class="form-group">
         <label>lozinka</label>
-        <input for="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="data.password" [class.is-invalid]="data.passwordErr != ''">
-        <small id ="password" class='text-danger'>{{data.passwordErr}}&nbsp;</small>
+        <input id ="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="data.password" [class.is-invalid]="data.passwordErr != ''">
+        <small for="password" class='text-danger'>{{data.passwordErr}}&nbsp;</small>
       </div>
       <div class="form-group">
         <label for="firstname">ime</label>
@@ -52,7 +52,6 @@
       <div *ngIf="data.acc_type == 'em'" class="form-group">
         <label  for="em_title">zvanje</label>
         <select id ="em_title" class="form-control" name="emTitle" [(ngModel)]="data.em_title" [class.is-invalid]="data.em_titleErr != ''">
-          <!-- ... TODO: procitati iz baze ... -->
           <option value='602ed0298b05043edc647ccc'>redovni profesor</option>
           <option value='602ed0298b05043edc647cd1'>istraživač</option>
         </select>

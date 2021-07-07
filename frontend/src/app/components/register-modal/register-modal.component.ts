@@ -9,9 +9,9 @@ import { AccRegisterData } from 'src/app/requests/acc';
   styleUrls: ['./register-modal.component.sass']
 })
 export class RegisterModalComponent implements OnInit {
-  data: AccRegisterData = new AccRegisterData();
   @ViewChild( TemplateRef )
   templateRef: TemplateRef<any>|null = null;
+  data: AccRegisterData = new AccRegisterData();
 
   constructor(
     private modalService: NgbModal,

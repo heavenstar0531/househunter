@@ -12,7 +12,7 @@ let accSchema = new mongoose.Schema({
     lastname:         { type: String },       // string
     email:            { type: String },       // unique<string>
     // ------------------------------------------------------------- <<< user info
-    usr_photo_id:     { type: ObjectId },     // ->file|buffer< binary >|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
+    usr_photo_id:     { type: ObjectId },     // ->file|file|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
     usr_addr_country: { type: String },       // string|null
     usr_addr_city:    { type: String },       // string|null
     // ------------------------------------------------------------- <<< acc status
@@ -52,7 +52,7 @@ export class AccModel
         throw new Error('TODO');
     }
 
-    // <all> current user in session
+    // <all> current user is stored in session
     logout(): Status {
         throw new Error('TODO');
     }
@@ -69,13 +69,8 @@ export class AccModel
     }
     
 
-    // <all> current user in session
-    blockAnother( blocked_acc_id: ObjectId ): Status {
-        throw new Error('TODO');
-    }
-
-    // <all> current user in session
-    unblockAnother( blocked_acc_id: ObjectId ): Status {
+    // <all> current user is stored in session
+    blockAnother( blocked_acc_id: ObjectId, is_blocked: boolean ): Status {
         throw new Error('TODO');
     }
 }

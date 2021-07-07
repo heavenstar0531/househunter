@@ -55,6 +55,7 @@ async function main() {
     } catch (err) {
         console.error(`[error] Failed to connect to MongoDB on path '${environment.mongoUrl}'`, err);
         process.kill(process.pid, 'SIGTERM');
+        return;
     }
 
     // omogucava cuvanje fajlova vecih od 16MB u mongo bazi

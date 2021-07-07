@@ -3,36 +3,39 @@
 ========================================================================================
 
 
-+ stranice
++ stranice i delovi
 ----------------------------------------
-+ pocetna            # sadrzi i obavestenja
-+ studiranje         # sadrzi filter za tip studija -- osnovne/master, si/rti/ostali
-+ nauka              # istrazivanja
-  + projekti         # stranica sa statickim linkovima
-  + ponude           # stranica sa statickim tekstom
-+ kontakt            # stranica sa statickim tekstom
-  + zaposleni
-    + zaposlen
-+ profil             # za sve ulogovane korisnike (sve osim usr)
-# studiranje
-  + predmet-st       # accordion informacije, predavanja, vezbe, lab, domaci, projekat, ispit;   desno obavestenja i prijave za obaveze
-TODO: dovrsiti i napraviti prototip
-  
++ navbar
+  + nav-logo
+  + router-link
+  ...
+  + login-modal
+    + login-form
+  + register-modal
+    + account-form
 
-+ delovi
-----------------------------------------
-+ navbar                 # (custom)
-  + ngx-breadcrumb         # breadcrumb
-  + login                  # modal
-  + register               # modal
-+ toast                  # toast
-+ content                # router-outlet
-  + search                 # (custom)
-  + property-list        # (custom)
-    + property             # card
-  + msg-list             # (custom)
-    + msg                  # (custom)
-+ footer                 # text only
++ router-outlet
+  >> property-list-page
+    + property-stats         # graphs
+    + property-gallery
+    + property-list          # search, cards
+
+    >> property-page
+      + property-modal
+        + property-form
+
+  >> conversation-list-page
+    + conversation-list
+    + message-list
+
+  >> user-list-page
+    + user-list
+      + account-modal
+    
+  >> my-account-page
+    + account-form
+
++ footer
 
 
 
@@ -88,7 +91,7 @@ TODO: dovrsiti i napraviti prototip
 + lastname            string
 + email               unique<string>
 # ------------------------------------- <<< user info
-+ usr_photo_id        ->file|buffer< binary >|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
++ usr_photo_id        ->file|file|null                  # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
 + usr_addr_country    string|null
 + usr_addr_city       string|null
 # ------------------------------------- <<< acc status
@@ -105,13 +108,12 @@ TODO: dovrsiti i napraviti prototip
 . list()                => status, list< acc >|null     # (adm): <everything>
 .
 . login( username, password ) => status, acc_id|null    # <all> initializes a server session
-. logout()                    => status                 # <all> current user in session
+. logout()                    => status                 # <all> current user is stored in session
 .
 . updateInfo( updated_acc )   => status                 # <all>
 . updateStatus( updated_acc ) => status                 # (adm)
 .
-. blockAnother( blocked_acc_id )   => status            # <all> current user in session
-. unblockAnother( blocked_acc_id ) => status            # <all> current user in session
+. setBlocked( blocked_acc_id, is_blocked ) => status    # <all> current user is stored in session
 
 
 
@@ -119,37 +121,44 @@ TODO: dovrsiti i napraviti prototip
 + prop                                                        # property, real estate, ...
 ----------------------------------------------------------------------------------------
 # ------------------------------------- <<< property info
-+ _id             [id]
-+ name            string
-+ addr_city       string|null
-+ addr_district   string|null
-+ addr_street     string|null
-+ addr_streetnum  string|null
-+ prop_type       enum( 'house', 'flat' )
-+ flat_floornum   number|null
-+ floorcnt        number
-+ area_m2         number
-+ roomcnt         number
-+ is_furnished    bool
-+ gallery         list< ->file|buffer<binary> >|null          # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
-+ prev_owner_id   ->acc|->agncy                               # (usr), agency
++ _id                    [id]
++ name                   string
++ addr_city              string|null
++ addr_district          string|null
++ addr_street            string|null
++ addr_streetnum         string|null
++ prop_type              enum( 'house', 'flat' )
++ flat_floornum          number|null
++ floorcnt               number
++ area_m2                number
++ roomcnt                number
++ is_furnished           bool
++ gallery                list< ->file >|list< file >|null     # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
++ old_owner_id           ->acc|->agncy                        # (usr), agency
 # ------------------------------------- <<< rent/sale info
-+ prop_sale_type  enum( 'rent', 'sale' )
-+ rent_list       list< rent >|null
-  + acc_id          ->acc
-  + from_dt         date
-  + to_dt           date
-+ rent_price      number|null
-+ sale_price      number|null
-+ sale_owner_id   ->acc|null                                  # (usr)
++ prop_sale_type         enum( 'rent', 'sale' )
++ rent_list              list< rent >|null
+  + renter_id              ->acc
+  + from_dt                date
+  + to_dt                  date
++ rent_price             number|null
++ sale_proposed_price    number|null
++ sale_offer_list        list< sale_offer >|null
+  + offeror_id             ->acc
+  + offered_amount         number
+  + accepted_dt            date|null
++ sale_actual_price      number|null
++ sale_arbiter_id        ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
++ sale_new_owner_id      ->acc|null                           # (usr)
 # ------------------------------------- <<< property status
-+ accepted_dt     date|null
-+ sold_dt         date|null
-+ deleted_dt      date|null
-+ is_promoted     bool
-+ viewcnt         number
++ accepted_dt            date|null
++ sold_dt                date|null
++ deleted_dt             date|null
++ is_promoted            bool
++ viewcnt                number
 # ------------------------------------- <<< frontend (instance) methods
 . prop.ensureValid( acc_type, method ) => status
+. sale_offer.ensureValid( acc_type, method ) => status
 # ------------------------------------- <<< backend (static) methods
 . add( prop )           => status, prop_id|null               # <all>
 . addMany( json_prop_list ) => status, list< prop_id >|null   # (adm)
@@ -157,35 +166,17 @@ TODO: dovrsiti i napraviti prototip
 . get( prop_id )        => status, prop|null                  # <gst>,<all>
 . list( criteria_json ) => status, list< prop >|null          # <gst>,<all>: <everything>|promoted|city|price_range;   (usr): owned;   (ang),(adm): agency_owned|sold
 .
-. updateInfo( updated_prop )       => status                   # <all>
-. updateStatus( updated_prop )     => status                   # (adm),(agn)
+. updateInfo( updated_prop )      => status                   # <all>
+. updateStatus( updated_prop )    => status                   # (adm),(agn)
 .
 . rent( prop_id, from_dt, to_dt ) => status, cost|null        # (usr)
-. purchase( prop_id, on_credit )  => status, cost|credit|null # (usr)
+. purchase( prop_id, on_credit )  => status, cost|credit|null # (usr)   TODO: fix
 .
-// TODO: smisliti sta treba da vrati ova funkcija
-. getStats( criteria_json ) => status, any|null               # (adm),(agn)
-
-
-
-----------------------------------------------------------------------------------------
-+ offer                                                     # sale offer
-----------------------------------------------------------------------------------------
-# ------------------------------------- <<< offer info
-+ _id             [id]
-+ prop_id         ->prop
-+ offeror_id      ->acc                                     # (usr) nalog koji daje ponudu
-+ sale_offer      number|null
-+ accept_dt       date|null
-+ arbiter_id      ->acc|null                                # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
-+ reject_dt       date|null
-# ------------------------------------- <<< frontend (instance) methods
-. offer.ensureValid( acc_type, method ) => status
-# ------------------------------------- <<< backend (static) methods
-. add( offer )      => status                               # (usr)
-. delete( prop_id ) => status                               # invisible to rest api
-. accept( offer )   => status                               # <all>
-. list( prop_id )   => status, list< offer >|null           # <all>
+. addOffer( prop_id, offer )         => status                # (usr)
+. acceptOffer( prop_id, offeror_id ) => status                # <all>
+. listOffers( prop_id )   => status, list< offer >|null       # <all>
+.
+. getStats( criteria_json ) => status, stats|null             # (adm),(agn)
 
 
 
@@ -206,7 +197,8 @@ TODO: dovrsiti i napraviti prototip
 + offeror_arch_dt date|null
 + deleted_dt      date|null
 # ------------------------------------- <<< frontend (instance) methods
-. msg.ensureValid( acc_type, method ) => status
+. conv.ensureValid( acc_type, method ) => status
+. msg.ensureValid( acc_type, method )  => status
 # ------------------------------------- <<< backend (static) methods
 . add( conv )           => status                           # (usr)
 . send( conv_id, msg )  => status, msg_id|null              # <all>

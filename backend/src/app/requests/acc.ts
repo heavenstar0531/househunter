@@ -1,4 +1,5 @@
 import ObjectId from 'bson-objectid';
+import { FileData } from './file';
 
 export class AccData {
     // ------------------------------------------------------------- <<< account info
@@ -9,7 +10,7 @@ export class AccData {
     lastname:         null|string = null;            // string
     email:            null|string = null;            // unique<string>
     // ------------------------------------------------------------- <<< user info
-    usr_photo_id:     null|ObjectId|Buffer = null;   // ->file|buffer< binary >|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
+    usr_photo_id:     null|ObjectId|FileData = null; // ->file|file|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
     usr_addr_country: null|string = null;            // string|null
     usr_addr_city:    null|string = null;            // string|null
     // ------------------------------------------------------------- <<< acc status

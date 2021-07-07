@@ -1,0 +1,273 @@
+[
+  /* -------------------------------------------------- <<< flats */
+  {
+    "_id":             { "$oid": "602ed0298b05043edc647ccf" },
+    "name":            "Stan 1",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Beogradska",
+    "addr_streetnum":  "20",
+    "prop_type":       "flat",
+    "flat_floornum":   5,
+    "floorcnt":        10,
+    "area_m2":         60,
+    "roomcnt":         3,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    /* ------ */
+    "prop_sale_type":  "rent",
+    "rent_list": [
+      {
+        "renter_id":   { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
+        "from_dt":     "2021-02-17T12:00:00Z",
+        "to_dt":       "2021-03-15T15:00:00Z"
+      },
+      {
+        "renter_id":   { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
+        "from_dt":     "2021-03-21T12:00:00Z",
+        "to_dt":       "2021-04-12T08:00:00Z"
+      },
+      {
+        "renter_id":   { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
+        "from_dt":     "2021-03-21T12:00:00Z",
+        "to_dt":       "2021-04-12T08:00:00Z"
+      }
+    ],
+    "rent_price":      5000,
+    "sale_proposed_price": null,
+    "sale_offer_list":     [],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     "2021-02-05T16:20:00Z",
+    "sold_dt":         null,
+    "deleted_dt":      null,
+    "is_promoted":     true,
+    "viewcnt":         20
+  },
+  /* --------------------- */
+  {
+    "_id":             { "$oid": "602ed0298b05043edc647cd0" },
+    "name":            "Stan 2",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Obilićev Venac",
+    "addr_streetnum":  "11",
+    "prop_type":       "flat",
+    "flat_floornum":   6,
+    "floorcnt":        10,
+    "area_m2":         90,
+    "roomcnt":         8,
+    "is_furnished":    false,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    /* ------ */
+    "prop_sale_type":  "rent",
+    "rent_list":       [
+      {
+        "renter_id":   { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
+        "from_dt":     "2021-06-05T12:00:00Z",
+        "to_dt":       "2022-06-05T12:00:00Z"
+      }
+    ],
+    "rent_price":      7500,
+    "sale_proposed_price": null,
+    "sale_offer_list":     [],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     "2021-02-06T16:20:00Z",
+    "sold_dt":         null,
+    "deleted_dt":      null,
+    "is_promoted":     true,
+    "viewcnt":         20
+  },
+  /* --------------------- */
+  {
+    "_id":             { "$oid": "602ed0298b05043edc647cd1" },
+    "name":            "Stan 3",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Pariska",
+    "addr_streetnum":  "46",
+    "prop_type":       "flat",
+    "flat_floornum":   2,
+    "floorcnt":        4,
+    "area_m2":         100,
+    "roomcnt":         8,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    /* ------ */
+    "prop_sale_type":  "sale",
+    "rent_list":       [],
+    "rent_price":      null,
+    "sale_proposed_price": 250000,
+    "sale_offer_list":     [
+      {
+        "offeror_id":     { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
+        "offered_amount": 220000,
+        "accepted_dt":    null
+      }
+    ],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     "2021-02-06T16:20:00Z",
+    "sold_dt":         null,
+    "deleted_dt":      null,
+    "is_promoted":     true,
+    "viewcnt":         20
+  },
+
+  /* -------------------------------------------------- <<< houses */
+{
+    "_id":             { "$oid": "602eda588b05043edc647cdf" },
+    "name":            "Kuća 1",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Zmaja od Noćaja",
+    "addr_streetnum":  "56",
+    "prop_type":       "house",
+    "flat_floornum":   null,
+    "floorcnt":        3,
+    "area_m2":         150,
+    "roomcnt":         10,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    /* ------ */
+    "prop_sale_type":  "sale",
+    "rent_list":       [],
+    "rent_price":      null,
+    "sale_proposed_price": 270000,
+    "sale_offer_list":     [
+      {
+        "offeror_id":     { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
+        "offered_amount": 250000,
+        "accepted_dt":    "2021-02-05T16:20:00Z"
+      },
+      {
+        "offeror_id":     { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
+        "offered_amount": 240000,
+        "accepted_dt":    null
+      }
+    ],
+    "sale_actual_price":   250000,
+    "sale_arbiter_id":     { "$oid": "602eda588b05043edc647cdc" },   /*Mara*/
+    "sale_new_owner_id":   { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
+    /* ------ */
+    "accepted_dt":     "2020-11-25T08:00:00Z",
+    "sold_dt":         "2021-02-05T16:20:00Z",
+    "deleted_dt":      null,
+    "is_promoted":     false,
+    "viewcnt":         20
+  },
+  /* --------------------- */
+{
+    "_id":             { "$oid": "602eda588b05043edc647ce2" },
+    "name":            "Kuća 2",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Uzun Mirkova",
+    "addr_streetnum":  "39",
+    "prop_type":       "house",
+    "flat_floornum":   null,
+    "floorcnt":        2,
+    "area_m2":         100,
+    "roomcnt":         7,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    /* ------ */
+    "prop_sale_type":  "sale",
+    "rent_list":       [],
+    "rent_price":      null,
+    "sale_proposed_price": 220000,
+    "sale_offer_list":     [
+      {
+        "offeror_id":     { "$oid": "602ed0298b05043edc647ccd" },   /*Katarina -- deleted account*/
+        "offered_amount": 20000,
+        "accepted_dt":    null
+      }
+    ],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     "2021-02-05T16:20:00Z",
+    "sold_dt":         null,
+    "deleted_dt":      true,
+    "is_promoted":     true,
+    "viewcnt":         20
+  },
+  /* --------------------- */
+{
+    "_id":             { "$oid": "602eda588b05043edc647ce3" },
+    "name":            "Kuća 3",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Kapetan Mišina",
+    "addr_streetnum":  "10a",
+    "prop_type":       "house",
+    "flat_floornum":   null,
+    "floorcnt":        3,
+    "area_m2":         150,
+    "roomcnt":         10,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    /* ------ */
+    "prop_sale_type":  "rent",
+    "rent_list":       [],
+    "rent_price":      null,
+    "sale_proposed_price": null,
+    "sale_offer_list":     [],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     null,
+    "sold_dt":         null,
+    "deleted_dt":      null,
+    "is_promoted":     false,
+    "viewcnt":         20
+  },
+  /* --------------------- */
+  {
+    "_id":             { "$oid": "602eda588b05043edc647ce1" },
+    "name":            "Kuća 4",
+    "addr_city":       "Beograd",
+    "addr_district":   "Stari Grad",
+    "addr_street":     "Masarikova",
+    "addr_streetnum":  "15",
+    "prop_type":       "house",
+    "flat_floornum":   4,
+    "floorcnt":        6,
+    "area_m2":         150,
+    "roomcnt":         10,
+    "is_furnished":    true,
+    "gallery":         [],
+    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    /* ------ */
+    "prop_sale_type":  "rent",
+    "rent_list":       [],
+    "rent_price":      null,
+    "sale_proposed_price": null,
+    "sale_offer_list":     [],
+    "sale_actual_price":   null,
+    "sale_arbiter_id":     null,
+    "sale_new_owner_id":   null,
+    /* ------ */
+    "accepted_dt":     null,
+    "sold_dt":         null,
+    "deleted_dt":      "2021-02-05T16:20:00Z",
+    "is_promoted":     false,
+    "viewcnt":         20
+  }
+]  
+

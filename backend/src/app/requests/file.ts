@@ -7,7 +7,8 @@ export class FileData {
     chunkSize:   null|number = null;     // number
     uploadDate:  null|Date = null;       // date
     filename:    null|string = null;     // string
-    metadata:    null|any = null;        // any
+ // metadata:    null|any = null;        // any
+    data:        null|Buffer = null;     // buffer< binary >
 
 
     ensureValid( acc_type: string, method: string ): void {

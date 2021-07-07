@@ -1,2 +1,3 @@
-export type Status = Map<string, string|number>;
-export type Criteria = Map<string, string|number>;
+export type Status = Map<string, null|string|number|Date>;
+export type Criteria = Map<string, null|string|number|Date>;
+export type Stats = Map<string, any>;

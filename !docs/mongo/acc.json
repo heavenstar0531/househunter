@@ -1,4 +1,5 @@
 [
+  /* -------------------------------------------------- <<< admin */
   {
     "_id": { "$oid": "602eda588b05043edc647cdb" },
     "username": "admin",
@@ -17,6 +18,7 @@
     "usr_blocked_ids": []
   },
 
+  /* -------------------------------------------------- <<< agents */
   {
     "_id": { "$oid": "602eda588b05043edc647cdc" },
     "username": "agent1",
@@ -34,6 +36,7 @@
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602eda588b05043edc647cdd" },
     "username": "agent2",
@@ -51,6 +54,7 @@
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd4" },
     "username": "agent3",
@@ -68,6 +72,7 @@
     "deleted_dt": "2021-02-17T23:00:00Z",
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd5" },
     "username": "agent4",
@@ -86,6 +91,7 @@
     "usr_blocked_ids": []
   },
 
+  /* -------------------------------------------------- <<< users */
   {
     "_id": { "$oid": "602eda588b05043edc647cde" },
     "username": "user1",
@@ -103,6 +109,7 @@
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd6" },
     "username": "user2",
@@ -122,10 +129,69 @@
       { "$oid": "602ed0298b05043edc647ccd" }
     ]
   },
+  /* --------------------- */
   {
-    "_id": { "$oid": "602ed0f78b05043edc647cd7" },
+    "_id": { "$oid": "602ed0298b05043edc647cd3" },
     "username": "user3",
     "password": "user3",
+    "firstname": "Miloš",
+    "lastname": "Marić",
+    "email": "milos@email.com",
+
+    "usr_photo_id": null,
+    "usr_addr_country": "Srbija",
+    "usr_addr_city": "Beograd",
+
+    "acc_type": "usr",
+    "activated_dt": "2021-02-17T23:00:00Z",
+    "deleted_dt": null,
+    "usr_blocked_ids": [
+      { "$oid": "602ed0298b05043edc647ccd" }
+    ]
+  },
+  /* --------------------- */
+  {
+    "_id": { "$oid": "602ed0298b05043edc647cd2" },
+    "username": "user4",
+    "password": "user4",
+    "firstname": "Petar",
+    "lastname": "Tomić",
+    "email": "petar@email.com",
+
+    "usr_photo_id": null,
+    "usr_addr_country": "Srbija",
+    "usr_addr_city": "Beograd",
+
+    "acc_type": "usr",
+    "activated_dt": "2021-02-17T23:00:00Z",
+    "deleted_dt": null,
+    "usr_blocked_ids": [
+      { "$oid": "602ed0298b05043edc647ccd" }
+    ]
+  },
+  /* --------------------- */
+  {
+    "_id": { "$oid": "602eda588b05043edc647ce0" },
+    "username": "user5",
+    "password": "user5",
+    "firstname": "Dimitrije",
+    "lastname": "Petronijević",
+    "email": "dimitrije@email.com",
+
+    "usr_photo_id": null,
+    "usr_addr_country": "Srbija",
+    "usr_addr_city": "Beograd",
+
+    "acc_type": "usr",
+    "activated_dt": "2021-02-17T23:00:00Z",
+    "deleted_dt": null,
+    "usr_blocked_ids": []
+  },
+  /* --------------------- */
+  {
+    "_id": { "$oid": "602ed0f78b05043edc647cd7" },
+    "username": "user6",
+    "password": "user6",
     "firstname": "Žika",
     "lastname": "Žikić",
     "email": "zika@email.com",
@@ -139,10 +205,11 @@
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0298b05043edc647ccc" },
-    "username": "user4",
-    "password": "user4",
+    "username": "user7",
+    "password": "user7",
     "firstname": "Sanja",
     "lastname": "Sanjić",
     "email": "sanja@email.com",
@@ -156,10 +223,11 @@
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd8" },
-    "username": "user5",
-    "password": "user5",
+    "username": "user8",
+    "password": "user8",
     "firstname": "Nikola",
     "lastname": "Nović",
     "email": "nikola@email.com",
@@ -173,10 +241,11 @@
     "deleted_dt": "2021-05-17T23:00:00Z",
     "usr_blocked_ids": []
   },
+  /* --------------------- */
   {
     "_id": { "$oid": "602ed0298b05043edc647ccd" },
-    "username": "user6",
-    "password": "user6",
+    "username": "user9",
+    "password": "user9",
     "firstname": "Katarina",
     "lastname": "Stefanović",
     "email": "katarina@email.com",
