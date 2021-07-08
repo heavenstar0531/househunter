@@ -7,7 +7,7 @@ let accSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< account info
  // _id:              { type: ObjectId },     // [id]
     username:         { type: String },       // unique<string>
-    password:         { type: String },       // unique<hash>
+    password:         { type: String },       // unique<hash>          # len: [8, 24], lowercase: 1+, uppercase: 1+, digit: 1+, special: 1+, max char repeat: 3
     firstname:        { type: String },       // string
     lastname:         { type: String },       // string
     email:            { type: String },       // unique<string>

@@ -17,18 +17,22 @@
 + router-outlet
   >> property-list-page
     + property-stats         # graphs
-    + property-gallery
+    + property-promoted
     + property-list          # search, cards
 
     >> property-page
-      + property-modal
-        + property-form
+      + property-form
+      + property-rent-modal
+        + property-rent-form
+      + property-buy-modal
+        + property-buy-form
 
   >> conversation-list-page
     + conversation-list
     + message-list
 
-  >> user-list-page
+  >> agency-page
+    + agency-info
     + user-list
       + account-modal
     
@@ -86,7 +90,7 @@
 # ------------------------------------- <<< account info
 + _id                 [id]
 + username            unique<string>
-+ password            unique<hash>
++ password            unique<hash>                      # len: [8, 24], lowercase: 1+, uppercase: 1+, digit: 1+, special: 1+, max char repeat: 3
 + firstname           string
 + lastname            string
 + email               unique<string>
@@ -146,7 +150,7 @@
 + sale_offer_list        list< sale_offer >|null
   + offeror_id             ->acc
   + offered_amount         number
-  + accepted_dt            date|null
+  + accepted_dt            bool|null
 + sale_actual_price      number|null
 + sale_arbiter_id        ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
 + sale_new_owner_id      ->acc|null                           # (usr)
@@ -170,11 +174,10 @@
 . updateStatus( updated_prop )    => status                   # (adm),(agn)
 .
 . rent( prop_id, from_dt, to_dt ) => status, cost|null        # (usr)
-. purchase( prop_id, on_credit )  => status, cost|credit|null # (usr)   TODO: fix
 .
-. addOffer( prop_id, offer )         => status                # (usr)
-. acceptOffer( prop_id, offeror_id ) => status                # <all>
-. listOffers( prop_id )   => status, list< offer >|null       # <all>
+. makePurchaseOffer( prop_id, offer )        => status        # (usr)
+. acceptPurchaseOffer( prop_id, offeror_id ) => status        # <all>
+. listPurchaseOffers( prop_id ) => status, list< offer >|null # <all>
 .
 . getStats( criteria_json ) => status, stats|null             # (adm),(agn)
 
@@ -184,25 +187,32 @@
 + conv                                                      # conversation
 ----------------------------------------------------------------------------------------
 # ------------------------------------- <<< conversation info
-+ _id             [id]
-+ prop_id         ->prop                                    # koristi se za naslov poruke
-+ offeror_id      ->acc                                     # (usr) koji je zainteresovan za rentiranje/kupovinu
-+ msg_list        list< msg >
-  + sender_id       ->acc                                   # (usr),agency_id
-  + text            string
-  + sent_dt         date
-  + read_dt         date|null
++ _id                 [id]
++ prop_id             ->prop                                # koristi se za naslov poruke
++ offeror_id          ->acc                                 # (usr) koji je zainteresovan za rentiranje/kupovinu
++ msg_list            list< msg >
+  + sender_id           ->acc                               # (usr),agency_id
+  + text                string
+  + sent_dt             date
+  + read_dt             date|null
 # ------------------------------------- <<< conversation status
-+ owner_arch_dt   date|null
-+ offeror_arch_dt date|null
-+ deleted_dt      date|null
++ owner_arch_dt       date|null
++ owner_deleted_dt    date|null
++ offeror_arch_dt     date|null
++ offeror_deleted_dt  date|null
 # ------------------------------------- <<< frontend (instance) methods
 . conv.ensureValid( acc_type, method ) => status
 . msg.ensureValid( acc_type, method )  => status
 # ------------------------------------- <<< backend (static) methods
-. add( conv )           => status                           # (usr)
-. send( conv_id, msg )  => status, msg_id|null              # <all>
-. list( criteria_json ) => status, list< conv >             # <all>: not_archived|archived
+. add( conv )             => status                         # <all>
+. delete( conv_id )       => status                         # <all>
+. get( conv_id )          => status, conv|null              # <all>
+. list( criteria_json )   => status, list< conv >           # <all>: not_archived|archived
+.
+. updateStatus( updated_conv ) => status                    # <all>
+.
+. sendMessage( conv_id, msg )  => status, msg_id|null       # <all>
+. markRead( conv_id, last_msg_dt ) => status                # <all>
 
 
 

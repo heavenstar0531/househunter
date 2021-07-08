@@ -6,8 +6,19 @@ import { AppComponent } from './app/app.component';
 // two-way data binding for forms, http client, bootstrap and breadcrumb modules
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+// https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
+// +   https://ng-bootstrap.github.io/#/components/nav/examples
+// +   https://ng-bootstrap.github.io/#/components/dropdown/examples
+// +   https://ng-bootstrap.github.io/#/components/buttons/examples
+// +   https://ng-bootstrap.github.io/#/components/modal/examples
+// +   https://ng-bootstrap.github.io/#/components/toast/examples
+// +   https://ng-bootstrap.github.io/#/components/datepicker/overview
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BreadcrumbModule } from 'xng-breadcrumb';
+// https://c3js.org/examples.html
+/* C3.js graph library */
+// https://icons.getbootstrap.com/
+/* bootstrap icon library */
 
 // pages
 

@@ -5,7 +5,7 @@ export class AccData {
     // ------------------------------------------------------------- <<< account info
     _id:              null|ObjectId = null;          // [id]
     username:         null|string = null;            // unique<string>
-    password:         null|string = null;            // unique<hash>
+    password:         null|string = null;            // unique<hash>          # len: [8, 24], lowercase: 1+, uppercase: 1+, digit: 1+, special: 1+, max char repeat: 3
     firstname:        null|string = null;            // string
     lastname:         null|string = null;            // string
     email:            null|string = null;            // unique<string>

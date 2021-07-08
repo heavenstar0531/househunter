@@ -1,7 +1,10 @@
 import { environment } from "./environments/environment";
 // https://www.npmjs.com/package/express
+// +   https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
 import express from "express";
 // https://www.npmjs.com/package/mongoose
+// +   https://docs.mongodb.com/manual/reference/sql-comparison/
+// +   https://docs.mongodb.com/manual/tutorial/query-documents/
 import mongoose from "mongoose";
 // https://www.npmjs.com/package/cors
 import cors from "cors";

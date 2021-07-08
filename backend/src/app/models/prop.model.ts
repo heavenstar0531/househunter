@@ -98,25 +98,19 @@ export class PropModel
         throw new Error('TODO');
     }
 
-    // TODO: fix
-    // (usr)
-    purchase( prop_id: ObjectId, on_credit: boolean ): [ Status, number|null/*cost|credit*/ ] {
-        throw new Error('TODO');
-    }
-
 
     // (usr)
-    addOffer( prop_id: ObjectId, offer: OfferData ): Status {
+    makePurchaseOffer( prop_id: ObjectId, offer: OfferData ): Status {
         throw new Error('TODO');
     }
 
     // <all>
-    acceptOffer( prop_id: ObjectId, offeror_id: ObjectId ): Status {
+    acceptPurchaseOffer( prop_id: ObjectId, offeror_id: ObjectId ): Status {
         throw new Error('TODO');
     }
 
     // <all>
-    listOffers( prop_id: ObjectId ): [ Status, Array< OfferData >|null ] {
+    listPurchaseOffers( prop_id: ObjectId ): [ Status, Array< OfferData >|null ] {
         throw new Error('TODO');
     }
     

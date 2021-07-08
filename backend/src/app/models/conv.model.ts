@@ -28,18 +28,34 @@ export class ConvModel
 {
     private model: Model<any> = mongoose.model( 'conv', convSchema );
 
-    // (usr)
+    // <all>
     add( conv: ConvData ): Status {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    delete( conv_id: ObjectId ): Status {
         throw new Error('TODO');
     }
     
     // <all>
-    send( conv_id: ObjectId, msg: MsgData ): [ Status, ObjectId|null/*msg_id*/ ] {
+    get( conv_id: ObjectId ): [ Status, ConvData|null ] {
         throw new Error('TODO');
     }
     
     // <all>: not_archived|archived
     list( criteria: Criteria ): [ Status, Array<ConvData> ] {
+        throw new Error('TODO');
+    }
+
+
+    // <all>
+    sendMessage( conv_id: ObjectId, msg: MsgData ): [ Status, ObjectId|null/*msg_id*/ ] {
+        throw new Error('TODO');
+    }
+
+    // <all>
+    markRead( conv_id: ObjectId, last_msg_dt: Date ): Status {
         throw new Error('TODO');
     }
 }
