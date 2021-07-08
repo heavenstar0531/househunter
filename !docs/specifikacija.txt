@@ -6,40 +6,40 @@
 + stranice i delovi
 ----------------------------------------
 + navbar
-  + nav-logo
-  + router-link
+  (+ nav-logo)
+  (+ router-link)
   ...
   + login-modal
     + login-form
   + register-modal
     + account-form
 
-+ router-outlet
+(+ router-outlet)
+  >> agency-page
+    + agency-info
+    + user-list
+      + account-modal
+
   >> property-list-page
     + property-stats         # graphs
     + property-promoted
     + property-list          # search, cards
 
-    >> property-page
-      + property-form
-      + property-rent-modal
-        + property-rent-form
-      + property-buy-modal
-        + property-buy-form
+  >> property-page
+    + property-form
+    + property-rent-modal
+      + property-rent-form
+    + property-buy-modal
+      + property-buy-form
 
   >> conversation-list-page
     + conversation-list
     + message-list
-
-  >> agency-page
-    + agency-info
-    + user-list
-      + account-modal
     
   >> my-account-page
-    + account-form
+    (+ account-form)
 
-+ footer
+(+ footer)
 
 
 
