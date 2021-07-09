@@ -1,4 +1,6 @@
-export const permissionMap: any = {
+import { Status } from "./types";
+
+const permissionMap: any = {
     agency:
     {
         get:                 { adm:0,                      },
@@ -44,5 +46,11 @@ export const permissionMap: any = {
 
 
 export function EnsurePermission( acc_type: string, target: string, method: string ): void {
-    if( !( target in permissionMap ) )
+    if( !permissionMap?.target?.method )
+    {
+        let status = new Status();
+        status.setStatus( "error" );
+        status.setMessage( "insufficient permissions" );
+        throw status;
+    }
 }

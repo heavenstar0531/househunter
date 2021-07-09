@@ -1,5 +1,6 @@
 import mongoose, { Model } from 'mongoose';
 import { Session } from "../util/types";
+import { EnsurePermission } from '../common/permissions';
 import { ObjectId } from 'mongodb';
 import { ConvData, MsgData } from '../common/requests/conv.data';
 import { Status, Criteria } from '../common/types'
