@@ -71,7 +71,6 @@
 ----------------------------------------------------------------------------------------
 # ------------------------------------- <<< agency info
 + _id                 [id]                              # agency id, currently only one agency exists
-+ income              ->acc
 + credit_percent      number                            # currently fixed at 20%
 + rent_percent        number
 + sale_percent        number

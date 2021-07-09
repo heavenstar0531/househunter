@@ -1,26 +1,28 @@
 import ObjectId from 'bson-objectid';
 import { FileData } from './file.data';
 
-export class AccData {
+export class AccData
+{
     // ------------------------------------------------------------- <<< account info
-    _id:              null|ObjectId = null;          // [id]
-    username:         null|string = null;            // unique<string>
-    password:         null|string = null;            // unique<hash>          # len: [8, 24], lowercase: 1+, uppercase: 1+, digit: 1+, special: 1+, max char repeat: 3
-    firstname:        null|string = null;            // string
-    lastname:         null|string = null;            // string
-    email:            null|string = null;            // unique<string>
+    _id?:              null|ObjectId = null;          // [id]
+    username?:         null|string = null;            // unique<string>
+    password?:         null|string = null;            // unique<hash>          # len: [8, 24], lowercase: 1+, uppercase: 1+, digit: 1+, special: 1+, max char repeat: 3
+    firstname?:        null|string = null;            // string
+    lastname?:         null|string = null;            // string
+    email?:            null|string = null;            // unique<string>
     // ------------------------------------------------------------- <<< user info
-    usr_photo_id:     null|ObjectId|FileData = null; // ->file|file|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
-    usr_addr_country: null|string = null;            // string|null
-    usr_addr_city:    null|string = null;            // string|null
+    usr_photo_id?:     null|ObjectId|FileData = null; // ->file|file|null      # u objektu se uvek cuva! ->file;   ako se ne unese koristiti default sliku
+    usr_addr_country?: null|string = null;            // string|null
+    usr_addr_city?:    null|string = null;            // string|null
     // ------------------------------------------------------------- <<< acc status
-    acc_type:         null|string = null;            // enum( 'adm', 'agn', 'usr' )
-    activated_dt:     null|Date = null;              // date|null
-    deleted_dt:       null|Date = null;              // date|null
-    usr_blocked_ids:  null|Array<ObjectId> = null;   // list< ->acc >|null
+    acc_type?:         null|string = null;            // enum( 'adm', 'agn', 'usr' )
+    activated_dt?:     null|Date = null;              // date|null
+    deleted_dt?:       null|Date = null;              // date|null
+    usr_blocked_ids?:  null|Array<ObjectId> = null;   // list< ->acc >|null
 
 
-    ensureValid( acc_type: string, method: string ): void {
+    static ensureValid( acc_type: string, method: string, data?: AccData ): void
+    {
         throw new Error('TODO');
     }
 };

@@ -12,6 +12,7 @@ import cors from "cors";
 import session from "express-session";
 // https://www.npmjs.com/package/connect-mongo
 import MongoStore from "connect-mongo";
+import { AgncyModel } from "./app/models/agncy.model";
 // https://www.npmjs.com/package/gridfs-stream
 const Grid = require("gridfs-stream");
 

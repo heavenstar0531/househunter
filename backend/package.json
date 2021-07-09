@@ -4,7 +4,11 @@
   "description": "",
   "main": "dist/server.js",
   "scripts": {
-    "serve": "concurrently -k \"tsc -w --incremental\" \"nodemon ./dist/server/server.js\""
+    "build-ts": "tsc",
+    "start": "npm run serve",
+    "serve": "concurrently -k \"tsc -w --incremental\" \"nodemon ./dist/server/server.js\"",
+    "watch-node": "node dist/server.js",
+    "watch-ts": "tsc -w"
   },
   "author": "",
   "license": "ISC",

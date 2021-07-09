@@ -1,12 +1,12 @@
 import { Status } from "./types";
 
 const permissionMap: any = {
-    agency:
+    agncy:
     {
         get:                 { adm:0,                      },
         update:              { adm:0,                      },
     },
-    account:
+    acc:
     {
         add:                 { adm:0,               gst:3, },
         delete:              { adm:0,                      },
@@ -18,7 +18,7 @@ const permissionMap: any = {
         updateStatus:        { adm:0,                      },
         blockAnother:        { adm:0, agn:1, usr:2,        },
     },
-    property:
+    prop:
     {
         add:                 { adm:0, agn:1, usr:2,        },
         addMany:             { adm:0,                      },
@@ -33,7 +33,7 @@ const permissionMap: any = {
         listPurchaseOffers:  { adm:0, agn:1, usr:2,        },
         getStats:            { adm:0, agn:1,               },
     },
-    conversation:
+    conv:
     {
         add:                 { adm:0, agn:1, usr:2,        },
         delete:              { adm:0, agn:1, usr:2,        },
@@ -46,11 +46,12 @@ const permissionMap: any = {
 
 
 export function EnsurePermission( acc_type: string, target: string, method: string ): void {
-    if( !permissionMap?.target?.method )
+    if( !target || !method || !acc_type ||
+        !permissionMap[target]?.[method]?.[acc_type] )
     {
         let status = new Status();
         status.setStatus( "error" );
-        status.setMessage( "insufficient permissions" );
+        status.setMessage( "Insufficient permissions." );
         throw status;
     }
 }

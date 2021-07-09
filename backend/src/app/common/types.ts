@@ -1,25 +1,40 @@
-// FIXME: implement map interface instead of extension
+// FIXME: these classes should not extend map but implement it
 export class Status extends Map<string, any>
 {
-    constructor()
+    constructor( status: string = null, message: string = null )
     {
         super();
-        this.setStatus( "not set" );
-        this.setMessage( "not set" );
+        if( status ) this.setStatus( status );
+        if( message ) this.setMessage( message );
     }
 
-    setStatus( status: string )
+
+    getStatus(): any { return this.get( "status" ); }
+    getMessage(): any { this.get( "message" ); }
+
+    setStatus( status: string ): void { this.set( "status", status ); }
+    setMessage( message: string ): void { this.set( "message", message ); }
+
+    
+    mergeWith( status: Status ): void
     {
-        this.set( "status", status );
+        status?.forEach( ( value, key ) =>
+        {
+            if( !this.has( key ) )
+            {
+                this.set( key, value );
+            }
+        });
+    }
+    overwriteWith( status: Status ): void
+    {
+        status?.forEach( ( value, key ) =>
+        {
+            this.set( key, value );
+        });
     }
 
-    setMessage( message: string )
-    {
-        this.set( "message", message );
-    }
 };
 
-// FIXME: implement map interface instead of extension
 export class Criteria extends Map<string, any> {};
-// FIXME: implement map interface instead of extension
 export class Stats extends Map<string, any> {};
