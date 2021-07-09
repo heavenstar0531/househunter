@@ -22,37 +22,37 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 // components - pages
-import { AgencyPageComponent } from './pages/agency-page/agency-page.component';
-import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
-import { PropertyPageComponent } from './pages/property-page/property-page.component';
-import { ConversationListPageComponent } from './pages/conversation-list-page/conversation-list-page.component';
-import { MyAccountPageComponent } from './pages/my-account-page/my-account-page.component';
+import { AgencyPageComponent } from './components/pages/agency-page/agency-page.component';
+import { PropertyListPageComponent } from './components/pages/property-list-page/property-list-page.component';
+import { PropertyPageComponent } from './components/pages/property-page/property-page.component';
+import { ConversationListPageComponent } from './components/pages/conversation-list-page/conversation-list-page.component';
+import { MyAccountPageComponent } from './components/pages/my-account-page/my-account-page.component';
 
 
-// components
-import { NavbarComponent } from './components/navbar/navbar.component';
-import { AgencyInfoComponent } from './components/agency-info/agency-info.component';
-import { PropertyStatsComponent } from './components/property-stats/property-stats.component';
-import { PropertyPromotedComponent } from './components/property-promoted/property-promoted.component';
+// components - stuff
+import { NavbarComponent } from './components/stuff/navbar/navbar.component';
+import { AgencyInfoComponent } from './components/stuff/agency-info/agency-info.component';
+import { PropertyStatsComponent } from './components/stuff/property-stats/property-stats.component';
+import { PropertyPromotedComponent } from './components/stuff/property-promoted/property-promoted.component';
 // components - lists
-import { UserListComponent } from './components/user-list/user-list.component';
-import { PropertyListComponent } from './components/property-list/property-list.component';
-import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
-import { MessageListComponent } from './components/message-list/message-list.component';
+import { UserListComponent } from './components/lists/user-list/user-list.component';
+import { PropertyListComponent } from './components/lists/property-list/property-list.component';
+import { ConversationListComponent } from './components/lists/conversation-list/conversation-list.component';
+import { MessageListComponent } from './components/lists/message-list/message-list.component';
 // components - modals
-import { LoginModalComponent } from './components/login-modal/login-modal.component';
-import { RegisterModalComponent } from './components/register-modal/register-modal.component';
-import { AccountModalComponent } from './components/account-modal/account-modal.component';
-import { PropertyRentModalComponent } from './components/property-rent-modal/property-rent-modal.component';
-import { PropertyBuyModalComponent } from './components/property-buy-modal/property-buy-modal.component';
+import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
+import { RegisterModalComponent } from './components/modals/register-modal/register-modal.component';
+import { AccountModalComponent } from './components/modals/account-modal/account-modal.component';
+import { PropertyRentModalComponent } from './components/modals/property-rent-modal/property-rent-modal.component';
+import { PropertyBuyModalComponent } from './components/modals/property-buy-modal/property-buy-modal.component';
 
 
 // components - forms
-import { LoginFormComponent } from './forms/login-form/login-form.component';
-import { AccountFormComponent } from './forms/account-form/account-form.component';
-import { PropertyFormComponent } from './forms/property-form/property-form.component';
-import { PropertyRentFormComponent } from './forms/property-rent-form/property-rent-form.component';
-import { PropertyBuyFormComponent } from './forms/property-buy-form/property-buy-form.component';
+import { LoginFormComponent } from './components/forms/login-form/login-form.component';
+import { AccountFormComponent } from './components/forms/account-form/account-form.component';
+import { PropertyFormComponent } from './components/forms/property-form/property-form.component';
+import { PropertyRentFormComponent } from './components/forms/property-rent-form/property-rent-form.component';
+import { PropertyBuyFormComponent } from './components/forms/property-buy-form/property-buy-form.component';
 
 
 // services
@@ -88,7 +88,7 @@ import { ConvService } from './services/conv/conv.service';   // ------------- <
     AccountModalComponent,
     PropertyRentModalComponent,
     PropertyBuyModalComponent,
-
+    
     // components - forms
     LoginFormComponent,
     AccountFormComponent,

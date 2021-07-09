@@ -11,7 +11,7 @@ export class AgncyData {
     admn_id:        null|ObjectId = null;   // ->acc
 
 
-    static EnsureValid( method: string, acc_type: string, data?: AgncyData ): void {
+    static EnsureValid( acc_type: string, method: string, data?: AgncyData ): void {
         throw new Error('TODO');
     }
 };

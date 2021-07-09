@@ -3,11 +3,11 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 // components - pages
-import { AgencyPageComponent } from './pages/agency-page/agency-page.component';
-import { PropertyListPageComponent } from './pages/property-list-page/property-list-page.component';
-import { PropertyPageComponent } from './pages/property-page/property-page.component';
-import { ConversationListPageComponent } from './pages/conversation-list-page/conversation-list-page.component';
-import { MyAccountPageComponent } from './pages/my-account-page/my-account-page.component';
+import { AgencyPageComponent } from './components/pages/agency-page/agency-page.component';
+import { PropertyListPageComponent } from './components/pages/property-list-page/property-list-page.component';
+import { PropertyPageComponent } from './components/pages/property-page/property-page.component';
+import { ConversationListPageComponent } from './components/pages/conversation-list-page/conversation-list-page.component';
+import { MyAccountPageComponent } from './components/pages/my-account-page/my-account-page.component';
 
 
 // application routes

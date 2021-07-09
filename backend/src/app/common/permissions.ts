@@ -1,4 +1,4 @@
-export const PermissionMap: any = {
+export const permissionMap: any = {
     agency:
     {
         get:                 { adm:0,                      },
@@ -43,7 +43,6 @@ export const PermissionMap: any = {
 };
 
 
-
-function EnsurePermission( target: string, method: string, acc_type: string ): void {
-    throw new Error('TODO');
+export function EnsurePermission( acc_type: string, target: string, method: string ): void {
+    if( !( target in permissionMap ) )
 }
