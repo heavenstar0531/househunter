@@ -5,7 +5,13 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Firefox",
+            "name": "npm run serve",
+            "command": "cd ${workspaceFolder}/backend && npm run serve",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "name": "firefox",
             "type": "firefox",
             "request": "launch",
             "reAttach": true,
