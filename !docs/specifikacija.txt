@@ -79,7 +79,7 @@
 # ------------------------------------- <<< frontend (instance) methods
 . agncy.ensureValid( acc_type, method ) => status
 # ------------------------------------- <<< backend (static) methods
-. get()                   => status, agncy              # (adm)
+. list()                  => status, agncy              # (adm)
 . update( updated_agncy ) => status                     # (adm)
 
 

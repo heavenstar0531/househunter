@@ -36,7 +36,7 @@ import { PropertyStatsComponent } from './components/property-stats/property-sta
 import { PropertyPromotedComponent } from './components/property-promoted/property-promoted.component';
 // components - lists
 import { UserListComponent } from './components/user-list/user-list.component';
-import { PropertyListComponent } from './property-list/property-list.component';
+import { PropertyListComponent } from './components/property-list/property-list.component';
 import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 import { MessageListComponent } from './components/message-list/message-list.component';
 // components - modals

@@ -1,4 +1,5 @@
 import ObjectId from 'bson-objectid';
+import { Status } from '../types';
 
 export class AgncyData {
     // ------------------------------------------------------------- <<< agency info
@@ -10,7 +11,7 @@ export class AgncyData {
     admn_id:        null|ObjectId = null;   // ->acc
 
 
-    ensureValid( acc_type: string, method: string ): void {
+    static EnsureValid( method: string, acc_type: string, data?: AgncyData ): void {
         throw new Error('TODO');
     }
 };

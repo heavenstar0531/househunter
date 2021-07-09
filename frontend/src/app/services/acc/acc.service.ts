@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { AccLoginData, AccRegisterData } from 'src/app/requests/acc';
+import { AccLoginData, AccRegisterData } from 'src/app/common/requests/acc.data';
 
 @Injectable({
   providedIn: 'root'

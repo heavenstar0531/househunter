@@ -1,5 +1,5 @@
 import ObjectId from 'bson-objectid';
-import { FileData } from './file';
+import { FileData } from './file.data';
 
 export class AccData {
     // ------------------------------------------------------------- <<< account info

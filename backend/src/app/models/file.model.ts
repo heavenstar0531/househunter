@@ -1,22 +1,21 @@
-// import mongoose, { Model } from 'mongoose';
 import { ObjectId } from 'mongodb';
-import { FileData } from '../requests/file';
+import { FileData } from '../common/requests/file.data';
 import { Status } from '../common/types'
 
 export class FileModel
 {
     // invisible to rest api
-    add( file: FileData ): [ Status, ObjectId|null/*file_id*/ ] {
+    async add( file: FileData ): Promise<[ Status, ObjectId?/*file_id*/ ]> {
         throw new Error('TODO');
     }
     
     // invisible to rest api
-    delete( file_id: ObjectId ): Status {
+    async delete( file_id: ObjectId ): Promise<Status> {
         throw new Error('TODO');
     }
     
     // invisible to rest api
-    get( file_id: ObjectId ): [ Status, FileData|null ] {
+    async get( file_id: ObjectId ): Promise<[ Status, FileData? ]> {
         throw new Error('TODO');
     }
 }

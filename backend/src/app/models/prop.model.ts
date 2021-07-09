@@ -1,6 +1,7 @@
 import mongoose, { Model } from 'mongoose';
+import { Session } from "../util/types";
 import { ObjectId } from 'mongodb';
-import { PropData, OfferData } from '../requests/prop';
+import { PropData, OfferData } from '../common/requests/prop.data';
 import { Status, Criteria, Stats } from '../common/types'
 
 let propRentSchema = new mongoose.Schema({
@@ -55,68 +56,74 @@ let propSchema = new mongoose.Schema({
 export class PropModel
 {
     private model: Model<any> = mongoose.model( 'prop', propSchema );
+    private session: Session = null;
+
+    constructor( session: Session )
+    {
+        this.session = session;
+    }
 
     // <all>
-    add( prop: PropData ): [ Status, ObjectId|null/*prop_id*/ ] {
+    async add( prop: PropData ): Promise<[ Status, ObjectId?/*prop_id*/ ]> {
         throw new Error('TODO');
     }
 
     // (adm)
-    addMany( prop_list: Array<String> ): [ Status, Array<ObjectId>|null/*prop_list*/ ] {
+    async addMany( prop_list: Array<String> ): Promise<[ Status, Array<ObjectId>?/*prop_list*/ ]> {
         throw new Error('TODO');
     }
 
     // (adm)
-    delete( prop_id: ObjectId ): Status {
+    async delete( prop_id: ObjectId ): Promise<Status> {
         throw new Error('TODO');
     }
 
     // <gst>,<all>
-    get( prop_id: ObjectId ): [ Status, PropData|null ] {
+    async get( prop_id: ObjectId ): Promise<[ Status, PropData? ]> {
         throw new Error('TODO');
     }
 
     // <gst>,<all>: <everything>|promoted|city|price_range;   (usr): owned;   (ang),(adm): agency_owned|sold
-    list( criteria: Criteria ): [ Status, Array<PropData>|null ] {
+    async list( criteria: Criteria ): Promise<[ Status, Array<PropData>? ]> {
         throw new Error('TODO');
     }
 
 
     // <all>
-    updateInfo( updated_prop: PropData ): Status {
+    async updateInfo( updated_prop: PropData ): Promise<Status> {
         throw new Error('TODO');
     }
 
     // (adm),(agn)
-    updateStatus( updated_prop: PropData ): Status {
+    async updateStatus( updated_prop: PropData ): Promise<Status> {
         throw new Error('TODO');
     }
     
     
     // (usr)
-    rent( prop_id: ObjectId, from_dt: Date, to_dt: Date ): [ Status, number|null/*cost*/ ] {
+    async rent( prop_id: ObjectId, from_dt: Date, to_dt: Date ): Promise<[ Status, number?/*cost*/ ]> {
         throw new Error('TODO');
     }
 
 
     // (usr)
-    makePurchaseOffer( prop_id: ObjectId, offer: OfferData ): Status {
+    async makePurchaseOffer( prop_id: ObjectId, offer: OfferData ): Promise<Status> {
         throw new Error('TODO');
     }
 
     // <all>
-    acceptPurchaseOffer( prop_id: ObjectId, offeror_id: ObjectId ): Status {
+    async acceptPurchaseOffer( prop_id: ObjectId, offeror_id: ObjectId ): Promise<Status> {
         throw new Error('TODO');
     }
 
     // <all>
-    listPurchaseOffers( prop_id: ObjectId ): [ Status, Array< OfferData >|null ] {
+    async listPurchaseOffers( prop_id: ObjectId ): Promise<[ Status, Array< OfferData >? ]> {
         throw new Error('TODO');
     }
     
     
     // (adm),(agn)
-    getStats( criteria: Criteria ): [ Status, Stats|null ] {
+    async getStats( criteria: Criteria ): Promise<[ Status, Stats? ]> {
         throw new Error('TODO');
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccService } from 'src/app/services/acc/acc.service';
-import { AccRegisterData } from 'src/app/requests/acc';
+import { AccRegisterData } from 'src/app/common/requests/acc.data';
 
 @Component({
   selector: 'app-register-modal',

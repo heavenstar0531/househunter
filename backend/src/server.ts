@@ -21,51 +21,52 @@ async function main() {
     const app = express();
     const router = express.Router();
 
-    // create the express router on the root path
-    app.use("/", router);
 
+    // use the express router
+    app.use( router );
     // use cross-origin sharing between the express backend and angular frontend (since the domains are different)
-    app.use(cors());
-    // set that all requests' bodies are read as json
-    app.use(express.json());
+    app.use( cors() );
 
+    // set that all requests' bodies are read as json
+    app.use( express.json() );
     // enable the session store for mongodb
-    app.use(
-        session({
-            store: MongoStore.create({
-                mongoUrl: environment.mongoUrl,
-                ttl: environment.sessionTtl,
-            }),
-            secret: environment.sessionSecret, // used for session encryption?
-            saveUninitialized: false, // prevents an uninitialized session to be saved to the session store
-            resave: false, // prevents an unmodified session (in a request) to be resaved to the session store
-        })
-    );
+    app.use( session({
+        store: MongoStore.create({
+            mongoUrl: environment.mongoUrl,
+            ttl: environment.sessionTtl,
+        }),
+        secret: environment.sessionSecret, // used for session encryption?
+        saveUninitialized: false, // prevents an uninitialized session to be saved to the session store
+        resave: false, // prevents an unmodified session (in a request) to be resaved to the session store
+    }) );
 
     // set the mongoose promise to be the global promise
     mongoose.Promise = global.Promise;
     // set the gridfs's mongo driver to the mongoose's mongo driver
     Grid.mongo = mongoose.mongo;
 
-    try {
+    try
+    {
         // wait for the connection to be established
-        await mongoose.connect(environment.mongoUrl, {
+        await mongoose.connect( environment.mongoUrl, {
             useUnifiedTopology: true,   // ???
             useNewUrlParser: true,   // the old url parser is deprecated
         });
 
-        console.log(`[info] Open connection to MongoDB on path '${environment.mongoUrl}'`);
-    } catch (err) {
-        console.error(`[error] Failed to connect to MongoDB on path '${environment.mongoUrl}'`, err);
-        process.kill(process.pid, 'SIGTERM');
+        console.log( `[info] Open connection to MongoDB on path '${environment.mongoUrl}'` );
+    }
+    catch( err )
+    {
+        console.error( `[error] Failed to connect to MongoDB on path '${environment.mongoUrl}'`, err );
+        process.kill( process.pid, 'SIGTERM' );
         return;
     }
 
     // omogucava cuvanje fajlova vecih od 16MB u mongo bazi
-    const gfs = Grid(mongoose.connection.db);
+    const gfs = Grid( mongoose.connection.db );
 
     // pokrenuti express server na datom portu
-    app.listen(environment.expressPort, () =>
+    app.listen( environment.expressPort, () =>
         console.log(`[info] Express server running on port ${environment.expressPort}`)
     );
 }
