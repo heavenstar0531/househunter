@@ -6,16 +6,16 @@ import { Status } from '../common/types'
 
 let agncySchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< agency info
- // _id:            { type: ObjectId },   // [id]      # agency id, currently only one agency exists
-    credit_percent: { type: Number },     // number    # currently fixed at 20%
-    rent_percent:   { type: Number },     // number
-    sale_percent:   { type: Number },     // number
-    admn_id:        { type: ObjectId },   // ->acc
+ // _id:            ObjectId,   // [id]      # agency id, currently only one agency exists
+    credit_percent: Number,     // number    # currently fixed at 20%
+    rent_percent:   Number,     // number
+    sale_percent:   Number,     // number
+    admn_id:        ObjectId,   // ->acc
 });
 
 export class AgncyModel
 {
-    private model: Model<any> = mongoose.model( 'agncy', agncySchema );
+    private model: Model<AgncyData> = mongoose.model( 'agncy', agncySchema, 'agncy' );
     private session: Session = null;
 
     constructor( session: Session )
@@ -29,16 +29,17 @@ export class AgncyModel
         try
         {
             AgncyData.ensureValid( this.session.acc_type, "get" );
+            let status = new Status();
             
-            let agency = await this.model.findOne().exec() as AgncyData;
-            if( !agency ) return [ new Status( "error", "Could not get agency." ) ];
+            let agency = await this.model.findOne().lean().exec();
+            if( !agency ) return [ status.setError( "message", "Could not get agency." ) ];
 
-            return [ new Status( "success" ), agency ];
+            return [ status, agency ];
         }
         catch( err )
         {
             if( err instanceof Status ) return [ err ];
-            if( err instanceof MongoError ) return [ new Status( "error", "Could not get agency." ) ];
+            if( err instanceof MongoError ) return [ new Status().setError( "message", "Could not get agency." ) ];
             throw err;
         }
     }
@@ -49,18 +50,20 @@ export class AgncyModel
         try
         {
             AgncyData.ensureValid( this.session.acc_type, "update", updated_agncy );
+            let status = new Status();
             
-            let error = await this.model.updateOne(
+            let opres = await this.model.collection.updateOne(
                 { _id: updated_agncy._id },
-                updated_agncy,
-                { upsert: true }
-            ).exec();   // upsert <=> add if not exists + update
-            
-            return new Status( "success" );
+                updated_agncy
+            );
+
+            if( opres.result.ok != 1 ) return status.setError( "message", "Could not update agency." );
+            return status;
         }
         catch( err )
         {
             if( err instanceof Status ) return err;
+            if( err instanceof MongoError ) return new Status().setError( "message", "Could not update agency." );
             throw err;
         }
     }

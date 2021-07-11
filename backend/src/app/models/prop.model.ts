@@ -1,62 +1,61 @@
 import mongoose, { Model } from 'mongoose';
 import { Session } from "../util/types";
-import { EnsurePermission } from '../common/permissions';
 import { ObjectId } from 'mongodb';
 import { PropData, OfferData } from '../common/requests/prop.data';
 import { Status, Criteria, Stats } from '../common/types'
 
 let propRentSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< rent info
- // _id:     { type: ObjectId },   // [id]
-    acc_id:  { type: ObjectId },   // ->acc
-    from_dt: { type: Date },       // date
-    to_dt:   { type: Date },       // date
+ // _id:     ObjectId,   // [id]
+    acc_id:  ObjectId,   // ->acc
+    from_dt: Date,       // date
+    to_dt:   Date,       // date
 });
 
 let propOfferSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< offer info
- // _id:            { type: ObjectId },   // [id]
-    offeror_id:     { type: ObjectId },   // ->acc
-    offered_amount: { type: Number },     // number
-    accepted_dt:    { type: Date },       // date|null
+ // _id:            ObjectId,   // [id]
+    offeror_id:     ObjectId,   // ->acc
+    offered_amount: Number,     // number
+    accepted_dt:    Date,       // date|null
 });
 
 let propSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< property info
- // _id:             { type: ObjectId },           // [id]
-    name:            { type: String },             // string
-    addr_city:       { type: String },             // string|null
-    addr_district:   { type: String },             // string|null
-    addr_street:     { type: String },             // string|null
-    addr_streetnum:  { type: String },             // string|null
-    prop_type:       { type: String, enum: [ 'house', 'flat' ] },   // enum( 'house', 'flat' )
-    flat_floornum:   { type: Number },             // number|null
-    floorcnt:        { type: Number },             // number
-    area_m2:         { type: Number },             // number
-    roomcnt:         { type: Number },             // number
-    is_furnished:    { type: Boolean },            // bool
-    gallery:         { type: [ObjectId] },         // list< ->file >|list< file >|null    # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
-    old_owner_id:    { type: ObjectId },           // ->acc|->agncy                       # (usr), agency
+ // _id:                 ObjectId,            // [id]
+    name:                String,              // string
+    addr_city:           String,              // string|null
+    addr_district:       String,              // string|null
+    addr_street:         String,              // string|null
+    addr_streetnum:      String,              // string|null
+    prop_type:           { type: String, enum: [ 'house', 'flat' ] },   // enum( 'house', 'flat' )
+    flat_floornum:       Number,              // number|null
+    floorcnt:            Number,              // number
+    area_m2:             Number,              // number
+    roomcnt:             Number,              // number
+    is_furnished:        Boolean,             // bool
+    gallery:             [ObjectId],          // list< ->file >|list< file >|null    # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
+    old_owner_id:        ObjectId,            // ->acc|->agncy                       # (usr), agency
     // ------------------------------------------------------------- <<< rent/sale info
-    prop_sale_type:  { type: String, enum: [ 'rent', 'sale' ] },   // enum( 'rent', 'sale' )
-    rent_list:       { type: [propRentSchema] },   // list< rent >|null
-    rent_price:      { type: Number },             // number|null
-    sale_proposed_price: { type: Number },         // number|null
-    sale_offer_list:     { type: [propOfferSchema] },   // list< sale_offer >|null
-    sale_actual_price:   { type: Number },         // number|null
-    sale_arbiter_id:     { type: ObjectId },       // ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
-    sale_new_owner_id:   { type: ObjectId },       // ->acc|null                           # (usr)
+    prop_sale_type:      { type: String, enum: [ 'rent', 'sale' ] },   // enum( 'rent', 'sale' )
+    rent_list:           [propRentSchema],    // list< rent >|null
+    rent_price:          Number,              // number|null
+    sale_proposed_price: Number,              // number|null
+    sale_offer_list:     [propOfferSchema],   // list< sale_offer >|null
+    sale_actual_price:   Number,              // number|null
+    sale_arbiter_id:     ObjectId,            // ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
+    sale_new_owner_id:   ObjectId,            // ->acc|null                           # (usr)
     // ------------------------------------------------------------- <<< property status
-    accepted_dt:     { type: Date },               // date|null
-    sold_dt:         { type: Date },               // date|null
-    deleted_dt:      { type: Date },               // date|null
-    is_promoted:     { type: Boolean },            // bool
-    viewcnt:         { type: Number },             // number    
+    accepted_dt:         Date,                // date|null
+    sold_dt:             Date,                // date|null
+    deleted_dt:          Date,                // date|null
+    is_promoted:         Boolean,             // bool
+    viewcnt:             Number,              // number    
 });
 
 export class PropModel
 {
-    private model: Model<any> = mongoose.model( 'prop', propSchema );
+    private model: Model<any> = mongoose.model( 'prop', propSchema, 'prop' );
     private session: Session = null;
 
     constructor( session: Session )

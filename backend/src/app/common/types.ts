@@ -1,40 +1,28 @@
-// FIXME: these classes should not extend map but implement it
-export class Status extends Map<string, any>
+export class Status
 {
-    constructor( status: string = null, message: string = null )
-    {
-        super();
-        if( status ) this.setStatus( status );
-        if( message ) this.setMessage( message );
-    }
+    private map: Map<string, any> = new Map<string, any>();
+    private status: number = Status.SUCCESS;
+    static ERROR:   number = -2;
+    static WARNING: number = -1;
+    static SUCCESS: number =  0;
 
-
-    getStatus(): any { return this.get( "status" ); }
-    getMessage(): any { this.get( "message" ); }
-
-    setStatus( status: string ): void { this.set( "status", status ); }
-    setMessage( message: string ): void { this.set( "message", message ); }
-
+    constructor() {}
     
-    mergeWith( status: Status ): void
+    getStatus(): number { return this.status; }
+    getKey( key: string ): any { return this.map.get( key ); }
+    getKeys(): IterableIterator<string> { return this.map.keys(); }
+    
+    private setStatus( status: number ): Status
     {
-        status?.forEach( ( value, key ) =>
-        {
-            if( !this.has( key ) )
-            {
-                this.set( key, value );
-            }
-        });
-    }
-    overwriteWith( status: Status ): void
-    {
-        status?.forEach( ( value, key ) =>
-        {
-            this.set( key, value );
-        });
+        this.status = Math.min( this.status, status );
+        return this;
     }
 
+    setError( key: string, value: any ): Status { this.setStatus( Status.ERROR ); this.map.set( key, value ); return this; }
+    setWarning( key: string, value: any ): Status { this.setStatus( Status.WARNING ); this.map.set( key, value ); return this; }
+    setInfo( key: string, value: any ): Status { this.setStatus( Status.SUCCESS ); this.map.set( key, value ); return this; }
 };
 
+// FIXME: these classes should not extend map but contain it
 export class Criteria extends Map<string, any> {};
 export class Stats extends Map<string, any> {};

@@ -23,7 +23,7 @@ let appRoutes: Routes = [
 
   // ____________________________________________________________________________________________________
   // miscellaneous paths that shouldn't be visible in the navbar
-  { path: '**', redirectTo: '/nekretnine' },
+  { path: '**', redirectTo: 'nekretnine' },
 ];
 
 @NgModule({
