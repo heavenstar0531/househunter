@@ -13,7 +13,14 @@ import session from "express-session";
 // https://www.npmjs.com/package/connect-mongo
 import MongoStore from "connect-mongo";
 // https://www.npmjs.com/package/gridfs-stream
-const Grid = require("gridfs-stream");
+import Grid from "gridfs-stream";
+
+// rest apis
+import { AgncyApi } from "./app/rest-api/agncy.api";
+import { AccApi } from "./app/rest-api/acc.api";
+import { ConvApi } from "./app/rest-api/conv.api";
+import { PropApi } from "./app/rest-api/prop.api";
+import { FileApi } from "./app/rest-api/file.api";
 
 // the main function
 async function main() {
@@ -42,17 +49,15 @@ async function main() {
 
     // set the mongoose promise to be the global promise
     mongoose.Promise = global.Promise;
-    // set the gridfs's mongo driver to the mongoose's mongo driver
-    Grid.mongo = mongoose.mongo;
-
+    
     try
     {
-        // wait for the connection to be established
+        // wait for the mongo connection to be established
         await mongoose.connect( environment.mongoUrl, {
             useUnifiedTopology: true,   // ???
             useNewUrlParser: true,   // the old url parser is deprecated
         });
-
+        
         console.log( `[info] Open connection to MongoDB on path '${environment.mongoUrl}'` );
     }
     catch( err )
@@ -61,11 +66,18 @@ async function main() {
         process.kill( process.pid, 'SIGTERM' );
         return;
     }
+    
+    // enables files larger than 16MB to be saved in mongo
+    // set the gridfs's mongo driver to be the mongoose's mongo driver
+    const gfs = Grid( mongoose.connection.db, mongoose.mongo );
 
-    // omogucava cuvanje fajlova vecih od 16MB u mongo bazi
-    const gfs = Grid( mongoose.connection.db );
-
-    // pokrenuti express server na datom portu
+    AgncyApi.register( router );
+    AccApi.register( router );
+    ConvApi.register( router );
+    PropApi.register( router );
+    FileApi.register( router, gfs );
+    
+    // start the express server
     app.listen( environment.expressPort, () =>
         console.log(`[info] Express server running on port ${environment.expressPort}`)
     );

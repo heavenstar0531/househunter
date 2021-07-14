@@ -5,8 +5,7 @@
     "income": 0,
     "credit_percent": 20,
     "rent_percent": 10,
-    "sale_percent": 15,
-    "admn_id": { "$oid": "602eda588b05043edc647cdb" }
+    "sale_percent": 15
   }
 ]  
 

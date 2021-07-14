@@ -14,9 +14,10 @@
     "roomcnt":         3,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    "owner_id":        { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
     /* ------ */
     "prop_sale_type":  "rent",
+    "price":           5000,
     "rent_list": [
       {
         "renter_id":   { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
@@ -34,12 +35,8 @@
         "to_dt":       "2021-04-12T08:00:00Z"
       }
     ],
-    "rent_price":      5000,
-    "sale_proposed_price": null,
-    "sale_offer_list":     [],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_offer_list": [],
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     "2021-02-05T16:20:00Z",
     "sold_dt":         null,
@@ -62,9 +59,10 @@
     "roomcnt":         8,
     "is_furnished":    false,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    "owner_id":        { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
     /* ------ */
     "prop_sale_type":  "rent",
+    "price":           7500,
     "rent_list":       [
       {
         "renter_id":   { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
@@ -72,12 +70,8 @@
         "to_dt":       "2022-06-05T12:00:00Z"
       }
     ],
-    "rent_price":      7500,
-    "sale_proposed_price": null,
-    "sale_offer_list":     [],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_offer_list": [],
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     "2021-02-06T16:20:00Z",
     "sold_dt":         null,
@@ -100,22 +94,19 @@
     "roomcnt":         8,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    "owner_id":        { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
     /* ------ */
     "prop_sale_type":  "sale",
+    "price":           260000,
     "rent_list":       [],
-    "rent_price":      null,
-    "sale_proposed_price": 250000,
-    "sale_offer_list":     [
+    "sale_offer_list": [
       {
         "offeror_id":     { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
         "offered_amount": 220000,
         "accepted_dt":    null
       }
     ],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     "2021-02-06T16:20:00Z",
     "sold_dt":         null,
@@ -139,13 +130,12 @@
     "roomcnt":         10,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    "owner_id":        { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
     /* ------ */
     "prop_sale_type":  "sale",
+    "price":           250000,
     "rent_list":       [],
-    "rent_price":      null,
-    "sale_proposed_price": 270000,
-    "sale_offer_list":     [
+    "sale_offer_list": [
       {
         "offeror_id":     { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
         "offered_amount": 250000,
@@ -157,9 +147,7 @@
         "accepted_dt":    null
       }
     ],
-    "sale_actual_price":   250000,
-    "sale_arbiter_id":     { "$oid": "602eda588b05043edc647cdc" },   /*Mara*/
-    "sale_new_owner_id":   { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
+    "sale_arbiter_id": { "$oid": "602eda588b05043edc647cdc" },   /*Mara*/
     /* ------ */
     "accepted_dt":     "2020-11-25T08:00:00Z",
     "sold_dt":         "2021-02-05T16:20:00Z",
@@ -182,22 +170,19 @@
     "roomcnt":         7,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
+    "owner_id":        { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
     /* ------ */
     "prop_sale_type":  "sale",
+    "price":           220000,
     "rent_list":       [],
-    "rent_price":      null,
-    "sale_proposed_price": 220000,
-    "sale_offer_list":     [
+    "sale_offer_list": [
       {
         "offeror_id":     { "$oid": "602ed0298b05043edc647ccd" },   /*Katarina -- deleted account*/
         "offered_amount": 20000,
         "accepted_dt":    null
       }
     ],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     "2021-02-05T16:20:00Z",
     "sold_dt":         null,
@@ -220,16 +205,13 @@
     "roomcnt":         10,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    "owner_id":        { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
     /* ------ */
     "prop_sale_type":  "rent",
+    "price":           6500,
     "rent_list":       [],
-    "rent_price":      null,
-    "sale_proposed_price": null,
-    "sale_offer_list":     [],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_offer_list": [],
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     null,
     "sold_dt":         null,
@@ -252,16 +234,13 @@
     "roomcnt":         10,
     "is_furnished":    true,
     "gallery":         [],
-    "old_owner_id":    { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
+    "owner_id":        { "$oid": "602ed0298b05043edc647cce" },   /*agency_id*/
     /* ------ */
     "prop_sale_type":  "rent",
+    "price":           4600,
     "rent_list":       [],
-    "rent_price":      null,
-    "sale_proposed_price": null,
-    "sale_offer_list":     [],
-    "sale_actual_price":   null,
-    "sale_arbiter_id":     null,
-    "sale_new_owner_id":   null,
+    "sale_offer_list": [],
+    "sale_arbiter_id": null,
     /* ------ */
     "accepted_dt":     null,
     "sold_dt":         null,

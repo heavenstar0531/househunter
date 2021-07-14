@@ -1,6 +1,6 @@
 import mongoose, { Model } from 'mongoose';
-import { Session } from "../util/types";
-import { MongoError, ObjectId } from 'mongodb';
+import { Session } from '../util/types';
+import { ObjectId } from 'mongodb';
 import { AgncyData } from '../common/requests/agncy.data';
 import { Status } from '../common/types'
 
@@ -10,62 +10,47 @@ let agncySchema = new mongoose.Schema({
     credit_percent: Number,     // number    # currently fixed at 20%
     rent_percent:   Number,     // number
     sale_percent:   Number,     // number
-    admn_id:        ObjectId,   // ->acc
 });
 
 export class AgncyModel
 {
     private model: Model<AgncyData> = mongoose.model( 'agncy', agncySchema, 'agncy' );
-    private session: Session = null;
+    constructor( 
+        private session: Session
+    ) { }
 
-    constructor( session: Session )
-    {
-        this.session = session;
-    }
+    // ------------------------------------------------------------- //
+
+    // private method
+    // FIXME: Agency Id, currently fixed
+    static getId(): ObjectId { return new ObjectId( "602ed0298b05043edc647cce" ); }
 
     // (adm)
     async get(): Promise<[ Status, AgncyData? ]>
     {
-        try
-        {
-            AgncyData.ensureValid( this.session.acc_type, "get" );
-            let status = new Status();
-            
-            let agency = await this.model.findOne().lean().exec();
-            if( !agency ) return [ status.setError( "message", "Could not get agency." ) ];
+        let status = new Status();
+        
+        let agency = await this.model.findOne(
+            {}
+        ).lean().exec();
 
-            return [ status, agency ];
-        }
-        catch( err )
-        {
-            if( err instanceof Status ) return [ err ];
-            if( err instanceof MongoError ) return [ new Status().setError( "message", "Could not get agency." ) ];
-            throw err;
-        }
+        if( !agency ) return [ status.setError( "message", "could not get agency" ) ];
+        return [ status, agency ];
     }
 
     // (adm)
+    // FIXME: limit what the user can do
     async update( updated_agncy: AgncyData ): Promise<Status>
     {
-        try
-        {
-            AgncyData.ensureValid( this.session.acc_type, "update", updated_agncy );
-            let status = new Status();
-            
-            let opres = await this.model.collection.updateOne(
-                { _id: updated_agncy._id },
-                updated_agncy
-            );
+        let status = new Status();
+        
+        let opres = await this.model.collection.updateOne(
+            { _id: updated_agncy._id },
+            updated_agncy
+        );
 
-            if( opres.result.ok != 1 ) return status.setError( "message", "Could not update agency." );
-            return status;
-        }
-        catch( err )
-        {
-            if( err instanceof Status ) return err;
-            if( err instanceof MongoError ) return new Status().setError( "message", "Could not update agency." );
-            throw err;
-        }
+        if( opres.result.ok != 1 ) return status.setError( "message", "could not update agency" );
+        return status;
     }
 }
 

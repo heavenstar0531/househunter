@@ -34,6 +34,9 @@ export class AppRoutingModule { }
 
 // remove paths that should't be visible in the navbar
 // +   deep copy the app routes object first before exporting
+// +   the result is not! a Routes object, instead it is just a plain old javascript object
+// +   https://stackoverflow.com/questions/5873624/parse-json-string-into-a-particular-object-prototype-in-javascript
+// +   Object.assign( new Foo, { a: 1 } )
 appRoutes = JSON.parse( JSON.stringify( appRoutes ) );
 appRoutes.pop();
 export { appRoutes };

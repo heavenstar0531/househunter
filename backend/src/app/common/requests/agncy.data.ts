@@ -1,49 +1,65 @@
-import ObjectId from 'bson-objectid';
+import { ObjectId } from 'mongodb';
 import { EnsurePermission } from '../permissions';
 import { Status } from '../types';
 
 export class AgncyData
 {
     // ------------------------------------------------------------- <<< agency info
-    _id?:            null|ObjectId = null;   // [id]      # agency id, currently only one agency exists
-    credit_percent?: null|number = null;     // number    # currently fixed at 20%
-    rent_percent?:   null|number = null;     // number
-    sale_percent?:   null|number = null;     // number
-    admn_id?:        null|ObjectId = null;   // ->acc
+    _id?:            ObjectId;   // [id]      # agency id, currently only one agency exists
+    credit_percent?: number;     // number    # currently fixed at 20%
+    rent_percent?:   number;     // number
+    sale_percent?:   number;     // number
 
 
-    static ensureValid( acc_type: string, method: string, data?: AgncyData ): void
+    // FIXME: this validation sort of works, but is not the best
+    static validate( status: Status, data: null|AgncyData, reqfields?: {} ): void
+    {
+        if( !( data instanceof AgncyData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( reqfields )
+        {
+            // --------------
+            if( '_id'            in reqfields && data._id            === undefined ) { status.setError( "_id.err",            "agency id missing" ); return; }
+            if( 'credit_percent' in reqfields && data.credit_percent === undefined ) status.setError( "credit_percent.err", "credit percent missing" );
+            if( 'rent_percent'   in reqfields && data.rent_percent   === undefined ) status.setError( "rent_percent.err",   "rent percent missing" );
+            if( 'sale_percent'   in reqfields && data._id            === undefined ) status.setError( "sale_percent.err",   "sale percent missing" );
+        }
+        // ------------------------------------------------------------- <<< agency info
+        if( data._id            !== undefined && !data._id                                                ) { status.setError( "_id.err",            "agency id missing" ); return; }
+        if( data.credit_percent !== undefined && ( data.credit_percent < 0 || data.credit_percent > 100 ) ) status.setError( "credit_percent.err", "credit percentage not in range [0., 100.]" );
+        if( data.rent_percent   !== undefined && ( data.rent_percent   < 0 || data.rent_percent   > 100 ) ) status.setError( "rent_percent.err",   "rent percentage not in range [0., 100.]" );
+        if( data.sale_percent   !== undefined && ( data.sale_percent   < 0 || data.sale_percent   > 100 ) ) status.setError( "sale_percent.err",   "sale percentage not in range [0., 100.]" );
+    }
+};
+
+// FIXME: check if the object contains all the necessary keys
+export class AgncyApiCall
+{
+    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "agncy", method );
         let status = new Status();
 
-        if( data )
-        {
-            if( !data["_id"] ) status.setError( "_id_err", "id missing" );
-            if( data["credit_percent"] && ( data.credit_percent < 0 || data.credit_percent > 100 ) ) status.setError( "credit_percent_err", "credit percentage not in range [0., 100.]" );
-            if( data["rent_percent"]   && ( data.rent_percent   < 0 || data.rent_percent   > 100 ) ) status.setError( "rent_percent_err",   "rent percentage not in range [0., 100.]" );
-            if( data["sale_percent"]   && ( data.sale_percent   < 0 || data.sale_percent   > 100 ) ) status.setError( "sale_percent_err",   "sale percentage not in range [0., 100.]" );
-        }
-
         switch( method )
         {
-            case "get":
-            {
-                // no user-given data to validate
-                break;
-            }
+            // ------------------------------------------------------------- //
+            // + get()
+            // + update( updated_agncy: AgncyData )
             case "update":
             {
-                if( !data ) { status.setError( "message", "Data not given." ); throw status; }
-                if( !data["credit_percent"] ) status.setError( "credit_percent_err", "credit percentage missing" );
-                if( !data["rent_percent"] ) status.setError( "rent_percent_err", "rent percentage missing" );
-                if( !data["sale_percent"] ) status.setError( "sale_percent_err", "sale percentage missing" );
-                
+                let agncy = params[ 0 ] as AgncyData;
+                AgncyData.validate( status, agncy, {
+                    _id:            true,
+                    credit_percent: true,
+                    rent_percent:   true,
+                    sale_percent:   true,
+                } );
                 break;
             }
         }
 
         if( status.getStatus() != Status.SUCCESS ) throw status;
     }
-};
+
+    static AgencyId(): ObjectId { return new ObjectId( "602ed0298b05043edc647cce" ); }
+}
 

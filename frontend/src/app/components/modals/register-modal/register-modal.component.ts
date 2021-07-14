@@ -1,7 +1,6 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AccService } from 'src/app/services/acc/acc.service';
-import { AccRegisterData } from 'src/app/common/requests/acc.data';
 
 @Component({
   selector: 'app-register-modal',
@@ -11,7 +10,7 @@ import { AccRegisterData } from 'src/app/common/requests/acc.data';
 export class RegisterModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   templateRef: TemplateRef<any>|null = null;
-  data: AccRegisterData = new AccRegisterData();
+//data: AccRegisterData = new AccRegisterData();
 
   constructor(
     private modalService: NgbModal,
@@ -31,10 +30,10 @@ export class RegisterModalComponent implements OnInit {
   }
 
   register(): void {
-    this.accService.register( this.data );
+  //this.accService.register( this.data );
   }
 
   reset(): void {
-    this.data = new AccRegisterData();
+  //this.data = new AccRegisterData();
   }
 }

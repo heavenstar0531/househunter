@@ -59,7 +59,9 @@ import { PropertyBuyFormComponent } from './components/forms/property-buy-form/p
 import { AgncyService } from './services/agncy/agncy.service';
 import { AccService } from './services/acc/acc.service';
 import { PropService } from './services/prop/prop.service';
-import { ConvService } from './services/conv/conv.service';   // ------------- <<< last one
+import { ConvService } from './services/conv/conv.service';
+import { FileService } from './services/file/file.service';
+import { SeshService } from './services/sesh/sesh.service';   // ------------- <<< last one
 
 
 @NgModule({
@@ -113,7 +115,9 @@ import { ConvService } from './services/conv/conv.service';   // ------------- <
     AgncyService,
     AccService,
     PropService,
-    ConvService,   // ------------- <<< last one
+    ConvService,
+    FileService,
+    SeshService,   // ------------- <<< last one
   ],
   bootstrap: [AppComponent],
 })

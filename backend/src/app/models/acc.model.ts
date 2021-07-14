@@ -1,8 +1,9 @@
 import mongoose, { Model } from 'mongoose';
-import { Session } from "../util/types";
+import { Session } from '../util/types';
 import { ObjectId } from 'mongodb';
 import { AccData } from '../common/requests/acc.data';
 import { Status } from '../common/types'
+import { AgncyModel } from './agncy.model';
 
 let accSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< account info
@@ -26,59 +27,144 @@ let accSchema = new mongoose.Schema({
 export class AccModel
 {
     private model: Model<any> = mongoose.model( 'acc', accSchema, 'acc' );
-    private session: Session = null;
+    constructor(
+        private session: Session
+    ) { }
 
-    constructor( session: Session )
-    {
-        this.session = session;
-    }
-
+    // ------------------------------------------------------------- //
     // <gst>,(adm)
-    async add( acc: AccData ): Promise<[ Status, ObjectId?/*acc_id*/ ]> {
-        throw new Error('TODO');
+    // FIXME: limit what the user can do
+    async add( acc: AccData ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
+    {
+        let status = new Status();
+        
+        let opres = await this.model.collection.insertOne(
+            acc,
+        );
+
+        if( opres.result.ok != 1 ) return [ status.setError( "message", "could not add account" ) ];
+        return [ status, opres.insertedId ];
     }
     
     // (adm)
-    async delete( acc_id: ObjectId ): Promise<Status> {
-        throw new Error('TODO');
+    // FIXME: log out the user
+    async delete( acc_id: ObjectId ): Promise<Status>
+    {
+        let status = new Status();
+        
+        let opres = await this.model.collection.updateOne(
+            { _id: acc_id, deleted_dt: null },
+            { deleted_dt: { $set: new Date() } }
+        );
+
+        if( opres.result.ok != 1 ) return status.setError( "message", "could not delete account" );
+        return status;
     }
 
     // (adm)
-    async get( acc_id: ObjectId ): Promise<[ Status, AccData? ]> {
-        throw new Error('TODO');
+    async get( acc_id: ObjectId ): Promise<[ Status, AccData? ]>
+    {
+        let status = new Status();
+        
+        let account = await this.model.findOne(
+            { _id: acc_id, deleted_dt: null }
+        ).lean().exec();
+
+        if( !account ) return [ status.setError( "message", "could not get account" ) ];
+        return [ status, account ];
     }
 
     // (adm): <everything>
-    async list(): Promise<[ Status, Array<AccData>? ]> {
-        throw new Error('TODO');
+    async list(): Promise<[ Status, Array<AccData>? ]>
+    {
+        let status = new Status();
+        
+        let account_list = await this.model.find(
+            { deleted_dt: null }
+        ).lean().exec();
+
+        if( !account_list ) return [ status.setError( "message", "could not list accounts" ) ];
+        return [ status, account_list ];
     }
     
 
+    // ------------------------------------------------------------- //
     // <all> initializes a server session
-    async login( username: string, password: string ): Promise<[ Status, ObjectId?/*acc_id*/ ]> {
-        throw new Error('TODO');
+    async login( username: string, password: string ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
+    {
+        if( this.session.acc_id ) return [ new Status().setError( "message", "user already logged in" ) ];
+        let status = new Status();
+        
+        let account = await this.model.findOne(
+            { username: username, deleted_dt: null }
+        ).lean().exec();
+
+        if( !account ) return [ status.setError( "username.err", "username invalid" ) ];
+        if( password != account.password ) return [ status.setError( "password.err", "password invalid" ) ];
+
+        this.session.acc_id          = account._id;
+        this.session.acc_type        = account.acc_type;
+        this.session.viewed_prop_map = new Map<ObjectId, boolean>();
+        
+        return [ status, account._id ];
     }
 
     // <all> current user is stored in session
-    async logout(): Promise<Status> {
-        throw new Error('TODO');
+    async logout(): Promise<Status>
+    {
+        if( !this.session.acc_id ) return new Status().setError( "message", "no user to log out" );
+        this.session.destroy( () => { return new Status() } );
     }
     
 
+    // ------------------------------------------------------------- //
     // <all>
-    async updateInfo( updated_acc: AccData ): Promise<Status> {
-        throw new Error('TODO');
+    // FIXME: limit what the user can do
+    async updateInfo( updated_acc: AccData ): Promise<Status>
+    {
+        let status = new Status();
+        
+        let opres = await this.model.collection.updateOne(
+            { _id: updated_acc._id, deleted_dt: null },
+            updated_acc
+        );
+
+        if( opres.result.ok != 1 ) return status.setError( "message", "could not update account info" );
+        return status;
     }
 
     // (adm)
-    async updateStatus( updated_acc: AccData ): Promise<Status> {
-        throw new Error('TODO');
+    // FIXME: limit what the user can do
+    async updateStatus( updated_acc: AccData ): Promise<Status>
+    {
+        let status = new Status();
+        
+        let opres = await this.model.collection.updateOne(
+            { _id: updated_acc._id, deleted_dt: null },
+            updated_acc
+        );
+
+        if( opres.result.ok != 1 ) return status.setError( "message", "could not update account status" );
+        return status;
     }
     
 
+    // ------------------------------------------------------------- //
     // <all> current user is stored in session
-    async blockAnother( blocked_acc_id: ObjectId, is_blocked: boolean ): Promise<Status> {
-        throw new Error('TODO');
+    // FIXME: prevent the user from blocking nonexistent/deleted users
+    async blockAnother( blocked_acc_id: ObjectId, is_blocked: boolean ): Promise<Status>
+    {
+        let status = new Status();
+        
+        let operation: any = ( is_blocked ) ? { $addToSet: blocked_acc_id } : { $pop: blocked_acc_id };
+
+        let opres = await this.model.collection.updateOne(
+            { _id: this.session.acc_id },
+            { user_blocked_ids: operation }
+        );
+
+        if( opres.result.ok != 1 ) return status.setError( "message", "could not " + ( is_blocked ? "block" : "unblock" ) + " another account" );
+        return status;
     }
 }
 

@@ -137,7 +137,7 @@
 + roomcnt                number
 + is_furnished           bool
 + gallery                list< ->file >|list< file >|null     # u objektu se uvek cuva! lista ->file;   photos, gifs and videos
-+ old_owner_id           ->acc|->agncy                        # (usr), agency
++ owner_id               ->acc|->agncy                        # (usr), agency
 # ------------------------------------- <<< rent/sale info
 + prop_sale_type         enum( 'rent', 'sale' )
 + rent_list              list< rent >|null
@@ -152,7 +152,6 @@
   + accepted_dt            bool|null
 + sale_actual_price      number|null
 + sale_arbiter_id        ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
-+ sale_new_owner_id      ->acc|null                           # (usr)
 # ------------------------------------- <<< property status
 + accepted_dt            date|null
 + sold_dt                date|null
@@ -188,6 +187,7 @@
 # ------------------------------------- <<< conversation info
 + _id                 [id]
 + prop_id             ->prop                                # koristi se za naslov poruke
++ owner_id            ->acc                                 # (usr),agency_id
 + offeror_id          ->acc                                 # (usr) koji je zainteresovan za rentiranje/kupovinu
 + msg_list            list< msg >
   + sender_id           ->acc                               # (usr),agency_id
@@ -252,7 +252,8 @@
 + _id                 [id]
 + acc_id              ->acc
 + acc_type            enum( 'adm', 'agn', 'usr' )
-+ viewed_prop_list    list< ->prop >
++ viewed_prop_map     map< ->prop, bool >
++ agncy_id            ->agncy
 
 
 
