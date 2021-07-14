@@ -1,8 +1,7 @@
 import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
-import { Readable } from 'stream';
-import { pipeline } from 'stream/promises';
-import { ObjectId } from 'mongodb';
+import { Readable, pipeline } from 'stream';
+import ObjectId from 'bson-objectid';
 import { FileData, FileMetadata } from '../common/requests/file.data';
 import { Status } from '../common/types'
 

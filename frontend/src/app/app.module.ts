@@ -14,11 +14,22 @@ import { HttpClientModule } from '@angular/common/http';
 // +   https://ng-bootstrap.github.io/#/components/toast/examples
 // +   https://ng-bootstrap.github.io/#/components/datepicker/overview
 import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// https://www.npmjs.com/package/xng-breadcrumb
 import { BreadcrumbModule } from 'xng-breadcrumb';
-// https://c3js.org/examples.html
-/* C3.js graph library */
+
+// https://www.npmjs.com/package/buffer
+/* implements node buffer type*/
+
+// https://www.npmjs.com/package/bootstrap
+/* bootstrap */
 // https://icons.getbootstrap.com/
 /* bootstrap icon library */
+// https://www.npmjs.com/package/@popperjs/core
+/* used for precise popovers */
+
+// https://www.npmjs.com/package/c3
+// +   https://c3js.org/examples.html
+/* C3.js graph library */
 
 
 // components - pages

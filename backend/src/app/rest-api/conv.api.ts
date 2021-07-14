@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData } from '../common/requests/conv.data';
 import { Status } from '../common/types';
 import { ConvModel } from '../models/conv.model';

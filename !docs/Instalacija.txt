@@ -1,0 +1,53 @@
++ Backend
+--------------------------------------------------
+// https://www.npmjs.com/package/express
+// +   https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
+import express from "express";
+// https://www.npmjs.com/package/mongoose
+// +   https://docs.mongodb.com/manual/reference/sql-comparison/
+// +   https://docs.mongodb.com/manual/tutorial/query-documents/
+import mongoose from "mongoose";
+// https://www.npmjs.com/package/cors
+import cors from "cors";
+// https://www.npmjs.com/package/express-session
+import session from "express-session";
+// https://www.npmjs.com/package/connect-mongo
+import MongoStore from "connect-mongo";
+// https://www.npmjs.com/package/gridfs-stream
+import Grid from "gridfs-stream";
+
+// https://www.npmjs.com/package/bson-objectid
+/* implements only object id from mongodb */
+
+// https://www.npmjs.com/package/concurrently
+/* run nodemon and tsc at the same time */
+// https://www.npmjs.com/package/nodemon
+/* watch for file changes in node */
+
+
+
++ Frontend
+--------------------------------------------------
+// https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
+import { NgbActiveModal, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// https://www.npmjs.com/package/xng-breadcrumb
+import { BreadcrumbModule } from 'xng-breadcrumb';
+
+// https://www.npmjs.com/package/buffer
+/* implements node buffer type*/
+
+// https://www.npmjs.com/package/bootstrap
+/* bootstrap */
+// https://icons.getbootstrap.com/
+/* bootstrap icon library */
+// https://www.npmjs.com/package/@popperjs/core
+/* used for precise popovers */
+
+// https://www.npmjs.com/package/c3
+// +   https://c3js.org/examples.html
+/* C3.js graph library */
+
+
+
+
+

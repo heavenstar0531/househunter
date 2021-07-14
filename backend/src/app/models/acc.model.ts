@@ -1,9 +1,8 @@
 import mongoose, { Model } from 'mongoose';
 import { Session } from '../util/types';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { AccData } from '../common/requests/acc.data';
 import { Status } from '../common/types'
-import { AgncyModel } from './agncy.model';
 
 let accSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< account info
@@ -90,23 +89,23 @@ export class AccModel
 
     // ------------------------------------------------------------- //
     // <all> initializes a server session
-    async login( username: string, password: string ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
+    async login( username: string, password: string ): Promise<[ Status, AccData? ]>
     {
         if( this.session.acc_id ) return [ new Status().setError( "message", "user already logged in" ) ];
         let status = new Status();
         
         let account = await this.model.findOne(
             { username: username, deleted_dt: null }
-        ).lean().exec();
+        ).lean().exec() as AccData;
 
         if( !account ) return [ status.setError( "username.err", "username invalid" ) ];
         if( password != account.password ) return [ status.setError( "password.err", "password invalid" ) ];
 
-        this.session.acc_id          = account._id;
+        this.session.acc_id          = account._id as ObjectId;
         this.session.acc_type        = account.acc_type;
         this.session.viewed_prop_map = new Map<ObjectId, boolean>();
         
-        return [ status, account._id ];
+        return [ status, account ];
     }
 
     // <all> current user is stored in session

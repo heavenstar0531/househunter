@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from '../common/requests/file.data';
 import { Status } from '../common/types';
 import { FileModel } from '../models/file.model';
@@ -52,7 +52,30 @@ export class FileApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not get file" ) ];
-                response.status( 200 ).json( res );
+                response.status( 404 ).json( res );
+            }
+        });
+
+        // GET   async get( file_id: ObjectId ): Promise<[ File ]>
+        router.route( '/file/get/:file_id' ).get( async ( request, response ) => {
+            try
+            {
+                let session = request.session as Session;
+                let file_id = ObjectId.createFromHexString( request.params.file_id );
+                FileApiCall.ensureValid( session.acc_type, "get", file_id );
+                
+                let [ status, file ] = await new FileModel( request.session, gfs ).get( file_id );
+                if( status.getStatus() != Status.SUCCESS ) { response.status( 400 ); return; }
+                
+                response.status( 200 ).setHeader( "Content-Type", file.content_type ).send( file.data );
+            }
+            catch( err )
+            {
+                if     ( err instanceof Status      ) console.log( err );
+                else if( err instanceof NativeError ) console.log( err );
+                else                                  throw err;
+                
+                response.status( 404 );
             }
         });
     }

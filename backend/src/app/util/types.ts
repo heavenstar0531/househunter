@@ -1,5 +1,5 @@
 import { Session as Sesh, SessionData as SeshData } from "express-session";
-import { ObjectId } from "mongodb";
+import ObjectId from "bson-objectid";
 
 export interface SessionData extends SeshData
 {

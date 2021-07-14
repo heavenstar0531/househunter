@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 
 @Injectable({
   providedIn: 'root'
@@ -21,17 +21,17 @@ export class SeshService {
     return acc_id as ObjectId;
   }
   
-  get acc_type(): string
-  {
-    return localStorage.getItem( "acc_id" ) ?? "gst";
-  }
-
   set acc_id( acc_id: ObjectId|null )
   {
     localStorage.setItem( "acc_id", JSON.stringify( acc_id ) );
   }
 
-  set acc_type( acc_type: string|null )
+  get acc_type(): string
+  {
+    return localStorage.getItem( "acc_id" ) ?? "gst";
+  }
+
+  set acc_type( acc_type: string )
   {
     if( !acc_type ) acc_type = "gst";
     localStorage.setItem( "acc_id", acc_type );

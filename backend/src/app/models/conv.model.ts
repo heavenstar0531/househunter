@@ -1,6 +1,6 @@
 import mongoose, { Model, mongo } from 'mongoose';
 import { Session } from '../util/types';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { ConvData, MsgData } from '../common/requests/conv.data';
 import { Status, Criteria } from '../common/types'
 import { AgncyModel } from './agncy.model';

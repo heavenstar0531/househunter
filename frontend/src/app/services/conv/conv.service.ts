@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData, MsgData } from 'src/app/common/requests/conv.data';
 import { Status } from 'src/app/common/types';
 import { SeshService } from '../sesh/sesh.service';
@@ -22,7 +22,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "add", conv );
-      let res = await this.http.post( '/conv/add', conv ).toPromise() as Promise<[ Status, ObjectId? ]>;
+      let res = await this.http.post( '/conv/add', conv ).toPromise() as [ Status, ObjectId? ];
       return res;
     }
     catch( err )
@@ -38,7 +38,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "delete", conv_id );
-      let res = await this.http.put( '/conv/delete', conv_id ).toPromise() as Promise<Status>;
+      let res = await this.http.put( '/conv/delete', conv_id ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -54,7 +54,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "get", conv_id );
-      let res = await this.http.post( '/conv/get', conv_id ).toPromise() as Promise<[ Status, ConvData? ]>;
+      let res = await this.http.post( '/conv/get', conv_id ).toPromise() as [ Status, ConvData? ];
       return res;
     }
     catch( err )
@@ -70,7 +70,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "list", is_archived );
-      let res = await this.http.post( '/conv/list', is_archived ).toPromise() as Promise<[ Status, Array<ConvData>? ]>;
+      let res = await this.http.post( '/conv/list', is_archived ).toPromise() as [ Status, Array<ConvData>? ];
       return res;
     }
     catch( err )
@@ -88,7 +88,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "sendMessage", conv_id, text );
-      let res = await this.http.put( '/conv/sendMessage', conv_id ).toPromise() as Promise<[ Status, MsgData? ]>;
+      let res = await this.http.put( '/conv/sendMessage', conv_id ).toPromise() as [ Status, MsgData? ];
       return res;
     }
     catch( err )
@@ -104,7 +104,7 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "markRead", conv_id, last_msg_dt );
-      let res = await this.http.put( '/conv/markRead', conv_id ).toPromise() as Promise<Status>;
+      let res = await this.http.put( '/conv/markRead', conv_id ).toPromise() as Status;
       return res;
     }
     catch( err )

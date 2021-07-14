@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { EnsurePermission } from '../permissions';
 import { emailRegex, minFourInASequence, oneDigitRegex, oneLowercaseRegex, oneSpecialRegex, oneUppercaseRegex, Status } from '../types';
 

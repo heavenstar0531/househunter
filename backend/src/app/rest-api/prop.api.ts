@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { PropApiCall, PropData } from '../common/requests/prop.data';
 import { Criteria, Status } from '../common/types';
 import { PropModel } from '../models/prop.model';

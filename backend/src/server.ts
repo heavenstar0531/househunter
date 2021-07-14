@@ -1,4 +1,5 @@
 import { environment } from "./environments/environment";
+
 // https://www.npmjs.com/package/express
 // +   https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Asynchronous/Async_await
 import express from "express";
@@ -15,12 +16,21 @@ import MongoStore from "connect-mongo";
 // https://www.npmjs.com/package/gridfs-stream
 import Grid from "gridfs-stream";
 
+// https://www.npmjs.com/package/bson-objectid
+/* implements only object id from mongodb */
+
+// https://www.npmjs.com/package/concurrently
+/* run nodemon and tsc at the same time */
+// https://www.npmjs.com/package/nodemon
+/* watch for file changes in node */
+
 // rest apis
 import { AgncyApi } from "./app/rest-api/agncy.api";
 import { AccApi } from "./app/rest-api/acc.api";
 import { ConvApi } from "./app/rest-api/conv.api";
 import { PropApi } from "./app/rest-api/prop.api";
 import { FileApi } from "./app/rest-api/file.api";
+
 
 // the main function
 async function main() {

@@ -1,5 +1,7 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AccData } from 'src/app/common/requests/acc.data';
+import { Status } from 'src/app/common/types';
 import { AccService } from 'src/app/services/acc/acc.service';
 
 @Component({
@@ -10,7 +12,9 @@ import { AccService } from 'src/app/services/acc/acc.service';
 export class LoginModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   templateRef: TemplateRef<any>|null = null;
-//data: AccLoginData = new AccLoginData();
+  status: Status = new Status();
+  username: string = "";
+  password: string = "";
 
   constructor(
     private modalService: NgbModal,
@@ -29,11 +33,13 @@ export class LoginModalComponent implements OnInit {
     this.reset();
   }
 
-  login(): void {
-  //this.accService.login( this.data );
+  async login() {
+    this.accService.login( this.username, this.password );
   }
 
-  reset(): void {
-  //this.data = new AccLoginData();
+  async reset() {
+    this.status = new Status();
+    this.username = "";
+    this.password = "";
   }
 }

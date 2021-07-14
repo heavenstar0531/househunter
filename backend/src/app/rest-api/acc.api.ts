@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { AccApiCall, AccData } from '../common/requests/acc.data';
 import { Status } from '../common/types';
 import { AccModel } from '../models/acc.model';
@@ -100,7 +100,7 @@ export class AccApi
 
         
         // ------------------------------------------------------------- //
-        // POST   async login( username: string, password: string ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
+        // POST   async login( username: string, password: string ): Promise<[ Status, AccData? ]>
         router.route( '/acc/login' ).post( async ( request, response ) => {
             try
             {

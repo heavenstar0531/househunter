@@ -21,7 +21,7 @@ export class AgncyService {
     try
     {
       AgncyApiCall.ensureValid( this.session.acc_type, "get" );
-      let res = await this.http.post( '/agncy/get', {} ).toPromise() as Promise<[ Status, AgncyData? ]>;
+      let res = await this.http.post( '/agncy/get', {} ).toPromise() as [ Status, AgncyData? ];
       return res;
     }
     catch( err )
@@ -37,7 +37,7 @@ export class AgncyService {
     try
     {
       AgncyApiCall.ensureValid( this.session.acc_type, "update", updated_agncy );
-      let res = await this.http.put( '/agncy/update', updated_agncy ).toPromise() as Promise<Status>;
+      let res = await this.http.put( '/agncy/update', updated_agncy ).toPromise() as Status;
       return res;
     }
     catch( err )

@@ -1,4 +1,4 @@
-import { ObjectId } from 'mongodb';
+import ObjectId from 'bson-objectid';
 import { EnsurePermission } from '../permissions';
 import { Status } from '../types';
 
