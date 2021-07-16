@@ -12,8 +12,6 @@ export class PropertyRentModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   template_ref: null|TemplateRef<NgbModal> = null;
   modal_ref: null|NgbModalRef = null;
-  @ViewChild( PropertyRentFormComponent )
-  form_ref: null|PropertyRentFormComponent = null;
 
   constructor(
     private modalService: NgbModal,
@@ -30,9 +28,8 @@ export class PropertyRentModalComponent implements OnInit {
     this.modal_ref?.close();
   }
 
-  async rent() {
-    if( !this.form_ref ) return;
-    let [ status, cost ] = await this.form_ref.rent();
+  async rent( form_ref: PropertyRentFormComponent ) {
+    let [ status, cost ] = await form_ref.rent();
     if( status.getStatus() == Status.SUCCESS ) this.close();
   }
 }

@@ -34,7 +34,7 @@ export const oneLowercaseRegex  = /[a-z]/;
 export const oneUppercaseRegex  = /[A-Z]/;
 export const oneSpecialRegex    = /[!@#\$%\^\&*\)\(+=._-]/;
 export const oneDigitRegex      = /[0-9]/;
-export const minFourInASequence = /.{4,}/;
+export const minFourInASequence = /(.)\1\1\1/;
 
 // check if two intervals intersect
 // + don't count single point intersection

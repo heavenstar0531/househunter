@@ -12,8 +12,6 @@ export class RegisterModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   template_ref: null|TemplateRef<NgbModal> = null;
   modal_ref: null|NgbModalRef = null;
-  @ViewChild( AccountFormComponent )
-  form_ref: null|AccountFormComponent = null;
 
   constructor(
     private modalService: NgbModal,
@@ -30,9 +28,8 @@ export class RegisterModalComponent implements OnInit {
     this.modal_ref?.close();
   }
 
-  async register() {
-    if( !this.form_ref ) return;
-    let [ status, _ ] = await this.form_ref.register();
+  async register( form_ref: AccountFormComponent ) {
+    let [ status, acc_id ] = await form_ref.register();
     if( status.getStatus() == Status.SUCCESS ) this.close();
   }
 }

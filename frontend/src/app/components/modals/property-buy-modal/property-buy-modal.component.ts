@@ -12,8 +12,6 @@ export class PropertyBuyModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   template_ref: null|TemplateRef<NgbModal> = null;
   modal_ref: null|NgbModalRef = null;
-  @ViewChild( PropertyBuyFormComponent )
-  form_ref: null|PropertyBuyFormComponent = null;
 
   constructor(
     private modalService: NgbModal,
@@ -30,9 +28,8 @@ export class PropertyBuyModalComponent implements OnInit {
     this.modal_ref?.close();
   }
 
-  async makePurchaseOffer() {
-    if( !this.form_ref ) return;
-    let status = await this.form_ref.makePurchaseOffer();
+  async makePurchaseOffer( form_ref : PropertyBuyFormComponent ) {
+    let status = await form_ref.makePurchaseOffer();
     if( status.getStatus() == Status.SUCCESS ) this.close();
   }
 }
