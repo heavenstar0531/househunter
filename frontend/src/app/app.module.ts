@@ -33,32 +33,29 @@ import { BreadcrumbModule } from 'xng-breadcrumb';
 
 
 // components - pages
+import { NavbarComponent } from './components/pages/navbar/navbar.component';
 import { AgencyPageComponent } from './components/pages/agency-page/agency-page.component';
 import { PropertyListPageComponent } from './components/pages/property-list-page/property-list-page.component';
 import { PropertyPageComponent } from './components/pages/property-page/property-page.component';
 import { ConversationListPageComponent } from './components/pages/conversation-list-page/conversation-list-page.component';
 import { MyAccountPageComponent } from './components/pages/my-account-page/my-account-page.component';
 
-
-// components - stuff
-import { NavbarComponent } from './components/stuff/navbar/navbar.component';
-import { AgencyInfoComponent } from './components/stuff/agency-info/agency-info.component';
-import { PropertyStatsComponent } from './components/stuff/property-stats/property-stats.component';
-import { PropertyPromotedComponent } from './components/stuff/property-promoted/property-promoted.component';
 // components - lists
 import { UserListComponent } from './components/lists/user-list/user-list.component';
 import { PropertyListComponent } from './components/lists/property-list/property-list.component';
 import { ConversationListComponent } from './components/lists/conversation-list/conversation-list.component';
 import { MessageListComponent } from './components/lists/message-list/message-list.component';
+import { PropertyStatsComponent } from './components/lists/property-stats/property-stats.component';
+import { PropertyPromotedComponent } from './components/lists/property-promoted/property-promoted.component';
+
 // components - modals
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
 import { RegisterModalComponent } from './components/modals/register-modal/register-modal.component';
 import { AccountModalComponent } from './components/modals/account-modal/account-modal.component';
 import { PropertyRentModalComponent } from './components/modals/property-rent-modal/property-rent-modal.component';
 import { PropertyBuyModalComponent } from './components/modals/property-buy-modal/property-buy-modal.component';
-
-
 // components - forms
+import { AgencyInfoComponent } from './components/forms/agency-info/agency-info.component';
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
 import { AccountFormComponent } from './components/forms/account-form/account-form.component';
 import { PropertyFormComponent } from './components/forms/property-form/property-form.component';
