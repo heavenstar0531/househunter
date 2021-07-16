@@ -15,16 +15,17 @@ import { PropertyFormComponent } from './components/forms/property-form/property
 let appRoutes: Routes = [
   // ____________________________________________________________________________________________________
   // pages
-  { path: '',   component: PropertyFormComponent,            data: { 'acctype': ['adm'],                   'breadcrumb': { 'label': 'Agencija',   } } },   // TODO: remove
-  { path: 'agencija',   component: AgencyPageComponent,            data: { 'acctype': ['adm'],                   'breadcrumb': { 'label': 'Agencija',   } } },
-  { path: 'nekretnine', component: PropertyListPageComponent,      data: { 'acctype': ['adm','agn','usr','gst'], 'breadcrumb': { 'label': 'Nekretnine', } }, children: [
-    { path: ':prop_id', component: PropertyPageComponent,          data: { 'acctype': ['adm','agn','usr'],       'breadcrumb': { 'alias': ':prop_name', } } },
+  { path: 'aaa',   component: PropertyFormComponent,            data: { acctype: ['adm'],                   breadcrumb: { label: 'AAAAA', info: 'home'  } }, },   // TODO: remove
+  { path: 'agencija',   component: AgencyPageComponent,            data: { acctype: ['adm'],                   breadcrumb: { label: 'Agencija',   } }, },
+  { path: 'nekretnine', component: PropertyListPageComponent,      data: { acctype: ['adm','agn','usr','gst'], breadcrumb: { label: 'Nekretnine', } }, children: [
+    { path: ':prop_id', component: PropertyPageComponent,          data: { acctype: ['adm','agn','usr'],       breadcrumb: { alias: ':prop_name', } }, },
   ]},
-  { path: 'poruke',     component: ConversationListPageComponent,  data: { 'acctype': ['adm','agn','usr'],       'breadcrumb': { 'label': 'Poruke',     } } },
-  { path: 'moj-nalog',  component: MyAccountPageComponent,         data: { 'acctype': ['adm','agn','usr'],       'breadcrumb': { 'label': 'Nalog',      } } },
+  { path: 'poruke',     component: ConversationListPageComponent,  data: { acctype: ['adm','agn','usr'],       breadcrumb: { label: 'Poruke',     } }, },
+  { path: 'moj-nalog',  component: MyAccountPageComponent,         data: { acctype: ['adm','agn','usr'],       breadcrumb: { label: 'Nalog',      } }, },
 
   // ____________________________________________________________________________________________________
   // miscellaneous paths that shouldn't be visible in the navbar
+  { path: '',   redirectTo: 'nekretnine', pathMatch: 'full',       data: {                                     breadcrumb: { label: 'HH',         } }, },
   { path: '**', redirectTo: 'nekretnine' },
 ];
 
@@ -40,6 +41,7 @@ export class AppRoutingModule { }
 // +   https://stackoverflow.com/questions/5873624/parse-json-string-into-a-particular-object-prototype-in-javascript
 // +   Object.assign( new Foo, { a: 1 } )
 appRoutes = JSON.parse( JSON.stringify( appRoutes ) );
+appRoutes.pop();
 appRoutes.pop();
 export { appRoutes };
 

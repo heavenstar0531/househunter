@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Routes, Route } from '@angular/router';
-import { NgbNavChangeEvent } from '@ng-bootstrap/ng-bootstrap';
 import { appRoutes } from 'src/app/app-routing.module';
-import { BreadcrumbService } from 'xng-breadcrumb';
 
 @Component({
   selector: 'app-navbar',
@@ -11,31 +9,11 @@ import { BreadcrumbService } from 'xng-breadcrumb';
 })
 export class NavbarComponent implements OnInit {
   routes: Routes = appRoutes;
-  activeNavItems: string[] = ['', ''];
   collapsed: boolean = true;
 
-  constructor(
-    private breadcrumb: BreadcrumbService,
-  ) {
-    let activeNavItems = JSON.parse( sessionStorage.getItem( 'activeNavItems' ) ?? '[]' );
-    this.activeNavItems = ( activeNavItems != [] ) ? activeNavItems : ['', ''];
-  }
+  constructor() {}
 
-  ngOnInit(): void {
-  }
-
-  ngOnDestroy(): void {
-    sessionStorage.setItem( 'activeNavItems', JSON.stringify( this.activeNavItems ) );
-  }
-
-  activeNavItemChanged( $event: NgbNavChangeEvent, idx: number ) {
-    this.activeNavItems[idx] = $event.nextId;
-  }
-
-  logout() {
-    
-  }
-
+  ngOnInit(): void {}
 
   getRouteLabel( route: Route ): string {
     return route.data?.breadcrumb['label'] ?? '';
@@ -46,7 +24,7 @@ export class NavbarComponent implements OnInit {
   }
 
   getSubroutes( route: Route ): Routes {
-    let routes = route?.children ?? [];
-    return routes.filter( ( r ) => this.getRouteLabel( r ) != '' );
+    let routes = route.children ?? [];
+    return routes.filter( ( route ) => this.getRouteLabel( route ) != '' );
   }
 }

@@ -10,7 +10,7 @@ import { AccService } from 'src/app/services/acc/acc.service';
 })
 export class LoginModalComponent implements OnInit {
   @ViewChild( TemplateRef )
-  templateRef: null|TemplateRef<any> = null;
+  modal_ref: null|TemplateRef<any> = null;
   status: Status = new Status();
   username: string = "";
   password: string = "";
@@ -26,7 +26,7 @@ export class LoginModalComponent implements OnInit {
   }
 
   open(): void {
-    this.modalService.open( this.templateRef ).result.then( _ => this.reset(), _ => this.reset() );
+    this.modalService.open( this.modal_ref ).result.then( _ => this.reset(), _ => this.reset() );
   }
 
   close(): void {

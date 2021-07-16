@@ -1,26 +1,26 @@
 <!-- navbar -->
 <nav ngbNav class="navbar navbar-expand-sm no-select navbar-light">
-  <span class="navbar-brand">
+  <div class="navbar-brand">
     <button class="navbar-toggler border-0" type="button" (click)="collapsed = !collapsed">
-      <span class="navbar-toggler-icon"></span>
+      <i class="bi bi-list"></i>
     </button>
-    <span class="nav-icon">HH</span>
-  </span>
+    <a routerLink="/" class="nav-icon">HH</a>
+  </div>
 
   <div class="navbar-collapse" [class.collapse]="collapsed">
     <ul class="navbar-nav mr-auto">
 
       <li *ngFor='let route of getRoutes()' [ngbNavItem]='route.path'>
         <!-- main menu -->
-        <a *ngIf="getSubroutes( route ).length == 0" [routerLink]='route.path' class="nav-link">{{ getRouteLabel( route ) }}</a>
+        <a *ngIf="! getSubroutes( route ).length" class="nav-link mr-auto" [routerLink]='route.path'>{{ getRouteLabel( route ) }}</a>
 
-        <div *ngIf="getSubroutes( route ).length > 0" ngbDropdown #dropdown="ngbDropdown" class="nav-item" (mouseover)="dropdown.open()" (mouseout)="dropdown.close()">
+        <div *ngIf="getSubroutes( route ).length" ngbDropdown #dropdown_ref="ngbDropdown" class="nav-item mr-auto" (mouseover)="dropdown_ref.open()" (mouseout)="dropdown_ref.close()">
           <!-- main menu -->
-          <a ngbDropdownToggle [routerLink]='route.path' class="nav-link" role="button">{{ getRouteLabel( route ) }}</a>
+          <a ngbDropdownToggle class="nav-link mr-auto" [routerLink]='route.path' role="button">{{ getRouteLabel( route ) }}</a>
 
           <!-- submenu -->
           <div ngbDropdownMenu class="dropdown-menu">
-            <a *ngFor="let subroute of getSubroutes( route )" ngbDropdownItem class="nav-link" [routerLink]='[route.path, subroute.path]'>{{ getRouteLabel( subroute ) }}</a>
+            <a *ngFor="let subroute of getSubroutes( route )" ngbDropdownItem class="nav-link mr-auto" [routerLink]='[route.path, subroute.path]'>{{ getRouteLabel( subroute ) }}</a>
           </div>
         </div>
 
@@ -29,13 +29,13 @@
 
     <ul class="navbar-nav ml-auto">
       <!-- register -->
-      <button class="btn nav-link shadow-none" (click)="registerModal.open()">Registracija</button>
-      <app-register-modal #registerModal></app-register-modal>
+      <button class="btn nav-link shadow-none mr-auto" (click)="register_modal_ref.open()">Registracija</button>
+      <app-register-modal #register_modal_ref></app-register-modal>
       <!-- login -->
-      <button class="btn btn-outline-dark btn-nav" (click)="loginModal.open()">Prijava</button>
-      <app-login-modal #loginModal></app-login-modal>
+      <button class="btn btn-outline-warning btn-nav mr-auto" (click)="login_modal_ref.open()">Prijava</button>
+      <app-login-modal #login_modal_ref></app-login-modal>
       <!-- logout -->
-      <div><button class="btn nav-link shadow-none">Odjava</button></div>
+      <div><button class="btn nav-link shadow-none mr-auto">Odjava</button></div>
     </ul>
   </div>
 
