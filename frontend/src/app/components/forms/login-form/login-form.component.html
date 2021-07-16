@@ -1,1 +1,13 @@
-<p>login-form works!</p>
+<form id='form' class="px-3 py-1">
+  <div class="form-group">
+    <label for="username">Korisničko ime</label>
+    <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="username" [class.is-invalid]="status.getKey('username.err')">
+    <small class='text-danger'>{{ status.getKey('username.err') }}&nbsp;</small>
+  </div>
+  <div class="form-group">
+    <label for="password">Lozinka</label>
+    <input id ="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="password" [class.is-invalid]="status.getKey('password.err')">
+    <small class='text-danger'>{{ status.getKey('password.err') }}&nbsp;</small>
+  </div>
+  <small class='text-danger'>{{ status.getKey('message') }}&nbsp;</small>
+</form>

@@ -13,7 +13,7 @@ export class MsgData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|MsgData, reqfields?: {} ): void
     {
-        if( !( data instanceof MsgData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof MsgData ) ) { status.setError( "msg.err", "message not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -48,7 +48,7 @@ export class ConvData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|ConvData, reqfields?: {} ): void
     {
-        if( !( data instanceof ConvData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof ConvData ) ) { status.setError( "conv.err", "conversation not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -101,7 +101,7 @@ export class ConvData
 // FIXME: check if the object contains all the necessary keys
 export class ConvApiCall
 {
-    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "conv", method );
         let status = new Status();
@@ -115,7 +115,6 @@ export class ConvApiCall
                 let conv = params[ 0 ] as ConvData;
                 ConvData.validate( status, conv, {
                     // --------------
-                    _id:                true,
                     prop_id:            true,
                     owner_id:           true,
                     offeror_id:         true,

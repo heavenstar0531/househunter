@@ -90,8 +90,15 @@ export class AccService {
     try
     {
       AccApiCall.ensureValid( "gst", "login", username, password );
-      let res = await this.http.post( '/acc/login', {} ).toPromise() as [ Status, AccData? ];
-      return res;
+      let [ status, acc ] = await this.http.post( '/acc/login', {} ).toPromise() as [ Status, AccData? ];
+
+      if( status.getStatus() != Status.SUCCESS ) return [ status, acc ];
+      acc = acc as AccData;
+
+      if( acc._id      ) this.session.acc_id   = acc._id;
+      if( acc.acc_type ) this.session.acc_type = acc.acc_type;
+
+      return [ status, acc ];
     }
     catch( err )
     {
@@ -107,6 +114,8 @@ export class AccService {
     {
       AccApiCall.ensureValid( this.session.acc_type, "logout" );
       let res = await this.http.post( '/acc/logout', {} ).toPromise() as Status;
+
+      this.session.destroy();
       return res;
     }
     catch( err )

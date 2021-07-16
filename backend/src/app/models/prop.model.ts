@@ -244,7 +244,7 @@ export class PropModel
         for( let i = 0; i < prop.rent_list.length; i++ )
         {
             let rent: RentData = prop.rent_list[ i ];
-            if( CheckIntersection( from_dt.valueOf(), to_dt.valueOf(), rent.from_dt.valueOf(), rent.to_dt.valueOf() ) ) return [ status.setError( "message", "Property isn't available for renting between given dates." ) ];
+            if( CheckIntersection( from_dt.valueOf(), to_dt.valueOf(), rent.from_dt.valueOf(), rent.to_dt.valueOf() ) ) return [ status.setError( "message", "property isn't available for renting between given dates" ) ];
         }
 
         let rent = new RentData();

@@ -5,69 +5,11 @@
   </div>
 
   <div class="modal-body">
-    <form id='form' class="px-3 py-1">
-      <small class='text-danger'>{{data.registerErr}}</small>
-
-      <!-- general -->
-      <div class="form-group">
-        <label for="username">korisničko ime</label>
-        <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="data.username" [class.is-invalid]="data.usernameErr != ''">
-        <small class='text-danger'>{{data.usernameErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label>lozinka</label>
-        <input id ="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="data.password" [class.is-invalid]="data.passwordErr != ''">
-        <small for="password" class='text-danger'>{{data.passwordErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label for="firstname">ime</label>
-        <input id ="firstname" type="text" class="form-control" placeholder="ime" name="firstname" [(ngModel)]="data.firstname" [class.is-invalid]="data.firstnameErr != ''">
-        <small class='text-danger'>{{data.firstnameErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label for="lastname">prezime</label>
-        <input id ="lastname" type="text" class="form-control" placeholder="prezime" name="lastname" [(ngModel)]="data.lastname" [class.is-invalid]="data.lastnameErr != ''">
-        <small class='text-danger'>{{data.lastnameErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label for="telephone">telefon</label>
-        <input id ="telephone" type="tel" class="form-control" placeholder="+381601234567" name="telephone" [(ngModel)]="data.telephone" [class.is-invalid]="data.telephoneErr != ''">
-        <small class='text-danger'>{{data.telephoneErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label for="address">puna adresa</label>
-        <input id ="address" type="text" class="form-control" placeholder="Beogradska 20, Beograd, Srbija" name="address" [(ngModel)]="data.address" [class.is-invalid]="data.addressErr != ''">
-        <small class='text-danger'>{{data.addressErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label  for="acc_type">tip korisnika</label>
-        <select id ="acc_type" class="form-control" name="accType" [(ngModel)]="data.acc_type" [class.is-invalid]="data.acc_typeErr != ''">
-          <option value='st'>student</option>
-          <option value='em'>zaposleni</option>
-        </select>
-        <small class='text-danger'>{{data.acc_typeErr}}&nbsp;</small>
-      </div>
-
-      <!-- employee -->
-      <div *ngIf="data.acc_type == 'em'" class="form-group">
-        <label  for="em_title">zvanje</label>
-        <select id ="em_title" class="form-control" name="emTitle" [(ngModel)]="data.em_title" [class.is-invalid]="data.em_titleErr != ''">
-          <option value='602ed0298b05043edc647ccc'>redovni profesor</option>
-          <option value='602ed0298b05043edc647cd1'>istraživač</option>
-        </select>
-        <small class='text-danger'>{{data.em_titleErr}}&nbsp;</small>
-      </div>
-      <div *ngIf="data.acc_type == 'em'" class="form-group">
-        <label for="em_cabinet">kabinet</label>
-        <input id ="em_cabinet" type="text" class="form-control" placeholder="42a" name="emCabinet" [(ngModel)]="data.em_cabinet" [class.is-invalid]="data.em_cabinetErr != ''">
-        <small class='text-danger'>{{data.em_cabinetErr}}&nbsp;</small>
-      </div>
-
-    </form>
+    <app-account-form></app-account-form>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="close( modal )">Odustani</button>
+    <button class="btn btn-light" (click)="close()">Odustani</button>
     <button class="btn btn-outline-dark" (click)="register()">Registruj se</button>
   </div>
 </ng-template>

@@ -1,1 +1,33 @@
-<p>property-rent-form works!</p>
+<form id='form' class="px-3 py-1">
+  <div class="form-group">
+    <label for="from_dt">Datum od</label>
+    <div class="input-group">
+      <input id="from_dt" class="form-control" placeholder="yyyy-mm-dd" name="from_dt" [(ngModel)]="from_dt" ngbDatepicker #from_dt_ref="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="from_dt_ref.toggle()" type="button">
+          <i class="bi-calendar-week"></i>
+        </button>
+      </div>
+    </div>
+    <small class='text-danger'>{{ status.getKey('from_dt.err') }}&nbsp;</small>
+  </div>
+    
+  <div class="form-group">
+    <label for="to_dt">Datum do</label>
+    <div class="input-group">
+      <input id="to_dt" class="form-control" placeholder="yyyy-mm-dd" name="to_dt" [(ngModel)]="to_dt" ngbDatepicker #to_dt_ref="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" (click)="to_dt_ref.toggle()" type="button">
+          <i class="bi-calendar-week"></i>
+        </button>
+      </div>
+    </div>
+    <small class='text-danger'>{{ status.getKey('to_dt.err') }}&nbsp;</small>
+  </div>
+
+  <small class='text-danger'>{{ status.getKey('message') }}&nbsp;</small>
+</form>
+
+
+
+

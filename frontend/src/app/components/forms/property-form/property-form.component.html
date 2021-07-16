@@ -1,1 +1,174 @@
-<p>property-form works!</p>
+<form id='form' class="px-3 py-1">
+  <!-- <div class="form-row">
+    <div class="col-12 col-sm-6 col-md-3">
+      <img src="/assets/images/account.png">
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+      <img src="/assets/images/account.png">
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+      <img src="/assets/images/account.png">
+    </div>
+    <div class="col-12 col-sm-6 col-md-3">
+      <img src="/assets/images/account.png">
+    </div>
+  </div> -->
+
+  <div class="form-row">
+    <div class="col-12">
+
+      <div class="form-group">
+        <label for="name">Naziv</label>
+        <input id ="name" type="text" class="form-control" placeholder="naziv" name="name" [(ngModel)]="prop.name" [class.is-invalid]="status.getKey('name.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('name.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 col-sm-6">
+
+      <div class="form-group">
+        <label for="addr_city">Grad</label>
+        <input id ="addr_city" type="text" class="form-control" placeholder="grad" name="addr_city" [(ngModel)]="prop.addr_city" [class.is-invalid]="status.getKey('addr_city.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('addr_city.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-12 col-sm-6">
+
+      <div class="form-group">
+        <label for="addr_district">Opština</label>
+        <input id ="addr_district" type="text" class="form-control" placeholder="opština" name="addr_district" [(ngModel)]="prop.addr_district" [class.is-invalid]="status.getKey('addr_district.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('addr_district.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 col-sm-9">
+
+      <div class="form-group">
+        <label for="addr_street">Ulica</label>
+        <input id ="addr_street" type="text" class="form-control" placeholder="ulica" name="addr_street" [(ngModel)]="prop.addr_street" [class.is-invalid]="status.getKey('addr_street.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('addr_street.err') }}&nbsp;</small>
+      </div>
+    
+    </div>
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="addr_streetnum">Broj ulice</label>
+        <input id ="addr_streetnum" type="text" class="form-control" placeholder="broj ulice" name="addr_streetnum" [(ngModel)]="prop.addr_streetnum" [class.is-invalid]="status.getKey('addr_streetnum.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('addr_streetnum.err') }}&nbsp;</small>
+      </div>
+    
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="prop_type">Tip nekretnine</label>
+        <select id="prop_type" type="text" class="form-control" name="prop_type" [(ngModel)]="prop.prop_type" [class.is-invalid]="status.getKey('prop_type.err')" [disabled]="readonly">
+          <option value="flat" selected>stan</option>
+          <option value="house">kuća</option>
+        </select>
+        <small class='text-danger'>{{ status.getKey('prop_type.err') }}&nbsp;</small>
+      </div>
+        
+    </div>
+    <div *ngIf="prop.prop_type == 'flat'" class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="flat_floornum">Sprat</label>
+        <input id ="flat_floornum" type="number" class="form-control" placeholder="sprat" name="flat_floornum" [(ngModel)]="prop.flat_floornum" [class.is-invalid]="status.getKey('flat_floornum.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('flat_floornum.err') }}&nbsp;</small>
+      </div>
+        
+    </div>
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="floorcnt">Broj spratova</label>
+        <input id ="floorcnt" type="number" class="form-control" placeholder="broj spratova" name="floorcnt" [(ngModel)]="prop.floorcnt" [class.is-invalid]="status.getKey('floorcnt.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('floorcnt.err') }}&nbsp;</small>
+      </div>
+        
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="area_m2">Površina <small>[m<sup><small>2</small></sup>]</small></label>
+        <input id ="area_m2" type="number" class="form-control" placeholder="površina" name="area_m2" [(ngModel)]="prop.area_m2" [class.is-invalid]="status.getKey('area_m2.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('area_m2.err') }}&nbsp;</small>
+      </div>
+            
+    </div>
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="roomcnt">Broj soba</label>
+        <input id ="roomcnt" type="number" class="form-control" placeholder="broj soba" name="roomcnt" [(ngModel)]="prop.roomcnt" [class.is-invalid]="status.getKey('roomcnt.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('roomcnt.err') }}&nbsp;</small>
+      </div>
+            
+    </div>
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="is_furnished">Nameštena</label>
+        <select id="is_furnished" type="text" class="form-control" name="is_furnished" [(ngModel)]="prop.is_furnished" [class.is-invalid]="status.getKey('is_furnished.err')" [disabled]="readonly">
+          <option value="true" selected>da</option>
+          <option value="false">ne</option>
+        </select>
+        <small class='text-danger'>{{ status.getKey('is_furnished.err') }}&nbsp;</small>
+      </div>
+            
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="prop_sale_type">Tip prodaje</label>
+        <select id="prop_sale_type" type="text" class="form-control" name="prop_sale_type" [(ngModel)]="prop.prop_sale_type" [class.is-invalid]="status.getKey('prop_sale_type.err')" [disabled]="readonly">
+          <option value="rent" selected>izdavanje</option>
+          <option value="sale">prodaja</option>
+        </select>
+        <small class='text-danger'>{{ status.getKey('prop_sale_type.err') }}&nbsp;</small>
+      </div>
+                
+    </div>
+    <div class="col-12 col-sm-3">
+
+      <div class="form-group">
+        <label for="price">{{ prop.prop_sale_type == "rent" ? "Cena po mesecu" : "Prodajna cena" }} <small>[RSD]</small></label>
+        <input id ="price" type="number" class="form-control" placeholder="cena" name="price" [(ngModel)]="prop.price" [class.is-invalid]="status.getKey('price.err')" [disabled]="readonly">
+        <small class='text-danger'>{{ status.getKey('price.err') }}&nbsp;</small>
+      </div>
+                
+    </div>
+  </div>
+
+  <small class='text-danger'>{{ status.getKey('message') }}</small>
+</form>
+
+<div *ngIf="!readonly" class="d-flex justify-content-end px-3 py-1">
+  <button class="btn btn-outline-dark">Odustani</button>
+  <div class="mr-2"></div>
+  <button class="btn btn-outline-success" (click)="form_type == 'add' ? add() : update()">{{ form_type == "add" ? "Dodaj" : "Izmeni" }}</button>
+</div>
+
+<!-- TODO -->
+<div *ngIf="readonly" class="d-flex justify-content-end px-3 py-1">
+  <button class="btn btn-outline-success">{{ prop.prop_sale_type == "rent" ? "Iznajmi" : "Kupi" }}</button>
+</div>
+

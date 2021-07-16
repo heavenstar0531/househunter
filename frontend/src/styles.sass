@@ -1,7 +1,9 @@
 // import bootstrap stuff
-@import "../node_modules/bootstrap/scss/functions"
-@import "../node_modules/bootstrap/scss/variables"
-@import "../node_modules/bootstrap/scss/mixins"
+@import "bootstrap/scss/functions"
+@import "bootstrap/scss/variables"
+@import "bootstrap/scss/mixins"
+// import bootstrap icons
+@import "bootstrap-icons/font/bootstrap-icons"
 
 // make the app fill the entire screen height
 html, body, app-root
@@ -24,6 +26,20 @@ app-root
   -ms-user-select: none // Internet Explorer/Edge
   user-select: none // Non-prefixed version, currently supported by Chrome, Opera and Firefox
 
+// prevent number fields from showing arrows
+input[type="number"]
+  -webkit-appearance: textfield
+  -moz-appearance: textfield
+  appearance: textfield
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button
+  -webkit-appearance: none
+
+// prevent wrapping of text on form labels
+label
+  white-space: nowrap
+
 // style placed here since for some bizarre reason it doesn't work anywhere else
 // possibly because reboot.scss is included globally and messes up the label part of the breadcrumb (the last crumb)
 .xng-breadcrumb-item
@@ -37,6 +53,18 @@ app-root
   border-radius: 0
 
 // prevent background icons from showing on valid and invalid forms
-.form-control.is-valid, .form-control.is-invalid
-  background-image: none
+.form-control
+  .is-valid, .is-invalid
+    background-image: none
+
+// shrink the bottom margin for the form group in order to fit the error message in that space
+form
+  .form-group  
+    margin-bottom: 0.25rem
+
+// make the label close to the form input
+form
+  .form-group  
+    label
+      margin-bottom: 3px
 

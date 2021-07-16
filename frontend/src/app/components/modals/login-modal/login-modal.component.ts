@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AccData } from 'src/app/common/requests/acc.data';
+import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Status } from 'src/app/common/types';
 import { AccService } from 'src/app/services/acc/acc.service';
 
@@ -11,10 +10,12 @@ import { AccService } from 'src/app/services/acc/acc.service';
 })
 export class LoginModalComponent implements OnInit {
   @ViewChild( TemplateRef )
-  templateRef: TemplateRef<any>|null = null;
+  templateRef: null|TemplateRef<any> = null;
   status: Status = new Status();
   username: string = "";
   password: string = "";
+  @ViewChild( NgbModalRef )
+  modal: null|NgbModalRef = null;
 
   constructor(
     private modalService: NgbModal,
@@ -28,18 +29,20 @@ export class LoginModalComponent implements OnInit {
     this.modalService.open( this.templateRef ).result.then( _ => this.reset(), _ => this.reset() );
   }
 
-  close( modal: any ): void {
-    modal.dismiss();
+  close(): void {
+    this.modal?.dismiss();
     this.reset();
   }
 
-  async login() {
-    this.accService.login( this.username, this.password );
-  }
-
-  async reset() {
+  reset() {
     this.status = new Status();
     this.username = "";
     this.password = "";
+  }
+
+  async login() {
+    let [ status, _ ] = await this.accService.login( this.username, this.password );
+    this.status = status;
+    if( this.status.getStatus() == Status.SUCCESS ) this.close();
   }
 }

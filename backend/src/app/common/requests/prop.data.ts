@@ -14,7 +14,7 @@ export class RentData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|RentData, reqfields?: {} ): void
     {
-        if( !( data instanceof RentData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof RentData ) ) { status.setError( "rent.err", "rent data not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -41,7 +41,7 @@ export class OfferData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|OfferData, reqfields?: {} ): void
     {
-        if( !( data instanceof OfferData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof OfferData ) ) { status.setError( "offer.err", "offer data not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -90,7 +90,7 @@ export class PropData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|PropData, reqfields?: {} ): void
     {
-        if( !( data instanceof PropData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof PropData ) ) { status.setError( "prop.err", "property not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -159,17 +159,9 @@ export class PropData
         if( data.prop_sale_type !== undefined && data.prop_sale_type != "rent" && data.prop_sale_type != "sale" ) status.setError( "prop_sale_type.err", "invalid property sale type" );
         if( data.price          !== undefined && ( data.price ?? -1 ) <= 0  ) status.setError( "price.err", "price has to be positive" );
 
-        if( data.prop_sale_type != "rent" )
-        {
-            if( data.rent_list !== null ) status.setError( "rent_list.err", "property not for rent, rent list should be null" );
-        }
-        if( data.prop_sale_type != "sale" )
-        {
-            if( data.sale_arbiter_id !== null ) status.setError( "sale_arbiter_id.err", "property not for sale, sale arbiter should be null" );
-            if( data.sale_offer_list !== null ) status.setError( "sale_offer_list.err", "property not for sale, sale offer list should be null" );
-        }
+        if( data.prop_sale_type == "rent" && data.sold_dt ) status.setError( "prop_sale_type.err", "property not for rent, since it is sold/being sold" );
 
-        if( data.rent_list !== undefined && data.prop_sale_type == "rent" )
+        if( data.rent_list !== undefined )
         {
             if( !data.rent_list ) status.setError( "rent_list.err", "rent list missing" );
             else for( let i = 0; i < data.rent_list.length; i++ )
@@ -190,9 +182,9 @@ export class PropData
                 }
             }
         }
-        if( data.sale_offer_list !== undefined && data.prop_sale_type == "sale" )
+        if( data.sale_offer_list !== undefined )
         {
-            if( !data.sale_offer_list ) status.setError( "rent_list.err", "rent list missing" );
+            if( !data.sale_offer_list ) status.setError( "sale_offer_list.err", "sale offer list missing" );
             else for( let i = 0; i < data.sale_offer_list.length; i++ )
             {
                 let offer = data.sale_offer_list[ i ];
@@ -204,8 +196,8 @@ export class PropData
                 } );
                 if( sale_status.getStatus() != Status.SUCCESS )
                 {
-                    status     .setError( "sale_status.err",   "invalid sale list" );
-                    sale_status.setError( "sale_status.err.+", { idx: i, status: sale_status } );
+                    status     .setError( "sale_offer_list.err",   "invalid sale offer list" );
+                    sale_status.setError( "sale_offer_list.err.+", { idx: i, status: sale_status } );
                     break;
                 }
             }
@@ -225,7 +217,7 @@ export class PropData
 
 export class PropApiCall
 {
-    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "prop", method );
         let status = new Status();
@@ -239,7 +231,6 @@ export class PropApiCall
                 let prop = params[ 0 ] as PropData;
                 PropData.validate( status, prop, {
                     // --------------
-                    _id:              true,
                     name:             true,
                     addr_city:        true,
                     addr_district:    true,

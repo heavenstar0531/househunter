@@ -1,27 +1,15 @@
 <!-- login modal -->
-<ng-template let-modal #templateRef>
+<ng-template let-modal #templateRef >
   <div class="modal-header">
     <h4 class="modal-title">Prijava</h4>
   </div>
 
   <div class="modal-body">
-    <form id='form' class="px-3 py-1">
-      <small class='text-danger'>{{data.loginErr}}&nbsp;</small>
-      <div class="form-group">
-        <label for="username">korisničko ime</label>
-        <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="data.username" [class.is-invalid]="data.usernameErr != ''">
-        <small class='text-danger'>{{data.usernameErr}}&nbsp;</small>
-      </div>
-      <div class="form-group">
-        <label for="password">lozinka</label>
-        <input id ="password" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="data.password" [class.is-invalid]="data.passwordErr != ''">
-        <small class='text-danger'>{{data.passwordErr}}&nbsp;</small>
-      </div>
-    </form>
+    <app-login-form></app-login-form>
   </div>
   
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="close( modal )">Odustani</button>
+    <button class="btn btn-light" (click)="close()">Odustani</button>
     <button class="btn btn-outline-dark" (click)="login()">Prijavi se</button>
   </div>
 </ng-template>

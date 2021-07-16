@@ -25,7 +25,7 @@ export class AccData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|AccData, reqfields?: {} ): void
     {
-        if( !( data instanceof AccData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof AccData ) ) { status.setError( "acc.err", "account not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -94,7 +94,7 @@ export class AccData
 // FIXME: check if the object contains all the necessary keys
 export class AccApiCall
 {
-    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "acc", method );
         let status = new Status();
@@ -109,7 +109,6 @@ export class AccApiCall
                 let acc = params[ 0 ] as AccData;
                 AccData.validate( status, acc, {
                     // --------------
-                    _id:              true,
                     username:         true,
                     password:         true,
                     firstname:        true,

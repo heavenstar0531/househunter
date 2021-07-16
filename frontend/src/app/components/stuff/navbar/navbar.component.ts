@@ -15,7 +15,7 @@ export class NavbarComponent implements OnInit {
   collapsed: boolean = true;
 
   constructor(
-    private breadcrumbService: BreadcrumbService,
+    private breadcrumb: BreadcrumbService,
   ) {
     let activeNavItems = JSON.parse( sessionStorage.getItem( 'activeNavItems' ) ?? '[]' );
     this.activeNavItems = ( activeNavItems != [] ) ? activeNavItems : ['', ''];

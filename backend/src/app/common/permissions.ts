@@ -12,7 +12,7 @@ const permissionMap: any = {
         delete:                      { adm:0,                      },
         get:                         { adm:0,                      },
         list:                        { adm:0,                      },
-        login:                       { adm:0, agn:1, usr:2,        },
+        login:                       { adm:0, agn:1, usr:2, gst:3, },
         logout:                      { adm:0, agn:1, usr:2,        },
         updateInfo:                  { adm:0, agn:1, usr:2,        },
         updateStatus:                { adm:0,                      },
@@ -45,7 +45,7 @@ const permissionMap: any = {
     // FIXME: files should not be generally accessible (security flaw), make a better permission system
     file:
     {
-        add:                         { adm:0, agn:1, usr:2, gst:3, },
+        add:                         { adm:0, agn:1, usr:2,        },
         get:                         { adm:0, agn:1, usr:2, gst:3, },
     },
 };
@@ -55,6 +55,6 @@ export function EnsurePermission( acc_type: string|null, target: string|null, me
     if( !acc_type ) acc_type = "gst";
     if( !target || !method || !permissionMap[target]?.[method]?.[acc_type] )
     {
-        throw new Status().setError( "message", "Insufficient permissions." );;
+        throw new Status().setError( "message", "insufficient permissions" );
     }
 }

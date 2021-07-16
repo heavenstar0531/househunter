@@ -11,7 +11,7 @@ export class FileMetadata
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|FileMetadata, reqfields?: {} ): void
     {
-        if( !( data instanceof FileMetadata ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof FileMetadata ) ) { status.setError( "filemeta.err", "file metadata not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -35,7 +35,7 @@ export class FileData
 
     static validate( status: Status, data: null|FileData, reqfields?: {} ): void
     {
-        if( !( data instanceof FileData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof FileData ) ) { status.setError( "file.err", "data not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -78,7 +78,7 @@ export class FileData
 // FIXME: check if the object contains all the necessary keys
 export class FileApiCall
 {
-    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "file", method );
         let status = new Status();
@@ -92,7 +92,6 @@ export class FileApiCall
                 let file = params[ 0 ] as FileData;
                 FileData.validate( status, file, {
                     // --------------
-                    _id:          true,
                     content_type: true,
                     metadata:     true,
                     // --------------

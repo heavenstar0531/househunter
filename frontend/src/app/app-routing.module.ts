@@ -8,12 +8,14 @@ import { PropertyListPageComponent } from './components/pages/property-list-page
 import { PropertyPageComponent } from './components/pages/property-page/property-page.component';
 import { ConversationListPageComponent } from './components/pages/conversation-list-page/conversation-list-page.component';
 import { MyAccountPageComponent } from './components/pages/my-account-page/my-account-page.component';
+import { PropertyFormComponent } from './components/forms/property-form/property-form.component';
 
 
 // application routes
 let appRoutes: Routes = [
   // ____________________________________________________________________________________________________
   // pages
+  { path: '',   component: PropertyFormComponent,            data: { 'acctype': ['adm'],                   'breadcrumb': { 'label': 'Agencija',   } } },   // TODO: remove
   { path: 'agencija',   component: AgencyPageComponent,            data: { 'acctype': ['adm'],                   'breadcrumb': { 'label': 'Agencija',   } } },
   { path: 'nekretnine', component: PropertyListPageComponent,      data: { 'acctype': ['adm','agn','usr','gst'], 'breadcrumb': { 'label': 'Nekretnine', } }, children: [
     { path: ':prop_id', component: PropertyPageComponent,          data: { 'acctype': ['adm','agn','usr'],       'breadcrumb': { 'alias': ':prop_name', } } },

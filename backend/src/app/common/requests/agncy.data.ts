@@ -14,7 +14,7 @@ export class AgncyData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|AgncyData, reqfields?: {} ): void
     {
-        if( !( data instanceof AgncyData ) ) { status.setError( "data.err", "data not given" ); return; }
+        if( !( data instanceof AgncyData ) ) { status.setError( "agncy.err", "agency not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -34,7 +34,7 @@ export class AgncyData
 // FIXME: check if the object contains all the necessary keys
 export class AgncyApiCall
 {
-    static ensureValid( acc_type: string, method: string, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "agncy", method );
         let status = new Status();

@@ -1,1 +1,25 @@
-<p>property-buy-form works!</p>
+<form id='form' class="px-3 py-1">
+    <div class="form-group">
+      <label for="offered_amount">Ponuda <small>[RSD]</small></label>
+      <input id ="offered_amount" type="number" class="form-control" placeholder="1000" name="offered_amount" [(ngModel)]="offered_amount" [class.is-invalid]="status.getKey('offered_amount.err')">
+      <small class='text-danger'>{{ status.getKey('offered_amount.err') }}&nbsp;</small>
+    </div>
+
+    <div class="form-group">
+      <div class="input-group">
+        Kupovina na kredit&nbsp; <input id="on_credit" type="checkbox" name="on_credit" [(ngModel)]="on_credit"  [class.is-invalid]="status.getKey('on_credit.err')">
+      </div>
+      <small class='text-danger'>{{ status.getKey('on_credit.err') }}&nbsp;</small>
+    </div>
+
+    <div *ngIf="on_credit" class="form-group">
+      Učešće: {{ credit_participation }}
+    </div>
+      
+    <small class='text-danger'>{{ status.getKey('message') }}&nbsp;</small>
+</form>
+
+  
+  
+  
+  

@@ -1,1 +1,56 @@
-<p>account-form works!</p>
+<form id='form' class="px-3 py-1">
+  <div class="form-group">
+    <label for="firstname">Ime</label>
+    <input id ="firstname" type="text" class="form-control" placeholder="ime" name="firstname" [(ngModel)]="acc.firstname" [class.is-invalid]="status.getKey('firstname.err')">
+    <small class='text-danger'>{{ status.getKey('firstname.err') }}&nbsp;</small>
+  </div>
+
+  <div class="form-group">
+    <label for="lastname">Prezime</label>
+    <input id ="lastname" type="text" class="form-control" placeholder="prezime" name="lastname" [(ngModel)]="acc.lastname" [class.is-invalid]="status.getKey('lastname.err')">
+    <small class='text-danger'>{{ status.getKey('lastname.err') }}&nbsp;</small>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email</label>
+    <input id ="email" type="email" class="form-control" placeholder="email" name="email" [(ngModel)]="acc.email" [class.is-invalid]="status.getKey('email.err')">
+    <small class='text-danger'>{{ status.getKey('email.err') }}&nbsp;</small>
+  </div>
+
+
+  
+  <div class="form-group">
+    <label for="usr_addr_country">Država</label>
+    <input id ="usr_addr_country" type="text" class="form-control" placeholder="država" name="usr_addr_country" [(ngModel)]="acc.usr_addr_country" [class.is-invalid]="status.getKey('usr_addr_country.err')">
+    <small class='text-danger'>{{ status.getKey('usr_addr_country.err') }}&nbsp;</small>
+  </div>
+
+  <div class="form-group">
+    <label for="usr_addr_city">Grad</label>
+    <input id ="usr_addr_city" type="text" class="form-control" placeholder="grad" name="usr_addr_city" [(ngModel)]="acc.usr_addr_city" [class.is-invalid]="status.getKey('usr_addr_city.err')">
+    <small class='text-danger'>{{ status.getKey('usr_addr_city.err') }}&nbsp;</small>
+  </div>
+
+  
+  
+  <div class="form-group">
+    <label for="username">Korisničko ime</label>
+    <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="acc.username" [class.is-invalid]="status.getKey('username.err')">
+    <small class='text-danger'>{{ status.getKey('username.err') }}&nbsp;</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Prethodna lozinka</label>
+    <input id ="password_prev" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="acc.password" [class.is-invalid]="status.getKey('password_prev.err')">
+    <small class='text-danger'>{{ status.getKey('password_prev.err') }}&nbsp;</small>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Lozinka</label>
+    <input id ="password"      type="password" class="form-control" placeholder="lozinka" name="password"     [(ngModel)]="acc.password" [class.is-invalid]="status.getKey('password.err')">
+    <input id ="password_rept" type="password" class="form-control" placeholder="lozinka" name="password_rept"                           [class.is-invalid]="status.getKey('password.err')">
+    <small class='text-danger'>{{status.getKey('password.err')}}&nbsp;</small>
+  </div>
+
+  <small class='text-danger'>{{ status.getKey('message') }}</small>
+</form>
