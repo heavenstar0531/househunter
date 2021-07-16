@@ -1,1 +1,14 @@
-<p>account-modal works!</p>
+<ng-template #template_ref>
+  <div class="modal-header">
+    <h4 class="modal-title">Nalog</h4>
+  </div>
+
+  <div class="modal-body">
+    <app-account-form #form_ref></app-account-form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-outline-dark" (click)="close()">Odustani</button>
+    <button class="btn btn-outline-success" (click)="update()">Sačuvaj</button>
+  </div>
+</ng-template>

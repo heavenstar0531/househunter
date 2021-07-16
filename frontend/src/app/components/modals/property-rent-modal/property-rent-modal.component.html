@@ -1,1 +1,14 @@
-<p>property-rent-modal works!</p>
+<ng-template #template_ref>
+  <div class="modal-header">
+    <h4 class="modal-title">Iznajmljivanje</h4>
+  </div>
+
+  <div class="modal-body">
+    <app-property-rent-form #form_ref></app-property-rent-form>
+  </div>
+
+  <div class="modal-footer">
+    <button class="btn btn-outline-dark" (click)="close()">Odustani</button>
+    <button class="btn btn-outline-success" (click)="rent()">Iznajmi</button>
+  </div>
+</ng-template>

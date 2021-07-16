@@ -1,15 +1,14 @@
-<!-- login modal -->
-<ng-template let-modal_var #modal_ref >
+<ng-template #template_ref >
   <div class="modal-header">
     <h4 class="modal-title">Prijava</h4>
   </div>
 
   <div class="modal-body">
-    <app-login-form></app-login-form>
+    <app-login-form #form_ref></app-login-form>
   </div>
   
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="close()">Odustani</button>
-    <button class="btn btn-outline-dark" (click)="login()">Prijavi se</button>
+    <button class="btn btn-outline-dark" (click)="close()">Odustani</button>
+    <button class="btn btn-outline-success" (click)="login()">Prijavi se</button>
   </div>
 </ng-template>

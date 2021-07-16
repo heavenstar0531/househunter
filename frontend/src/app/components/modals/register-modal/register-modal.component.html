@@ -1,15 +1,14 @@
-<!-- register modal -->
-<ng-template let-modal_var #modal_ref>
+<ng-template #template_ref>
   <div class="modal-header">
     <h4 class="modal-title">Registracija</h4>
   </div>
 
   <div class="modal-body">
-    <app-account-form></app-account-form>
+    <app-account-form #form_ref></app-account-form>
   </div>
 
   <div class="modal-footer">
-    <button class="btn btn-light" (click)="close()">Odustani</button>
-    <button class="btn btn-outline-dark" (click)="register()">Registruj se</button>
+    <button class="btn btn-outline-dark" (click)="close()">Odustani</button>
+    <button class="btn btn-outline-success" (click)="register()">Registruj se</button>
   </div>
 </ng-template>

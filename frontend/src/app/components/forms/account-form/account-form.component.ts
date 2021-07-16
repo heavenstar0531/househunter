@@ -17,6 +17,8 @@ export class AccountFormComponent implements OnInit {
 
   status: Status = new Status();
   acc: AccData = new AccData();
+  password_prev: string = "";
+  password_rept: string = "";
 
 
   constructor(
@@ -52,16 +54,6 @@ export class AccountFormComponent implements OnInit {
     this.reset();
   }
 
-  async update(): Promise< [Status, ObjectId?/*acc_id*/] > {
-    if( this.form_type != "update" ) return [ new Status().setError( "formtype.err", "invalid form type" ) ];
-
-    let [ status, acc_id ] = await this.accService.add( this.acc );
-
-    this.status = status;
-    this.acc._id = acc_id;
-    return [ status, acc_id ];
-  }
-
   async register(): Promise< [Status, ObjectId?/*acc_id*/] > {
     if( this.form_type != "register" ) return [ new Status().setError( "formtype.err", "invalid form type" ) ];
 
@@ -72,9 +64,20 @@ export class AccountFormComponent implements OnInit {
     return [ status, acc_id ];
   }
 
+  async update(): Promise<Status> {
+    if( this.form_type != "update" ) return new Status().setError( "formtype.err", "invalid form type" );
+
+    let status = await this.accService.updateInfo( this.acc );
+
+    this.status = status;
+    return status;
+  }
+
   reset(): void {
     this.status = new Status();
     // copy enumerable properties from the old account object to the new one
     this.acc = Object.assign( new AccData(), this.acc_old );
+    this.password_prev = "";
+    this.password_rept = "";
   }
 }
