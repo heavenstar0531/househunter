@@ -1,14 +1,26 @@
 <div class="header">
-    <div class="navbar-strip">
-        <app-navbar></app-navbar>
-    </div>
+  <div class="navbar-strip">
+    <app-navbar></app-navbar>
+  </div>
 </div>
 
 <div class="content">
-    <xng-breadcrumb separator='>'></xng-breadcrumb>
-    <router-outlet></router-outlet>
+  <div class="row mx-2">
+    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-xxl-4 offset-xxl-4 p-0">
+      
+      <xng-breadcrumb separator='>'></xng-breadcrumb>
+
+    </div>
+  </div>
+  <div class="row mx-2">
+    <div class="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-xxl-4 offset-xxl-4 p-0">
+
+      <router-outlet></router-outlet>
+    
+    </div>
+  </div>
 </div>
 
-<div class="footer">
-    <div>Copyright 2021, Marko Stanojević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu</div>
+<div class="footer mx-2">
+  <div>Copyright 2021, Marko Stanojević, Odsek za softversko inženjerstvo Elektrotehničkog fakulteta Univerziteta u Beogradu</div>
 </div>
