@@ -53,6 +53,7 @@ import { RegisterModalComponent } from './components/modals/register-modal/regis
 import { AccountModalComponent } from './components/modals/account-modal/account-modal.component';
 import { PropertyRentModalComponent } from './components/modals/property-rent-modal/property-rent-modal.component';
 import { PropertyBuyModalComponent } from './components/modals/property-buy-modal/property-buy-modal.component';
+
 // components - forms
 import { AgencyInfoComponent } from './components/forms/agency-info/agency-info.component';
 import { LoginFormComponent } from './components/forms/login-form/login-form.component';
@@ -61,6 +62,8 @@ import { PropertyFormComponent } from './components/forms/property-form/property
 import { PropertyRentFormComponent } from './components/forms/property-rent-form/property-rent-form.component';
 import { PropertyBuyFormComponent } from './components/forms/property-buy-form/property-buy-form.component';
 
+// directives
+import { GraphDirective } from './directives/graph.directive';
 
 // services
 import { AgncyService } from './services/agncy/agncy.service';
@@ -70,26 +73,28 @@ import { ConvService } from './services/conv/conv.service';
 import { FileService } from './services/file/file.service';
 import { SeshService } from './services/sesh/sesh.service';   // ------------- <<< last one
 
+// route guards
+import { RouteGuard } from './util/route.guard';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     // components - pages
+    NavbarComponent,
     AgencyPageComponent,
     PropertyListPageComponent,
     PropertyPageComponent,
     ConversationListPageComponent,
     MyAccountPageComponent,
     
-    // components
-    NavbarComponent,
-    AgencyInfoComponent,
-    PropertyStatsComponent,
     // components - lists
     UserListComponent,
     PropertyListComponent,
     ConversationListComponent,
     MessageListComponent,
+    PropertyStatsComponent,
+
     // components - modals
     LoginModalComponent,
     RegisterModalComponent,
@@ -98,11 +103,15 @@ import { SeshService } from './services/sesh/sesh.service';   // ------------- <
     PropertyBuyModalComponent,
     
     // components - forms
+    AgencyInfoComponent,
     LoginFormComponent,
     AccountFormComponent,
     PropertyFormComponent,
     PropertyRentFormComponent,
-    PropertyBuyFormComponent,   // ------------- <<< last one
+    PropertyBuyFormComponent,
+
+    // directives
+    GraphDirective,   // ------------- <<< last one
   ],
   imports: [
     // app modules and components
@@ -123,7 +132,9 @@ import { SeshService } from './services/sesh/sesh.service';   // ------------- <
     PropService,
     ConvService,
     FileService,
-    SeshService,   // ------------- <<< last one
+    SeshService,
+    // route guards
+    RouteGuard,   // ------------- <<< last one
   ],
   bootstrap: [AppComponent],
 })

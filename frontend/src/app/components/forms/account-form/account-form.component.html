@@ -1,7 +1,7 @@
 <form id='form' class="px-3 py-1">
   <div class="form-group d-flex align-items-stretch">
     <!-- TODO -->
-    <img id="usr_photo" class="rounded mb-0 mr-4" style="width: 100px; height: 100px;" src="/assets/images/account.png">
+    <img id="usr_photo" class="rounded shadow-sm mb-0 mr-4" style="width: 100px; height: 100px;" src="/assets/images/account.png">
     <div class="d-flex flex-column-reverse">
       <div class="btn-group">
         <button class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
@@ -30,8 +30,6 @@
     <input id ="email" type="email" class="form-control" placeholder="email" name="email" [(ngModel)]="acc.email" [class.is-invalid]="status.getKey('email.err')">
     <small class='text-danger'>{{ status.getKey('email.err') }}&nbsp;</small>
   </div>
-
-
   
   <div class="form-group">
     <label for="usr_addr_country">Država</label>
@@ -45,6 +43,7 @@
     <small class='text-danger'>{{ status.getKey('usr_addr_city.err') }}&nbsp;</small>
   </div>
 
+  <div class="mb-4"></div>
   
   
   <div class="form-group">

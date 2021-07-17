@@ -1,25 +1,53 @@
-<p>property-stats works!</p>
+<div class="d-flex justify-content-end px-3 py-1 mb-2">
+  <button class="btn btn-outline-dark" (click)="show_graphs = !show_graphs">{{ show_graphs ? "Sakrij grafike": "Prikaži grafike" }}</button>
+</div>
 
+<div *ngIf="show_graphs" class="row mx-2">
 
-<!-- galerija nekretnine -->
-<!-- message-list -->
-<!-- property-stats -->
-<button class="btn btn-outline-dark"><i class="bi bi-x-lg"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-check-lg"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-x-square"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-x"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-patch-exclamation"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-person-lines-fill"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-person-x-fill"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-cash-coin"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-cursor"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-dash-circle"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-dash-circle-fill"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-dash-square"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-dash-square-fill"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-archive"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-archive-fill"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-patch-question"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-arrow-up-circle"></i></button>
-<button class="btn btn-outline-dark"><i class="bi bi-arrow-up-circle-fill"></i></button>
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow-sm">
+      <div [graph]="'pie'" [data]="price_range" [options]="options"></div>
+      <div class="card-body">
+        <h5 class="card-text">Cenovni rang</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow-sm">
+      <div [graph]="'bar'" [data]="cities" [options]="options"></div>
+      <div class="card-body">
+        <h5 class="card-text">Gradovi</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow-sm">
+      <div [graph]="'bar'" [data]="houses" [options]="options"></div>
+      <div class="card-body">
+        <h5 class="card-text">Stanovi</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow-sm">
+      <div [graph]="'bar'" [data]="flats" [options]="options"></div>
+      <div class="card-body">
+        <h5 class="card-text">Kuće</h5>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow-sm">
+      <div [graph]="'bar'" [data]="profit" [options]="options"></div>
+      <div class="card-body">
+        <h5 class="card-text">Profit</h5>
+      </div>
+    </div>
+  </div>
+
+</div>
+

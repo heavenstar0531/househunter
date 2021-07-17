@@ -1,25 +1,25 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Stats } from 'src/app/common/types';
-import * as c3 from 'c3'
 
 @Component({
   selector: 'app-property-stats',
   templateUrl: './property-stats.component.html',
   styleUrls: ['./property-stats.component.sass']
 })
-export class PropertyStatsComponent implements OnInit, AfterViewInit {
+export class PropertyStatsComponent implements OnInit {
   stats: Stats = new Stats();
+  show_graphs: boolean = false;
+
   // graph 1
-  graph1: null|c3.ChartAPI = null;
   price_range: any = {
-      "<= 2500":   0,
-      "<= 5000":   0,
-      "<= 10000":  0,
-      "<= 20000":  0,
-      "<= 50000":  0,
-      "<= 100000": 0,
-      "<= 200000": 0,
-      "> 200000":  0,
+      "<= 2500":   10,
+      "<= 5000":   10,
+      "<= 10000":  10,
+      "<= 20000":  10,
+      "<= 50000":  10,
+      "<= 100000": 10,
+      "<= 200000": 10,
+      "> 200000":  10,
   };
   // graph 2
   cities: any = {};
@@ -30,23 +30,39 @@ export class PropertyStatsComponent implements OnInit, AfterViewInit {
   // graph 5
   profit: any = { "rent": 0, "sale": 0 };
 
+  // TODO
+  options: any = {
+    bar: {
+      width: {
+        ratio: 0.6,   // this makes bar width 50% of length between ticks
+      },
+    },
+    // size: {
+    //   height: 100,
+    //   width: 100,
+    // },
+    legend: {
+      inset: true   // hide the x-axis legend
+    },
+    axis: {
+      x: {
+        show: false,
+      },
+      // y: {
+      //   show: false  // hide the y-axis line & ticks
+      // }
+    },
 
+    tooltip: {
+      show: false,
+    },
+
+
+  }
   
 
   constructor() { }
 
   ngOnInit(): void {
-  }
-
-  ngAfterViewInit(): void {
-    this.graph1 = c3.generate({
-    bindto: '#chart',
-      data: {
-        columns: [
-          ['data1', 30, 200, 100, 400, 150, 250],
-          ['data2', 50, 20, 10, 40, 15, 25]
-        ]
-      }
-    });
   }
 }

@@ -10,22 +10,25 @@ import { ConversationListPageComponent } from './components/pages/conversation-l
 import { MyAccountPageComponent } from './components/pages/my-account-page/my-account-page.component';
 import { PropertyFormComponent } from './components/forms/property-form/property-form.component';
 
+// route guard
+import { RouteGuard } from './util/route.guard';
+
 
 // application routes
 let appRoutes: Routes = [
   // ____________________________________________________________________________________________________
   // pages
-  { path: 'aaa',   component: PropertyFormComponent,            data: { acctype: ['adm'],                   breadcrumb: { label: 'AAAAA', info: 'home'  } }, },   // TODO: remove
-  { path: 'agencija',   component: AgencyPageComponent,            data: { acctype: ['adm'],                   breadcrumb: { label: 'Agencija',   } }, },
-  { path: 'nekretnine', component: PropertyListPageComponent,      data: { acctype: ['adm','agn','usr','gst'], breadcrumb: { label: 'Nekretnine', } }, children: [
-    { path: ':prop_id', component: PropertyPageComponent,          data: { acctype: ['adm','agn','usr'],       breadcrumb: { alias: ':prop_name', } }, },
+  { path: 'aaa',        component: PropertyFormComponent,          data: { acc_type: { adm:0,                      }, breadcrumb: { label: 'AAAAA'       } },  canActivate: [ RouteGuard ], },   // TODO: remove
+  { path: 'agencija',   component: AgencyPageComponent,            data: { acc_type: { adm:0,                      }, breadcrumb: { label: 'Agencija',   } },  canActivate: [ RouteGuard ], },
+  { path: 'nekretnine', component: PropertyListPageComponent,      data: { acc_type: { adm:0, agn:1, usr:2, gst:3, }, breadcrumb: { label: 'Nekretnine', } },  canActivate: [ RouteGuard ], children: [
+    { path: ':prop_id', component: PropertyPageComponent,          data: { acc_type: { adm:0, agn:1, usr:2,        }, breadcrumb: { alias: ':prop_name', } },  canActivate: [ RouteGuard ], },
   ]},
-  { path: 'poruke',     component: ConversationListPageComponent,  data: { acctype: ['adm','agn','usr'],       breadcrumb: { label: 'Poruke',     } }, },
-  { path: 'moj-nalog',  component: MyAccountPageComponent,         data: { acctype: ['adm','agn','usr'],       breadcrumb: { label: 'Nalog',      } }, },
+  { path: 'poruke',     component: ConversationListPageComponent,  data: { acc_type: { adm:0, agn:1, usr:2,        }, breadcrumb: { label: 'Poruke',     } },  canActivate: [ RouteGuard ], },
+  { path: 'moj-nalog',  component: MyAccountPageComponent,         data: { acc_type: { adm:0, agn:1, usr:2,        }, breadcrumb: { label: 'Nalog',      } },  canActivate: [ RouteGuard ], },
 
   // ____________________________________________________________________________________________________
   // miscellaneous paths that shouldn't be visible in the navbar
-  { path: '',   redirectTo: 'nekretnine', pathMatch: 'full',       data: {                                     breadcrumb: { label: 'HH',         } }, },
+  { path: '',   redirectTo: 'nekretnine', pathMatch: 'full',       data: {                                            breadcrumb: { label: 'HH',         } }, },
   { path: '**', redirectTo: 'nekretnine' },
 ];
 
