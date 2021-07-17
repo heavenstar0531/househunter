@@ -1,1 +1,7 @@
-<app-account-form></app-account-form>
+<app-account-form #form_ref></app-account-form>
+
+<div class="d-flex justify-content-end px-3 py-1">
+  <button class="btn btn-outline-dark" (click)="reset( form_ref )">Odustani</button>
+  <div class="mr-2"></div>
+  <button class="btn btn-outline-success" (click)="update( form_ref )">Izmeni</button>
+</div>

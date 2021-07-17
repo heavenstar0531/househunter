@@ -1,4 +1,18 @@
 <form id='form' class="px-3 py-1">
+  <div class="form-group d-flex align-items-stretch">
+    <!-- TODO -->
+    <img id="usr_photo" class="rounded mb-0 mr-4" style="width: 100px; height: 100px;" src="/assets/images/account.png">
+    <div class="d-flex flex-column-reverse">
+      <div class="btn-group">
+        <button class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
+        <button class="btn btn-outline-dark"><i class="bi bi-x-lg"></i></button>
+      </div>
+      <label for="usr_photo">Vaša slika</label><br>
+    </div>
+  </div>
+  
+
+
   <div class="form-group">
     <label for="firstname">Ime</label>
     <input id ="firstname" type="text" class="form-control" placeholder="ime" name="firstname" [(ngModel)]="acc.firstname" [class.is-invalid]="status.getKey('firstname.err')">

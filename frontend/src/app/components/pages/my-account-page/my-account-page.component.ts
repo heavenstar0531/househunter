@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AccountFormComponent } from '../../forms/account-form/account-form.component';
 
 @Component({
   selector: 'app-my-account-page',
@@ -6,10 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-account-page.component.sass']
 })
 export class MyAccountPageComponent implements OnInit {
-
-  constructor() { }
+  constructor( ) { }
 
   ngOnInit(): void {
+  }
+
+  async reset( form_ref: AccountFormComponent ) {
+    form_ref.reset();
+  }
+
+  async update( form_ref: AccountFormComponent ) {
+    let status = await form_ref.update();
   }
 
 }

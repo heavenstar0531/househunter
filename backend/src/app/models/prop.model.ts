@@ -146,10 +146,11 @@ export class PropModel
             let city:         string  = criteria.get( "city" );
             let price_min:    number  = criteria.get( "price_min" );
             let price_max:    number  = criteria.get( "price_max" );
-            let promoted:     boolean = criteria.has( "promoted" );
-            let agency_owned: boolean = criteria.has( "agency_owned" );
-            let owned:        boolean = criteria.has( "owned" );
-            let sold:         boolean = criteria.has( "sold" );
+            let promoted:     boolean = !!criteria.get( "promoted" );
+            let unverified:   boolean = !!criteria.get( "unverified" );
+            let owned:        boolean = !!criteria.get( "owned" );
+            let agency_owned: boolean = !!criteria.get( "agency_owned" );
+            let sold:         boolean = !!criteria.get( "sold" );
 
             if( city ) mongo_criteria.addr_city = { $eq: city };
             if( price_min || price_max )
@@ -159,6 +160,7 @@ export class PropModel
                 mongo_criteria.price = { $gte: price_min, $lte: price_max };
             }
 
+            if( unverified ) mongo_criteria.verified = { $eq: null };
             if( promoted ) mongo_criteria.is_promoted = { $eq: true };
             if( agency_owned )
             {

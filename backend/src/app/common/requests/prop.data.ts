@@ -331,10 +331,11 @@ export class PropApiCall
                 let city:         string  = criteria.get( "city" );
                 let price_min:    number  = criteria.get( "price_min" );
                 let price_max:    number  = criteria.get( "price_max" );
-                let promoted:     boolean = criteria.has( "promoted" );
-                let owned:        boolean = criteria.has( "owned" );
-                let agency_owned: boolean = criteria.has( "agency_owned" );
-                let sold:         boolean = criteria.has( "sold" );
+                let promoted:     boolean = !!criteria.get( "promoted" );
+                let unverified:   boolean = !!criteria.get( "unverified" );
+                let owned:        boolean = !!criteria.get( "owned" );
+                let agency_owned: boolean = !!criteria.get( "agency_owned" );
+                let sold:         boolean = !!criteria.get( "sold" );
 
                 let criteria_status = new Status();
                 if( acc_type != "usr" )
@@ -345,6 +346,7 @@ export class PropApiCall
                 {
                     if( agency_owned ) criteria_status.setError( "agency_owned", "invalid criteria" );
                     if( sold         ) criteria_status.setError( "sold",         "invalid criteria" );
+                    if( unverified   ) criteria_status.setError( "unverified",   "invalid criteria" );
                 }
 
                 if( criteria_status.getStatus() != Status.SUCCESS ) status.setError( "criteria", criteria_status );

@@ -5,6 +5,11 @@
 // import bootstrap icons
 @import "bootstrap-icons/font/bootstrap-icons"
 
+// breakpoint example (import bootstrap stuff first)
+// @include media-breakpoint-up( sm )
+//   .custom-class
+//     display: block
+  
 // make the app fill the entire screen height
 html, body
   height: 100%
@@ -41,6 +46,10 @@ input[type=number]::-webkit-outer-spin-button
 label
   white-space: nowrap
 
+// prevent bootstrap table fields from wrapping
+.table
+  white-space: nowrap
+
 // style placed here since for some bizarre reason it doesn't work anywhere else
 // possibly because reboot.scss is included globally and messes up the label part of the breadcrumb (the last crumb)
 .xng-breadcrumb-item
@@ -70,4 +79,10 @@ form
   .form-group  
     label
       margin-bottom: 3px
+
+// horizontal line for splitting form segments
+hr
+  border-top: 3px dotted lightgray
+  margin-top: 0px
+  margin-bottom: 40px
 

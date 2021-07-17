@@ -46,7 +46,6 @@ import { PropertyListComponent } from './components/lists/property-list/property
 import { ConversationListComponent } from './components/lists/conversation-list/conversation-list.component';
 import { MessageListComponent } from './components/lists/message-list/message-list.component';
 import { PropertyStatsComponent } from './components/lists/property-stats/property-stats.component';
-import { PropertyPromotedComponent } from './components/lists/property-promoted/property-promoted.component';
 
 // components - modals
 import { LoginModalComponent } from './components/modals/login-modal/login-modal.component';
@@ -86,7 +85,6 @@ import { SeshService } from './services/sesh/sesh.service';   // ------------- <
     NavbarComponent,
     AgencyInfoComponent,
     PropertyStatsComponent,
-    PropertyPromotedComponent,
     // components - lists
     UserListComponent,
     PropertyListComponent,

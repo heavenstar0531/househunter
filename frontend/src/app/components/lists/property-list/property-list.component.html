@@ -1,1 +1,181 @@
-<p>property-list works!</p>
+<div class="d-flex justify-content-end px-3 py-1 mb-2">
+  <button class="btn btn-outline-dark" (click)="add()">Dodaj nekretninu</button>
+  <div class="mr-2"></div>
+  <button class="btn btn-outline-dark" (click)="addMany()">Dodaj nekretnine</button>
+</div>
+
+<form id='form' class="px-3 py-1">
+  <div class="form-row">
+    <div class="col-12">
+
+      <div class="form-group">
+        <label for="city">Grad</label>
+        <input id ="city" type="text" class="form-control" placeholder="grad" name="city" [(ngModel)]="city" [class.is-invalid]="status.getKey('city.err')">
+        <small class='text-danger'>{{ status.getKey('city.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+  </div>
+  
+  <div class="form-row">
+    <div class="col-6">
+
+      <div class="form-group">
+        <label for="price_min">Cena od</label>
+        <input id ="price_min" type="text" class="form-control" placeholder="cena od" name="price_min" [(ngModel)]="price_min" [class.is-invalid]="status.getKey('price_min.err')">
+        <small class='text-danger'>{{ status.getKey('price_min.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-6">
+
+      <div class="form-group">
+        <label for="price_max">Cena do</label>
+        <input id ="price_max" type="text" class="form-control" placeholder="cena do" name="price_max" [(ngModel)]="price_max" [class.is-invalid]="status.getKey('price_max.err')">
+        <small class='text-danger'>{{ status.getKey('price_max.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col-6 col-sm-3">
+
+      <div class="form-group">
+        <div class="form-check">
+          <input id ="promoted" type="checkbox" class="form-check-input" name="promoted" [(ngModel)]="promoted" [class.is-invalid]="status.getKey('promoted.err')">
+          <label for="promoted" class="form-check-label">Promovisane</label>
+        </div>
+        <small class='text-danger'>{{ status.getKey('promoted.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-6 col-sm-3">
+
+      <div class="form-group">
+        <div class="form-check">
+          <input id ="unverified" type="checkbox" class="form-check-input" name="unverified" [(ngModel)]="unverified" [class.is-invalid]="status.getKey('unverified.err')">
+          <label for="unverified" class="form-check-label">Nepotvrđene</label>
+        </div>
+        <small class='text-danger'>{{ status.getKey('unverified.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-6 col-sm-3">
+
+      <div class="form-group">
+        <div class="form-check">
+          <input id ="owned" type="checkbox" class="form-check-input" name="owned" [(ngModel)]="owned" [class.is-invalid]="status.getKey('owned.err')">
+          <label for="owned" class="form-check-label">U vlasništvu</label>
+        </div>
+        <small class='text-danger'>{{ status.getKey('owned.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-6 col-sm-3">
+
+      <div class="form-group">
+        <div class="form-check">
+          <input id ="agency_owned" type="checkbox" class="form-check-input" name="agency_owned" [(ngModel)]="agency_owned" [class.is-invalid]="status.getKey('agency_owned.err')">
+          <label for="agency_owned" class="form-check-label">Agencija</label>
+        </div>
+        <small class='text-danger'>{{ status.getKey('agency_owned.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+    <div class="col-6 col-sm-3">
+
+      <div class="form-group">
+        <div class="form-check">
+          <input id ="sold" type="checkbox" class="form-check-input" name="sold" [(ngModel)]="sold" [class.is-invalid]="status.getKey('sold.err')">
+          <label for="sold" class="form-check-label">Prodate</label>
+        </div>
+        <small class='text-danger'>{{ status.getKey('sold.err') }}&nbsp;</small>
+      </div>
+
+    </div>
+  </div>
+
+  <small class='text-danger'>{{ status.getKey('message') }}&nbsp;</small>
+</form>
+
+<div class="d-flex justify-content-end px-3 py-1 mb-2">
+  <button class="btn btn-outline-dark" (click)="reset()">Resetuj</button>
+  <div class="mr-2"></div>
+  <button class="btn btn-outline-success" (click)="search()">Pretraži</button>
+</div>
+
+<hr>
+
+
+
+
+
+<div class="row mx-2">
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow">
+      <div class="btn-overlay btn-group">
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-patch-question"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle-fill"></i></button>
+      </div>
+
+      <img class="card-img-top" src="/assets/images/account.png">
+      <div class="card-body">
+        <p class="card-text">Grad, Opština</p>
+        <p class="card-text">Tip, Kvadratura</p>
+        <p class="card-text">Izdavanje, Cena</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow">
+      <div class="btn-overlay btn-group">
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-patch-question"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle-fill"></i></button>
+      </div>
+      <img class="card-img-top" src="/assets/images/account.png">
+      <div class="card-body">
+        <p class="card-text">Grad, Opština</p>
+        <p class="card-text">Tip, Kvadratura</p>
+        <p class="card-text">Izdavanje, Cena</p>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow">
+      <div class="btn-overlay btn-group">
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-patch-question"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle-fill"></i></button>
+      </div>
+      <img class="card-img-top" src="/assets/images/account.png">
+      <div class="card-body">
+        <p class="card-text">Grad, Opština</p>
+        <p class="card-text">Tip, Kvadratura</p>
+        <p class="card-text">Izdavanje, Cena</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-6 card-container">
+    <div class="card shadow">
+      <div class="btn-overlay btn-group">
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-patch-question"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle"></i></button>
+        <button class="btn btn-sm btn-outline-dark"><i class="bi bi-arrow-up-circle-fill"></i></button>
+      </div>
+      <img class="card-img-top" src="/assets/images/account.png">
+      <div class="card-body">
+        <p class="card-text">Grad, Opština</p>
+        <p class="card-text">Tip, Kvadratura</p>
+        <p class="card-text">Izdavanje, Cena</p>
+      </div>
+    </div>
+  </div>
+
+</div>
