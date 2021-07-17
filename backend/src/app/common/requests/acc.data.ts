@@ -190,9 +190,9 @@ export class AccApiCall
             case "blockAnother":
             {
                 let blocked_acc_id = params[ 0 ] as ObjectId;
-                let is_blocked     = params[ 1 ] as Boolean;
+             // let is_blocked     = params[ 1 ] as boolean;
                 if( !( blocked_acc_id instanceof ObjectId ) ) status.setError( "blocked_id.err", "blocked account id missing" );
-                if( !( is_blocked     instanceof Boolean )  ) status.setError( "is_blocked.err", "new blocked status missing" );
+             // if( !( is_blocked     instanceof Boolean )  ) status.setError( "is_blocked.err", "new blocked status missing" );
                 break;
             }
         }

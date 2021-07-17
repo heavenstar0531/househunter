@@ -107,7 +107,7 @@ export class ConvApi
             {
                 let session = request.session as Session;
                 let conv_id = Object.assign( new ObjectId(), request.body.conv_id );
-                let text = Object.assign( new String(), request.body.text );
+                let text = request.body.text;
                 ConvApiCall.ensureValid( session.acc_type, "sendMessage", conv_id, text );
                 
                 let res = await new ConvModel( request.session ).sendMessage( conv_id, text );

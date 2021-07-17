@@ -92,10 +92,11 @@ export class AccService {
     try
     {
       AccApiCall.ensureValid( "gst", "login", username, password );
-      let [ status, acc ] = await this.http.post( `${this.url}/acc/login`, {} ).toPromise() as [ Status, AccData? ];
+      let [ status, acc ] = ( await this.http.post( `${this.url}/acc/login`, { username, password } ).toPromise() ) as [ Status, AccData? ];
+      status = Object.assign( new Status(), status );
 
       if( status.getStatus() != Status.SUCCESS ) return [ status, acc ];
-      acc = acc as AccData;
+      acc = Object.assign( new AccData(), acc );
 
       if( acc._id      ) this.session.acc_id   = acc._id;
       if( acc.acc_type ) this.session.acc_type = acc.acc_type;

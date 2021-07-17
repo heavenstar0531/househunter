@@ -28,13 +28,13 @@ export class SeshService {
 
   get acc_type(): string
   {
-    return localStorage.getItem( "acc_id" ) ?? "gst";
+    return localStorage.getItem( "acc_type" ) ?? "gst";
   }
 
   set acc_type( acc_type: string )
   {
     if( !acc_type ) acc_type = "gst";
-    localStorage.setItem( "acc_id", acc_type );
+    localStorage.setItem( "acc_type", acc_type );
   }
 
   destroy(): void

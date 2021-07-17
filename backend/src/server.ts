@@ -39,11 +39,8 @@ async function main() {
     const router = express.Router();
 
 
-    // use the express router
-    app.use( router );
     // use cross-origin sharing between the express backend and angular frontend (since the domains are different)
     app.use( cors() );
-
     // set that all requests' bodies are read as json
     app.use( express.json() );
     // enable the session store for mongodb
@@ -56,6 +53,9 @@ async function main() {
         saveUninitialized: false, // prevents an uninitialized session to be saved to the session store
         resave: false, // prevents an unmodified session (in a request) to be resaved to the session store
     }) );
+    // use the express router -- must be the last middleware!!!
+    // +   also, keep the forward slash (needed for some reason)
+    app.use( '/', router );
 
     // set the mongoose promise to be the global promise
     mongoose.Promise = global.Promise;

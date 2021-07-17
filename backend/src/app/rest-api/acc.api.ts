@@ -104,8 +104,8 @@ export class AccApi
         router.route( '/acc/login' ).post( async ( request, response ) => {
             try
             {
-                let username = Object.assign( new String(), request.body.username );
-                let password = Object.assign( new String(), request.body.password );
+                let username = request.body.username as string;
+                let password = request.body.password as string;
                 AccApiCall.ensureValid( "gst", "login", username, password );
                 
                 let res = await new AccModel( request.session ).login( username, password );

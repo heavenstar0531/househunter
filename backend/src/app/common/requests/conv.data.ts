@@ -140,8 +140,8 @@ export class ConvApiCall
             // + list( is_archived: boolean )
             case "list":
             {
-                let is_archived = params[ 0 ] as Boolean;
-                if( !( is_archived instanceof Boolean ) ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
+             // let is_archived = params[ 0 ] as boolean;
+             // if( !( is_archived instanceof boolean ) ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
                 break;
             }
 
@@ -150,10 +150,10 @@ export class ConvApiCall
             case "sendMessage":
             {
                 let conv_id   = params[ 0 ] as ObjectId;
-                let text      = params[ 1 ] as String;
+                let text      = params[ 1 ] as string;
 
                 if( !( conv_id   instanceof ObjectId ) ) status.setError( "conv_id.err",   "conversation id missing" );
-                if( !( text      instanceof String )   ) status.setError( "text.err",      "message text missing" );
+             // if( !( text      instanceof string )   ) status.setError( "text.err",      "message text missing" );
                 break;
             }
             // + listMessages( conv_id: ObjectId )
