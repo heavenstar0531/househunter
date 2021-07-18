@@ -1,9 +1,8 @@
 import { Router } from 'express';
 import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData } from '../common/requests/conv.data';
-import { JsonStringifyReplacer, Status } from '../common/types';
 import { ConvModel } from '../models/conv.model';
-import { Error } from 'mongoose';
+import { RestApi } from './rest.api';
 
 export class ConvApi
 {
@@ -19,16 +18,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "add", conv );
                 
                 let res = await new ConvModel( request.session ).add( conv );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not add conversation" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not add conversation" );
             }
         });
 
@@ -41,16 +35,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "delete", conv_id );
                 
                 let res = await new ConvModel( request.session ).delete( conv_id );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = new Status().setError( "message", "could not delete conversation" );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not delete conversation" );
             }
         });
 
@@ -63,16 +52,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "get", conv_id );
                 
                 let res = await new ConvModel( request.session ).get( conv_id );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not get conversation" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not get conversation" );
             }
         });
 
@@ -85,16 +69,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "list", is_archived );
                 
                 let res = await new ConvModel( request.session ).list( is_archived );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not list conversations" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not list conversations" );
             }
         });
 
@@ -110,16 +89,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "sendMessage", conv_id, text );
                 
                 let res = await new ConvModel( request.session ).sendMessage( conv_id, text );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not send message" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not send message" );
             }
         });
 
@@ -133,16 +107,11 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "markRead", conv_id, last_msg_dt );
                 
                 let res = await new ConvModel( request.session ).markRead( conv_id, last_msg_dt );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = new Status().setError( "message", "could not mark messages as read" );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not mark messages as read" );
             }
         });
     }

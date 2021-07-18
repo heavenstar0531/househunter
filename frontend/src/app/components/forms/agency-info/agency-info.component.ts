@@ -24,8 +24,9 @@ export class AgencyInfoComponent implements OnInit {
 
       this.status = status;
       if( !agncy ) return;
+
       this.agncy_old = agncy;
-      this.agncy = Object.assign( this.agncy, this.agncy_old );
+      this.agncy = Object.assign( new AgncyData(), this.agncy_old );
     } );
   }
 
@@ -34,7 +35,7 @@ export class AgencyInfoComponent implements OnInit {
     this.status = status;
 
     if( this.status.getStatus() != Status.SUCCESS ) return;
-    this.agncy_old = Object.assign( this.agncy_old, this.agncy );
+    this.agncy_old = Object.assign( new AgncyData(), this.agncy );
   }
 
   async reset() {

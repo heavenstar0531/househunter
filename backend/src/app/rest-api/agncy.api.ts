@@ -1,8 +1,7 @@
 import { Router } from 'express';
 import { AgncyApiCall, AgncyData } from '../common/requests/agncy.data';
-import { JsonStringifyReplacer, Status } from '../common/types';
 import { AgncyModel } from '../models/agncy.model';
-import { Error } from 'mongoose';
+import { RestApi } from './rest.api';
 
 export class AgncyApi
 {
@@ -17,16 +16,11 @@ export class AgncyApi
                 AgncyApiCall.ensureValid( session.acc_type, "get" );
                 
                 let res = await new AgncyModel( request.session ).get();
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-
-                let res = [ new Status().setError( "message", "could not get agency" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not get agency" );
             }
         });
 
@@ -39,16 +33,11 @@ export class AgncyApi
                 AgncyApiCall.ensureValid( session.acc_type, "update", updated_agncy );
 
                 let res = await new AgncyModel( request.session ).update( updated_agncy );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-
-                let res = new Status().setError( "message", "could not update agency" );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not update agency" );
             }
         });
     }

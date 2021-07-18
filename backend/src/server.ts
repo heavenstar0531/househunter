@@ -65,6 +65,12 @@ async function main() {
             mongoUrl: environment.mongoUrl,
             ttl: environment.sessionTtl,
         }),
+        cookie: {
+            secure: environment.cookieSecure,
+            httpOnly: environment.cookieHttpOnly,
+            sameSite: 'lax',
+            maxAge: environment.cookieMaxAge,
+        },
         secret: environment.sessionSecret, // used for session encryption?
         saveUninitialized: false, // prevents an uninitialized session to be saved to the session store
         resave: false, // prevents an unmodified session (in a request) to be resaved to the session store

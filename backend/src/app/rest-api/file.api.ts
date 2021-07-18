@@ -2,9 +2,8 @@ import { Router } from 'express';
 import { Grid } from 'gridfs-stream';
 import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from '../common/requests/file.data';
-import { JsonStringifyReplacer, Status } from '../common/types';
 import { FileModel } from '../models/file.model';
-import { Error } from 'mongoose';
+import { RestApi } from './rest.api';
 
 export class FileApi
 {
@@ -20,16 +19,11 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "add", file );
     
                 let res = await new FileModel( request.session, gfs ).add( file );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not add file" ) ];
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not add file" );
             }
         });
 
@@ -42,16 +36,11 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let res = await new FileModel( request.session, gfs ).get( file_id );
-                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonResponse( response, 200, res );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                let res = [ new Status().setError( "message", "could not get file" ) ];
-                response.status( 404 ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+                RestApi.sendJsonErrorResponse( response, 200, err, "could not get file" );
             }
         });
 
@@ -64,18 +53,11 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let [ status, file ] = await new FileModel( request.session, gfs ).get( file_id );
-                if( status.getStatus() != Status.SUCCESS || !file ) { response.status( 400 ); return; }
-                
-                if( file?.content_type ) response.setHeader( "Content-Type", file?.content_type );
-                response.status( 200 ).type( "application/json" ).send( file.data );
+                RestApi.sendFileResponse( response, status, file );
             }
             catch( err )
             {
-                if     ( err instanceof Status ) console.log( err );
-                else if( err instanceof Error  ) console.log( err );
-                else                             throw err;
-                
-                response.status( 404 );
+                RestApi.sendFileErrorResponse( response, err );
             }
         });
     }
