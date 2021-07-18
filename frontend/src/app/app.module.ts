@@ -77,7 +77,7 @@ import { SeshService } from './services/sesh/sesh.service';   // ------------- <
 import { RouteGuard } from './util/route-guard/route.guard';
 
 // interceptors
-import { JsonHttpInterceptor } from './json-http.interceptor';
+import { JsonHttpInterceptor } from './util/json-http/json-http.interceptor';
 
 
 @NgModule({
