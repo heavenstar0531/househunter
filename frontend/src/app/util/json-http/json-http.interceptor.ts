@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor, HttpResponse } from '@angular/common/http';
-import { filter, map } from "rxjs/operators";
+import { map } from "rxjs/operators";
 import { Observable } from 'rxjs';
 import { JsonParseReviver } from 'src/app/common/types'
 
@@ -10,15 +10,13 @@ export class JsonHttpInterceptor implements HttpInterceptor {
 
   intercept( request: HttpRequest<unknown>, next: HttpHandler ): Observable<HttpEvent<unknown>> {
     return next
-      .handle( request.clone( { setHeaders: { "Content-Type": "application/json" } } ) )
-      .pipe(
-        filter( ( event: any ) => event instanceof HttpResponse ),
-        map( event => this.parseResponse( event ) )
-      );
+      .handle( request )
+      .pipe( map( event => this.parseResponse( event ) ) );
   }
 
-  private parseResponse( event: HttpResponse<any> ): HttpEvent<any> {
-    if( "application/json".includes( event?.headers?.get( "Content-Type" ) ?? "" ) ) return event;
+  private parseResponse( event: HttpEvent<any> ): HttpEvent<any> {
+    if( !( event instanceof HttpResponse )
+     || !( event?.headers?.get( "Content-Type" ) ?? "" ).includes( "application/json" ) ) return event;
 
     let body_old = JSON.stringify( event.body );   // undo the JSON.parse that was previously done by the default angular http interceptor
     let body_new = JSON.parse( body_old, JsonParseReviver );   // parse the response the good way

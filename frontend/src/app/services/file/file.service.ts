@@ -26,7 +26,7 @@ export class FileService {
       FileApiCall.ensureValid( this.session.acc_type, "add", file );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/file/add`, JSON.stringify( file, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, ObjectId? ];
+      let res = await this.http.post( `${this.url}/file/add`, JSON.stringify( file, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, ObjectId? ];
 
       return res;
     }
@@ -45,7 +45,7 @@ export class FileService {
       FileApiCall.ensureValid( this.session.acc_type, "get", file_id );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/file/get`, JSON.stringify( file_id, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, FileData? ];
+      let res = await this.http.post( `${this.url}/file/get`, JSON.stringify( file_id, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, FileData? ];
 
       return res;
     }

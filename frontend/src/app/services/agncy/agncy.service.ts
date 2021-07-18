@@ -25,7 +25,7 @@ export class AgncyService {
       AgncyApiCall.ensureValid( this.session.acc_type, "get" );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/agncy/get`, JSON.stringify( {}, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, AgncyData? ];
+      let res = await this.http.post( `${this.url}/agncy/get`, JSON.stringify( {}, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, AgncyData? ];
 
       return res;
     }
@@ -44,7 +44,7 @@ export class AgncyService {
       AgncyApiCall.ensureValid( this.session.acc_type, "update", updated_agncy );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/agncy/update`, JSON.stringify( updated_agncy, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/agncy/update`, JSON.stringify( updated_agncy, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }

@@ -28,7 +28,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "add", acc );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/acc/add`, JSON.stringify( acc, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, ObjectId? ];
+      let res = await this.http.put( `${this.url}/acc/add`, JSON.stringify( acc, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, ObjectId? ];
 
       return res;
     }
@@ -47,7 +47,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "delete", acc_id );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/acc/delete`, JSON.stringify( acc_id, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/acc/delete`, JSON.stringify( acc_id, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }
@@ -66,7 +66,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "get", acc_id );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/acc/get`, JSON.stringify( acc_id, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, AccData? ];
+      let res = await this.http.post( `${this.url}/acc/get`, JSON.stringify( acc_id, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, AccData? ];
 
       return res;
     }
@@ -85,7 +85,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "list" );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/acc/list`, JSON.stringify( {}, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, Array<AccData>? ];
+      let res = await this.http.post( `${this.url}/acc/list`, JSON.stringify( {}, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, Array<AccData>? ];
 
       return res;
     }
@@ -106,7 +106,7 @@ export class AccService {
       AccApiCall.ensureValid( "gst", "login", username, password );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let [ status, acc ] = ( await this.http.post( `${this.url}/acc/login`, JSON.stringify( { username, password }, JsonStringifyReplacer ), { headers } ).toPromise() ) as [ Status, AccData? ];
+      let [ status, acc ] = ( await this.http.post( `${this.url}/acc/login`, JSON.stringify( { username, password }, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() ) as [ Status, AccData? ];
       
       if( status.getStatus() != Status.SUCCESS || !acc ) return [ status, acc ];
 
@@ -131,7 +131,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "logout" );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/acc/logout`, JSON.stringify( {}, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.post( `${this.url}/acc/logout`, JSON.stringify( {}, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       this.session.destroy();
       this.router.navigate( [''] );
@@ -154,7 +154,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "updateInfo", this.session.acc_id, updated_acc );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/acc/updateInfo`, JSON.stringify( updated_acc, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/acc/updateInfo`, JSON.stringify( updated_acc, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }
@@ -173,7 +173,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "updateStatus", this.session.acc_id, updated_acc );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/acc/updateStatus`, JSON.stringify( updated_acc, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/acc/updateStatus`, JSON.stringify( updated_acc, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }
@@ -194,7 +194,7 @@ export class AccService {
       AccApiCall.ensureValid( this.session.acc_type, "blockAnother", blocked_acc_id, is_blocked );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/acc/blockAnother`, JSON.stringify( { blocked_acc_id, is_blocked }, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/acc/blockAnother`, JSON.stringify( { blocked_acc_id, is_blocked }, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }

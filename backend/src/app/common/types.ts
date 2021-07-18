@@ -116,23 +116,24 @@ export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64
         // @ts-ignore @ts-expect-error
         let val: any = this[ key ];
         
-        return val ===  Infinity        ? { $num:   1 }:
-               val === -Infinity        ? { $num:  -1 }:
-               Number.isNaN( val )      ? { $num: ' ' }:
+        return val ===  Infinity             ? { $num:   1 }:
+               val === -Infinity             ? { $num:  -1 }:
+               Number.isNaN( val )           ? { $num: ' ' }:
                // @ts-expect-error
-               val instanceof Date      ? { $date: isNaN( val ) ? '!' : +val }:
-               val instanceof Map       ? { $map: [ ...val ] }:
-               val instanceof Set       ? { $set: [ ...val ] }:
-               val instanceof TypeError ? { $type_err: [ val.message, val.stack ] }:
-               val instanceof Error     ? { $err: [ val.message, val.stack ] }:
-               val instanceof RegExp    ? { $regexp: [ val.source,  val.flags ] }:
-               val instanceof ObjectId  ? { $bson_id: val.toHexString() }:
+               val instanceof Date           ? { $date: isNaN( val ) ? '!' : +val }:
+               val instanceof Map            ? { $map: [ ...val ] }:
+               val instanceof Set            ? { $set: [ ...val ] }:
+               val instanceof TypeError      ? { $type_err: [ val.message, val.stack ] }:
+               val instanceof Error          ? { $err: [ val.message, val.stack ] }:
+               val instanceof RegExp         ? { $regexp: [ val.source,  val.flags ] }:
+               val instanceof ObjectId       ? { $bson_id: val.toHexString() }:
+               val?._bsontype === "ObjectID" ? { $bson_id: val.toHexString() }:
          //    // @ts-expect-error
          //    ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
-               typeof val === 'bigint'  ? { $bigint: val + '' }:
-               val instanceof Status    ? { $status:   Object.setPrototypeOf( val, null ) || val }:
-               val instanceof Criteria  ? { $criteria: Object.setPrototypeOf( val, null ) || val }:
-               val instanceof Stats     ? { $stats:    Object.setPrototypeOf( val, null ) || val }:
+               typeof val === 'bigint'       ? { $bigint: val + '' }:
+               val instanceof Status         ? { $status:   Object.setPrototypeOf( val, null ) || val }:
+               val instanceof Criteria       ? { $criteria: Object.setPrototypeOf( val, null ) || val }:
+               val instanceof Stats          ? { $stats:    Object.setPrototypeOf( val, null ) || val }:
                val
     },
     JsonParseReviver: ( key: any, val: any ) => {
