@@ -217,7 +217,7 @@ export class PropData
 
 export class PropApiCall
 {
-    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|undefined|null, method: string|undefined|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "prop", method );
         let status = new Status();
@@ -412,10 +412,10 @@ export class PropApiCall
             case "makePurchaseOffer":
             {
                 let prop_id        = params[ 0 ] as ObjectId;
-             // let offered_amount = params[ 1 ] as number;
+                let offered_amount = params[ 1 ] as number;
 
                 if( !( prop_id        instanceof ObjectId ) ) status.setError( "prop_id.err", "property id missing" );
-             // if( !( offered_amount instanceof Number )   ) status.setError( "from_dt.err", "offered amount missing" );
+                if( typeof offered_amount != 'number'       ) status.setError( "from_dt.err", "offered amount missing" );
                 break;
             }
             // + acceptOrRejectPurchaseOffer( prop_id: ObjectId, offeror_id: number, accept: boolean )
@@ -423,11 +423,11 @@ export class PropApiCall
             {
                 let prop_id    = params[ 0 ] as ObjectId;
                 let offeror_id = params[ 1 ] as ObjectId;
-             // let accept     = params[ 2 ] as boolean;
+                let accept     = params[ 2 ] as boolean;
 
                 if( !( prop_id    instanceof ObjectId ) ) status.setError( "prop_id.err",    "property id missing" );
                 if( !( offeror_id instanceof ObjectId ) ) status.setError( "offeror_id.err", "offeror id missing" );
-             // if( !( accept     instanceof boolean  ) ) status.setError( "accept.err",     "accept switch missing" );
+                if( typeof accept != 'boolean'          ) status.setError( "accept.err",     "accept switch missing" );
                 break;
             }
             // + listPurchaseOffers( prop_id: ObjectId )

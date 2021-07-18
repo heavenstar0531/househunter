@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { SeshService } from '../services/sesh/sesh.service';
+import { SeshService } from '../../services/sesh/sesh.service';
 
 @Injectable({
   providedIn: 'root'

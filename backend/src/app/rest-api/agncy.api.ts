@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
 import { AgncyApiCall, AgncyData } from '../common/requests/agncy.data';
-import { Status } from '../common/types';
+import { JsonReplacer, Status } from '../common/types';
 import { AgncyModel } from '../models/agncy.model';
 import { NativeError } from 'mongoose';
 
@@ -18,7 +18,7 @@ export class AgncyApi
                 AgncyApiCall.ensureValid( session.acc_type, "get" );
                 
                 let res = await new AgncyModel( request.session ).get();
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -27,7 +27,7 @@ export class AgncyApi
                 else                                  throw err;
 
                 let res = [ new Status().setError( "message", "could not get agency" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -36,11 +36,11 @@ export class AgncyApi
             try
             {
                 let session = request.session as Session;
-                let updated_agncy = Object.assign( new AgncyData(), request.body.updated_agncy );
+                let updated_agncy = request.body.updated_agncy as AgncyData;
                 AgncyApiCall.ensureValid( session.acc_type, "update", updated_agncy );
 
                 let res = await new AgncyModel( request.session ).update( updated_agncy );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -49,7 +49,7 @@ export class AgncyApi
                 else                                  throw err;
 
                 let res = new Status().setError( "message", "could not update agency" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
     }

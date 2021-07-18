@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData } from '../common/requests/conv.data';
-import { Status } from '../common/types';
+import { JsonReplacer, Status } from '../common/types';
 import { ConvModel } from '../models/conv.model';
 import { NativeError } from 'mongoose';
 
@@ -16,11 +16,11 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let conv = Object.assign( new ConvData(), request.body.conv );
+                let conv = request.body.conv as ConvData;
                 ConvApiCall.ensureValid( session.acc_type, "add", conv );
                 
                 let res = await new ConvModel( request.session ).add( conv );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -29,7 +29,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not add conversation" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -38,11 +38,11 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let conv_id = Object.assign( new ObjectId(), request.body.conv_id );
+                let conv_id = request.body.conv_id as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "delete", conv_id );
                 
                 let res = await new ConvModel( request.session ).delete( conv_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -51,7 +51,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not delete conversation" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -60,11 +60,11 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let conv_id = Object.assign( new ObjectId(), request.body.conv_id );
+                let conv_id = request.body.conv_id as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "get", conv_id );
                 
                 let res = await new ConvModel( request.session ).get( conv_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -73,7 +73,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not get conversation" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -82,11 +82,11 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let is_archived = Object.assign( new Boolean(), request.body.is_archived );
+                let is_archived = request.body.is_archived as boolean;
                 ConvApiCall.ensureValid( session.acc_type, "list", is_archived );
                 
                 let res = await new ConvModel( request.session ).list( is_archived );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -95,7 +95,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not list conversations" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -106,12 +106,12 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let conv_id = Object.assign( new ObjectId(), request.body.conv_id );
-                let text = request.body.text;
+                let conv_id = request.body.conv_id as ObjectId;
+                let text = request.body.text as string;
                 ConvApiCall.ensureValid( session.acc_type, "sendMessage", conv_id, text );
                 
                 let res = await new ConvModel( request.session ).sendMessage( conv_id, text );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -120,7 +120,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not send message" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -129,12 +129,12 @@ export class ConvApi
             try
             {
                 let session = request.session as Session;
-                let conv_id = Object.assign( new ObjectId(), request.body.conv_id );
-                let last_msg_dt = Object.assign( new Date(), request.body.last_msg_dt );
+                let conv_id = request.body.conv_id as ObjectId;
+                let last_msg_dt = request.body.last_msg_dt as Date;
                 ConvApiCall.ensureValid( session.acc_type, "markRead", conv_id, last_msg_dt );
                 
                 let res = await new ConvModel( request.session ).markRead( conv_id, last_msg_dt );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -143,7 +143,7 @@ export class ConvApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not mark messages as read" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
     }

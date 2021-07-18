@@ -101,7 +101,7 @@ export class ConvData
 // FIXME: check if the object contains all the necessary keys
 export class ConvApiCall
 {
-    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|undefined|null, method: string|undefined|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "conv", method );
         let status = new Status();
@@ -140,8 +140,8 @@ export class ConvApiCall
             // + list( is_archived: boolean )
             case "list":
             {
-             // let is_archived = params[ 0 ] as boolean;
-             // if( !( is_archived instanceof boolean ) ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
+                let is_archived = params[ 0 ] as boolean;
+                if( typeof is_archived != 'boolean' ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
                 break;
             }
 
@@ -153,7 +153,7 @@ export class ConvApiCall
                 let text      = params[ 1 ] as string;
 
                 if( !( conv_id   instanceof ObjectId ) ) status.setError( "conv_id.err",   "conversation id missing" );
-             // if( !( text      instanceof string )   ) status.setError( "text.err",      "message text missing" );
+                if( typeof text != 'string'            ) status.setError( "text.err",      "message text missing" );
                 break;
             }
             // + listMessages( conv_id: ObjectId )

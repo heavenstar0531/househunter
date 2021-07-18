@@ -12,13 +12,10 @@ export class SeshService {
     let acc_id: any = localStorage.getItem( "acc_id" );
     if( !acc_id ) return null;
     
-    acc_id = JSON.parse( acc_id );
+    acc_id = JSON.parse( acc_id ) as ObjectId;
     if( !acc_id ) return null;
 
-    acc_id = Object.assign( new ObjectId(), acc_id );
-    if( !acc_id ) return null;
-
-    return acc_id as ObjectId;
+    return acc_id;
   }
   
   set acc_id( acc_id: ObjectId|null )

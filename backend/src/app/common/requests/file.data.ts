@@ -78,7 +78,7 @@ export class FileData
 // FIXME: check if the object contains all the necessary keys
 export class FileApiCall
 {
-    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|undefined|null, method: string|undefined|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "file", method );
         let status = new Status();

@@ -3,7 +3,7 @@ import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
 import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from '../common/requests/file.data';
-import { Status } from '../common/types';
+import { JsonReplacer, Status } from '../common/types';
 import { FileModel } from '../models/file.model';
 import { NativeError } from 'mongoose';
 
@@ -21,7 +21,7 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "add", file );
     
                 let res = await new FileModel( request.session, gfs ).add( file );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -30,7 +30,7 @@ export class FileApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not add file" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -43,7 +43,7 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let res = await new FileModel( request.session, gfs ).get( file_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -52,7 +52,7 @@ export class FileApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not get file" ) ];
-                response.status( 404 ).json( res );
+                response.status( 404 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -65,9 +65,10 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let [ status, file ] = await new FileModel( request.session, gfs ).get( file_id );
-                if( status.getStatus() != Status.SUCCESS ) { response.status( 400 ); return; }
+                if( status.getStatus() != Status.SUCCESS || !file ) { response.status( 400 ); return; }
                 
-                response.status( 200 ).setHeader( "Content-Type", file.content_type ).send( file.data );
+                if( file?.content_type ) response.setHeader( "Content-Type", file?.content_type );
+                response.status( 200 ).send( file.data );
             }
             catch( err )
             {

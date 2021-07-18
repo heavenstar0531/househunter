@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Stats } from 'fs';
 import ObjectId from 'bson-objectid';
 import { OfferData, PropApiCall, PropData } from 'src/app/common/requests/prop.data';
-import { Criteria, Status } from 'src/app/common/types';
+import { Criteria, JsonReplacer, Status } from 'src/app/common/types';
 import { SeshService } from '../sesh/sesh.service';
 import { environment } from 'src/environments/environment';
 
@@ -25,7 +25,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "add", prop );
-      let res = await this.http.post( `${this.url}/prop/add`, prop ).toPromise() as [ Status, ObjectId? ];
+      let res = await this.http.post( `${this.url}/prop/add`, JSON.stringify( prop, JsonReplacer ) ).toPromise() as [ Status, ObjectId? ];
       return res;
     }
     catch( err )
@@ -41,7 +41,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "addMany", prop_list );
-      let res = await this.http.post( `${this.url}/prop/addMany`, prop_list ).toPromise() as [ Status, Array<ObjectId>? ];
+      let res = await this.http.post( `${this.url}/prop/addMany`, JSON.stringify( prop_list, JsonReplacer ) ).toPromise() as [ Status, Array<ObjectId>? ];
       return res;
     }
     catch( err )
@@ -57,7 +57,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "delete", prop_id );
-      let res = await this.http.put( `${this.url}/prop/delete`, prop_id ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/prop/delete`, JSON.stringify( prop_id, JsonReplacer ) ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -73,7 +73,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "get", prop_id );
-      let res = await this.http.post( `${this.url}/prop/get`, prop_id ).toPromise() as [ Status, PropData? ];
+      let res = await this.http.post( `${this.url}/prop/get`, JSON.stringify( prop_id, JsonReplacer ) ).toPromise() as [ Status, PropData? ];
       return res;
     }
     catch( err )
@@ -89,7 +89,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "list", criteria );
-      let res = await this.http.post( `${this.url}/prop/list`, criteria ).toPromise() as [ Status, Array<PropData>? ];
+      let res = await this.http.post( `${this.url}/prop/list`, JSON.stringify( criteria, JsonReplacer ) ).toPromise() as [ Status, Array<PropData>? ];
       return res;
     }
     catch( err )
@@ -107,7 +107,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "updateInfo", updated_prop );
-      let res = await this.http.put( `${this.url}/prop/updateInfo`, updated_prop ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/prop/updateInfo`, JSON.stringify( updated_prop, JsonReplacer ) ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -123,7 +123,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "updateStatus", updated_prop );
-      let res = await this.http.put( `${this.url}/prop/updateStatus`, updated_prop ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/prop/updateStatus`, JSON.stringify( updated_prop, JsonReplacer ) ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -141,7 +141,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "rent", prop_id, from_dt, to_dt );
-      let res = await this.http.put( `${this.url}/prop/rent`, { prop_id, from_dt, to_dt } ).toPromise() as [ Status, number ];
+      let res = await this.http.put( `${this.url}/prop/rent`, JSON.stringify( { prop_id, from_dt, to_dt }, JsonReplacer ) ).toPromise() as [ Status, number ];
       return res;
     }
     catch( err )
@@ -158,7 +158,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "makePurchaseOffer", prop_id, offered_amount );
-      let res = await this.http.put( `${this.url}/prop/makePurchaseOffer`, { prop_id, offered_amount } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/prop/makePurchaseOffer`, JSON.stringify( { prop_id, offered_amount }, JsonReplacer ) ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -174,7 +174,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "acceptOrRejectPurchaseOffer", prop_id, offeror_id, accept );
-      let res = await this.http.put( `${this.url}/prop/acceptOrRejectPurchaseOffer`, { prop_id, offeror_id, accept } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/prop/acceptOrRejectPurchaseOffer`, JSON.stringify( { prop_id, offeror_id, accept }, JsonReplacer ) ).toPromise() as Status;
       return res;
     }
     catch( err )
@@ -190,7 +190,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "listPurchaseOffers", prop_id );
-      let res = await this.http.post( `${this.url}/prop/listPurchaseOffers`, prop_id ).toPromise() as [ Status, Array< OfferData >? ];
+      let res = await this.http.post( `${this.url}/prop/listPurchaseOffers`, JSON.stringify( prop_id, JsonReplacer ) ).toPromise() as [ Status, Array< OfferData >? ];
       return res;
     }
     catch( err )
@@ -208,7 +208,7 @@ export class PropService {
     try
     {
       PropApiCall.ensureValid( this.session.acc_type, "getStats" );
-      let res = await this.http.post( `${this.url}/prop/getStats`, criteria ).toPromise() as [ Status, Stats? ];
+      let res = await this.http.post( `${this.url}/prop/getStats`, JSON.stringify( criteria, JsonReplacer ) ).toPromise() as [ Status, Stats? ];
       return res;
     }
     catch( err )

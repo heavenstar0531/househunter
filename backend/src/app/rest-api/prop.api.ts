@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { PropApiCall, PropData } from '../common/requests/prop.data';
-import { Criteria, Status } from '../common/types';
+import { Criteria, JsonReplacer, Status } from '../common/types';
 import { PropModel } from '../models/prop.model';
 import { NativeError } from 'mongoose';
 
@@ -16,11 +16,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop = Object.assign( new PropData(), request.body.prop );
+                let prop = request.body.prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "add", prop );
                 
                 let res = await new PropModel( request.session ).add( prop );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -29,7 +29,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not add property" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -38,16 +38,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_list_src = request.body.prop_list as Array<PropData>;
-                let prop_list = new Array<PropData>();
-                for( let i = 0; i < prop_list_src.length; i++ )
-                {
-                    prop_list.push( Object.assign( new PropData(), prop_list_src[ i ] ) );
-                }
+                let prop_list = request.body.prop_list as Array<PropData>;
                 PropApiCall.ensureValid( session.acc_type, "addMany", prop_list );
                 
                 let res = await new PropModel( request.session ).addMany( prop_list );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -56,7 +51,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not add properties from given list" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -65,11 +60,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
+                let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "delete", prop_id );
                 
                 let res = await new PropModel( request.session ).delete( prop_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -78,7 +73,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not delete property" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
         
@@ -87,11 +82,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
+                let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "get", prop_id );
                 
                 let res = await new PropModel( request.session ).get( prop_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -100,7 +95,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not get property" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -109,11 +104,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let criteria = Object.assign( new Criteria(), request.body.criteria );
+                let criteria = request.body.criteria as Criteria;
                 PropApiCall.ensureValid( session.acc_type, "list", criteria );
                 
                 let res = await new PropModel( request.session ).list( criteria );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -122,7 +117,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not list properties" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -133,11 +128,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let updated_prop = Object.assign( new PropData(), request.body.updated_prop );
+                let updated_prop = request.body.updated_prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateInfo", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateInfo( updated_prop );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -146,7 +141,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not update property info" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -155,11 +150,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let updated_prop = Object.assign( new PropData(), request.body.updated_prop );
+                let updated_prop = request.body.updated_prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateStatus", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateStatus( updated_prop );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -168,7 +163,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not update property status" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -179,13 +174,13 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
-                let from_dt = Object.assign( new Date(), request.body.from_dt );
-                let to_dt = Object.assign( new Date(), request.body.to_dt );
+                let prop_id = request.body.prop_id as ObjectId;
+                let from_dt = request.body.from_dt as Date;
+                let to_dt = request.body.to_dt as Date;
                 PropApiCall.ensureValid( session.acc_type, "rent", prop_id, from_dt, to_dt );
                 
                 let res = await new PropModel( request.session ).rent( prop_id, from_dt, to_dt );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -194,7 +189,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = [ new Status().setError( "message", "could not rent property" ) ];
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -205,12 +200,12 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
-                let offered_amount = Object.assign( new Number(), request.body.offered_amount );
+                let prop_id = request.body.prop_id as ObjectId;
+                let offered_amount = request.body.offered_amount as number;
                 PropApiCall.ensureValid( session.acc_type, "makePurchaseOffer", prop_id, offered_amount );
                 
                 let res = await new PropModel( request.session ).makePurchaseOffer( prop_id, offered_amount );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -219,7 +214,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not make purchase offer on property" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -228,13 +223,13 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
-                let offeror_id = Object.assign( new ObjectId(), request.body.offeror_id );
-                let accept = Object.assign( new Boolean(), request.body.accept );
+                let prop_id = request.body.prop_id as ObjectId;
+                let offeror_id = request.body.offeror_id as ObjectId;
+                let accept = request.body.accept as boolean;
                 PropApiCall.ensureValid( session.acc_type, "acceptOrRejectPurchaseOffer", prop_id, offeror_id, accept );
                 
                 let res = await new PropModel( request.session ).acceptOrRejectPurchaseOffer( prop_id, offeror_id, accept );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -243,7 +238,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not make purchase offer on property" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -252,11 +247,11 @@ export class PropApi
             try
             {
                 let session = request.session as Session;
-                let prop_id = Object.assign( new ObjectId(), request.body.prop_id );
+                let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "listPurchaseOffers", prop_id );
                 
                 let res = await new PropModel( request.session ).listPurchaseOffers( prop_id );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -265,7 +260,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not list purchase offers for property" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
 
@@ -279,7 +274,7 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "getStats" );
                 
                 let res = await new PropModel( request.session ).getStats();
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
             catch( err )
             {
@@ -288,7 +283,7 @@ export class PropApi
                 else                                  throw err;
                 
                 let res = new Status().setError( "message", "could not get stats for properties" );
-                response.status( 200 ).json( res );
+                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
             }
         });
     }

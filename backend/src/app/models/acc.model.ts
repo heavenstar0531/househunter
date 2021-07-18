@@ -112,7 +112,8 @@ export class AccModel
     async logout(): Promise<Status>
     {
         if( !this.session.acc_id ) return new Status().setError( "message", "no user to log out" );
-        this.session.destroy( () => { return new Status() } );
+        this.session.destroy( () => {} );
+        return new Status();
     }
     
 

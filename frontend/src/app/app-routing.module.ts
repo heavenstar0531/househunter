@@ -11,11 +11,11 @@ import { MyAccountPageComponent } from './components/pages/my-account-page/my-ac
 import { PropertyFormComponent } from './components/forms/property-form/property-form.component';
 
 // route guard
-import { RouteGuard } from './util/route.guard';
+import { RouteGuard } from './util/route-guard/route.guard';
 
 
 // application routes
-let appRoutes: Routes = [
+const routes: Routes = [
   // ____________________________________________________________________________________________________
   // pages
   { path: 'aaa',        component: PropertyFormComponent,          data: { acc_type: { adm:0,                      }, breadcrumb: { label: 'AAAAA'       } },  canActivate: [ RouteGuard ], },   // TODO: remove
@@ -33,7 +33,7 @@ let appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot( routes )],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
@@ -42,8 +42,7 @@ export class AppRoutingModule { }
 // +   deep copy the app routes object first before exporting
 // +   the result is not! a Routes object, instead it is just a plain old javascript object
 // +   https://stackoverflow.com/questions/5873624/parse-json-string-into-a-particular-object-prototype-in-javascript
-// +   Object.assign( new Foo, { a: 1 } )
-appRoutes = JSON.parse( JSON.stringify( appRoutes ) );
+let appRoutes = JSON.parse( JSON.stringify( routes ) );
 appRoutes.pop();
 appRoutes.pop();
 export { appRoutes };

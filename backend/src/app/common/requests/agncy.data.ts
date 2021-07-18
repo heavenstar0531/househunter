@@ -34,7 +34,7 @@ export class AgncyData
 // FIXME: check if the object contains all the necessary keys
 export class AgncyApiCall
 {
-    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|undefined|null, method: string|undefined|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "agncy", method );
         let status = new Status();

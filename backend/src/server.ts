@@ -30,6 +30,7 @@ import { AccApi } from "./app/rest-api/acc.api";
 import { ConvApi } from "./app/rest-api/conv.api";
 import { PropApi } from "./app/rest-api/prop.api";
 import { FileApi } from "./app/rest-api/file.api";
+import { JsonReviver } from "./app/common/types";
 
 
 // the main function
@@ -42,7 +43,7 @@ async function main() {
     // use cross-origin sharing between the express backend and angular frontend (since the domains are different)
     app.use( cors() );
     // set that all requests' bodies are read as json
-    app.use( express.json() );
+    app.use( express.json( { reviver: JsonReviver, } ) );
     // enable the session store for mongodb
     app.use( session({
         store: MongoStore.create({

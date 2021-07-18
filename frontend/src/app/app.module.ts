@@ -73,8 +73,11 @@ import { ConvService } from './services/conv/conv.service';
 import { FileService } from './services/file/file.service';
 import { SeshService } from './services/sesh/sesh.service';   // ------------- <<< last one
 
-// route guards
-import { RouteGuard } from './util/route.guard';
+// guards
+import { RouteGuard } from './util/route-guard/route.guard';
+
+// interceptors
+import { JsonHttpInterceptor } from './json-http.interceptor';
 
 
 @NgModule({
@@ -133,8 +136,10 @@ import { RouteGuard } from './util/route.guard';
     ConvService,
     FileService,
     SeshService,
-    // route guards
-    RouteGuard,   // ------------- <<< last one
+    // guards
+    RouteGuard,
+    // interceptors
+    JsonHttpInterceptor,   // ------------- <<< last one
   ],
   bootstrap: [AppComponent],
 })

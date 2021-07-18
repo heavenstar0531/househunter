@@ -94,7 +94,7 @@ export class AccData
 // FIXME: check if the object contains all the necessary keys
 export class AccApiCall
 {
-    static ensureValid( acc_type: string|null, method: string|null, ...params: Array<any> ): void
+    static ensureValid( acc_type: string|undefined|null, method: string|undefined|null, ...params: Array<any> ): void
     {
         EnsurePermission( acc_type, "acc", method );
         let status = new Status();
@@ -190,9 +190,9 @@ export class AccApiCall
             case "blockAnother":
             {
                 let blocked_acc_id = params[ 0 ] as ObjectId;
-             // let is_blocked     = params[ 1 ] as boolean;
+                let is_blocked     = params[ 1 ] as boolean;
                 if( !( blocked_acc_id instanceof ObjectId ) ) status.setError( "blocked_id.err", "blocked account id missing" );
-             // if( !( is_blocked     instanceof Boolean )  ) status.setError( "is_blocked.err", "new blocked status missing" );
+                if( typeof is_blocked != 'boolean'          ) status.setError( "is_blocked.err", "new blocked status missing" );
                 break;
             }
         }

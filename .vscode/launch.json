@@ -21,7 +21,7 @@
                 {
                     "url": "webpack:///src",
                     "path": "${workspaceFolder}/frontend/src"
-                },
+                }
             ]
         }
     ]

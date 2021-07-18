@@ -51,7 +51,7 @@ const permissionMap: any = {
 };
 
 
-export function EnsurePermission( acc_type: string|null, target: string|null, method: string|null ): void {
+export function EnsurePermission( acc_type: string|undefined|null, target: string|undefined|null, method: string|undefined|null ): void {
     if( !acc_type ) acc_type = "gst";
     if( !target || !method || !permissionMap[target]?.[method]?.[acc_type] )
     {
