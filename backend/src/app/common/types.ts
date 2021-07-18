@@ -92,6 +92,9 @@ export const { JsonReplacer, JsonReviver } = ( ( types: any, buf64: any ) => ( {
         return val ===  Infinity        ? { $num:   1 }:
                val === -Infinity        ? { $num:  -1 }:
                Number.isNaN( val )      ? { $num: ' ' }:
+               val instanceof Status    ? { $status: val }:
+               val instanceof Criteria  ? { $criteria: val }:
+               val instanceof Stats     ? { $stats: val }:
                // @ts-expect-error
                val instanceof Date      ? { $date: isNaN( val ) ? '!' : +val }:
                val instanceof Map       ? { $map: [ ...val ] }:
@@ -108,6 +111,9 @@ export const { JsonReplacer, JsonReviver } = ( ( types: any, buf64: any ) => ( {
     JsonReviver: ( key: any, val: any ) => {
         return ( val === null && val !== 'object' ) ? val:
             val.$num      ? val.$num / 0:
+            val.$status   ? Object.assign( new Status(),   val.$status ):
+            val.$criteria ? Object.assign( new Criteria(), val.$criteria ):
+            val.$stats    ? Object.assign( new Stats(),    val.$stats ):
             val.$date     ? new Date( val.$date ):
             // @ts-expect-error
             val.$regexp   ? new RegExp( ...val.$regexp ):

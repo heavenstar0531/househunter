@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData, MsgData } from 'src/app/common/requests/conv.data';
@@ -24,7 +24,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "add", conv );
-      let res = await this.http.post( `${this.url}/conv/add`, JSON.stringify( conv, JsonReplacer ) ).toPromise() as [ Status, ObjectId? ];
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.post( `${this.url}/conv/add`, JSON.stringify( conv, JsonReplacer ), { headers } ).toPromise() as [ Status, ObjectId? ];
+
       return res;
     }
     catch( err )
@@ -40,7 +43,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "delete", conv_id );
-      let res = await this.http.put( `${this.url}/conv/delete`, JSON.stringify( conv_id, JsonReplacer ) ).toPromise() as Status;
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.put( `${this.url}/conv/delete`, JSON.stringify( conv_id, JsonReplacer ), { headers } ).toPromise() as Status;
+
       return res;
     }
     catch( err )
@@ -56,7 +62,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "get", conv_id );
-      let res = await this.http.post( `${this.url}/conv/get`, JSON.stringify( conv_id, JsonReplacer ) ).toPromise() as [ Status, ConvData? ];
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.post( `${this.url}/conv/get`, JSON.stringify( conv_id, JsonReplacer ), { headers } ).toPromise() as [ Status, ConvData? ];
+
       return res;
     }
     catch( err )
@@ -72,7 +81,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "list", is_archived );
-      let res = await this.http.post( `${this.url}/conv/list`, JSON.stringify( is_archived, JsonReplacer ) ).toPromise() as [ Status, Array<ConvData>? ];
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.post( `${this.url}/conv/list`, JSON.stringify( is_archived, JsonReplacer ), { headers } ).toPromise() as [ Status, Array<ConvData>? ];
+
       return res;
     }
     catch( err )
@@ -90,7 +102,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "sendMessage", conv_id, text );
-      let res = await this.http.put( `${this.url}/conv/sendMessage`, JSON.stringify( conv_id, JsonReplacer ) ).toPromise() as [ Status, MsgData? ];
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.put( `${this.url}/conv/sendMessage`, JSON.stringify( conv_id, JsonReplacer ), { headers } ).toPromise() as [ Status, MsgData? ];
+
       return res;
     }
     catch( err )
@@ -106,7 +121,10 @@ export class ConvService {
     try
     {
       ConvApiCall.ensureValid( this.session.acc_type, "markRead", conv_id, last_msg_dt );
-      let res = await this.http.put( `${this.url}/conv/markRead`, JSON.stringify( conv_id, JsonReplacer ) ).toPromise() as Status;
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.put( `${this.url}/conv/markRead`, JSON.stringify( conv_id, JsonReplacer ), { headers } ).toPromise() as Status;
+
       return res;
     }
     catch( err )

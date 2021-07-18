@@ -2,6 +2,7 @@ import ObjectId from 'bson-objectid';
 import { EnsurePermission } from '../permissions';
 import { Status } from '../types';
 
+// IMPORTANT: don't add any nonstatic methods, since the json replacer and reviver view this object as POJO
 export class AgncyData
 {
     // ------------------------------------------------------------- <<< agency info

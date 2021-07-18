@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AgncyApiCall, AgncyData } from 'src/app/common/requests/agncy.data';
 import { JsonReplacer, Status } from 'src/app/common/types';
@@ -23,7 +23,10 @@ export class AgncyService {
     try
     {
       AgncyApiCall.ensureValid( this.session.acc_type, "get" );
-      let res = await this.http.post( `${this.url}/agncy/get`, JSON.stringify( {}, JsonReplacer ) ).toPromise() as [ Status, AgncyData? ];
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.post( `${this.url}/agncy/get`, JSON.stringify( {}, JsonReplacer ), { headers } ).toPromise() as [ Status, AgncyData? ];
+
       return res;
     }
     catch( err )
@@ -39,7 +42,10 @@ export class AgncyService {
     try
     {
       AgncyApiCall.ensureValid( this.session.acc_type, "update", updated_agncy );
-      let res = await this.http.put( `${this.url}/agncy/update`, JSON.stringify( updated_agncy, JsonReplacer ) ).toPromise() as Status;
+
+      let headers = new HttpHeaders().set( "Content-Type", "application/json" );
+      let res = await this.http.put( `${this.url}/agncy/update`, JSON.stringify( updated_agncy, JsonReplacer ), { headers } ).toPromise() as Status;
+
       return res;
     }
     catch( err )

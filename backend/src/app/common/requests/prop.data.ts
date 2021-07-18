@@ -3,6 +3,7 @@ import { AgncyApiCall } from '../requests/agncy.data';
 import { EnsurePermission } from '../permissions';
 import { Criteria, Status } from '../types';
 
+// IMPORTANT: don't add any nonstatic methods, since the json replacer and reviver view this object as POJO
 export class RentData
 {
     // ------------------------------------------------------------- <<< rent info
@@ -30,6 +31,7 @@ export class RentData
 };
 
 
+// IMPORTANT: don't add any nonstatic methods, since the json replacer and reviver view this object as POJO
 export class OfferData
 {
     // ------------------------------------------------------------- <<< offer info
@@ -56,6 +58,7 @@ export class OfferData
 };
 
 
+// IMPORTANT: don't add any nonstatic methods, since the json replacer and reviver view this object as POJO
 export class PropData
 {
     // ------------------------------------------------------------- <<< property info
