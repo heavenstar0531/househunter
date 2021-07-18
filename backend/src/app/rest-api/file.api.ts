@@ -3,9 +3,9 @@ import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
 import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from '../common/requests/file.data';
-import { JsonReplacer, Status } from '../common/types';
+import { JsonStringifyReplacer, Status } from '../common/types';
 import { FileModel } from '../models/file.model';
-import { NativeError } from 'mongoose';
+import { Error } from 'mongoose';
 
 export class FileApi
 {
@@ -21,16 +21,16 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "add", file );
     
                 let res = await new FileModel( request.session, gfs ).add( file );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not add file" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -43,16 +43,16 @@ export class FileApi
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let res = await new FileModel( request.session, gfs ).get( file_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not get file" ) ];
-                response.status( 404 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 404 ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -68,13 +68,13 @@ export class FileApi
                 if( status.getStatus() != Status.SUCCESS || !file ) { response.status( 400 ); return; }
                 
                 if( file?.content_type ) response.setHeader( "Content-Type", file?.content_type );
-                response.status( 200 ).send( file.data );
+                response.status( 200 ).type( "application/json" ).send( file.data );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 response.status( 404 );
             }

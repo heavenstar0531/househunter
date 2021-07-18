@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app/app.component';
 // two-way data binding for forms, http client, bootstrap and breadcrumb modules
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // https://www.npmjs.com/package/@ng-bootstrap/ng-bootstrap
 // +   https://ng-bootstrap.github.io/#/components/nav/examples
 // +   https://ng-bootstrap.github.io/#/components/dropdown/examples
@@ -139,7 +139,7 @@ import { JsonHttpInterceptor } from './json-http.interceptor';
     // guards
     RouteGuard,
     // interceptors
-    JsonHttpInterceptor,   // ------------- <<< last one
+    { provide: HTTP_INTERCEPTORS, useClass: JsonHttpInterceptor, multi: true },   // ------------- <<< last one
   ],
   bootstrap: [AppComponent],
 })

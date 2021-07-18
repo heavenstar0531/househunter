@@ -1,9 +1,9 @@
 import { Router } from 'express';
 import { Session } from '../util/types';
 import { AgncyApiCall, AgncyData } from '../common/requests/agncy.data';
-import { JsonReplacer, Status } from '../common/types';
+import { JsonStringifyReplacer, Status } from '../common/types';
 import { AgncyModel } from '../models/agncy.model';
-import { NativeError } from 'mongoose';
+import { Error } from 'mongoose';
 
 export class AgncyApi
 {
@@ -18,16 +18,16 @@ export class AgncyApi
                 AgncyApiCall.ensureValid( session.acc_type, "get" );
                 
                 let res = await new AgncyModel( request.session ).get();
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
 
                 let res = [ new Status().setError( "message", "could not get agency" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -40,16 +40,16 @@ export class AgncyApi
                 AgncyApiCall.ensureValid( session.acc_type, "update", updated_agncy );
 
                 let res = await new AgncyModel( request.session ).update( updated_agncy );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
 
                 let res = new Status().setError( "message", "could not update agency" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
     }

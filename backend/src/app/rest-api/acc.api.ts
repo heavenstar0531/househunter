@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { AccApiCall, AccData } from '../common/requests/acc.data';
-import { JsonReplacer, Status } from '../common/types';
+import { JsonStringifyReplacer, Status } from '../common/types';
 import { AccModel } from '../models/acc.model';
-import { NativeError } from 'mongoose';
+import { Error } from 'mongoose';
 
 export class AccApi
 {
@@ -20,16 +20,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "add", acc );
                 
                 let res = await new AccModel( request.session ).add( acc );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
 
                 let res = [ new Status().setError( "message", "could not add account" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -42,16 +42,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "delete", acc_id );
                 
                 let res = await new AccModel( request.session ).delete( acc_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not delete account" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
         
@@ -64,16 +64,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "get", acc_id );
                 
                 let res = await new AccModel( request.session ).get( acc_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not get account" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
         
@@ -85,16 +85,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "list" );
                 
                 let res = await new AccModel( request.session ).list();
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not list accounts" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -109,16 +109,16 @@ export class AccApi
                 AccApiCall.ensureValid( "gst", "login", username, password );
                 
                 let res = await new AccModel( request.session ).login( username, password );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not log in" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
         
@@ -130,16 +130,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "logout" );
                 
                 let res = await new AccModel( request.session ).logout();
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not log out" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -154,16 +154,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "updateInfo", session.acc_id, updated_acc );
                 
                 let res = await new AccModel( request.session ).updateInfo( updated_acc );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not update account info" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -176,16 +176,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "updateStatus", session.acc_id, updated_acc );
                 
                 let res = await new AccModel( request.session ).updateStatus( updated_acc );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not update account status" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -202,16 +202,16 @@ export class AccApi
                 AccApiCall.ensureValid( session.acc_type, "blockAnother", blocked_acc_id, is_blocked );
                 
                 let res = await new AccModel( request.session ).blockAnother( blocked_acc_id, is_blocked );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not " + ( is_blocked ? "block" : "unblock" ) + " another account" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
     }

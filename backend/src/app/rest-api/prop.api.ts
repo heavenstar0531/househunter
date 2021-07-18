@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { PropApiCall, PropData } from '../common/requests/prop.data';
-import { Criteria, JsonReplacer, Status } from '../common/types';
+import { Criteria, JsonStringifyReplacer, Status } from '../common/types';
 import { PropModel } from '../models/prop.model';
-import { NativeError } from 'mongoose';
+import { Error } from 'mongoose';
 
 export class PropApi
 {
@@ -20,16 +20,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "add", prop );
                 
                 let res = await new PropModel( request.session ).add( prop );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not add property" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -42,16 +42,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "addMany", prop_list );
                 
                 let res = await new PropModel( request.session ).addMany( prop_list );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not add properties from given list" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -64,16 +64,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "delete", prop_id );
                 
                 let res = await new PropModel( request.session ).delete( prop_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not delete property" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
         
@@ -86,16 +86,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "get", prop_id );
                 
                 let res = await new PropModel( request.session ).get( prop_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not get property" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -108,16 +108,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "list", criteria );
                 
                 let res = await new PropModel( request.session ).list( criteria );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not list properties" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -132,16 +132,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "updateInfo", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateInfo( updated_prop );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not update property info" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -154,16 +154,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "updateStatus", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateStatus( updated_prop );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not update property status" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -180,16 +180,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "rent", prop_id, from_dt, to_dt );
                 
                 let res = await new PropModel( request.session ).rent( prop_id, from_dt, to_dt );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not rent property" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -205,16 +205,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "makePurchaseOffer", prop_id, offered_amount );
                 
                 let res = await new PropModel( request.session ).makePurchaseOffer( prop_id, offered_amount );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not make purchase offer on property" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -229,16 +229,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "acceptOrRejectPurchaseOffer", prop_id, offeror_id, accept );
                 
                 let res = await new PropModel( request.session ).acceptOrRejectPurchaseOffer( prop_id, offeror_id, accept );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not make purchase offer on property" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -251,16 +251,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "listPurchaseOffers", prop_id );
                 
                 let res = await new PropModel( request.session ).listPurchaseOffers( prop_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not list purchase offers for property" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -274,16 +274,16 @@ export class PropApi
                 PropApiCall.ensureValid( session.acc_type, "getStats" );
                 
                 let res = await new PropModel( request.session ).getStats();
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not get stats for properties" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
     }

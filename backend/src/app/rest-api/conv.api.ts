@@ -2,9 +2,9 @@ import { Router } from 'express';
 import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData } from '../common/requests/conv.data';
-import { JsonReplacer, Status } from '../common/types';
+import { JsonStringifyReplacer, Status } from '../common/types';
 import { ConvModel } from '../models/conv.model';
-import { NativeError } from 'mongoose';
+import { Error } from 'mongoose';
 
 export class ConvApi
 {
@@ -20,16 +20,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "add", conv );
                 
                 let res = await new ConvModel( request.session ).add( conv );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not add conversation" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -42,16 +42,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "delete", conv_id );
                 
                 let res = await new ConvModel( request.session ).delete( conv_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not delete conversation" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -64,16 +64,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "get", conv_id );
                 
                 let res = await new ConvModel( request.session ).get( conv_id );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not get conversation" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -86,16 +86,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "list", is_archived );
                 
                 let res = await new ConvModel( request.session ).list( is_archived );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not list conversations" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -111,16 +111,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "sendMessage", conv_id, text );
                 
                 let res = await new ConvModel( request.session ).sendMessage( conv_id, text );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = [ new Status().setError( "message", "could not send message" ) ];
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
 
@@ -134,16 +134,16 @@ export class ConvApi
                 ConvApiCall.ensureValid( session.acc_type, "markRead", conv_id, last_msg_dt );
                 
                 let res = await new ConvModel( request.session ).markRead( conv_id, last_msg_dt );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
             catch( err )
             {
-                if     ( err instanceof Status      ) console.log( err );
-                else if( err instanceof NativeError ) console.log( err );
-                else                                  throw err;
+                if     ( err instanceof Status ) console.log( err );
+                else if( err instanceof Error  ) console.log( err );
+                else                             throw err;
                 
                 let res = new Status().setError( "message", "could not mark messages as read" );
-                response.status( 200 ).send( JSON.stringify( res, JsonReplacer ) );
+                response.status( 200 ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
             }
         });
     }

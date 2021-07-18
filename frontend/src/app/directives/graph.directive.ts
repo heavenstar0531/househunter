@@ -1,4 +1,4 @@
-import { Directive, Input, ElementRef } from '@angular/core';
+import { Directive, Input, ElementRef, Inject } from '@angular/core';
 import * as c3 from 'c3'
 
 @Directive({
@@ -8,7 +8,7 @@ export class GraphDirective {
   chart: any|c3.ChartAPI;
   
   constructor(
-    private graph_ref: ElementRef,
+    @Inject( ElementRef ) private graph_ref: ElementRef,
   ) {}
 
   @Input( 'graph' )

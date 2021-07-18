@@ -15,7 +15,8 @@ export class RouteGuard implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
     ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      return this.sesh.acc_type in ( route.data?.acc_type ?? { } );
+      return true;
+      // return this.sesh.acc_type in ( route.data?.acc_type ?? { } );   // TODO: vratiti
   }
   
 }

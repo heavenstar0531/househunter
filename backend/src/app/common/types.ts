@@ -2,16 +2,25 @@ import ObjectId from "bson-objectid";
 
 export class Status
 {
-    private map: any = {};
+    private map: Map<string, any> = new Map<string, any>();
     private status: number = Status.SUCCESS;
     static readonly ERROR:   number = -2;
     static readonly WARNING: number = -1;
     static readonly SUCCESS: number =  0;
 
     constructor() {}
-    
+
+    *[ Symbol.iterator ] (): any
+    {
+        for( let key in this )
+        {
+            yield [ key, this[ key ] ];
+        }
+    };
+
     getStatus(): number { return this.status; }
-    getKey( key: string ): any { return this.map[ key ]; }
+    getKey( key: string ): any { return this.map.get( key ); }
+    hasKey( key: string ): boolean { return this.map.has( key ); }
     
     private setStatus( status: number ): Status
     {
@@ -19,7 +28,7 @@ export class Status
         return this;
     }
 
-    private setKey( key: string, value: any ): void { this.map[ key ] = value; }
+    private setKey( key: string, value: any ): void { this.map.set( key, value ); }
 
     setError  ( key: string, value: any ): Status { this.setStatus( Status.ERROR   ); this.setKey( key, value ); return this; }
     setWarning( key: string, value: any ): Status { this.setStatus( Status.WARNING ); this.setKey( key, value ); return this; }
@@ -28,20 +37,38 @@ export class Status
 
 export class Criteria
 {
-    private map: any = {};
-    get( key: string ): any { return this.map[ key ]; }
-    set( key: string, value: any ): Criteria { this.map[ key ] = value; return this; }
-    has( key: string ): boolean { return !!this.map[ key ]; }
-    get size(): number { return Object.keys( this.map ).length; }
+    private map: Map<string, any> = new Map<string, any>();
+
+    *[ Symbol.iterator ] (): any
+    {
+        for( let key in this )
+        {
+            yield [ key, this[ key ] ];
+        }
+    };
+    
+    get( key: string ): any { return this.map.get( key ); }
+    set( key: string, value: any ): Criteria { this.map.set( key, value ); return this; }
+    has( key: string ): boolean { return this.map.has( key ); }
+    get size(): number { return this.map.size; }
 };
 
 export class Stats
 {
-    private map: any = {};
-    get( key: string ): any { return this.map[ key ]; }
-    set( key: string, value: any ): Stats { this.map[ key ] = value; return this; }
-    has( key: string ): boolean { return !!this.map[ key ]; }
-    get size(): number { return Object.keys( this.map ).length; }
+    private map: Map<string, any> = new Map<string, any>();
+
+    *[ Symbol.iterator ] (): any
+    {
+        for( let key in this )
+        {
+            yield [ key, this[ key ] ];
+        }
+    };
+
+    get( key: string ): any { return this.map.get( key ); }
+    set( key: string, value: any ): Stats { this.map.set( key, value ); return this; }
+    has( key: string ): boolean { return this.map.has( key ); }
+    get size(): number { return this.map.size; }
 };
 
 
@@ -84,17 +111,14 @@ export function CheckIfObjectContainsKeys( obj: any, keys_to_keep: any ): boolea
 
 
 // https://gist.github.com/jimmywarting/a6ae45a9f445ca352ed62374a2855ff2
-export const { JsonReplacer, JsonReviver } = ( ( types: any, buf64: any ) => ( {
-    JsonReplacer( key: any ): any {
+export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64: any ) => ( {
+    JsonStringifyReplacer( key: any ): any {
         // @ts-ignore @ts-expect-error
         let val: any = this[ key ];
         
         return val ===  Infinity        ? { $num:   1 }:
                val === -Infinity        ? { $num:  -1 }:
                Number.isNaN( val )      ? { $num: ' ' }:
-               val instanceof Status    ? { $status: val }:
-               val instanceof Criteria  ? { $criteria: val }:
-               val instanceof Stats     ? { $stats: val }:
                // @ts-expect-error
                val instanceof Date      ? { $date: isNaN( val ) ? '!' : +val }:
                val instanceof Map       ? { $map: [ ...val ] }:
@@ -103,31 +127,32 @@ export const { JsonReplacer, JsonReviver } = ( ( types: any, buf64: any ) => ( {
                val instanceof Error     ? { $err: [ val.message, val.stack ] }:
                val instanceof RegExp    ? { $regexp: [ val.source,  val.flags ] }:
                val instanceof ObjectId  ? { $bson_id: val.toHexString() }:
-               // @ts-expect-error
-               ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
+         //    // @ts-expect-error
+         //    ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
                typeof val === 'bigint'  ? { $bigint: val + '' }:
+               val instanceof Status    ? { $status:   Object.setPrototypeOf( val, null ) || val }:
+               val instanceof Criteria  ? { $criteria: Object.setPrototypeOf( val, null ) || val }:
+               val instanceof Stats     ? { $stats:    Object.setPrototypeOf( val, null ) || val }:
                val
     },
-    JsonReviver: ( key: any, val: any ) => {
+    JsonParseReviver: ( key: any, val: any ) => {
         return ( val === null && val !== 'object' ) ? val:
             val.$num      ? val.$num / 0:
-            val.$status   ? Object.assign( new Status(),   val.$status ):
-            val.$criteria ? Object.assign( new Criteria(), val.$criteria ):
-            val.$stats    ? Object.assign( new Stats(),    val.$stats ):
             val.$date     ? new Date( val.$date ):
             // @ts-expect-error
             val.$regexp   ? new RegExp( ...val.$regexp ):
-         // // @ts-expect-error
-         // val.$file     ? new File( ...val.$file ):
             val.$err      ? ( key = new Error( val.$err[ 0 ] ), key.stack = val.$err[ 1 ], key ):
             val.$type_err ? ( key = new TypeError( val.$type_err[ 0 ] ), key.stack = val.$type_err[ 1 ], key ):
             val.$map      ? new Map( val.$map ):
             val.$bson_id  ? ObjectId.createFromHexString( val.$bson_id ):
             val.$set      ? new Set( val.$set ):
-            val.$buf      ? val.$buf[ 0 ]
-                          ? new types[ val.$buf[ 0 ] ]( buf64.decode( val.$buf[ 1 ], types[ val.$buf[ 0 ] ].BYTES_PER_ELEMENT ).buffer )
-                          : new Uint8Array( buf64.decode( val.$buf[ 1 ], 1 ) ).buffer:
+         // val.$buf      ? val.$buf[ 0 ]
+         //               ? new types[ val.$buf[ 0 ] ]( buf64.decode( val.$buf[ 1 ], types[ val.$buf[ 0 ] ].BYTES_PER_ELEMENT ).buffer ):
+         //                 new Uint8Array( buf64.decode( val.$buf[ 1 ], 1 ) ).buffer:
             val.$bigint   ? BigInt( val.$bigint ):
+            val.$status   ? Object.assign( new Status(),   val.$status   ):
+            val.$criteria ? Object.assign( new Criteria(), val.$criteria ):
+            val.$stats    ? Object.assign( new Stats(),    val.$stats    ):
             val 
     },
 }) )

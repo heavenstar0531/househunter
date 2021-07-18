@@ -6,7 +6,7 @@
   "scripts": {
     "build-ts": "tsc",
     "start": "npm run serve",
-    "serve": "concurrently -k \"tsc -w --incremental\" \"nodemon ./dist/server/server.js\"",
+    "serve": "concurrently -k \"tsc -w --incremental\" \"nodemon --delay 1 ./dist/server/server.js\"",
     "watch-node": "node dist/server.js",
     "watch-ts": "tsc -w"
   },

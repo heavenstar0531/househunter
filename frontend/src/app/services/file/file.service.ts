@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from 'src/app/common/requests/file.data';
-import { JsonReplacer, Status } from 'src/app/common/types';
+import { JsonStringifyReplacer, Status } from 'src/app/common/types';
 import { environment } from 'src/environments/environment';
 import { SeshService } from '../sesh/sesh.service';
 
@@ -26,7 +26,7 @@ export class FileService {
       FileApiCall.ensureValid( this.session.acc_type, "add", file );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/file/add`, JSON.stringify( file, JsonReplacer ), { headers } ).toPromise() as [ Status, ObjectId? ];
+      let res = await this.http.post( `${this.url}/file/add`, JSON.stringify( file, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, ObjectId? ];
 
       return res;
     }
@@ -45,7 +45,7 @@ export class FileService {
       FileApiCall.ensureValid( this.session.acc_type, "get", file_id );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.post( `${this.url}/file/get`, JSON.stringify( file_id, JsonReplacer ), { headers } ).toPromise() as [ Status, FileData? ];
+      let res = await this.http.post( `${this.url}/file/get`, JSON.stringify( file_id, JsonStringifyReplacer ), { headers } ).toPromise() as [ Status, FileData? ];
 
       return res;
     }

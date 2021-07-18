@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import ObjectId from 'bson-objectid';
-import { JsonReplacer, JsonReviver } from 'src/app/common/types';
+import { JsonStringifyReplacer, JsonParseReviver } from 'src/app/common/types';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SeshService {
     let acc_id: any = localStorage.getItem( "acc_id" );
     if( !acc_id ) return null;
     
-    acc_id = JSON.parse( acc_id, JsonReviver ) as ObjectId;
+    acc_id = JSON.parse( acc_id, JsonParseReviver ) as ObjectId;
     if( !acc_id ) return null;
 
     return acc_id;
@@ -21,7 +21,7 @@ export class SeshService {
   
   set acc_id( acc_id: ObjectId|null )
   {
-    localStorage.setItem( "acc_id", JSON.stringify( acc_id, JsonReplacer ) );
+    localStorage.setItem( "acc_id", JSON.stringify( acc_id, JsonStringifyReplacer ) );
   }
 
   get acc_type(): string
