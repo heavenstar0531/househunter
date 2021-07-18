@@ -1,8 +1,8 @@
 import mongoose, { Model } from 'mongoose';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { AgncyData } from '../common/requests/agncy.data';
 import { Status } from '../common/types'
+import { Sesh } from 'express-session';
 
 let agncySchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< agency info
@@ -16,7 +16,7 @@ export class AgncyModel
 {
     private model: Model<AgncyData> = mongoose.model( 'agncy', agncySchema, 'agncy' );
     constructor( 
-        private session: Session
+        private session: Sesh
     ) { }
 
     // ------------------------------------------------------------- //

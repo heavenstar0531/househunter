@@ -1,8 +1,8 @@
 import mongoose, { Model } from 'mongoose';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { AccData } from '../common/requests/acc.data';
 import { Status } from '../common/types'
+import { Sesh } from 'express-session';
 
 let accSchema = new mongoose.Schema({
     // ------------------------------------------------------------- <<< account info
@@ -27,7 +27,7 @@ export class AccModel
 {
     private model: Model<any> = mongoose.model( 'acc', accSchema, 'acc' );
     constructor(
-        private session: Session
+        private session: Sesh
     ) { }
 
     // ------------------------------------------------------------- //
@@ -111,7 +111,6 @@ export class AccModel
     // <all> current user is stored in session
     async logout(): Promise<Status>
     {
-        if( !this.session.acc_id ) return new Status().setError( "message", "no user to log out" );
         this.session.destroy( () => {} );
         return new Status();
     }

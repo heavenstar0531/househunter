@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Session } from '../util/types';
 import { AgncyApiCall, AgncyData } from '../common/requests/agncy.data';
 import { JsonStringifyReplacer, Status } from '../common/types';
 import { AgncyModel } from '../models/agncy.model';
@@ -14,7 +13,7 @@ export class AgncyApi
         router.route( '/agncy/get' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 AgncyApiCall.ensureValid( session.acc_type, "get" );
                 
                 let res = await new AgncyModel( request.session ).get();
@@ -35,7 +34,7 @@ export class AgncyApi
         router.route( '/agncy/update' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let updated_agncy = request.body.updated_agncy as AgncyData;
                 AgncyApiCall.ensureValid( session.acc_type, "update", updated_agncy );
 

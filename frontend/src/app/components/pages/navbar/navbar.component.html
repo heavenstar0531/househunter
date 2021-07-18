@@ -28,14 +28,25 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-      <!-- register -->
-      <button class="btn nav-link shadow-none mr-auto" (click)="register_modal_ref.open()">Registracija</button>
-      <app-register-modal #register_modal_ref></app-register-modal>
-      <!-- login -->
-      <button class="btn btn-outline-warning btn-nav shadow-none mr-auto" (click)="login_modal_ref.open()">Prijava</button>
-      <app-login-modal #login_modal_ref></app-login-modal>
-      <!-- logout -->
-      <div><button class="btn nav-link shadow-none mr-auto">Odjava</button></div>
+      <div *ngIf="acc_type == 'gst'">
+
+        <!-- register -->
+        <button class="btn nav-link shadow-none mr-auto" (click)="register_modal_ref.open()">Registracija</button>
+        <app-register-modal #register_modal_ref></app-register-modal>
+
+      </div>
+      <div *ngIf="acc_type == 'gst'">
+        <!-- login -->
+        <button class="btn btn-outline-warning btn-nav shadow-none mr-auto h-100" (click)="login_modal_ref.open()">Prijava</button>
+        <app-login-modal #login_modal_ref></app-login-modal>
+
+      </div>
+      <div *ngIf="acc_type != 'gst'">
+        
+        <!-- logout -->
+        <button class="btn nav-link shadow-none mr-auto" (click)="logout()">Odjava</button>
+
+      </div>
     </ul>
   </div>
 

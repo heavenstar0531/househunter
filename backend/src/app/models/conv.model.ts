@@ -1,9 +1,9 @@
 import mongoose, { Model, mongo } from 'mongoose';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { ConvData, MsgData } from '../common/requests/conv.data';
-import { Status, Criteria } from '../common/types'
+import { Status } from '../common/types'
 import { AgncyModel } from './agncy.model';
+import { Sesh } from 'express-session';
 
 
 let convMsgSchema = new mongoose.Schema({
@@ -34,7 +34,7 @@ export class ConvModel
     private model: Model<any> = mongoose.model( 'conv', convSchema, 'conv' );
 
     constructor(
-        private session: Session
+        private session: Sesh
     ) { }
 
     private static getUserRole( acc_id: ObjectId, acc_type: string, conversation: ConvData ): string

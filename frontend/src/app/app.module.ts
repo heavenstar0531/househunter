@@ -63,7 +63,7 @@ import { PropertyRentFormComponent } from './components/forms/property-rent-form
 import { PropertyBuyFormComponent } from './components/forms/property-buy-form/property-buy-form.component';
 
 // directives
-import { GraphDirective } from './directives/graph.directive';
+import { GraphDirective } from './util/graph/graph.directive';
 
 // services
 import { AgncyService } from './services/agncy/agncy.service';

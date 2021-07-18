@@ -13,7 +13,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@types/express-session": "^1.17.3",
+    "@types/express-session": "^1.17.4",
     "@types/gridfs-stream": "^0.5.34",
     "tslint": "^5.20.1",
     "typescript": "^3.9.7"

@@ -134,6 +134,7 @@ export class AccService {
       let res = await this.http.post( `${this.url}/acc/logout`, JSON.stringify( {}, JsonStringifyReplacer ), { headers } ).toPromise() as Status;
 
       this.session.destroy();
+      this.router.navigate( [''] );
       return res;
     }
     catch( err )

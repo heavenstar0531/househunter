@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { AccApiCall, AccData } from '../common/requests/acc.data';
 import { JsonStringifyReplacer, Status } from '../common/types';
@@ -15,7 +14,7 @@ export class AccApi
         router.route( '/acc/add' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let acc = request.body.acc as AccData;
                 AccApiCall.ensureValid( session.acc_type, "add", acc );
                 
@@ -37,7 +36,7 @@ export class AccApi
         router.route( '/acc/delete' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let acc_id = request.body.acc_id as ObjectId;
                 AccApiCall.ensureValid( session.acc_type, "delete", acc_id );
                 
@@ -59,7 +58,7 @@ export class AccApi
         router.route( '/acc/get' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let acc_id = request.body.acc_id as ObjectId;
                 AccApiCall.ensureValid( session.acc_type, "get", acc_id );
                 
@@ -81,7 +80,7 @@ export class AccApi
         router.route( '/acc/list' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 AccApiCall.ensureValid( session.acc_type, "list" );
                 
                 let res = await new AccModel( request.session ).list();
@@ -126,7 +125,7 @@ export class AccApi
         router.route( '/acc/logout' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 AccApiCall.ensureValid( session.acc_type, "logout" );
                 
                 let res = await new AccModel( request.session ).logout();
@@ -149,7 +148,7 @@ export class AccApi
         router.route( '/acc/updateInfo' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let updated_acc = request.body.updated_acc as AccData;
                 AccApiCall.ensureValid( session.acc_type, "updateInfo", session.acc_id, updated_acc );
                 
@@ -171,7 +170,7 @@ export class AccApi
         router.route( '/acc/updateStatus' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let updated_acc = request.body.updated_acc as AccData;
                 AccApiCall.ensureValid( session.acc_type, "updateStatus", session.acc_id, updated_acc );
                 
@@ -196,7 +195,7 @@ export class AccApi
             let is_blocked = true;
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let blocked_acc_id = request.body.blocked_acc_id as ObjectId;
                 is_blocked = request.body.is_blocked as boolean;
                 AccApiCall.ensureValid( session.acc_type, "blockAnother", blocked_acc_id, is_blocked );

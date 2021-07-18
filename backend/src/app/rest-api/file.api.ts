@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
 import ObjectId from 'bson-objectid';
 import { FileApiCall, FileData } from '../common/requests/file.data';
@@ -16,7 +15,7 @@ export class FileApi
         router.route( '/file/add' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let file = Object.assign( new FileData(), request.body.file );
                 FileApiCall.ensureValid( session.acc_type, "add", file );
     
@@ -38,7 +37,7 @@ export class FileApi
         router.route( '/file/get' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let file_id = Object.assign( new ObjectId(), request.body.file_id );
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
@@ -60,7 +59,7 @@ export class FileApi
         router.route( '/file/get/:file_id' ).get( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let file_id = ObjectId.createFromHexString( request.params.file_id );
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 

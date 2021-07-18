@@ -1,16 +1,16 @@
-import { Session } from '../util/types';
 import { Grid } from 'gridfs-stream';
 import { Readable, pipeline } from 'stream';
 import ObjectId from 'bson-objectid';
 import { FileData, FileMetadata } from '../common/requests/file.data';
 import { Status } from '../common/types'
+import { Sesh } from 'express-session';
 
 
 
 export class FileModel
 {
     constructor(
-        private session: Session,
+        private session: Sesh,
         private gfs: Grid )
     { }
 

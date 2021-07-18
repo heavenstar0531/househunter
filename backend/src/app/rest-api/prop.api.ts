@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { PropApiCall, PropData } from '../common/requests/prop.data';
 import { Criteria, JsonStringifyReplacer, Status } from '../common/types';
@@ -15,7 +14,7 @@ export class PropApi
         router.route( '/prop/add' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop = request.body.prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "add", prop );
                 
@@ -37,7 +36,7 @@ export class PropApi
         router.route( '/prop/addMany' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_list = request.body.prop_list as Array<PropData>;
                 PropApiCall.ensureValid( session.acc_type, "addMany", prop_list );
                 
@@ -59,7 +58,7 @@ export class PropApi
         router.route( '/prop/delete' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "delete", prop_id );
                 
@@ -81,7 +80,7 @@ export class PropApi
         router.route( '/prop/get' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "get", prop_id );
                 
@@ -103,7 +102,7 @@ export class PropApi
         router.route( '/prop/list' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let criteria = request.body.criteria as Criteria;
                 PropApiCall.ensureValid( session.acc_type, "list", criteria );
                 
@@ -127,7 +126,7 @@ export class PropApi
         router.route( '/prop/updateInfo' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let updated_prop = request.body.updated_prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateInfo", updated_prop );
                 
@@ -149,7 +148,7 @@ export class PropApi
         router.route( '/prop/updateStatus' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let updated_prop = request.body.updated_prop as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateStatus", updated_prop );
                 
@@ -173,7 +172,7 @@ export class PropApi
         router.route( '/prop/rent' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 let from_dt = request.body.from_dt as Date;
                 let to_dt = request.body.to_dt as Date;
@@ -199,7 +198,7 @@ export class PropApi
         router.route( '/prop/makePurchaseOffer' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 let offered_amount = request.body.offered_amount as number;
                 PropApiCall.ensureValid( session.acc_type, "makePurchaseOffer", prop_id, offered_amount );
@@ -222,7 +221,7 @@ export class PropApi
         router.route( '/prop/acceptOrRejectPurchaseOffer' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 let offeror_id = request.body.offeror_id as ObjectId;
                 let accept = request.body.accept as boolean;
@@ -246,7 +245,7 @@ export class PropApi
         router.route( '/prop/listPurchaseOffers' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let prop_id = request.body.prop_id as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "listPurchaseOffers", prop_id );
                 
@@ -270,7 +269,7 @@ export class PropApi
         router.route( '/prop/getStats' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 PropApiCall.ensureValid( session.acc_type, "getStats" );
                 
                 let res = await new PropModel( request.session ).getStats();

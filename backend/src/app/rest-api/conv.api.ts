@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import { Session } from '../util/types';
 import ObjectId from 'bson-objectid';
 import { ConvApiCall, ConvData } from '../common/requests/conv.data';
 import { JsonStringifyReplacer, Status } from '../common/types';
@@ -15,7 +14,7 @@ export class ConvApi
         router.route( '/conv/add' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let conv = request.body.conv as ConvData;
                 ConvApiCall.ensureValid( session.acc_type, "add", conv );
                 
@@ -37,7 +36,7 @@ export class ConvApi
         router.route( '/conv/delete' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let conv_id = request.body.conv_id as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "delete", conv_id );
                 
@@ -59,7 +58,7 @@ export class ConvApi
         router.route( '/conv/get' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let conv_id = request.body.conv_id as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "get", conv_id );
                 
@@ -81,7 +80,7 @@ export class ConvApi
         router.route( '/conv/list' ).post( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let is_archived = request.body.is_archived as boolean;
                 ConvApiCall.ensureValid( session.acc_type, "list", is_archived );
                 
@@ -105,7 +104,7 @@ export class ConvApi
         router.route( '/conv/sendMessage' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let conv_id = request.body.conv_id as ObjectId;
                 let text = request.body.text as string;
                 ConvApiCall.ensureValid( session.acc_type, "sendMessage", conv_id, text );
@@ -128,7 +127,7 @@ export class ConvApi
         router.route( '/conv/markRead' ).put( async ( request, response ) => {
             try
             {
-                let session = request.session as Session;
+                let session = request.session;
                 let conv_id = request.body.conv_id as ObjectId;
                 let last_msg_dt = request.body.last_msg_dt as Date;
                 ConvApiCall.ensureValid( session.acc_type, "markRead", conv_id, last_msg_dt );

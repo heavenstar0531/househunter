@@ -7,6 +7,8 @@ import express from "express";
 // +   https://docs.mongodb.com/manual/reference/sql-comparison/
 // +   https://docs.mongodb.com/manual/tutorial/query-documents/
 import mongoose from "mongoose";
+// https://www.npmjs.com/package/bson-objectid
+import ObjectId from "bson-objectid";
 // https://www.npmjs.com/package/cors
 import cors from "cors";
 // https://www.npmjs.com/package/express-session
@@ -23,6 +25,19 @@ import Grid from "gridfs-stream";
 /* run nodemon and tsc at the same time */
 // https://www.npmjs.com/package/nodemon
 /* watch for file changes in node */
+
+// extend express session data interface before its use
+declare module 'express-session'
+{
+    interface SessionData
+    {
+        acc_id?:          ObjectId;
+        acc_type?:        string;
+        viewed_prop_map?: Map<ObjectId, boolean>;
+    }
+
+    export type Sesh = Session & Partial<SessionData>
+}
 
 // rest apis
 import { AgncyApi } from "./app/rest-api/agncy.api";
