@@ -24,10 +24,10 @@ export class MsgData
             if( 'read_dt'   in reqfields && data.read_dt   === undefined ) status.setError( "read_dt.err",   "read date missing" );
         }
         // ------------------------------------------------------------- <<< message info
-        if( data.sender_id !== undefined && !data.sender_id    ) status.setError( "sender_id.err", "sender id missing" );
-        if( data.text      !== undefined && !data.text?.length ) status.setError( "text.err",      "text missing" );
-        if( data.sent_dt   !== undefined && !data.sent_dt      ) status.setError( "sent_dt.err",   "sent date missing" );
-        // data.read_dt
+        if( data.sender_id !== undefined && !( data.sender_id instanceof ObjectId ) ) status.setError( "sender_id.err", "sender id missing" );
+        if( data.text      !== undefined && !data.text?.length                      ) status.setError( "text.err",      "text missing" );
+        if( data.sent_dt   !== undefined && !( data.sent_dt instanceof Date )       ) status.setError( "sent_dt.err",   "sent date missing" );
+        if( data.read_dt                 && !( data.sent_dt instanceof Date )       ) status.setError( "read_dt.err",   "read date missing" );
     }
 };
 
@@ -66,10 +66,10 @@ export class ConvData
             if( 'offeror_deleted_dt' in reqfields && data.offeror_deleted_dt === undefined ) status.setError( "offeror_deleted_dt.err", "offeror delete date missing" );
         }
         // ------------------------------------------------------------- <<< conversation info
-        if( data._id        !== undefined && !data._id        ) status.setError( "_id.err",        "conversation id missing" );
-        if( data.prop_id    !== undefined && !data.prop_id    ) status.setError( "prop_id.err",    "property id missing" );
-        if( data.owner_id   !== undefined && !data.owner_id   ) status.setError( "owner_id.err",   "owner id missing" );
-        if( data.offeror_id !== undefined && !data.offeror_id ) status.setError( "offeror_id.err", "offeror id missing" );
+        if( data._id        !== undefined && !( data._id instanceof ObjectId )        ) status.setError( "_id.err", "conversation id missing" );
+        if( data.prop_id    !== undefined && !( data.prop_id instanceof ObjectId )    ) status.setError( "prop_id.err",    "property id missing" );
+        if( data.owner_id   !== undefined && !( data.owner_id instanceof ObjectId )   ) status.setError( "owner_id.err",   "owner id missing" );
+        if( data.offeror_id !== undefined && !( data.offeror_id instanceof ObjectId ) ) status.setError( "offeror_id.err", "offeror id missing" );
 
         if( data.msg_list !== undefined )
         {
@@ -93,10 +93,10 @@ export class ConvData
             }
         }
         // ------------------------------------------------------------- <<< conversation status
-        // data.owner_arch_dt
-        // data.owner_deleted_dt
-        // data.offeror_arch_dt
-        // data.offeror_deleted_dt
+        if( data.owner_arch_dt      && !( data.owner_arch_dt      instanceof Date ) ) status.setError( "owner_arch_dt.err",      "owner archive date invalid" );
+        if( data.owner_deleted_dt   && !( data.owner_deleted_dt   instanceof Date ) ) status.setError( "owner_deleted_dt.err",   "owner delete date invalid" );
+        if( data.offeror_arch_dt    && !( data.offeror_arch_dt    instanceof Date ) ) status.setError( "offeror_arch_dt.err",    "offeror archive date invalid" );
+        if( data.offeror_deleted_dt && !( data.offeror_deleted_dt instanceof Date ) ) status.setError( "offeror_deleted_dt.err", "offeror delete date invalid" );
     }
 };
 
@@ -143,7 +143,7 @@ export class ConvApiCall
             case "list":
             {
                 let is_archived = params[ 0 ] as boolean;
-                if( typeof is_archived != 'boolean' ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
+                if( typeof is_archived !== 'boolean' ) status.setError( "is_archived.err", "conversation switch 'is archived' missing" );
                 break;
             }
 
@@ -155,7 +155,7 @@ export class ConvApiCall
                 let text      = params[ 1 ] as string;
 
                 if( !( conv_id   instanceof ObjectId ) ) status.setError( "conv_id.err",   "conversation id missing" );
-                if( typeof text != 'string'            ) status.setError( "text.err",      "message text missing" );
+                if( typeof text !== 'string'           ) status.setError( "text.err",      "message text missing" );
                 break;
             }
             // + listMessages( conv_id: ObjectId )

@@ -20,8 +20,8 @@ export class FileMetadata
             if( 'upload_dt'   in reqfields && data.upload_dt   === undefined ) status.setError( "upload_dt.err",   "upload date missing" );
         }
         // ------------------------------------------------------------- <<< file metadata
-        if( data.uploader_id !== undefined && !data.uploader_id ) status.setError( "uploader_id.err", "uploader missing" );
-        if( data.upload_dt   !== undefined && !data.upload_dt   ) status.setError( "upload_dt.err",   "upload date missing" );
+        if( data.uploader_id !== undefined && !( data.uploader_id instanceof ObjectId ) ) status.setError( "uploader_id.err", "uploader missing" );
+        if( data.upload_dt   !== undefined && !( data.upload_dt instanceof Date )       ) status.setError( "upload_dt.err",   "upload date missing" );
     }
 }
 
@@ -48,11 +48,7 @@ export class FileData
             if( 'data'         in reqfields && data.data         === undefined ) status.setError( "data.err",         "data missing" );
         }
         // ------------------------------------------------------------- <<< file metadata
-        if( data._id !== undefined )
-        {
-            if( !data._id                         ) status.setError( "_id.err", "file id missing" );
-            if( !( data._id instanceof ObjectId ) ) status.setError( "_id.err", "file id not an 'object id'" );
-        }
+        if( data._id !== undefined && !( data._id instanceof ObjectId || typeof data._id !== 'string' ) ) status.setError( "_id.err", "file id missing" );
         if( data.content_type !== undefined && !data.content_type ) status.setError( "content_type.err", "file content type missing" );
         if( data.metadata !== undefined )
         {
@@ -73,7 +69,7 @@ export class FileData
                 }
             }
         }
-        if( data !== undefined && !data ) status.setError( "data.err", "file date missing" );
+        if( data !== undefined && !( data instanceof Buffer ) ) status.setError( "data.err", "file date missing" );
     }
 }
 

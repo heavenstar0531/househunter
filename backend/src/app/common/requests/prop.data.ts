@@ -24,9 +24,9 @@ export class RentData
             if( 'to_dt'     in reqfields && data.to_dt      === undefined ) status.setError( "to_dt.err",      "to_dt missing" );
         }
         // ------------------------------------------------------------- <<< rent info
-        if( data.renter_id  !== undefined && !data.renter_id ) { status.setError( "renter_id.err",  "renter id missing" ); return; }
-        if( data.from_dt    !== undefined && !data.from_dt   ) status.setError( "from_dt.err",    "from date missing" );
-        if( data.to_dt      !== undefined && !data.to_dt     ) status.setError( "to_dt.err",      "to date missing" );
+        if( data.renter_id  !== undefined && !( data.renter_id instanceof ObjectId ) ) { status.setError( "renter_id.err",  "renter id missing" ); return; }
+        if( data.from_dt    !== undefined && !( data.from_dt instanceof Date )       ) status.setError( "from_dt.err",    "from date missing" );
+        if( data.to_dt      !== undefined && !( data.to_dt instanceof Date )         ) status.setError( "to_dt.err",      "to date missing" );
     }
 };
 
@@ -52,8 +52,9 @@ export class OfferData
             if( 'accepted_dt'    in reqfields && data.accepted_dt    === undefined ) status.setError( "accepted_dt.err",    "accepted date missing" );
         }
         // ------------------------------------------------------------- <<< offer info
-        if( data.offeror_id     !== undefined && !data.offeror_id                 ) { status.setError( "offeror_id.err",     "offeror id missing" ); return; }
-        if( data.offered_amount !== undefined && ( data.offered_amount ?? -1) < 0 ) status.setError( "offered_amount.err", "offerred amount must be positive" );
+        if( data.offeror_id     !== undefined && !( data.offeror_id instanceof ObjectId )                                ) { status.setError( "offeror_id.err",     "offeror id missing" ); return; }
+        if( data.offered_amount !== undefined && ( typeof data.offered_amount !== 'number' ||  data.offered_amount < 0 ) ) status.setError( "offered_amount.err", "offerred amount must be positive" );
+        if( data.accepted_dt                  && !( data.accepted_dt instanceof Date )                                   ) status.setError( "accepted_dt.err",    "accepted date missing" );
     }
 };
 
@@ -79,8 +80,8 @@ export class PropData
     // ------------------------------------------------------------- <<< rent/sale info
     prop_sale_type?:      string;                 // enum( 'rent', 'sale' )
     price?:               number;                 // number|null
-    rent_list?:           null|Array<RentData>;   // list< rent >|null
-    sale_offer_list?:     null|Array<OfferData>;  // list< sale_offer >|null
+    rent_list?:           Array<RentData>;        // list< rent >|null
+    sale_offer_list?:     Array<OfferData>;       // list< sale_offer >|null
     sale_arbiter_id?:     null|ObjectId;          // ->acc|null                           # (agn),(adm) mora da potvrdi prihvacenu ponudu! (ako nije potvrdio, ponuda nije jos prihvacena)
     // ------------------------------------------------------------- <<< property status
     accepted_dt?:         null|Date;              // date|null
@@ -133,15 +134,12 @@ export class PropData
         if( data.addr_street    !== undefined && !data.addr_street?.length    ) status.setError( "addr_street.err",    "street name missing" );
         if( data.addr_streetnum !== undefined && !data.addr_streetnum?.length ) status.setError( "addr_streetnum.err", "street number missing" );
         
-        if( data.prop_type !== undefined && data.prop_type != "house" && data.prop_type != "flat" ) status.setError( "prop_type.err", "invalid property type" );
-
-        if     ( data.prop_type == "flat" && data.flat_floornum === null ) status.setError( "flat_floornum.err", "missing flat's floor number" );
-        else if( data.prop_type != "flat" && data.flat_floornum !== null ) status.setError( "flat_floornum.err", "property is not a flat, flat floor number should be null" );
-        
-        if( data.floorcnt      !== undefined && ( data.floorcnt ?? -1 ) <= 0 ) status.setError( "floorcnt.err",      "floor count has to be positive" );
-        if( data.area_m2       !== undefined && ( data.area_m2 ?? -1 ) <= 0  ) status.setError( "area_m2.err",       "area has to be positive" );
-        if( data.roomcnt       !== undefined && ( data.roomcnt ?? -1 ) <= 0  ) status.setError( "roomcnt.err",       "the number of rooms has to be positive" );
-        if( data.is_furnished  !== undefined && !data.is_furnished           ) status.setError( "is_furnished.err",  "missing if the flat is furnished or not" );
+        if( data.prop_type     !== undefined && data.prop_type != "house" && data.prop_type != "flat"       ) status.setError( "prop_type.err",     "invalid property type" );
+        if( data.flat_floornum               && ( typeof data.floorcnt !== 'number' || data.floorcnt <= 0 ) ) status.setError( "flat_floornum.err", "flat's floor number must be positive" );
+        if( data.floorcnt      !== undefined && ( typeof data.floorcnt !== 'number' || data.floorcnt <= 0 ) ) status.setError( "floorcnt.err",      "floor count has to be positive" );
+        if( data.area_m2       !== undefined && ( typeof data.area_m2  !== 'number' || data.area_m2  <= 0 ) ) status.setError( "area_m2.err",       "area has to be positive" );
+        if( data.roomcnt       !== undefined && ( typeof data.roomcnt  !== 'number' || data.roomcnt  <= 0 ) ) status.setError( "roomcnt.err",       "the number of rooms has to be positive" );
+        if( data.is_furnished  !== undefined && !data.is_furnished                                          ) status.setError( "is_furnished.err",  "missing if the flat is furnished or not" );
         
         if( data.gallery !== undefined )
         {
@@ -149,20 +147,18 @@ export class PropData
             else for( let i = 0; i < data.gallery.length; i++ )
             {
                 let media = data.gallery[ i ];
-                if( !media )
+                if( !( media instanceof ObjectId ) )
                 {
                     status.setError( "gallery.err", "invalid gallery" );
-                    status.setError( "gallery.err.+", "missing media[" + i + "]'s id" );
+                    status.setError( "gallery.err.+", "invalid media[" + i + "]'s id" );
                     break;
                 }
             }
         }
-        if( data.owner_id !== undefined && !data.owner_id ) status.setError( "owner_id.err", "owner id missing" );
+        if( data.owner_id !== undefined && !( data.owner_id instanceof ObjectId ) ) status.setError( "owner_id.err", "owner id missing" );
         // ------------------------------------------------------------- <<< rent/sale info
         if( data.prop_sale_type !== undefined && data.prop_sale_type != "rent" && data.prop_sale_type != "sale" ) status.setError( "prop_sale_type.err", "invalid property sale type" );
-        if( data.price          !== undefined && ( data.price ?? -1 ) <= 0  ) status.setError( "price.err", "price has to be positive" );
-
-        if( data.prop_sale_type == "rent" && data.sold_dt ) status.setError( "prop_sale_type.err", "property not for rent, since it is sold/being sold" );
+        if( data.price          !== undefined && ( typeof data.price !== 'number' || data.price <= 0 )          ) status.setError( "price.err", "price has to be positive" );
 
         if( data.rent_list !== undefined )
         {
@@ -185,6 +181,7 @@ export class PropData
                 }
             }
         }
+
         if( data.sale_offer_list !== undefined )
         {
             if( !data.sale_offer_list ) status.setError( "sale_offer_list.err", "sale offer list missing" );
@@ -206,15 +203,24 @@ export class PropData
             }
         }
 
-        if( data.owner_id == AgncyApiCall.AgencyId() && data.sold_dt ) status.setError( "owner_id.err",        "agency cannot sell its properties to itself" );
-        if( data.sold_dt && data.sale_arbiter_id === null            ) status.setError( "sale_arbiter_id.err", "sale arbiter id missing" );
-        if( data.sold_dt === null && data.sale_arbiter_id            ) status.setError( "sold_dt.err",         "missing selling date" );
+        if( data.sale_arbiter_id && !( data.sale_arbiter_id instanceof ObjectId )   ) status.setError( "sale_arbiter_id.err", "sale arbiter id missing" );
         // ------------------------------------------------------------- <<< property status
-        // data.accepted_dt
-        // data.sold_dt
-        // data.deleted_dt
-        if( data.is_promoted !== undefined && !data.is_promoted           ) status.setError( "is_promoted.err",  "missing if the flat is promoted or not" );
-        if( data.viewcnt     !== undefined && ( data.viewcnt ?? -1 ) < 0  ) status.setError( "viewcnt.err",      "view count has to be nonnegative" );
+        if( data.accepted_dt               && !( data.accepted_dt instanceof Date ) ) status.setError( "data.accepted_dt", "acceptance date missing" );
+        if( data.sold_dt                   && !( data.sold_dt     instanceof Date ) ) status.setError( "data.sold_dt",     "sale date missing" );
+        if( data.deleted_dt                && !( data.deleted_dt  instanceof Date ) ) status.setError( "data.deleted_dt",  "deletion date missing" );
+        if( data.is_promoted !== undefined && !data.is_promoted                     ) status.setError( "is_promoted.err",  "missing if the flat is promoted or not" );
+        if( data.viewcnt     !== undefined && ( typeof data.viewcnt !== 'number' || data.viewcnt < 0 ) ) status.setError( "viewcnt.err", "view count has to be nonnegative" );
+
+
+        // ------------------------------------------------------------- <<< consistency checks
+        if     ( data.prop_type == "flat" && data.flat_floornum === null ) status.setError( "flat_floornum.err", "missing flat's floor number" );
+        else if( data.prop_type != "flat" && data.flat_floornum !== null ) status.setError( "flat_floornum.err", "property is not a flat, flat floor number should be null" );
+        
+        if( data.prop_sale_type == "rent" && ( data.sold_dt || data.sale_arbiter_id ) ) status.setError( "prop_sale_type.err", "cannot rent sold property" );
+        if( data.owner_id == AgncyApiCall.AgencyId() && data.sold_dt ) status.setError( "owner_id.err", "agency cannot sell its properties to itself" );
+
+        if     ( data.sold_dt && data.sale_arbiter_id === null ) status.setError( "sale_arbiter_id.err", "sale arbiter id missing" );
+        else if( data.sold_dt === null && data.sale_arbiter_id ) status.setError( "sold_dt.err",         "sold date missing" );
     }
 };
 
@@ -418,7 +424,7 @@ export class PropApiCall
                 let offered_amount = params[ 1 ] as number;
 
                 if( !( prop_id        instanceof ObjectId ) ) status.setError( "prop_id.err", "property id missing" );
-                if( typeof offered_amount != 'number'       ) status.setError( "from_dt.err", "offered amount missing" );
+                if( typeof offered_amount !== 'number'      ) status.setError( "from_dt.err", "offered amount missing" );
                 break;
             }
             // + acceptOrRejectPurchaseOffer( prop_id: ObjectId, offeror_id: number, accept: boolean )
@@ -430,7 +436,7 @@ export class PropApiCall
 
                 if( !( prop_id    instanceof ObjectId ) ) status.setError( "prop_id.err",    "property id missing" );
                 if( !( offeror_id instanceof ObjectId ) ) status.setError( "offeror_id.err", "offeror id missing" );
-                if( typeof accept != 'boolean'          ) status.setError( "accept.err",     "accept switch missing" );
+                if( typeof accept !== 'boolean'         ) status.setError( "accept.err",     "accept switch missing" );
                 break;
             }
             // + listPurchaseOffers( prop_id: ObjectId )

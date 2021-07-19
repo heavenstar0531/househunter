@@ -47,8 +47,8 @@ export class AccData
             if( 'usr_blocked_ids'  in reqfields && data.usr_blocked_ids  === undefined ) status.setError( "usr_blocked_ids.err",  "blocked user list missing" );
         }
         // ------------------------------------------------------------- <<< account info
-        if( data._id       !== undefined && !data._id              ) { status.setError( "_id.err",       "account id missing" ); return; }
-        if( data.username  !== undefined && !data.username?.length ) status.setError( "username.err",  "username missing" );
+        if( data._id       !== undefined && !( data._id instanceof ObjectId ) ) { status.setError( "_id.err",       "account id missing" ); return; }
+        if( data.username  !== undefined && !data.username?.length            ) status.setError( "username.err",  "username missing" );
         if( data.password  !== undefined )
         {
             if     ( !data.password?.length                   ) status.setError( "password.err",  "password missing" );
@@ -68,23 +68,24 @@ export class AccData
             else if( !emailRegex.test( data.email ) ) status.setError( "email.err", "email not in correct format" );
         }
         // ------------------------------------------------------------- <<< user info
-        if( data.usr_photo_id     !== undefined && !data.usr_photo_id             ) data.usr_photo_id = new ObjectId( /*TODO*/ );
+        if( data.usr_photo_id     !== undefined && !( data.usr_photo_id instanceof ObjectId ) ) data.usr_photo_id = new ObjectId( /*TODO*/ );
         if( data.usr_addr_country !== undefined && !data.usr_addr_country?.length ) status.setError( "usr_addr_country.err", "country missing" );
         if( data.usr_addr_city    !== undefined && !data.usr_addr_city?.length    ) status.setError( "usr_addr_city.err",    "city missing" );
         // ------------------------------------------------------------- <<< acc status
         if( data.acc_type !== undefined && data.acc_type != "adm" && data.acc_type != "agn" && data.acc_type != "usr" ) status.setError( "acc_type.err", "invalid account type" );
-        // data.activated_dt
-        // data.deleted_dt
+        if( data.activated_dt           && !( data.activated_dt instanceof Date ) ) status.setError( "activated_dt.err", "activation date invalid" );
+        if( data.deleted_dt             && !( data.deleted_dt instanceof Date )   ) status.setError( "deleted_dt.err",   "deletion date invalid" );
+
         if( data.usr_blocked_ids !== undefined )
         {
             if( !data.usr_blocked_ids ) status.setError( "usr_blocked_ids.err", "missing blocked users" );
             for( let i = 0; i < data.usr_blocked_ids.length; i++ )
             {
                 let usr_blocked_id = data.usr_blocked_ids[ i ];
-                if( !usr_blocked_id )
+                if( !( usr_blocked_id instanceof ObjectId ) )
                 {
                     status.setError( "usr_blocked_ids.err", "invalid blocked user list" );
-                    status.setError( "usr_blocked_ids.err.+", "missing blocked user[" + i + "]'s id" );
+                    status.setError( "usr_blocked_ids.err.+", "invalid blocked user[" + i + "]'s id" );
                     break;
                 }
             }
