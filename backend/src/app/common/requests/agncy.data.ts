@@ -15,7 +15,7 @@ export class AgncyData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|AgncyData, reqfields?: {} ): void
     {
-        if( !( data instanceof AgncyData ) ) { status.setError( "agncy.err", "agency not given" ); return; }
+        if( !data ) { status.setError( "agncy.err", "agency not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -25,10 +25,10 @@ export class AgncyData
             if( 'sale_percent'   in reqfields && data._id            === undefined ) status.setError( "sale_percent.err",   "sale percent missing" );
         }
         // ------------------------------------------------------------- <<< agency info
-        if( data._id            !== undefined && !data._id                                                ) { status.setError( "_id.err",            "agency id missing" ); return; }
-        if( data.credit_percent !== undefined && ( data.credit_percent < 0 || data.credit_percent > 100 ) ) status.setError( "credit_percent.err", "credit percentage not in range [0., 100.]" );
-        if( data.rent_percent   !== undefined && ( data.rent_percent   < 0 || data.rent_percent   > 100 ) ) status.setError( "rent_percent.err",   "rent percentage not in range [0., 100.]" );
-        if( data.sale_percent   !== undefined && ( data.sale_percent   < 0 || data.sale_percent   > 100 ) ) status.setError( "sale_percent.err",   "sale percentage not in range [0., 100.]" );
+        if( data._id            !== undefined && !data._id                                                   ) { status.setError( "_id.err",            "agency id missing" ); return; }
+        if( data.credit_percent !== undefined && !( data.credit_percent >= 0 || data.credit_percent <= 100 ) ) status.setError( "credit_percent.err", "credit percentage not in range [0., 100.]" );
+        if( data.rent_percent   !== undefined && !( data.rent_percent   >= 0 || data.rent_percent   <= 100 ) ) status.setError( "rent_percent.err",   "rent percentage not in range [0., 100.]" );
+        if( data.sale_percent   !== undefined && !( data.sale_percent   >= 0 || data.sale_percent   <= 100 ) ) status.setError( "sale_percent.err",   "sale percentage not in range [0., 100.]" );
     }
 };
 

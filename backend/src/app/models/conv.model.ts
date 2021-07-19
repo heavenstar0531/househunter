@@ -37,7 +37,7 @@ export class ConvModel
         private session: Sesh
     ) { }
 
-    private static getUserRole( acc_id: ObjectId, acc_type: string, conversation: ConvData ): string
+    private static getUserRole( acc_id: null|ObjectId, acc_type: string, conversation: ConvData ): string
     {
         let owner =   ( conversation.owner_id == AgncyModel.getId() && acc_type in { adm:0, agn:0 } )
                    || ( conversation.owner_id == acc_id             && acc_type == "usr" );
@@ -69,7 +69,7 @@ export class ConvModel
         let [ status, conversation ] = await this.get( conv_id );
         if( status.getStatus() ) return new Status().setError( "message", "could not delete conversation" );
 
-        let user_role = ConvModel.getUserRole( this.session.acc_id, this.session.acc_type, conversation );
+        let user_role = ConvModel.getUserRole( this.session.acc_id ?? null, this.session.acc_type, conversation );
 
         if( user_role == "owner"   ) conversation.owner_deleted_dt   = new Date();
         if( user_role == "offeror" ) conversation.offeror_deleted_dt = new Date();

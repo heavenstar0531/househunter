@@ -12,7 +12,7 @@ export class FileMetadata
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|FileMetadata, reqfields?: {} ): void
     {
-        if( !( data instanceof FileMetadata ) ) { status.setError( "filemeta.err", "file metadata not given" ); return; }
+        if( !data ) { status.setError( "filemeta.err", "file metadata not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -37,7 +37,7 @@ export class FileData
 
     static validate( status: Status, data: null|FileData, reqfields?: {} ): void
     {
-        if( !( data instanceof FileData ) ) { status.setError( "file.err", "data not given" ); return; }
+        if( !data ) { status.setError( "file.err", "data not given" ); return; }
         if( reqfields )
         {
             // --------------

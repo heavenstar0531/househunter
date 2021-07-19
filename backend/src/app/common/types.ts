@@ -2,8 +2,8 @@ import ObjectId from "bson-objectid";
 
 export class Status
 {
-    private map: Map<string, any> = new Map<string, any>();
     private status: number = Status.SUCCESS;
+    private map: Map<string, any> = new Map<string, any>();
     static readonly ERROR:   number = -2;
     static readonly WARNING: number = -1;
     static readonly SUCCESS: number =  0;
@@ -14,15 +14,8 @@ export class Status
         this.map = map ? map : new Map<string, any>();
     }
 
-    *[ Symbol.iterator ] (): any
-    {
-        for( let key in this )
-        {
-            yield [ key, this[ key ] ];
-        }
-    };
-
     getStatus(): number { return this.status; }
+    getMap(): Map<string, any> { return this.map; }
     getKey( key: string ): any { return this.map.get( key ); }
     hasKey( key: string ): boolean { return this.map.has( key ); }
     
@@ -55,8 +48,9 @@ export class Criteria
             yield [ key, this[ key ] ];
         }
     };
-    
+
     get( key: string ): any { return this.map.get( key ); }
+    getMap(): Map<string, any> { return this.map; }
     set( key: string, value: any ): Criteria { this.map.set( key, value ); return this; }
     has( key: string ): boolean { return this.map.has( key ); }
     get size(): number { return this.map.size; }
@@ -80,6 +74,7 @@ export class Stats
     };
 
     get( key: string ): any { return this.map.get( key ); }
+    getMap(): Map<string, any> { return this.map; }
     set( key: string, value: any ): Stats { this.map.set( key, value ); return this; }
     has( key: string ): boolean { return this.map.has( key ); }
     get size(): number { return this.map.size; }
@@ -126,49 +121,58 @@ export function CheckIfObjectContainsKeys( obj: any, keys_to_keep: any ): boolea
 
 // https://gist.github.com/jimmywarting/a6ae45a9f445ca352ed62374a2855ff2
 export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64: any ) => ( {
-    JsonStringifyReplacer( key: any ): any {
+    JsonStringifyReplacer( key: any ): any
+    {
         // @ts-ignore @ts-expect-error
         let val: any = this[ key ];
         
-        return val ===  Infinity             ? { $num:   1 }:
-               val === -Infinity             ? { $num:  -1 }:
-               Number.isNaN( val )           ? { $num: ' ' }:
-               // @ts-expect-error
-               val instanceof Date           ? { $date: isNaN( val ) ? '!' : +val }:
-               val instanceof Map            ? { $map: [ ...val ] }:
-               val instanceof Set            ? { $set: [ ...val ] }:
-               val instanceof TypeError      ? { $type_err: [ val.message, val.stack ] }:
-               val instanceof Error          ? { $err: [ val.message, val.stack ] }:
-               val instanceof RegExp         ? { $regexp: [ val.source,  val.flags ] }:
-               val instanceof ObjectId       ? { $bson_id: val.toHexString() }:
-               val?._bsontype === "ObjectID" ? { $bson_id: val.toHexString() }:
-               // @ts-expect-error
-               ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
-               typeof val === 'bigint'       ? { $bigint: val + '' }:
-               val instanceof Status         ? { $status:   [ ...val ] }:
-               val instanceof Criteria       ? { $criteria: [ ...val ] }:
-               val instanceof Stats          ? { $stats:    [ ...val ] }:
-               val
+        if( val ===  null                 ) return val;
+        if( val ===  Infinity             ) return { $num:   1 };
+        if( val === -Infinity             ) return { $num:  -1 };
+        if( Number.isNaN( val )           ) return { $num: ' ' };
+        // @ts-expect-error
+        if( val instanceof Date           ) return { $date: isNaN( val ) ? '!' : +val };
+        if( val instanceof Map            ) return { $map: [ ...val ] };
+        if( val instanceof Set            ) return { $set: [ ...val ] };
+        if( val instanceof TypeError      ) return { $type_err: [ val.message, val.stack ] };
+        if( val instanceof Error          ) return { $err: [ val.message, val.stack ] };
+        if( val instanceof RegExp         ) return { $regexp: [ val.source,  val.flags ] };
+        if( val instanceof ObjectId       ) return { $bson_id: val.toHexString() };
+        if( val?._bsontype === "ObjectID" ) return { $bson_id: val.toHexString() };
+        // @ts-expect-error
+        if( ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ) return { $buffer: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] };
+        if( typeof val === 'bigint'       ) return { $bigint: val + '' };
+        if( val instanceof Status         ) return { $status:   [ val.getStatus(), val.getMap() ] };
+        if( val instanceof Criteria       ) return { $criteria: [ val.getMap() ] };
+        if( val instanceof Stats          ) return { $stats:    [ val.getMap() ] };
+        
+        return val
     },
-    JsonParseReviver: ( key: any, val: any ) => {
-        return ( val === null && val !== 'object' ) ? val:
-            val.$num      ? val.$num / 0:
-            val.$date     ? new Date( val.$date ):
-            // @ts-expect-error
-            val.$regexp   ? new RegExp( ...val.$regexp ):
-            val.$err      ? ( key = new Error( val.$err[ 0 ] ), key.stack = val.$err[ 1 ], key ):
-            val.$type_err ? ( key = new TypeError( val.$type_err[ 0 ] ), key.stack = val.$type_err[ 1 ], key ):
-            val.$map      ? new Map( val.$map ):
-            val.$bson_id  ? ObjectId.createFromHexString( val.$bson_id ):
-            val.$set      ? new Set( val.$set ):
-            val.$buf      ? val.$buf[ 0 ]
-                          ? new types[ val.$buf[ 0 ] ]( buf64.decode( val.$buf[ 1 ], types[ val.$buf[ 0 ] ].BYTES_PER_ELEMENT ).buffer ):
-                            new Uint8Array( buf64.decode( val.$buf[ 1 ], 1 ) ).buffer:
-            val.$bigint   ? BigInt( val.$bigint ):
-            val.$status   ? new Status( ...val ):
-            val.$criteria ? new Criteria( ...val ):
-            val.$stats    ? new Stats( ...val ):
-            val 
+    JsonParseReviver( key: any, val: any ): any
+    {
+        if( val === null && val !== 'object' ) return val;
+        if( val.$num      ) return val.$num / 0;
+        if( val.$date     ) return new Date( val.$date );
+        // @ts-expect-error
+        if( val.$regexp   ) return new RegExp( ...val.$regexp );
+        if( val.$err      ) return ( key = new Error( val.$err[ 0 ] ), key.stack = val.$err[ 1 ], key );
+        if( val.$type_err ) return ( key = new TypeError( val.$type_err[ 0 ] ), key.stack = val.$type_err[ 1 ], key );
+        if( val.$map      ) return new Map( val.$map );
+        if( val.$bson_id  ) return ObjectId.createFromHexString( val.$bson_id );
+        if( val.$set      ) return new Set( val.$set );
+        if( val.$buffer   )
+        {
+            let buftype = val.$buffer[ 0 ];
+            let buffer  = val.$buffer[ 1 ];
+            if( buftype ) return new types[ buftype ]( buf64.decode( buffer, types[ buftype ].BYTES_PER_ELEMENT ).buffer );
+            else          return new Uint8Array( buf64.decode( buffer, 1 ) ).buffer;
+        }
+        if( val.$bigint   ) return BigInt( val.$bigint );
+        if( val.$status   ) return new Status( val.$status );
+        if( val.$criteria ) return new Criteria( val.$criteria );
+        if( val.$stats    ) return new Stats( val.$stats );
+
+        return val ;
     },
 }) )
 // FIXME: garbled mess, fix
@@ -179,4 +183,41 @@ export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64
     // @ts-expect-error
     4|g>>2;k=h[a.charCodeAt(++b)];if(64===k)break;e[c++]=(g&3)<<6|k} return new Uint8Array(f,0,c)},encode(a){for(var b=-1,h=a.length,d=new Uint8Array(new ArrayBuffer(Math.ceil(4*h/3))),e=0;++b<h;){var c=a[b],g=a[++b];d[e++]=f[c>>2];d[e++]=f[(c&3)<<4|g>>4];isNaN(g)?(d[e++]=f[64],d[e++]=f[64]):(c=a[++b],d[e++]=f[(g&15)<<2|c>>6],d[e++]=f[isNaN(c)?64:c&63])}return new TextDecoder().decode(d)}}}
 ) () );
+
+
+// TEST: json replacer and reviver
+// let obj: any =
+// {
+//     date: new Date(),
+//     pInf: Infinity,
+//     arr: [2,3],
+//     nInf: -Infinity,
+//     map: new Map([['a', 'b']]),
+//     set: new Set(['a', new Date(), 'a']),
+//     reg: /^f/g,
+//     err: new Error('fail'),
+//     typo: new TypeError('typo'),
+//     empty: null,
+//     binary: new Uint16Array([97]),
+//     buff: new ArrayBuffer(20),
+//     obj: {bday: new Date('1996-08-29')},
+//     str: 'str',
+//     bool: true,
+//     num: 3,
+//     nan: NaN,
+//     invDate: new Date('!'),
+//     // Experimental... creating blob/files are sync but reading it is async.
+//     file: {$f: [[new Uint8Array([97])], 'sample.txt', {type: 'text/javascript'}]},
+//     blob: {$d: [['abc'], {type: 'text/javascript'}]},
+//     status: new Status().setError("err", "errrror"),
+//     criteria: new Criteria().set("err", "errrror"),
+//     stats: new Stats().set("err", "errrror"),
+// }
+
+// let str = JSON.stringify( obj, JsonStringifyReplacer, 2 )
+// let res = JSON.parse( str, JsonParseReviver )
+
+// console.log( str )
+// console.log( obj )
+// console.log( res )
 

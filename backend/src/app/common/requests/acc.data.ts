@@ -26,7 +26,7 @@ export class AccData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|AccData, reqfields?: {} ): void
     {
-        if( !( data instanceof AccData ) ) { status.setError( "acc.err", "account not given" ); return; }
+        if( !data ) { status.setError( "acc.err", "account not given" ); return; }
         if( reqfields )
         {
             // --------------

@@ -2,7 +2,7 @@
     "compilerOptions": {
         "module": "commonjs",
         "esModuleInterop": true,
-        "target": "es6",
+        "target": "es2020",
         "noImplicitAny": true,
         "skipLibCheck": true,
         "moduleResolution": "node",
@@ -17,7 +17,7 @@
             ]
         },
         "lib": [
-            "es2015"
+            "es2020"
         ]
     },
     "include": [

@@ -15,7 +15,7 @@ export class RentData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|RentData, reqfields?: {} ): void
     {
-        if( !( data instanceof RentData ) ) { status.setError( "rent.err", "rent data not given" ); return; }
+        if( !data ) { status.setError( "rent.err", "rent data not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -43,7 +43,7 @@ export class OfferData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|OfferData, reqfields?: {} ): void
     {
-        if( !( data instanceof OfferData ) ) { status.setError( "offer.err", "offer data not given" ); return; }
+        if( !data ) { status.setError( "offer.err", "offer data not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -93,7 +93,7 @@ export class PropData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|PropData, reqfields?: {} ): void
     {
-        if( !( data instanceof PropData ) ) { status.setError( "prop.err", "property not given" ); return; }
+        if( !data ) { status.setError( "prop.err", "property not given" ); return; }
         if( reqfields )
         {
             // --------------

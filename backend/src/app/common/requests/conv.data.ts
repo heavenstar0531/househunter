@@ -14,7 +14,7 @@ export class MsgData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|MsgData, reqfields?: {} ): void
     {
-        if( !( data instanceof MsgData ) ) { status.setError( "msg.err", "message not given" ); return; }
+        if( !data ) { status.setError( "msg.err", "message not given" ); return; }
         if( reqfields )
         {
             // --------------
@@ -50,7 +50,7 @@ export class ConvData
     // FIXME: this validation sort of works, but is not the best
     static validate( status: Status, data: null|ConvData, reqfields?: {} ): void
     {
-        if( !( data instanceof ConvData ) ) { status.setError( "conv.err", "conversation not given" ); return; }
+        if( !data ) { status.setError( "conv.err", "conversation not given" ); return; }
         if( reqfields )
         {
             // --------------
