@@ -8,7 +8,11 @@ export class Status
     static readonly WARNING: number = -1;
     static readonly SUCCESS: number =  0;
 
-    constructor() {}
+    constructor( [ status, map ]: [ number, Map<string, any> ] = [ 0, new Map<string, any>() ] )
+    {
+        this.status = status;
+        this.map = map ? map : new Map<string, any>();
+    }
 
     *[ Symbol.iterator ] (): any
     {
@@ -37,8 +41,13 @@ export class Status
 
 export class Criteria
 {
-    private map: Map<string, any> = new Map<string, any>();
+    private map: Map<string, any>;
 
+    constructor( map?: Map<string, any> )
+    {
+        this.map = map ? map : new Map<string, any>();
+    }
+    
     *[ Symbol.iterator ] (): any
     {
         for( let key in this )
@@ -56,6 +65,11 @@ export class Criteria
 export class Stats
 {
     private map: Map<string, any> = new Map<string, any>();
+
+    constructor( map?: Map<string, any> )
+    {
+        this.map = map ? map : new Map<string, any>();
+    }
 
     *[ Symbol.iterator ] (): any
     {
@@ -128,12 +142,12 @@ export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64
                val instanceof RegExp         ? { $regexp: [ val.source,  val.flags ] }:
                val instanceof ObjectId       ? { $bson_id: val.toHexString() }:
                val?._bsontype === "ObjectID" ? { $bson_id: val.toHexString() }:
-         //    // @ts-expect-error
-         //    ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
+               // @ts-expect-error
+               ArrayBuffer.isView( val ) || val instanceof ArrayBuffer ? { $buf: [ types.indexOf( val.constructor ), buf64.encode( new Uint8Array( val.buffer ) ) ] }:
                typeof val === 'bigint'       ? { $bigint: val + '' }:
-               val instanceof Status         ? { $status:   Object.setPrototypeOf( val, null ) || val }:
-               val instanceof Criteria       ? { $criteria: Object.setPrototypeOf( val, null ) || val }:
-               val instanceof Stats          ? { $stats:    Object.setPrototypeOf( val, null ) || val }:
+               val instanceof Status         ? { $status:   [ ...val ] }:
+               val instanceof Criteria       ? { $criteria: [ ...val ] }:
+               val instanceof Stats          ? { $stats:    [ ...val ] }:
                val
     },
     JsonParseReviver: ( key: any, val: any ) => {
@@ -147,13 +161,13 @@ export const { JsonStringifyReplacer, JsonParseReviver } = ( ( types: any, buf64
             val.$map      ? new Map( val.$map ):
             val.$bson_id  ? ObjectId.createFromHexString( val.$bson_id ):
             val.$set      ? new Set( val.$set ):
-         // val.$buf      ? val.$buf[ 0 ]
-         //               ? new types[ val.$buf[ 0 ] ]( buf64.decode( val.$buf[ 1 ], types[ val.$buf[ 0 ] ].BYTES_PER_ELEMENT ).buffer ):
-         //                 new Uint8Array( buf64.decode( val.$buf[ 1 ], 1 ) ).buffer:
+            val.$buf      ? val.$buf[ 0 ]
+                          ? new types[ val.$buf[ 0 ] ]( buf64.decode( val.$buf[ 1 ], types[ val.$buf[ 0 ] ].BYTES_PER_ELEMENT ).buffer ):
+                            new Uint8Array( buf64.decode( val.$buf[ 1 ], 1 ) ).buffer:
             val.$bigint   ? BigInt( val.$bigint ):
-            val.$status   ? Object.assign( new Status(),   val.$status   ):
-            val.$criteria ? Object.assign( new Criteria(), val.$criteria ):
-            val.$stats    ? Object.assign( new Stats(),    val.$stats    ):
+            val.$status   ? new Status( ...val ):
+            val.$criteria ? new Criteria( ...val ):
+            val.$stats    ? new Stats( ...val ):
             val 
     },
 }) )

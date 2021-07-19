@@ -18,28 +18,25 @@ export class RestApi
     }
 
 
-    public static sendJsonErrorResponse( response: any, status: number, err: any, message: string ): void
+    public static sendJsonErrorResponse( response: any, status: number, error: any, message: string ): void
     {
-        console.log( err );
+        console.log( error );
     
-        let res;
-        if     ( err instanceof Status ) res = err;
-        else if( err instanceof Error  ) res = new Status().setError( "message", message );
-        else                             throw err;
-        
-        response.status( status ).type( "application/json" ).send( JSON.stringify( res, JsonStringifyReplacer ) );
+        if( !( error instanceof Status ) ) error = new Status();
+        error.setError( "message", message );
+
+        response.status( status ).type( "application/json" ).send( JSON.stringify( error, JsonStringifyReplacer ) );
+        if( error instanceof Status || error instanceof Error ) return;
+        throw error;
     }
 
-    public static sendFileErrorResponse( response: any, err: any ): void
+    public static sendFileErrorResponse( response: any, error: any ): void
     {
-        console.log( err );
+        console.log( error );
 
-        let status;
-        if     ( err instanceof Status ) status = 400;
-        else if( err instanceof Error  ) status = 400;
-        else                             throw err;
-        
-        response.status( status ).send( "" );
+        response.status( 400 ).send( "" );
+        if( error instanceof Status || error instanceof Error ) return;
+        throw error;
     }
 }
 

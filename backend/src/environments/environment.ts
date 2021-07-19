@@ -7,7 +7,7 @@ export const environment = {
   sessionSecret: 'random secret that is very random indeed',   // secret za sesiju
   sessionTtl: 60*60/*s*/,
 
-  cookieSecure: true,
+  cookieSecure: false,
   cookieHttpOnly: true,
   cookieSameSite: 'lax',   // FIXME: use in server.ts
   cookieMaxAge: 10 * 24*60*60 * 1000/*ms*/,
