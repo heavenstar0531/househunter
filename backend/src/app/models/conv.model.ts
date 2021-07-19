@@ -1,4 +1,4 @@
-import mongoose, { Model, mongo } from 'mongoose';
+import mongoose, { Model } from 'mongoose';
 import ObjectId from 'bson-objectid';
 import { ConvData, MsgData } from '../common/requests/conv.data';
 import { Status } from '../common/types'
@@ -160,7 +160,7 @@ export class ConvModel
                 message.read_dt = new Date( last_msg_dt );
         }
 
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: this.session.acc_id },
             conversation
         );

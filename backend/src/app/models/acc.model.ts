@@ -123,7 +123,7 @@ export class AccModel
     {
         let status = new Status();
         
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: updated_acc._id, deleted_dt: null },
             updated_acc
         );
@@ -138,7 +138,7 @@ export class AccModel
     {
         let status = new Status();
         
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: updated_acc._id, deleted_dt: null },
             updated_acc
         );

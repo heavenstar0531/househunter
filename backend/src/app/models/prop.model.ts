@@ -208,7 +208,7 @@ export class PropModel
     {
         let status = new Status();
 
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: updated_prop._id, deleted_dt: null },
             updated_prop
         );
@@ -223,7 +223,7 @@ export class PropModel
     {
         let status = new Status();
         
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: updated_prop._id, deleted_dt: null },
             updated_prop
         );
@@ -310,7 +310,7 @@ export class PropModel
             } );
         }
         
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { prop_id: prop_id, deleted_dt: null },
             prop
         );
