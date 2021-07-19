@@ -44,7 +44,7 @@ export class AgncyModel
     {
         let status = new Status();
         
-        let opres = await this.model.collection.updateOne(
+        let opres = await this.model.collection.replaceOne(
             { _id: updated_agncy._id },
             updated_agncy
         );

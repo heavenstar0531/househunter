@@ -15,7 +15,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let prop = request.body.prop as PropData;
+                let prop = request.body as PropData;
                 PropApiCall.ensureValid( session.acc_type, "add", prop );
                 
                 let res = await new PropModel( request.session ).add( prop );
@@ -32,7 +32,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let prop_list = request.body.prop_list as Array<PropData>;
+                let prop_list = request.body as Array<PropData>;
                 PropApiCall.ensureValid( session.acc_type, "addMany", prop_list );
                 
                 let res = await new PropModel( request.session ).addMany( prop_list );
@@ -49,7 +49,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let prop_id = request.body.prop_id as ObjectId;
+                let prop_id = request.body as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "delete", prop_id );
                 
                 let res = await new PropModel( request.session ).delete( prop_id );
@@ -66,7 +66,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let prop_id = request.body.prop_id as ObjectId;
+                let prop_id = request.body as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "get", prop_id );
                 
                 let res = await new PropModel( request.session ).get( prop_id );
@@ -83,7 +83,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let criteria = request.body.criteria as Criteria;
+                let criteria = request.body as Criteria;
                 PropApiCall.ensureValid( session.acc_type, "list", criteria );
                 
                 let res = await new PropModel( request.session ).list( criteria );
@@ -102,7 +102,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let updated_prop = request.body.updated_prop as PropData;
+                let updated_prop = request.body as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateInfo", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateInfo( updated_prop );
@@ -119,7 +119,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let updated_prop = request.body.updated_prop as PropData;
+                let updated_prop = request.body as PropData;
                 PropApiCall.ensureValid( session.acc_type, "updateStatus", updated_prop );
                 
                 let res = await new PropModel( request.session ).updateStatus( updated_prop );
@@ -196,7 +196,7 @@ export class PropApi
             try
             {
                 let session = request.session;
-                let prop_id = request.body.prop_id as ObjectId;
+                let prop_id = request.body as ObjectId;
                 PropApiCall.ensureValid( session.acc_type, "listPurchaseOffers", prop_id );
                 
                 let res = await new PropModel( request.session ).listPurchaseOffers( prop_id );
@@ -210,7 +210,7 @@ export class PropApi
 
 
         // ------------------------------------------------------------- //
-        // POST   async getStats( criteria: Criteria ): Promise<[ Status, Stats? ]>
+        // POST   async getStats(): Promise<[ Status, Stats? ]>
         router.route( '/prop/getStats' ).post( async ( request, response ) => {
             try
             {

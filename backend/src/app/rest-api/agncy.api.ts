@@ -29,7 +29,7 @@ export class AgncyApi
             try
             {
                 let session = request.session;
-                let updated_agncy = request.body.updated_agncy as AgncyData;
+                let updated_agncy = request.body as AgncyData;
                 AgncyApiCall.ensureValid( session.acc_type, "update", updated_agncy );
 
                 let res = await new AgncyModel( request.session ).update( updated_agncy );

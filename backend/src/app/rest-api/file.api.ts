@@ -15,7 +15,7 @@ export class FileApi
             try
             {
                 let session = request.session;
-                let file = Object.assign( new FileData(), request.body.file );
+                let file = Object.assign( new FileData(), request.body );
                 FileApiCall.ensureValid( session.acc_type, "add", file );
     
                 let res = await new FileModel( request.session, gfs ).add( file );
@@ -32,7 +32,7 @@ export class FileApi
             try
             {
                 let session = request.session;
-                let file_id = Object.assign( new ObjectId(), request.body.file_id );
+                let file_id = Object.assign( new ObjectId(), request.body );
                 FileApiCall.ensureValid( session.acc_type, "get", file_id );
                 
                 let res = await new FileModel( request.session, gfs ).get( file_id );

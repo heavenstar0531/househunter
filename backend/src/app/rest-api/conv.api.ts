@@ -14,7 +14,7 @@ export class ConvApi
             try
             {
                 let session = request.session;
-                let conv = request.body.conv as ConvData;
+                let conv = request.body as ConvData;
                 ConvApiCall.ensureValid( session.acc_type, "add", conv );
                 
                 let res = await new ConvModel( request.session ).add( conv );
@@ -31,7 +31,7 @@ export class ConvApi
             try
             {
                 let session = request.session;
-                let conv_id = request.body.conv_id as ObjectId;
+                let conv_id = request.body as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "delete", conv_id );
                 
                 let res = await new ConvModel( request.session ).delete( conv_id );
@@ -48,7 +48,7 @@ export class ConvApi
             try
             {
                 let session = request.session;
-                let conv_id = request.body.conv_id as ObjectId;
+                let conv_id = request.body as ObjectId;
                 ConvApiCall.ensureValid( session.acc_type, "get", conv_id );
                 
                 let res = await new ConvModel( request.session ).get( conv_id );
@@ -65,7 +65,7 @@ export class ConvApi
             try
             {
                 let session = request.session;
-                let is_archived = request.body.is_archived as boolean;
+                let is_archived = request.body as boolean;
                 ConvApiCall.ensureValid( session.acc_type, "list", is_archived );
                 
                 let res = await new ConvModel( request.session ).list( is_archived );

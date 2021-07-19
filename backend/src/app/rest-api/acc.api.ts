@@ -14,7 +14,7 @@ export class AccApi
             try
             {
                 let session = request.session;
-                let acc = request.body.acc as AccData;
+                let acc = request.body as AccData;
                 AccApiCall.ensureValid( session.acc_type, "add", acc );
                 
                 let res = await new AccModel( request.session ).add( acc );
@@ -31,7 +31,7 @@ export class AccApi
             try
             {
                 let session = request.session;
-                let acc_id = request.body.acc_id as ObjectId;
+                let acc_id = request.body as ObjectId;
                 AccApiCall.ensureValid( session.acc_type, "delete", acc_id );
                 
                 let res = await new AccModel( request.session ).delete( acc_id );
@@ -48,7 +48,7 @@ export class AccApi
             try
             {
                 let session = request.session;
-                let acc_id = request.body.acc_id as ObjectId;
+                let acc_id = request.body as ObjectId;
                 AccApiCall.ensureValid( session.acc_type, "get", acc_id );
                 
                 let res = await new AccModel( request.session ).get( acc_id );
@@ -118,7 +118,7 @@ export class AccApi
             try
             {
                 let session = request.session;
-                let updated_acc = request.body.updated_acc as AccData;
+                let updated_acc = request.body as AccData;
                 AccApiCall.ensureValid( session.acc_type, "updateInfo", session.acc_id, updated_acc );
                 
                 let res = await new AccModel( request.session ).updateInfo( updated_acc );
@@ -135,7 +135,7 @@ export class AccApi
             try
             {
                 let session = request.session;
-                let updated_acc = request.body.updated_acc as AccData;
+                let updated_acc = request.body as AccData;
                 AccApiCall.ensureValid( session.acc_type, "updateStatus", session.acc_id, updated_acc );
                 
                 let res = await new AccModel( request.session ).updateStatus( updated_acc );

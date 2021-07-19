@@ -104,7 +104,7 @@ export class ConvService {
       ConvApiCall.ensureValid( this.session.acc_type, "sendMessage", conv_id, text );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/conv/sendMessage`, JSON.stringify( conv_id, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, MsgData? ];
+      let res = await this.http.put( `${this.url}/conv/sendMessage`, JSON.stringify( { conv_id, text }, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, MsgData? ];
 
       return res;
     }
@@ -123,7 +123,7 @@ export class ConvService {
       ConvApiCall.ensureValid( this.session.acc_type, "markRead", conv_id, last_msg_dt );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
-      let res = await this.http.put( `${this.url}/conv/markRead`, JSON.stringify( conv_id, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
+      let res = await this.http.put( `${this.url}/conv/markRead`, JSON.stringify( { conv_id, last_msg_dt }, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as Status;
 
       return res;
     }
