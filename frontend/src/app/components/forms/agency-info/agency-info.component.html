@@ -4,7 +4,7 @@
 
       <div class="form-group">
         <label for="credit_percent">Procenat za kredite</label>
-        <input id ="credit_percent" type="text" class="form-control" placeholder="procenat za kredite" name="credit_percent" [(ngModel)]="agncy.credit_percent" [class.is-invalid]="status.getKey('credit_percent.err')">
+        <input id ="credit_percent" type="number" class="form-control" placeholder="procenat za kredite" name="credit_percent" [(ngModel)]="agncy.credit_percent" [class.is-invalid]="status.getKey('credit_percent.err')">
         <small class='text-danger'>{{ status.getKey('credit_percent.err') }}&nbsp;</small>
       </div>
 
@@ -13,7 +13,7 @@
 
       <div class="form-group">
         <label for="rent_percent">Procenat za iznajmljivanje</label>
-        <input id ="rent_percent" type="text" class="form-control" placeholder="procenat za iznajmljivanje" name="rent_percent" [(ngModel)]="agncy.rent_percent" [class.is-invalid]="status.getKey('rent_percent.err')">
+        <input id ="rent_percent" type="number" class="form-control" placeholder="procenat za iznajmljivanje" name="rent_percent" [(ngModel)]="agncy.rent_percent" [class.is-invalid]="status.getKey('rent_percent.err')">
         <small class='text-danger'>{{ status.getKey('rent_percent.err') }}&nbsp;</small>
       </div>
 
@@ -22,7 +22,7 @@
 
       <div class="form-group">
         <label for="sale_percent">Procenat za prodaju</label>
-        <input id ="sale_percent" type="text" class="form-control" placeholder="procenat za prodaju" name="sale_percent" [(ngModel)]="agncy.sale_percent" [class.is-invalid]="status.getKey('sale_percent.err')">
+        <input id ="sale_percent" type="number" class="form-control" placeholder="procenat za prodaju" name="sale_percent" [(ngModel)]="agncy.sale_percent" [class.is-invalid]="status.getKey('sale_percent.err')">
         <small class='text-danger'>{{ status.getKey('sale_percent.err') }}&nbsp;</small>
       </div>
 

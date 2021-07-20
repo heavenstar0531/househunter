@@ -1,5 +1,6 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { AccData } from 'src/app/common/requests/acc.data';
 import { Status } from 'src/app/common/types';
 import { AccountFormComponent } from '../../forms/account-form/account-form.component';
 
@@ -12,6 +13,8 @@ export class AccountModalComponent implements OnInit {
   @ViewChild( TemplateRef )
   template_ref: null|TemplateRef<NgbModal> = null;
   modal_ref: null|NgbModalRef = null;
+  @Input( "acc_old" )
+  acc_old: AccData = new AccData();   // read only
 
   constructor(
     private modalService: NgbModal,

@@ -68,7 +68,7 @@ export class AccData
             else if( !emailRegex.test( data.email ) ) status.setError( "email.err", "email not in correct format" );
         }
         // ------------------------------------------------------------- <<< user info
-        if( data.usr_photo_id     !== undefined && !( data.usr_photo_id instanceof ObjectId ) ) data.usr_photo_id = new ObjectId( /*TODO*/ );
+        if( data.usr_photo_id                   && !( data.usr_photo_id instanceof ObjectId ) ) status.setError( "usr_photo_id.err", "user photo id missing" );
         if( data.usr_addr_country !== undefined && !data.usr_addr_country?.length ) status.setError( "usr_addr_country.err", "country missing" );
         if( data.usr_addr_city    !== undefined && !data.usr_addr_city?.length    ) status.setError( "usr_addr_city.err",    "city missing" );
         // ------------------------------------------------------------- <<< acc status
@@ -90,6 +90,9 @@ export class AccData
                 }
             }
         }
+
+        // ------------------------------------------------------------- <<< consistency checks
+        // data.usr_photo_id = new ObjectId( /*TODO*/ );
     }
 };
 

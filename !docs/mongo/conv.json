@@ -9,32 +9,32 @@
       {
         "sender_id":      { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
         "text":           "Dobar dan! Interesuje me koliko košta iznajmljivanje Vašeg stana u poslovne svrhe po danu.",
-        "sent_dt":        "2021-02-17T11:00:00Z",
-        "read_dt":        "2021-02-17T11:00:01Z"
+        "sent_dt":        { "$date": "2021-02-17T11:00:00.000Z" },
+        "read_dt":        { "$date": "2021-02-17T11:00:01.000Z" }
       },
       {
         "sender_id":      { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
         "text":           "Poštovanje! Drago mi je da ste zainteresovani. Cena je 5000din po danu.",
-        "sent_dt":        "2021-02-17T11:01:00Z",
-        "read_dt":        "2021-02-17T11:01:01Z"
+        "sent_dt":        { "$date": "2021-02-17T11:01:00.000Z" },
+        "read_dt":        { "$date": "2021-02-17T11:01:01.000Z" }
       },
       {
         "sender_id":      { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
         "text":           "Aha. Takođe, da li bih mogao iznajmiti stan na sledećih mesec ipo dana počevši od danas?",
-        "sent_dt":        "2021-02-17T11:02:00Z",
-        "read_dt":        "2021-02-17T11:02:01Z"
+        "sent_dt":        { "$date": "2021-02-17T11:01:00.000Z" },
+        "read_dt":        { "$date": "2021-02-17T11:02:01.000Z" }
       },
       {
         "sender_id":      { "$oid": "602ed0f78b05043edc647cd6" },   /*Marko*/
         "text":           "Možete, pošaljite samo zahtev za iznajmljivanje.",
-        "sent_dt":        "2021-02-17T11:03:00Z",
-        "read_dt":        "2021-02-17T11:03:01Z"
+        "sent_dt":        { "$date": "2021-02-17T11:03:00.000Z" },
+        "read_dt":        { "$date": "2021-02-17T11:03:01.000Z" }
       },
       {
         "sender_id":      { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
         "text":           "Super. Hvala puno!",
-        "sent_dt":        "2021-02-17T11:04:00Z",
-        "read_dt":        "2021-02-17T11:04:01Z"
+        "sent_dt":        { "$date": "2021-02-17T11:03:30.000Z" },
+        "read_dt":        { "$date": "2021-02-17T11:03:31.000Z" }
       }
     ],
     "owner_arch_dt":      null,
@@ -52,11 +52,11 @@
       {
         "sender_id":      { "$oid": "602ed0298b05043edc647ccd" },   /*Katarina*/
         "text":           "Tralalala.",
-        "sent_dt":        "2021-02-17T12:00:00Z",
-        "read_dt":        "2021-02-17T12:01:01Z"
+        "sent_dt":        { "$date": "2021-02-17T12:00:00.000Z" },
+        "read_dt":        { "$date": "2021-02-17T12:05:00.000Z" }
       }
     ],
-    "owner_arch_dt":      "2021-02-19T08:00:00Z",
+    "owner_arch_dt":      { "$date": "2021-02-19T08:05:00.000Z" },
     "owner_deleted_dt":   null,
     "offeror_arch_dt":    null,
     "offeror_deleted_dt": null

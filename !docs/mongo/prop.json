@@ -21,24 +21,24 @@
     "rent_list": [
       {
         "renter_id":   { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
-        "from_dt":     "2021-02-17T12:00:00Z",
-        "to_dt":       "2021-03-15T15:00:00Z"
+        "from_dt":     { "$date": "2021-02-17T12:00:00.000Z" },
+        "to_dt":       { "$date": "2021-03-15T15:00:00.000Z" }
       },
       {
         "renter_id":   { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
-        "from_dt":     "2021-03-21T12:00:00Z",
-        "to_dt":       "2021-04-12T08:00:00Z"
+        "from_dt":     { "$date": "2021-03-21T12:00:00.000Z" },
+        "to_dt":       { "$date": "2021-04-12T08:00:00.000Z" }
       },
       {
         "renter_id":   { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
-        "from_dt":     "2021-03-21T12:00:00Z",
-        "to_dt":       "2021-04-12T08:00:00Z"
+        "from_dt":     { "$date": "2021-03-21T12:00:00.000Z" },
+        "to_dt":       { "$date": "2021-04-12T08:00:00.000Z" }
       }
     ],
     "sale_offer_list": [],
     "sale_arbiter_id": null,
     /* ------ */
-    "accepted_dt":     "2021-02-05T16:20:00Z",
+    "accepted_dt":     { "$date": "2021-02-05T16:20:00.000Z" },
     "sold_dt":         null,
     "deleted_dt":      null,
     "is_promoted":     true,
@@ -66,14 +66,14 @@
     "rent_list":       [
       {
         "renter_id":   { "$oid": "602ed0f78b05043edc647cd7" },   /*Žika*/
-        "from_dt":     "2021-06-05T12:00:00Z",
-        "to_dt":       "2022-06-05T12:00:00Z"
+        "from_dt":     { "$date": "2021-06-05T12:00:00.000Z" },
+        "to_dt":       { "$date": "2022-06-05T12:00:00.000Z" }
       }
     ],
     "sale_offer_list": [],
     "sale_arbiter_id": null,
     /* ------ */
-    "accepted_dt":     "2021-02-06T16:20:00Z",
+    "accepted_dt":     { "$date": "2021-02-06T16:20:00.000Z" },
     "sold_dt":         null,
     "deleted_dt":      null,
     "is_promoted":     true,
@@ -108,7 +108,7 @@
     ],
     "sale_arbiter_id": null,
     /* ------ */
-    "accepted_dt":     "2021-02-06T16:20:00Z",
+    "accepted_dt":     { "$date": "2021-02-06T16:20:00.000Z" },
     "sold_dt":         null,
     "deleted_dt":      null,
     "is_promoted":     true,
@@ -139,7 +139,7 @@
       {
         "offeror_id":     { "$oid": "602eda588b05043edc647cde" },   /*Maja*/
         "offered_amount": 250000,
-        "accepted_dt":    "2021-02-05T16:20:00Z"
+        "accepted_dt":    { "$date": "2021-02-05T16:20:00.000Z" }
       },
       {
         "offeror_id":     { "$oid": "602eda588b05043edc647ce0" },   /*Dimitrije*/
@@ -149,8 +149,8 @@
     ],
     "sale_arbiter_id": { "$oid": "602eda588b05043edc647cdc" },   /*Mara*/
     /* ------ */
-    "accepted_dt":     "2020-11-25T08:00:00Z",
-    "sold_dt":         "2021-02-05T16:20:00Z",
+    "accepted_dt":     { "$date": "2020-11-25T08:00:00.000Z" },
+    "sold_dt":         { "$date": "2021-02-05T16:20:00.000Z" },
     "deleted_dt":      null,
     "is_promoted":     false,
     "viewcnt":         20
@@ -184,7 +184,7 @@
     ],
     "sale_arbiter_id": null,
     /* ------ */
-    "accepted_dt":     "2021-02-05T16:20:00Z",
+    "accepted_dt":     { "$date": "2021-02-05T16:20:00.000Z" },
     "sold_dt":         null,
     "deleted_dt":      true,
     "is_promoted":     true,
@@ -244,7 +244,7 @@
     /* ------ */
     "accepted_dt":     null,
     "sold_dt":         null,
-    "deleted_dt":      "2021-02-05T16:20:00Z",
+    "deleted_dt":      { "$date": "2021-02-05T16:20:00.000Z" },
     "is_promoted":     false,
     "viewcnt":         20
   }

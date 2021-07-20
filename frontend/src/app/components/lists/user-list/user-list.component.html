@@ -10,17 +10,18 @@
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <td>.</td>
-      <td>.</td>
-      <td>.</td>
-      <td>.</td>
-      <td>.</td>
-      <td class="p-1" style="width: 50px;">
+    <tr *ngFor="let acc of acc_list">
+      <td>{{ acc.username  }}</td>
+      <td>{{ acc.email     }}</td>
+      <td>{{ acc.firstname }}</td>
+      <td>{{ acc.lastname  }}</td>
+      <td>{{ acc.acc_type  }}</td>
+      <td class="p-1" style="text-align: right; width: 50px;">
         <div class="btn-group" >
-          <button class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
-          <button class="btn btn-outline-dark"><i class="bi bi-check-lg"></i></button>
-          <button class="btn btn-outline-dark"><i class="bi bi-x-lg"></i></button>
+          <button class="btn btn-outline-dark" (click)="account_modal_ref.open()"><i class="bi bi-pen"></i></button>
+          <app-account-modal #account_modal_ref [acc_old]="acc"></app-account-modal>
+          <button *ngIf="!acc.activated_dt" class="btn btn-outline-dark" (click)="activate( acc )"><i class="bi bi-check-lg"></i></button>
+          <button *ngIf="acc.acc_type != 'adm'" class="btn btn-outline-dark" (click)="delete( acc )"><i class="bi bi-x-lg"></i></button>
         </div>
       </td>
     </tr>

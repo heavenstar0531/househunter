@@ -2,7 +2,6 @@
   /* -------------------------------------------------- <<< agency */
   {
     "_id": { "$oid": "602ed0298b05043edc647cce" },
-    "income": 0,
     "credit_percent": 20,
     "rent_percent": 10,
     "sale_percent": 15

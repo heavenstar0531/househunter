@@ -3,7 +3,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdb" },
     "username": "admin",
-    "password": "admin",
+    "password": "ADMINadmin#",
     "firstname": "Pera",
     "lastname": "Perić",
     "email": "pera@email.com",
@@ -13,7 +13,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "adm",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -22,7 +22,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdc" },
     "username": "agent1",
-    "password": "agent1",
+    "password": "AGENTagent1#",
     "firstname": "Mara",
     "lastname": "Marić",
     "email": "mara@email.com",
@@ -32,7 +32,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "agn",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -40,7 +40,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdd" },
     "username": "agent2",
-    "password": "agent2",
+    "password": "AGENTagent2#",
     "firstname": "Zika",
     "lastname": "Zikić",
     "email": "zika@email.com",
@@ -50,7 +50,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "agn",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -58,7 +58,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd4" },
     "username": "agent3",
-    "password": "agent3",
+    "password": "AGENTagent3#",
     "firstname": "Laza",
     "lastname": "Lazić",
     "email": "laza@email.com",
@@ -68,15 +68,15 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "agn",
-    "activated_dt": "2021-02-17T23:00:00Z",
-    "deleted_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
+    "deleted_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "usr_blocked_ids": []
   },
   /* --------------------- */
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd5" },
     "username": "agent4",
-    "password": "agent4",
+    "password": "AGENTagent4#",
     "firstname": "Mika",
     "lastname": "Mikić",
     "email": "mika@email.com",
@@ -86,8 +86,8 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "agn",
-    "activated_dt": "2021-02-17T23:00:00Z",
-    "deleted_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
+    "deleted_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "usr_blocked_ids": []
   },
 
@@ -95,7 +95,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cde" },
     "username": "user1",
-    "password": "user1",
+    "password": "USERuser1#",
     "firstname": "Maja",
     "lastname": "Majić",
     "email": "maja@email.com",
@@ -105,7 +105,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -113,7 +113,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd6" },
     "username": "user2",
-    "password": "user2",
+    "password": "USERuser2#",
     "firstname": "Marko",
     "lastname": "Marić",
     "email": "marko@email.com",
@@ -123,7 +123,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": [
       { "$oid": "602ed0298b05043edc647ccd" }
@@ -133,7 +133,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647cd3" },
     "username": "user3",
-    "password": "user3",
+    "password": "USERuser3#",
     "firstname": "Miloš",
     "lastname": "Marić",
     "email": "milos@email.com",
@@ -143,7 +143,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": [
       { "$oid": "602ed0298b05043edc647ccd" }
@@ -153,7 +153,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647cd2" },
     "username": "user4",
-    "password": "user4",
+    "password": "USERuser4#",
     "firstname": "Petar",
     "lastname": "Tomić",
     "email": "petar@email.com",
@@ -163,7 +163,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": [
       { "$oid": "602ed0298b05043edc647ccd" }
@@ -173,7 +173,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647ce0" },
     "username": "user5",
-    "password": "user5",
+    "password": "USERuser5#",
     "firstname": "Dimitrije",
     "lastname": "Petronijević",
     "email": "dimitrije@email.com",
@@ -183,7 +183,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -191,7 +191,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd7" },
     "username": "user6",
-    "password": "user6",
+    "password": "USERuser6#",
     "firstname": "Žika",
     "lastname": "Žikić",
     "email": "zika@email.com",
@@ -201,7 +201,7 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "deleted_dt": null,
     "usr_blocked_ids": []
   },
@@ -209,7 +209,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647ccc" },
     "username": "user7",
-    "password": "user7",
+    "password": "USERuser7#",
     "firstname": "Sanja",
     "lastname": "Sanjić",
     "email": "sanja@email.com",
@@ -227,7 +227,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd8" },
     "username": "user8",
-    "password": "user8",
+    "password": "USERuser8#",
     "firstname": "Nikola",
     "lastname": "Nović",
     "email": "nikola@email.com",
@@ -238,14 +238,14 @@
 
     "acc_type": "usr",
     "activated_dt": null,
-    "deleted_dt": "2021-05-17T23:00:00Z",
+    "deleted_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "usr_blocked_ids": []
   },
   /* --------------------- */
   {
     "_id": { "$oid": "602ed0298b05043edc647ccd" },
     "username": "user9",
-    "password": "user9",
+    "password": "USERuser9#",
     "firstname": "Katarina",
     "lastname": "Stefanović",
     "email": "katarina@email.com",
@@ -255,8 +255,8 @@
     "usr_addr_city": "Beograd",
 
     "acc_type": "usr",
-    "activated_dt": "2021-02-17T23:00:00Z",
-    "deleted_dt": "2021-05-17T23:00:00Z",
+    "activated_dt": { "$date": "2021-02-17T23:00:00.000Z" },
+    "deleted_dt": { "$date": "2021-02-17T23:00:00.000Z" },
     "usr_blocked_ids": []
   }
 ]
