@@ -25,12 +25,14 @@ export class UserListComponent implements OnInit {
   async activate( acc: AccData ) {
     acc.activated_dt = new Date();
     let status = await this.accService.updateStatus( acc );
+    if( status.getStatus() != Status.SUCCESS ) acc.activated_dt = null;
   }
 
   async delete( acc: AccData ) {
     acc.deleted_dt = new Date();
     let status = await this.accService.updateStatus( acc );
     if( status.getStatus() == Status.SUCCESS ) this.acc_list = this.acc_list.filter( account => account._id != acc._id );
+    else                                       acc.deleted_dt = null;
   }
 
 }

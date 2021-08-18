@@ -34,12 +34,12 @@ export class FileModel
         // create a file id for the new file
         let id = new ObjectId().toHexString();
 
-        await pipeline(
+        pipeline(
             new Readable({
                 // insert null at the end of the stream in order to terminate the stream
-                read() { this.push( data ); this.push( null ); }
+                read() { this.push(data); this.push(null); }
             }),
-            this.gfs.createWriteStream( file as any )
+            this.gfs.createWriteStream(file as any)
         );
 
         return [ status, id ];

@@ -21,12 +21,33 @@ export class AccService {
   
   // ------------------------------------------------------------- //
   // PUT   async add( acc: AccData ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
-  async add( acc: AccData ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
+  async add( acc: AccData, password_new: string ): Promise<[ Status, ObjectId?/*acc_id*/ ]>
   {
     try
     {
-      AccApiCall.ensureValid( this.session.acc_type, "add", acc );
+      let status;
+      try
+      {
+        AccApiCall.ensureValid( this.session.acc_type, "add", acc );
+        status = new Status();
+      }
+      catch( err )
+      {
+        if( !( err instanceof Status ) ) throw err;
+        status = err;
+      }
+      
+      // additional validation
+      {
+        if( !status.hasKey( 'password.err' ) && acc.password != password_new )
+        {
+          status.setError( 'password.err',     'passwords do not match' );
+          status.setError( 'password_new.err', 'passwords do not match' );
+        }
 
+        if( status.getStatus() != Status.SUCCESS ) throw status;
+      }
+  
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );
       let res = await this.http.put( `${this.url}/acc/add`, JSON.stringify( acc, JsonStringifyReplacer ), { headers, withCredentials: true, } ).toPromise() as [ Status, ObjectId? ];
 
@@ -147,10 +168,33 @@ export class AccService {
 
   // ------------------------------------------------------------- //
   // PUT   async updateInfo( updated_acc: AccData ): Promise<Status>
-  async updateInfo( updated_acc: AccData ): Promise<Status>
+  async updateInfo( acc_old: AccData, updated_acc: AccData, password_old: string, password_new: string ): Promise<Status>
   {
     try
     {
+      let status;
+      try
+      {
+        AccApiCall.ensureValid( this.session.acc_type, "updateInfo", this.session.acc_id, updated_acc );
+        status = new Status();
+      }
+      catch( err )
+      {
+        if( !( err instanceof Status ) ) throw err;
+        status = err;
+      }
+      
+      // additional validation
+      {
+        // if( !status.hasKey( 'password.err' ) && acc.password != password_new )
+        // {
+        //   status.setError( 'password.err',     'passwords do not match' );
+        //   status.setError( 'password_new.err', 'passwords do not match' );
+        // }
+
+        if( status.getStatus() != Status.SUCCESS ) throw status;
+      }
+      
       AccApiCall.ensureValid( this.session.acc_type, "updateInfo", this.session.acc_id, updated_acc );
 
       let headers = new HttpHeaders().set( "Content-Type", "application/json" );

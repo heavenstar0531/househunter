@@ -22,6 +22,8 @@ app-root
 // prevent focus outline on clicked elements
 *:focus
   outline: none
+.btn:focus
+  box-shadow: none !important
 
 // prevent items from being selectable by mouse
 .no-select
@@ -41,7 +43,7 @@ input[type="number"]
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button
   -webkit-appearance: none
-
+  
 // prevent wrapping of text on form labels
 label, small
   white-space: nowrap

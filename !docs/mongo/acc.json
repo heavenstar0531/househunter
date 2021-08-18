@@ -3,7 +3,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdb" },
     "username": "admin",
-    "password": "ADMINadmin#",
+    "password": "ADMINadmin#0",
     "firstname": "Pera",
     "lastname": "Perić",
     "email": "pera@email.com",
@@ -22,7 +22,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdc" },
     "username": "agent1",
-    "password": "AGENTagent1#",
+    "password": "AGENTagent#1",
     "firstname": "Mara",
     "lastname": "Marić",
     "email": "mara@email.com",
@@ -40,7 +40,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cdd" },
     "username": "agent2",
-    "password": "AGENTagent2#",
+    "password": "AGENTagent#2",
     "firstname": "Zika",
     "lastname": "Zikić",
     "email": "zika@email.com",
@@ -58,7 +58,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd4" },
     "username": "agent3",
-    "password": "AGENTagent3#",
+    "password": "AGENTagent#3",
     "firstname": "Laza",
     "lastname": "Lazić",
     "email": "laza@email.com",
@@ -76,7 +76,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd5" },
     "username": "agent4",
-    "password": "AGENTagent4#",
+    "password": "AGENTagent#4",
     "firstname": "Mika",
     "lastname": "Mikić",
     "email": "mika@email.com",
@@ -95,7 +95,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647cde" },
     "username": "user1",
-    "password": "USERuser1#",
+    "password": "USERuser#1",
     "firstname": "Maja",
     "lastname": "Majić",
     "email": "maja@email.com",
@@ -113,7 +113,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd6" },
     "username": "user2",
-    "password": "USERuser2#",
+    "password": "USERuser#2",
     "firstname": "Marko",
     "lastname": "Marić",
     "email": "marko@email.com",
@@ -133,7 +133,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647cd3" },
     "username": "user3",
-    "password": "USERuser3#",
+    "password": "USERuser#3",
     "firstname": "Miloš",
     "lastname": "Marić",
     "email": "milos@email.com",
@@ -153,7 +153,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647cd2" },
     "username": "user4",
-    "password": "USERuser4#",
+    "password": "USERuser#4",
     "firstname": "Petar",
     "lastname": "Tomić",
     "email": "petar@email.com",
@@ -173,7 +173,7 @@
   {
     "_id": { "$oid": "602eda588b05043edc647ce0" },
     "username": "user5",
-    "password": "USERuser5#",
+    "password": "USERuser#5",
     "firstname": "Dimitrije",
     "lastname": "Petronijević",
     "email": "dimitrije@email.com",
@@ -191,7 +191,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd7" },
     "username": "user6",
-    "password": "USERuser6#",
+    "password": "USERuser#6",
     "firstname": "Žika",
     "lastname": "Žikić",
     "email": "zika@email.com",
@@ -209,7 +209,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647ccc" },
     "username": "user7",
-    "password": "USERuser7#",
+    "password": "USERuser#7",
     "firstname": "Sanja",
     "lastname": "Sanjić",
     "email": "sanja@email.com",
@@ -227,7 +227,7 @@
   {
     "_id": { "$oid": "602ed0f78b05043edc647cd8" },
     "username": "user8",
-    "password": "USERuser8#",
+    "password": "USERuser#8",
     "firstname": "Nikola",
     "lastname": "Nović",
     "email": "nikola@email.com",
@@ -245,7 +245,7 @@
   {
     "_id": { "$oid": "602ed0298b05043edc647ccd" },
     "username": "user9",
-    "password": "USERuser9#",
+    "password": "USERuser#9",
     "firstname": "Katarina",
     "lastname": "Stefanović",
     "email": "katarina@email.com",

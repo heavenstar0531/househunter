@@ -18,8 +18,8 @@
       <td>{{ acc.acc_type  }}</td>
       <td class="p-1" style="text-align: right; width: 50px;">
         <div class="btn-group" >
-          <button class="btn btn-outline-dark" (click)="account_modal_ref.open()"><i class="bi bi-pen"></i></button>
-          <app-account-modal #account_modal_ref [acc_old]="acc"></app-account-modal>
+          <button class="btn btn-outline-dark" (click)="edit_account_modal_ref.open()"><i class="bi bi-pen"></i></button>
+          <app-account-modal #edit_account_modal_ref [acc_old]="acc"></app-account-modal>
           <button *ngIf="!acc.activated_dt" class="btn btn-outline-dark" (click)="activate( acc )"><i class="bi bi-check-lg"></i></button>
           <button *ngIf="acc.acc_type != 'adm'" class="btn btn-outline-dark" (click)="delete( acc )"><i class="bi bi-x-lg"></i></button>
         </div>
@@ -27,3 +27,8 @@
     </tr>
   </tbody>
 </table>
+
+<div class="d-flex justify-content-end px-3 py-1 mb-2">
+  <button class="btn btn-outline-dark" (click)="new_account_modal_ref.open()">Dodaj nalog</button>
+  <app-account-modal #new_account_modal_ref></app-account-modal>
+</div>

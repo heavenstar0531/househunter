@@ -1,15 +1,22 @@
 <form id='form' class="px-3 py-1">
   <div class="form-group d-flex align-items-stretch">
     <img id="usr_photo" class="rounded shadow-sm mb-0 mr-4" style="width: 100px; height: 100px;" src="/assets/images/account.png">
+
     <div class="d-flex flex-column-reverse">
       <div class="btn-group">
-        <button class="btn btn-outline-dark"><i class="bi bi-pen"></i></button>
-        <button class="btn btn-outline-dark"><i class="bi bi-x-lg"></i></button>
+
+        <label class="btn btn-outline-dark mb-0">
+          <i class="bi bi-pen"></i>
+          <input #usr_photo_input id="usr_photo" type="file" accept=".jpg,.jpeg,.png" hidden (change)="saveImage( usr_photo_input )">
+        </label>
+
+        <button class="btn btn-outline-dark" (click)="resetImage()"><i class="bi bi-x-lg"></i></button>
+
       </div>
-      <label for="usr_photo">Vaša slika</label><br>
+      <label for="usr_photo">Slika</label><br>
     </div>
   </div>
-  
+
 
 
   <div class="form-group">
@@ -45,25 +52,34 @@
   <div class="mb-4"></div>
   
   
+  <div *ngIf="form_type == 'update'" class="form-group">
+    <label for="acc_type">Tip korisnika</label>
+    <select id="acc_type" type="text" class="form-control" name="acc_type" [(ngModel)]="acc.acc_type" [class.is-invalid]="status.getKey('acc_type.err')" [disabled]="sesh_acc_type != 'adm' || sesh_acc_id == acc._id">
+      <option value="usr" selected>korisnik</option>
+      <option value="agn">agent</option>
+    </select>
+    <small class='text-danger'>{{ status.getKey('acc_type.err') }}&nbsp;</small>
+  </div>
+
   <div class="form-group">
     <label for="username">Korisničko ime</label>
     <input id ="username" type="text" class="form-control" placeholder="korisničko ime" name="username" [(ngModel)]="acc.username" [class.is-invalid]="status.getKey('username.err')">
     <small class='text-danger'>{{ status.getKey('username.err') }}&nbsp;</small>
   </div>
 
-  <div class="form-group">
-    <label for="password">Prethodna lozinka</label>
-    <input id ="password_prev" type="password" class="form-control" placeholder="lozinka" name="password" [(ngModel)]="password_prev" [class.is-invalid]="status.getKey('password_prev.err')">
-    <small class='text-danger'>{{ status.getKey('password_prev.err') }}&nbsp;</small>
+  <div *ngIf="form_type == 'update'" class="form-group">
+    <label for="password_old">Prethodna lozinka</label>
+    <input id ="password_old" type="password" class="form-control" placeholder="lozinka" name="password_old" [(ngModel)]="password_old" [class.is-invalid]="status.getKey('password_old.err')">
+    <small class='text-danger'>{{ status.getKey('password_old.err') }}&nbsp;</small>
   </div>
 
   <div class="form-group">
     <label for="password">Lozinka</label>
     <div class='input-group'>
-      <input id ="password"      type="password" class="form-control" placeholder="lozinka"          name="password"      [(ngModel)]="acc.password"   [class.is-invalid]="status.getKey('password.err')">
-      <input id ="password_rept" type="password" class="form-control" placeholder="ponovite lozinku" name="password_rept" [(ngModel)]="password_rept"  [class.is-invalid]="status.getKey('password.err')">
+      <input id ="password"     type="password" class="form-control" placeholder="lozinka"          name="password"     [(ngModel)]="acc.password"  [class.is-invalid]="status.getKey('password.err')">
+      <input id ="password_new" type="password" class="form-control" placeholder="ponovite lozinku" name="password_new" [(ngModel)]="password_new"  [class.is-invalid]="status.getKey('password_new.err')">
     </div>
-    <small class='text-danger'>{{status.getKey('password.err')}}&nbsp;</small>
+    <small class='text-danger'>{{ status.getKey('password.err') }}&nbsp;</small>
   </div>
 
   <small class='text-danger'>{{ status.getKey('message') }}</small>

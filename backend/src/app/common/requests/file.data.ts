@@ -33,7 +33,24 @@ export class FileData
     content_type?: string;            // string
     metadata?:     FileMetadata;      // metadata
     // ------------------------------------------------------------- <<< file
-    data?:         Buffer;            // buffer< binary >
+    data?:         ArrayBuffer;       // buffer< binary >
+
+    static async from( file: File, uploader_id?: null|ObjectId ): Promise<FileData>
+    {
+        let fileData = new FileData();
+
+        fileData._id = new ObjectId();
+        fileData.content_type = file.type;
+        fileData.metadata = new FileMetadata();
+        fileData.metadata.upload_dt = new Date();
+        if( uploader_id )
+        {
+            fileData.metadata.uploader_id = uploader_id;
+        }
+        fileData.data = await file.arrayBuffer();
+
+        return fileData;
+    }
 
     static validate( status: Status, data: null|FileData, reqfields?: {} ): void
     {

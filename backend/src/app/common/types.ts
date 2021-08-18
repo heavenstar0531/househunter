@@ -25,11 +25,16 @@ export class Status
         return this;
     }
 
-    private setKey( key: string, value: any ): void { this.map.set( key, value ); }
+    private setKey( key: string, value: any, status: number ): void
+    {
+        if( value === undefined || value === null ) return;
+        this.setStatus( status );
+        this.map.set( key, value );
+    }
 
-    setError  ( key: string, value: any ): Status { this.setStatus( Status.ERROR   ); this.setKey( key, value ); return this; }
-    setWarning( key: string, value: any ): Status { this.setStatus( Status.WARNING ); this.setKey( key, value ); return this; }
-    setInfo   ( key: string, value: any ): Status { this.setStatus( Status.SUCCESS ); this.setKey( key, value ); return this; }
+    setError  ( key: string, value: any ): Status { this.setKey( key, value, Status.ERROR   ); return this; }
+    setWarning( key: string, value: any ): Status { this.setKey( key, value, Status.WARNING ); return this; }
+    setInfo   ( key: string, value: any ): Status { this.setKey( key, value, Status.SUCCESS ); return this; }
 };
 
 export class Criteria
